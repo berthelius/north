@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="bg-light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fafafa"/>
+    </linearGradient>
+    <linearGradient id="rust-grad-light" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c2410c"/>
+      <stop offset="100%" stop-color="#9a3412"/>
+    </linearGradient>
+    <pattern id="grid-dots-light" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#e5e5e5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="360" rx="12" fill="url(#bg-light)"/>
+  <rect width="1200" height="360" rx="12" fill="url(#grid-dots-light)" opacity="0.8"/>
+  <rect x="0.5" y="0.5" width="1199" height="359" rx="11.5" stroke="#e5e5e5" stroke-width="1"/>
+
+  <!-- Top Technical Rail -->
+  <line x1="48" y1="48" x2="1152" y2="48" stroke="#e5e5e5" stroke-width="1"/>
+  <text x="48" y="38" font-family="'JetBrains Mono', monospace" font-size="10" fill="#737373" letter-spacing="0.25em" font-weight="600">SPECIFICATION // SPEC: V0.1 CANONICAL</text>
+  <text x="1152" y="38" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10" fill="#a3a3a3" letter-spacing="0.2em">NORTHFILE.DEV · BRTHLS</text>
+
+  <!-- Center Heading: NORTH.md -->
+  <g transform="translate(48, 165)">
+    <!-- Compass Pointer Motif -->
+    <path d="M 0 -45 L 8 -15 L 0 -22 L -8 -15 Z" fill="url(#rust-grad-light)"/>
+    <text x="24" y="0" font-family="'Anton', Impact, 'Arial Narrow', sans-serif" font-size="108" fill="#0a0a0a" letter-spacing="0.02em" font-weight="900">NORTH.md</text>
+  </g>
+
+  <!-- Accent Rule -->
+  <rect x="48" y="196" width="72" height="4" fill="url(#rust-grad-light)"/>
+
+  <!-- Subtitle / Hook -->
+  <text x="48" y="240" font-family="'Inter', -apple-system, sans-serif" font-size="20" fill="#171717" font-weight="600" letter-spacing="-0.01em">
+    Give your AI coding agents judgment when the prompt runs out.
+  </text>
+  <text x="48" y="268" font-family="'Inter', -apple-system, sans-serif" font-size="14" fill="#525252" font-weight="400">
+    Purpose, ambition, and precomputed trade-off defaults to scale autonomous agency without drift.
+  </text>
+
+  <!-- Bottom Technical Rail -->
+  <line x1="48" y1="312" x2="1152" y2="312" stroke="#e5e5e5" stroke-width="1"/>
+  
+  <!-- Micro Badges in Footer -->
+  <g transform="translate(48, 332)">
+    <text x="0" y="0" font-family="'JetBrains Mono', monospace" font-size="11" fill="#737373">
+      LAYER 5: <tspan fill="#c2410c" font-weight="600">DIRECTION &amp; ARBITRATION</tspan>
+    </text>
+    <text x="340" y="0" font-family="'JetBrains Mono', monospace" font-size="11" fill="#737373">
+      COMPLEMENTS: <tspan fill="#0a0a0a" font-weight="500">AGENTS.md</tspan> · <tspan fill="#0a0a0a" font-weight="500">design.md</tspan> · <tspan fill="#0a0a0a" font-weight="500">SOUL.md</tspan> · <tspan fill="#0a0a0a" font-weight="500">CONSTITUTION.md</tspan>
+    </text>
+    <text x="1104" y="0" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="11" fill="#9a3412" font-weight="600">
+      MIT LICENSE ◇ OPEN STANDARD
+    </text>
+  </g>
+</svg>

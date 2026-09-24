@@ -1,0 +1,418 @@
+---
+import Base from "../layouts/Base.astro";
+
+const entries = [
+  {
+    version: "v0.1",
+    date: "2026-09-24",
+    dateDisplay: "24 September 2026",
+    status: "current",
+    changes: [
+      "Canonical public specification release.",
+      "Codified the seven canonical sections: North Star, The Bar, Current Ambition, Anti-Goals, Trade-off Defaults, Ambition Triggers, and Reversibility.",
+      "Structured Trade-off Defaults table schema adopted with explicit 'Flip when' conditions.",
+      "Codified distinction between Mechanical Automated Gates and Truth Assertions in The Bar.",
+      "Established the 5-layer agent governance stack (CONSTITUTION.md, AGENTS.md, design.md, SOUL.md, NORTH.md).",
+      "Adopted semantic versioning (semver) with one-way door guarantees for section names.",
+    ],
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "NORTH.md Specification Changelog",
+  description:
+    "Version history for the NORTH.md specification — a markdown convention for declaring project purpose, ambition, and trade-off defaults.",
+  datePublished: "2026-05-17",
+  author: {
+    "@type": "Person",
+    name: "Viktor Berthelius",
+    url: "https://brthls.com",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "BRTHLS",
+    url: "https://brthls.com",
+  },
+  url: "https://northfile.dev/changelog",
+  mainEntityOfPage: "https://northfile.dev/changelog",
+};
+---
+
+<Base
+  title="Changelog — NORTH.md"
+  description="Specification version history for NORTH.md — the markdown convention for project purpose and ambition."
+  canonical="https://northfile.dev/changelog"
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <main class="changelog-main" id="main-content">
+    <!-- Hero -->
+    <header class="changelog-header">
+      <p class="changelog-eyebrow">Specification history</p>
+      <h1 class="changelog-title">Changelog</h1>
+      <p class="changelog-subtitle">
+        Version history for the <a href="/spec" class="cl-link">NORTH.md specification</a>.
+        Follows <a href="https://semver.org" class="cl-link">Semantic Versioning</a>.
+      </p>
+      <div class="changelog-actions">
+        <a href="/spec.md" class="action-link" download>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2v9M4 8l4 4 4-4M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Download spec.md
+        </a>
+        <a href="#rss-note" class="action-link rss-link" aria-describedby="rss-note">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="3.5" cy="12.5" r="1.5" fill="currentColor"/>
+            <path d="M2 8.5a6 6 0 016 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M2 4.5a10 10 0 0110 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Subscribe via RSS
+        </a>
+      </div>
+    </header>
+
+    <!-- RSS note -->
+    <p class="rss-note" id="rss-note" aria-live="polite">
+      RSS feed coming in a future release. Subscribe to the <a href="https://github.com/berthelius/north" class="cl-link">GitHub repository</a> for now.
+    </p>
+
+    <!-- Entries -->
+    <section class="changelog-entries" aria-label="Version history">
+      {
+        entries.map((entry) => (
+          <article class="changelog-entry" aria-labelledby={`v${entry.version.replace(".", "-")}`}>
+            <div class="entry-meta">
+              <time
+                class="entry-version"
+                datetime={entry.date}
+                id={`v${entry.version.replace(".", "-")}`}
+              >
+                {entry.version}
+              </time>
+              <span class="entry-date">{entry.dateDisplay}</span>
+              {entry.status === "current" && (
+                <span class="entry-badge" aria-label="Current version">Current</span>
+              )}
+            </div>
+            <div class="entry-body">
+              <ul class="entry-changes" role="list">
+                {entry.changes.map((change) => (
+                  <li>{change}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </section>
+
+    <!-- Semver guide -->
+    <section class="semver-guide" aria-labelledby="semver-heading">
+      <h2 id="semver-heading" class="semver-title">Versioning policy</h2>
+      <dl class="semver-list">
+        <div class="semver-item">
+          <dt><code>MAJOR</code></dt>
+          <dd>Breaking section changes. Adopters must update their files.</dd>
+        </div>
+        <div class="semver-item">
+          <dt><code>MINOR</code></dt>
+          <dd>Additive sections or clarifications that may change validator behaviour.</dd>
+        </div>
+        <div class="semver-item">
+          <dt><code>PATCH</code></dt>
+          <dd>Editorial changes. No file updates required.</dd>
+        </div>
+      </dl>
+      <p class="semver-note">
+        Declare the target spec version in your <code>NORTH.md</code> with
+        <code>&lt;!-- NORTH.md spec: v0.1 --&gt;</code> on the first line.
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="changelog-footer">
+      <p>
+        <a href="/spec" class="cl-link">Read the specification</a>
+        <span class="meta-sep" aria-hidden="true">·</span>
+        MIT &copy; <a href="https://brthls.com" class="cl-link">Viktor Berthelius</a>
+        <span class="meta-sep" aria-hidden="true">·</span>
+        <a href="https://github.com/berthelius/north" class="cl-link">GitHub</a>
+      </p>
+    </footer>
+  </main>
+</Base>
+
+<style>
+  .changelog-main {
+    max-width: 72ch;
+    margin: 0 auto;
+    padding: 4rem var(--spacing-gutter) 6rem;
+  }
+
+  /* Header */
+  .changelog-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .changelog-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin: 0 0 1rem;
+  }
+
+  .changelog-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0 0 1rem;
+  }
+
+  .changelog-subtitle {
+    font-size: var(--text-base);
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 56ch;
+    margin: 0 0 1.5rem;
+  }
+
+  .changelog-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: var(--text-sm);
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    padding: 0.375rem 0.875rem;
+    border-radius: 6px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .action-link:hover,
+  .action-link:focus-visible {
+    color: var(--fg);
+    border-color: var(--muted);
+    outline: none;
+  }
+
+  /* RSS note */
+  .rss-note {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    background: color-mix(in srgb, var(--fg) 4%, transparent);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin: 0 0 3rem;
+    line-height: 1.5;
+  }
+
+  /* Entries */
+  .changelog-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 3.5rem;
+  }
+
+  .changelog-entry {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .changelog-entry:first-child {
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (min-width: 640px) {
+    .changelog-entry {
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .entry-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    flex-shrink: 0;
+  }
+
+  .entry-version {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 400;
+    color: var(--fg);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .entry-date {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .entry-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    width: fit-content;
+  }
+
+  .entry-body {
+    padding-top: 0.25rem;
+  }
+
+  .entry-changes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .entry-changes li {
+    display: flex;
+    gap: 0.75rem;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--fg);
+  }
+
+  .entry-changes li::before {
+    content: "—";
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+
+  /* Semver guide */
+  .semver-guide {
+    padding: 2rem;
+    background: color-mix(in srgb, var(--fg) 3%, transparent);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    margin-bottom: 3rem;
+  }
+
+  .semver-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.25rem;
+    line-height: 1.1;
+  }
+
+  .semver-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .semver-item {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  @media (max-width: 480px) {
+    .semver-item {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+
+  .semver-item dt {
+    font-size: var(--text-sm);
+  }
+
+  .semver-item dd {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .semver-note {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: color-mix(in srgb, var(--fg) 7%, transparent);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+  }
+
+  /* Links */
+  .cl-link {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s;
+  }
+
+  .cl-link:hover,
+  .cl-link:focus-visible {
+    text-decoration-color: var(--fg);
+    outline: none;
+  }
+
+  /* Footer */
+  .changelog-footer {
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  .changelog-footer p {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
+    align-items: center;
+  }
+
+  .meta-sep {
+    color: var(--rule);
+  }
+</style>

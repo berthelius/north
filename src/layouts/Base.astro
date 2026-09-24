@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+import Header from "../components/layout/Header.astro";
+import { getAlternateLinks, type Language } from "../lib/i18n";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+  lang?: Language;
+  showHeader?: boolean;
+}
+
+const {
+  title = "NORTH.md — Give your AI agents judgment when the prompt runs out",
+  description = "A single markdown file declaring purpose, ambition, and precomputed trade-offs to scale autonomous agency without drift.",
+  ogImage = "/og/default.png",
+  canonical,
+  lang = "en",
+  showHeader = true,
+} = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = new URL(ogImage, siteUrl).href;
+
+const alternateLinks = getAlternateLinks(Astro.url.pathname, siteUrl);
+const canonicalEn = alternateLinks.find((l) => l.lang === "en")?.href ?? `${siteUrl}/`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Language Alternates (Hreflang) -->
+    {alternateLinks.map(({ lang: l, href }) => (
+      <link rel="alternate" hreflang={l} href={href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={canonicalEn} />
+
+    <!-- Launch switch: kept noindex/nofollow until Commit B -->
+    <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex" />
+    <meta name="googlebot" content="noindex,nofollow" />
+
+    <!-- AIO / LLM Endpoints -->
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM index" />
+    <link rel="alternate" type="text/markdown" href="/spec.md" title="Specification (markdown)" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="NORTH.md" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+
+    <!-- View Transitions -->
+    <meta name="view-transition" content="same-origin" />
+  </head>
+  <body>
+    {showHeader && <Header lang={lang} currentPath={Astro.url.pathname} />}
+    <slot />
+  </body>
+</html>

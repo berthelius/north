@@ -1,0 +1,86 @@
+---
+import { buildLocalizedPath, type Language } from "../../lib/i18n";
+import { useTranslations } from "../../data/locales";
+
+interface Props {
+  lang?: Language;
+  currentPath?: string;
+}
+
+const { lang = "en", currentPath = "/" } = Astro.props;
+const t = useTranslations(lang);
+
+const isSpanish = lang === "es";
+const targetLang: Language = isSpanish ? "en" : "es";
+const targetPath = buildLocalizedPath(currentPath, targetLang);
+
+const navLinks = [
+  { href: buildLocalizedPath("/spec", lang), label: t("nav.spec") },
+  { href: buildLocalizedPath("/compare", lang), label: t("nav.compare") },
+  { href: buildLocalizedPath("/why", lang), label: t("nav.why") },
+  { href: buildLocalizedPath("/examples", lang), label: t("nav.examples") },
+];
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-[var(--rule)] bg-[var(--bg)]/90 backdrop-blur-md transition-colors">
+  <div class="mx-auto flex h-14 max-w-[var(--max-prose,72ch)] items-center justify-between px-[var(--spacing-gutter)]">
+    <!-- Brand -->
+    <a
+      href={buildLocalizedPath("/", lang)}
+      class="group flex items-center gap-2 font-display text-xl tracking-[0.04em] text-[var(--fg)] uppercase transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+      aria-label="NORTH.md Home"
+    >
+      <span class="inline-block h-2 w-2 rounded-full bg-[var(--accent)] transition-transform group-hover:scale-125" aria-hidden="true"></span>
+      <span>NORTH.MD</span>
+    </a>
+
+    <!-- Nav & Utilities -->
+    <div class="flex items-center gap-5 sm:gap-6">
+      <nav class="hidden sm:flex items-center gap-5 font-mono text-xs uppercase tracking-wider" aria-label="Main Navigation">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="flex items-center gap-3 border-l border-[var(--rule)] pl-4 sm:pl-5">
+        <!-- Language Switcher -->
+        <a
+          href={targetPath}
+          class="font-mono text-xs uppercase tracking-widest px-2 py-1 rounded border border-[var(--rule)] hover:border-[var(--fg)] text-[var(--fg)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+          title={t("nav.langTitle")}
+          aria-label={t("nav.langTitle")}
+        >
+          {t("nav.lang")}
+        </a>
+
+        <!-- GitHub -->
+        <a
+          href="https://github.com/berthelius/north"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm p-1"
+          aria-label="GitHub repository (opens in new tab)"
+        >
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

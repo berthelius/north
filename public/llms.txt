@@ -1,0 +1,36 @@
+# NORTH.md
+
+> A markdown convention that declares a software project's purpose, ambition,
+> and precomputed trade-off defaults in a form readable by both humans and AI coding agents.
+> It gives agents judgment when the prompt runs out: scaling agency without scaling drift.
+
+## Specification
+
+- [Specification v0.1 (canonical)](https://northfile.dev/spec): the seven canonical sections, with rationale, empirical gates, and examples.
+- [Specification raw markdown](https://northfile.dev/spec.md): plain markdown, machine-readable.
+- [Spanish Specification](https://northfile.dev/es/spec): versión oficial en español de la especificación canónica.
+- [Spanish raw markdown](https://northfile.dev/es/spec.md): especificación en markdown plano en español.
+- [Full LLM dump](https://northfile.dev/llms-full.txt): full specification text inlined for LLM consumption.
+- [Ecosystem Comparison](https://northfile.dev/compare): comprehensive matrix comparing NORTH.md with AGENTS.md, design.md, SOUL.md, and CONSTITUTION.md.
+
+## Reference
+
+- [README](https://github.com/berthelius/north): repository introduction.
+- [Examples](https://northfile.dev/examples): NORTH.md files across multiple project domains (SaaS, OSS, agency, internal platform).
+- [Why](https://northfile.dev/why): why projects need an explicit direction and decision arbitration layer.
+- [FAQ](https://northfile.dev/faq): common questions.
+- [Changelog](https://northfile.dev/changelog): specification version history.
+
+## Machine-readable endpoints
+
+- [Canonical spec v0.1 (JSON)](https://northfile.dev/api/spec/v0.1.json): JSON Schema representation of the v0.1 spec.
+- [Canonical spec v0.1 (markdown)](https://northfile.dev/api/spec/v0.1.md): canonical raw markdown specification.
+- [LLM index (JSON)](https://northfile.dev/.well-known/llms.json): machine-readable pointer file for LLM agents discovering the spec.
+
+## Agent Context Ecosystem (5-Layer Stack)
+
+- [CONSTITUTION.md](https://agentconstitution.dev): non-negotiable negative safety boundaries (Layer 1).
+- [AGENTS.md](https://agents.md): agent operational instructions and execution (Layer 2).
+- [design.md](https://northfile.dev/compare): visual design system contracts and UI tokens (Layer 3).
+- [SOUL.md](https://soul.md): project identity and voice (Layer 4).
+- [NORTH.md](https://northfile.dev): project purpose, ambition, and trade-off defaults (Layer 5).

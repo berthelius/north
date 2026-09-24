@@ -1,0 +1,99 @@
+---
+import { useTranslations } from "../../data/locales";
+import { buildLocalizedPath, type Language } from "../../lib/i18n";
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<footer
+  class="mx-auto max-w-[var(--max-prose,72ch)] px-[var(--spacing-gutter)] pt-10 pb-16 border-t border-[var(--rule)]"
+  aria-label="Site footer"
+>
+  <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+    <!-- 5-Layer Governance Stack nav -->
+    <nav aria-label="Agent governance stack">
+      <p class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 select-none">
+        {t("footer.stack")}
+      </p>
+      <ul class="flex flex-wrap gap-x-5 gap-y-2 text-xs font-mono" role="list">
+        <li>
+          <span class="text-[var(--muted)]">CONSTITUTION.md</span>
+        </li>
+        <li>
+          <a
+            href="https://agents.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
+            aria-label="AGENTS.md — opens in new tab"
+          >
+            AGENTS.md
+          </a>
+        </li>
+        <li>
+          <span class="text-[var(--muted)]">design.md</span>
+        </li>
+        <li>
+          <a
+            href="https://soul.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
+            aria-label="SOUL.md — opens in new tab"
+          >
+            SOUL.md
+          </a>
+        </li>
+        <li>
+          <span class="text-[var(--accent)] font-semibold" aria-current="page">NORTH.md</span>
+        </li>
+      </ul>
+      <ul class="flex flex-wrap gap-x-5 gap-y-2 mt-4 pt-3 border-t border-[var(--rule)]" role="list">
+        <li>
+          <a href={buildLocalizedPath("/spec", lang)} class="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150">{t("nav.spec")}</a>
+        </li>
+        <li>
+          <a href={buildLocalizedPath("/compare", lang)} class="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150">{t("nav.compare")}</a>
+        </li>
+        <li>
+          <a href={buildLocalizedPath("/why", lang)} class="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150">{t("nav.why")}</a>
+        </li>
+        <li>
+          <a href={buildLocalizedPath("/examples", lang)} class="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150">{t("nav.examples")}</a>
+        </li>
+        <li>
+          <a href={buildLocalizedPath("/faq", lang)} class="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150">{t("nav.faq")}</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Meta -->
+    <div class="text-sm text-[var(--muted)] text-right space-y-1.5">
+      <p>
+        MIT ·
+        <a
+          href="https://brthls.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-[var(--fg)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
+          aria-label="Viktor Berthelius — opens in new tab"
+        >Viktor Berthelius</a> ·
+        <a
+          href="https://github.com/berthelius/north"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-[var(--fg)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
+          aria-label="GitHub repository — opens in new tab"
+        >GitHub</a>
+      </p>
+      <p class="text-xs text-[var(--muted)]">
+        Built with Astro · Hosted on Vercel
+      </p>
+    </div>
+  </div>
+</footer>

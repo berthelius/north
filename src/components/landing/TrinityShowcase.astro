@@ -1,0 +1,169 @@
+---
+import { useTranslations } from "../../data/locales";
+import { buildLocalizedPath, type Language } from "../../lib/i18n";
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section
+  class="trinity-section mx-auto max-w-[var(--max-prose,72ch)] px-[var(--spacing-gutter)] py-[var(--spacing-section)] border-t border-[var(--rule)]"
+  aria-labelledby="stack-heading"
+>
+  <div class="flex items-center gap-2">
+    <span class="font-mono text-xs uppercase tracking-widest text-[var(--accent)] font-semibold">{t("stack.kicker")}</span>
+  </div>
+  <h2
+    id="stack-heading"
+    class="mt-2 font-display text-[clamp(1.75rem,4vw,2.75rem)] tracking-[0.02em] text-[var(--fg)] uppercase"
+  >
+    {t("stack.title")}
+  </h2>
+  <p class="mt-4 max-w-[56ch] text-[var(--muted)] leading-[1.65]">
+    {t("stack.desc")}
+  </p>
+
+  <div class="stack-grid mt-10 grid gap-3 sm:grid-cols-2 md:grid-cols-5">
+    <!-- Layer 1: CONSTITUTION.md -->
+    <article
+      class="stack-card rounded-md border border-[var(--rule)] p-4 bg-[var(--bg)] flex flex-col justify-between transition-all duration-150 hover:border-[var(--fg)]"
+    >
+      <div>
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[0.65rem] tracking-wider uppercase text-[var(--muted)]">L1 &middot; Limits</span>
+          <span class="text-[0.65rem] font-mono text-[var(--muted)]">Safety</span>
+        </div>
+        <h3 class="mt-2 font-mono text-sm font-semibold text-[var(--fg)]">
+          CONSTITUTION.md
+        </h3>
+        <p class="mt-2 text-xs text-[var(--muted)] leading-relaxed">
+          Negative invariants, compliance red lines, and forbidden operations.
+        </p>
+      </div>
+      <div class="mt-4 pt-3 border-t border-[var(--rule)]">
+        <span class="text-[0.68rem] text-[var(--muted)] font-mono">Anthropic</span>
+      </div>
+    </article>
+
+    <!-- Layer 2: AGENTS.md / CLAUDE.md -->
+    <article
+      class="stack-card rounded-md border border-[var(--rule)] p-4 bg-[var(--bg)] flex flex-col justify-between transition-all duration-150 hover:border-[var(--fg)]"
+    >
+      <div>
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[0.65rem] tracking-wider uppercase text-[var(--muted)]">L2 &middot; How</span>
+          <span class="text-[0.65rem] font-mono text-[var(--muted)]">Execution</span>
+        </div>
+        <h3 class="mt-2 font-mono text-sm font-semibold text-[var(--fg)]">
+          AGENTS.md
+        </h3>
+        <p class="mt-2 text-xs text-[var(--muted)] leading-relaxed">
+          Build commands, linter flags, workspace paths, and test runners.
+        </p>
+      </div>
+      <div class="mt-4 pt-3 border-t border-[var(--rule)]">
+        <a
+          href="https://agents.md"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[0.68rem] text-[var(--muted)] font-mono hover:text-[var(--fg)] transition-colors inline-flex items-center gap-1"
+        >
+          Linux Foundation &rarr;
+        </a>
+      </div>
+    </article>
+
+    <!-- Layer 3: design.md -->
+    <article
+      class="stack-card rounded-md border border-[var(--rule)] p-4 bg-[var(--bg)] flex flex-col justify-between transition-all duration-150 hover:border-[var(--fg)]"
+    >
+      <div>
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[0.65rem] tracking-wider uppercase text-[var(--muted)]">L3 &middot; Look</span>
+          <span class="text-[0.65rem] font-mono text-[var(--muted)]">UI Contract</span>
+        </div>
+        <h3 class="mt-2 font-mono text-sm font-semibold text-[var(--fg)]">
+          design.md
+        </h3>
+        <p class="mt-2 text-xs text-[var(--muted)] leading-relaxed">
+          UI tokens, responsive layout contracts, and design system primitives.
+        </p>
+      </div>
+      <div class="mt-4 pt-3 border-t border-[var(--rule)]">
+        <span class="text-[0.68rem] text-[var(--muted)] font-mono">Google Material</span>
+      </div>
+    </article>
+
+    <!-- Layer 4: SOUL.md -->
+    <article
+      class="stack-card rounded-md border border-[var(--rule)] p-4 bg-[var(--bg)] flex flex-col justify-between transition-all duration-150 hover:border-[var(--fg)]"
+    >
+      <div>
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[0.65rem] tracking-wider uppercase text-[var(--muted)]">L4 &middot; Who</span>
+          <span class="text-[0.65rem] font-mono text-[var(--muted)]">Voice</span>
+        </div>
+        <h3 class="mt-2 font-mono text-sm font-semibold text-[var(--fg)]">
+          SOUL.md
+        </h3>
+        <p class="mt-2 text-xs text-[var(--muted)] leading-relaxed">
+          Product identity, cultural voice, and user empathy aesthetics.
+        </p>
+      </div>
+      <div class="mt-4 pt-3 border-t border-[var(--rule)]">
+        <a
+          href="https://soul.md"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[0.68rem] text-[var(--muted)] font-mono hover:text-[var(--fg)] transition-colors inline-flex items-center gap-1"
+        >
+          Community &rarr;
+        </a>
+      </div>
+    </article>
+
+    <!-- Layer 5: NORTH.md (Apex) -->
+    <article
+      class="stack-card stack-card--north rounded-md border-2 border-[var(--accent)] p-4 bg-[color-mix(in_srgb,var(--accent)_5%,transparent)] flex flex-col justify-between transition-all duration-150 shadow-sm"
+      aria-current="true"
+    >
+      <div>
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[0.65rem] tracking-wider uppercase text-[var(--accent)] font-semibold">L5 &middot; Why</span>
+          <span class="text-[0.65rem] font-mono text-[var(--accent)] font-semibold">Apex</span>
+        </div>
+        <h3 class="mt-2 font-mono text-sm font-bold text-[var(--fg)] flex items-center gap-1.5">
+          NORTH.md
+          <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+        </h3>
+        <p class="mt-2 text-xs text-[var(--fg)] font-medium leading-relaxed">
+          Purpose, the quality bar, asymmetric bets, and precomputed trade-offs.
+        </p>
+      </div>
+      <div class="mt-4 pt-3 border-t border-[var(--accent)]">
+        <a
+          href={buildLocalizedPath("/spec", lang)}
+          class="text-[0.68rem] text-[var(--accent)] font-mono font-semibold hover:underline inline-flex items-center gap-1"
+        >
+          BRTHLS &middot; Spec v0.1 &rarr;
+        </a>
+      </div>
+    </article>
+  </div>
+
+  <p class="mt-8 max-w-[58ch] text-sm text-[var(--muted)] leading-[1.65]">
+    {t("stack.summary")}
+  </p>
+  <div class="mt-4">
+    <a
+      href={buildLocalizedPath("/compare", lang)}
+      class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[var(--accent)] hover:underline underline-offset-4 transition-colors"
+    >
+      {t("stack.compareLink")}
+    </a>
+  </div>
+</section>

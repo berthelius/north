@@ -1,0 +1,165 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const allExamples = await getCollection("examples");
+const examples = allExamples.sort((a, b) => a.data.order - b.data.order);
+
+const domainLabels: Record<string, string> = {
+  "saas-b2b": "SaaS B2B",
+  "oss-library": "OSS Library",
+  "agency": "Agency",
+  "side-project": "Side Project",
+  "internal-tool": "Internal Tool",
+};
+
+const domainKeys = Object.keys(domainLabels);
+---
+
+<Base
+  title="Examples — NORTH.md across domains"
+  description="Five real NORTH.md files across different project types: SaaS, open-source library, creative agency, side project, and internal platform."
+>
+  <main class="mx-auto max-w-3xl px-6 py-24 md:py-32">
+    <!-- Header -->
+    <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
+      northfile.dev / examples
+    </p>
+
+    <h1 class="mt-6 font-display text-4xl md:text-5xl leading-[1.0] tracking-tight">
+      Examples
+    </h1>
+
+    <p class="mt-5 max-w-2xl text-lg text-[var(--muted)] leading-relaxed">
+      NORTH.md works differently depending on the project type. Below are five
+      examples — each a complete, realistic file you could adapt for your own
+      project.
+    </p>
+
+    <!-- Domain filter chips -->
+    <div
+      class="mt-8 flex flex-wrap gap-2"
+      id="filter-chips"
+      role="group"
+      aria-label="Filter examples by domain"
+    >
+      <button
+        class="filter-chip active font-mono text-xs px-3 py-1.5 rounded-full border border-[var(--rule)] text-[var(--fg)] transition hover:border-[var(--accent)] data-[active=true]:bg-[var(--fg)] data-[active=true]:text-[var(--bg)] data-[active=true]:border-[var(--fg)]"
+        data-domain="all"
+        data-active="true"
+        aria-pressed="true"
+      >
+        All
+      </button>
+      {domainKeys.map((d) => (
+        <button
+          class="filter-chip font-mono text-xs px-3 py-1.5 rounded-full border border-[var(--rule)] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--fg)] data-[active=true]:bg-[var(--fg)] data-[active=true]:text-[var(--bg)] data-[active=true]:border-[var(--fg)]"
+          data-domain={d}
+          data-active="false"
+          aria-pressed="false"
+        >
+          {domainLabels[d]}
+        </button>
+      ))}
+    </div>
+
+    <!-- Example list -->
+    <ul class="mt-12 space-y-0" id="example-list" role="list">
+      {examples.map((example) => (
+        <li
+          class="example-card border-t border-[var(--rule)] py-8 group"
+          data-domain={example.data.domain}
+        >
+          <a
+            href={`/examples/${example.id}`}
+            class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded"
+            aria-label={`Read ${example.data.title} — ${example.data.subtitle}`}
+          >
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-3 flex-wrap">
+                  <span
+                    class="font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border"
+                    style={`color: var(--accent); border-color: currentColor;`}
+                  >
+                    {domainLabels[example.data.domain]}
+                  </span>
+                </div>
+                <h2 class="mt-2 font-display text-2xl md:text-3xl leading-tight tracking-tight group-hover:text-[var(--accent)] transition-colors">
+                  {example.data.title}
+                </h2>
+                <p class="mt-1.5 text-[var(--muted)] text-base leading-snug">
+                  {example.data.subtitle}
+                </p>
+              </div>
+              <span
+                class="shrink-0 text-[var(--muted)] text-xl group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all hidden sm:block mt-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="border-t border-[var(--rule)] pt-8 mt-2"></div>
+
+    <!-- Submit CTA -->
+    <div class="mt-8 rounded-lg border border-[var(--rule)] p-6">
+      <h2 class="font-display text-xl">Submit your NORTH.md</h2>
+      <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
+        Have a NORTH.md that exemplifies the convention for your domain? Open a
+        GitHub issue — we review and add examples that demonstrate a genuinely
+        different pattern.
+      </p>
+      <a
+        href="https://github.com/berthelius/north/issues/new?template=add-example.md"
+        class="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)]"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open an issue
+        <span aria-hidden>↗</span>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-20 border-t border-[var(--rule)] pt-10 text-sm text-[var(--muted)]">
+      <p>
+        <a href="/" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">← Back to northfile.dev</a>
+      </p>
+      <p class="mt-3">
+        MIT ©{" "}
+        <a href="https://brthls.com" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Viktor Berthelius</a>
+        {" "}·{" "}
+        <a href="https://github.com/berthelius/north" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">GitHub</a>
+      </p>
+    </footer>
+  </main>
+</Base>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>(".filter-chip");
+  const cards = document.querySelectorAll<HTMLElement>(".example-card");
+
+  function setActive(domain: string) {
+    chips.forEach((chip) => {
+      const isActive = chip.dataset.domain === domain;
+      chip.dataset.active = isActive ? "true" : "false";
+      chip.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    cards.forEach((card) => {
+      const matches = domain === "all" || card.dataset.domain === domain;
+      (card as HTMLElement).style.display = matches ? "" : "none";
+    });
+  }
+
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      setActive(chip.dataset.domain ?? "all");
+    });
+  });
+</script>

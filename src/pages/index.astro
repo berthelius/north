@@ -1,0 +1,33 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/landing/Hero.astro";
+import TrinityShowcase from "../components/landing/TrinityShowcase.astro";
+import SevenSections from "../components/landing/SevenSections.astro";
+import TemplateBlock from "../components/landing/TemplateBlock.astro";
+import BadgeShowcase from "../components/landing/BadgeShowcase.astro";
+import LandingFooter from "../components/landing/LandingFooter.astro";
+import JsonLd from "../components/seo/JsonLd.astro";
+import {
+  getWebSiteSchema,
+  getDefinedTermSchema,
+  getSoftwareSourceCodeSchema,
+} from "../components/seo/schemas";
+---
+
+<Base
+  title="NORTH.md — Give your AI agents judgment when the prompt runs out"
+  description="A single markdown file declaring purpose, ambition, and precomputed trade-offs to scale autonomous agency without drift."
+>
+  <JsonLd data={getWebSiteSchema()} />
+  <JsonLd data={getDefinedTermSchema()} />
+  <JsonLd data={getSoftwareSourceCodeSchema()} />
+
+  <main id="main-content">
+    <Hero />
+    <TrinityShowcase />
+    <SevenSections />
+    <TemplateBlock />
+    <BadgeShowcase />
+  </main>
+  <LandingFooter />
+</Base>

@@ -1,0 +1,149 @@
+---
+/**
+ * CopyButton — copies text to clipboard.
+ *
+ * Props:
+ *   value        — text to copy directly (takes priority over target)
+ *   target       — CSS selector; copies innerText of matched element
+ *   label        — button label (default: "Copy")
+ *   successLabel — label shown on success (default: "Copied!")
+ */
+
+interface Props {
+  value?: string;
+  target?: string;
+  label?: string;
+  successLabel?: string;
+  class?: string;
+}
+
+const {
+  value,
+  target,
+  label = 'Copy',
+  successLabel = 'Copied!',
+  class: className = '',
+} = Astro.props;
+
+const dataValue = value ?? '';
+const dataTarget = target ?? '';
+---
+
+<button
+  type="button"
+  class:list={[
+    'copy-btn',
+    'inline-flex items-center gap-1.5',
+    'px-2.5 py-1',
+    'text-xs font-mono font-medium',
+    'rounded',
+    'border border-[var(--rule,#e7e5e4)]',
+    'text-[var(--muted,#78716c)]',
+    'bg-transparent',
+    'cursor-pointer',
+    'select-none',
+    'transition-all duration-150',
+    'hover:border-[var(--fg,#0a0a0a)] hover:text-[var(--fg,#0a0a0a)]',
+    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent,#c2410c)]',
+    'active:scale-95',
+    'disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none',
+    className,
+  ]}
+  aria-label={label}
+  data-copy-value={dataValue}
+  data-copy-target={dataTarget}
+  data-label={label}
+  data-success-label={successLabel}
+>
+  <!-- Copy icon -->
+  <svg
+    class="copy-icon w-3.5 h-3.5 shrink-0"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+  </svg>
+  <!-- Checkmark icon (hidden by default) -->
+  <svg
+    class="check-icon w-3.5 h-3.5 shrink-0 hidden"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+  <span class="copy-label">{label}</span>
+</button>
+
+<script>
+  // Initialise all CopyButton instances on the page.
+  // Uses is:inline semantics but scoped — runs once per page load.
+  function initCopyButtons(): void {
+    const supportsClipboard = typeof navigator !== 'undefined' && 'clipboard' in navigator;
+
+    document.querySelectorAll<HTMLButtonElement>('button.copy-btn').forEach((btn) => {
+      if (btn.dataset.copyInit === '1') return;
+      btn.dataset.copyInit = '1';
+
+      if (!supportsClipboard) {
+        btn.disabled = true;
+        btn.title = 'Clipboard API unavailable in this context';
+        return;
+      }
+
+      btn.addEventListener('click', async () => {
+        let text = btn.dataset.copyValue ?? '';
+
+        if (!text && btn.dataset.copyTarget) {
+          const el = document.querySelector(btn.dataset.copyTarget);
+          text = el?.textContent?.trim() ?? '';
+        }
+
+        if (!text) return;
+
+        try {
+          await navigator.clipboard.writeText(text);
+
+          const label = btn.querySelector<HTMLElement>('.copy-label');
+          const copyIcon = btn.querySelector<SVGElement>('.copy-icon');
+          const checkIcon = btn.querySelector<SVGElement>('.check-icon');
+
+          if (label) label.textContent = btn.dataset.successLabel ?? 'Copied!';
+          copyIcon?.classList.add('hidden');
+          checkIcon?.classList.remove('hidden');
+          btn.setAttribute('aria-label', btn.dataset.successLabel ?? 'Copied!');
+
+          setTimeout(() => {
+            if (label) label.textContent = btn.dataset.label ?? 'Copy';
+            copyIcon?.classList.remove('hidden');
+            checkIcon?.classList.add('hidden');
+            btn.setAttribute('aria-label', btn.dataset.label ?? 'Copy');
+          }, 2000);
+        } catch {
+          // Clipboard write failed — silently degrade.
+          btn.disabled = true;
+        }
+      });
+    });
+  }
+
+  // Run on initial load and after any View Transition.
+  initCopyButtons();
+  document.addEventListener('astro:page-load', initCopyButtons);
+</script>

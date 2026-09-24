@@ -1,0 +1,366 @@
+---
+import Base from "../layouts/Base.astro";
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Why NORTH.md — The missing layer in your agent context stack",
+  "description": "Modern AI coding agents default to safe, incremental output. NORTH.md fixes the asymmetry by naming the destination, setting the bar above the default, and giving agents permission to be ambitious.",
+  "author": {
+    "@type": "Person",
+    "name": "Viktor Berthelius",
+    "url": "https://brthls.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NORTH.md",
+    "url": siteUrl
+  },
+  "datePublished": "2026-05-17",
+  "url": `${siteUrl}/why`,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `${siteUrl}/why`
+  }
+};
+---
+
+<Base
+  title="Why NORTH.md — The missing layer in your agent context stack"
+  description="Modern AI coding agents default to safe, incremental output. NORTH.md fixes the asymmetry by naming the destination, setting the bar above the default, and giving agents permission to be ambitious."
+  canonical={`${siteUrl}/why`}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+
+  <main class="mx-auto max-w-3xl px-6 py-24 md:py-32">
+
+    <!-- Back nav -->
+    <nav class="mb-16">
+      <a
+        href="/"
+        class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)] underline decoration-dotted underline-offset-4 hover:text-[var(--fg)] transition-colors"
+      >
+        &larr; northfile.dev
+      </a>
+    </nav>
+
+    <!-- Eyebrow -->
+    <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
+      essay &middot; may 2026
+    </p>
+
+    <!-- Title -->
+    <h1 class="mt-5 font-display text-4xl md:text-5xl leading-[1.05] tracking-tight">
+      The missing layer in your agent context stack
+    </h1>
+
+    <p class="mt-4 text-sm text-[var(--muted)]">
+      By <a href="https://brthls.com" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Viktor Berthelius</a>
+      &middot; 8 min read
+    </p>
+
+    <hr class="mt-10 border-[var(--rule)]" />
+
+    <!-- Essay body -->
+    <article class="essay mt-10">
+
+      <p class="drop-cap">
+        Ask a capable AI agent to refactor a slow function, and you will get a faster function.
+        Ask it to make the whole module ten times better, and you will still get a faster function — perhaps with a few more test cases. The task expands to fill the instruction, but never beyond it. The agent is not being obtuse. It is doing exactly what its context tells it to do: stay within the lines, do not break anything, ship the increment. The problem is that nobody told it where the lines end.
+      </p>
+
+      <p>
+        This is not a capability problem. The same agent that hands you a tidy patch could, in principle, rewrite the module from scratch with a better interface, cut three dependencies, and leave behind a suite of tests that would have caught the original bug two months ago. It has the raw ability. What it lacks is <em>authorisation</em> — a clear signal that the bigger move is within scope, that the team will accept it, that the bar is set somewhere above "does not regress".
+      </p>
+
+      <!-- Pull quote -->
+      <blockquote class="pull-quote">
+        "The agent is not being obtuse. It is doing exactly what its context tells it to do: stay within the lines, do not break anything, ship the increment. The problem is that nobody told it where the lines end."
+      </blockquote>
+
+      <h2>The layer we built, and the one we forgot</h2>
+
+      <p>
+        The first wave of agent tooling gave us operational context. <code>CLAUDE.md</code>, <code>AGENTS.md</code>, and their equivalents tell an agent <em>how</em> to work: run these gates before committing, follow these conventions, respect these file boundaries, do not push to main directly. This was the right first move. Agents without operational guardrails cause chaos — broken builds, mismerged migrations, violated conventions. The rule file solved a real problem.
+      </p>
+
+      <p>
+        The second wave gave us identity context. <code>SOUL.md</code> tells an agent <em>who</em> the project is: the voice, the aesthetic, the values, the personality. It answers questions like "should this error message be terse or warm?" and "does this codebase prefer explicit verbosity or concise cleverness?" This too was the right move. Without identity context, every AI-touched component ends up feeling subtly alien — technically correct but tonally mismatched.
+      </p>
+
+      <p>
+        What neither layer answers is the question that ultimately determines whether an agent ships a competent patch or an ambitious leap:
+      </p>
+
+      <blockquote class="pull-quote">
+        "Where is this project going, and how far are we willing to push to get there?"
+      </blockquote>
+
+      <p>
+        Without an answer, every agent defaults to the safe interpretation. Not because safe is wrong, but because <em>safe is the only interpretation that requires no assumption about ambition</em>. The agent cannot know whether you are trying to build the best invoicing tool in Europe or just keep the lights on for one more quarter. In the absence of that information, it hedges. It patches. It increments.
+      </p>
+
+      <h2>What happens in practice</h2>
+
+      <p>
+        Consider a common scenario. A product is two years old. The data model has several seams showing — a <code>status</code> field that has accumulated seven possible values, a permissions system that started as a boolean and was extended with string checks, a reporting layer that queries the same table four times per request. None of these is a crisis. All of them are slowing the team down.
+      </p>
+
+      <p>
+        An agent asked to "clean up the reporting layer" will consolidate the four queries into two, maybe three, add an index, and return. A reasonable patch. A good one, even.
+      </p>
+
+      <p>
+        But an agent that knows the project is building toward a specific, declared destination — that performance at the reporting layer is load-bearing for the entire product strategy, that the acceptable bar includes sub-200ms p95, that the team has explicitly decided clean design takes priority over backward compatibility in internal tools — that agent has the information it needs to propose the bolder move. Not because it suddenly became more capable, but because the context has shifted from "what is safe to do?" to "what is right to do?"
+      </p>
+
+      <hr class="section-rule" />
+
+      <h2>What NORTH.md actually does</h2>
+
+      <p>
+        NORTH.md is a single markdown file, seven sections long, that lives at the root of your repository. It answers the ambition question in a form that both humans and agents can read without special tooling.
+      </p>
+
+      <p>
+        The first section — the North Star — names the destination in one sentence. Not a vision statement. Not a mission. A destination: specific enough to disqualify wrong moves, ambitious enough to be uncomfortable, grounded enough to be reachable. The second section — the Bar — states what "done" means in concrete, observable terms. Not "high quality" but "Lighthouse 100, WCAG AA, zero type errors in CI, and i18n parity across fifteen languages. No exceptions."
+      </p>
+
+      <p>
+        The remaining five sections handle trade-offs, asymmetric investments, explicit refusals, ambition triggers, and reversibility. Together they precompute the decisions that would otherwise be made implicitly, and usually incorrectly, on every agent session.
+      </p>
+
+      <!-- Pull quote -->
+      <blockquote class="pull-quote">
+        "NORTH.md precomputes the decisions that would otherwise be made implicitly, and usually incorrectly, on every agent session."
+      </blockquote>
+
+      <p>
+        The effect is not that agents become reckless. It is that agents stop defaulting to the smallest legal interpretation of every task. They still respect the operational rules in <code>CLAUDE.md</code>. They still honour the identity in <code>SOUL.md</code>. But now they also know that this project is going somewhere specific, that certain investments deserve a disproportionate share of effort, and that some tempting shortcuts are pre-declined.
+      </p>
+
+      <h2>Why a markdown file, specifically</h2>
+
+      <p>
+        The success of <code>CLAUDE.md</code> and <code>AGENTS.md</code> demonstrated something that was not obvious a few years ago: a plain markdown file at a known path is one of the most effective ways to get structured context into a software project's ambient information environment. It is read by humans during onboarding. It is read by agents at session start. It is indexed by crawlers. It appears in repository search. It is versioned by git with no additional infrastructure.
+      </p>
+
+      <p>
+        A YAML schema would be more machine-parseable. A JSON file would be easier to validate programmatically. But both would be worse at the primary job, which is changing how humans and agents <em>think</em> about a project, not just how they <em>process</em> its metadata. Prose has rhetorical force that structured data does not. The sentence "this project replaces QuickBooks for European freelancers by 2027" lands differently in a YAML string than in a document section with a heading and context around it.
+      </p>
+
+      <p>
+        <code>llms.txt</code> proved the same point from the other direction. A plain text file at a predictable URL turned out to be more durable and more widely adopted than elaborate structured alternatives. Convention compounds. Once enough projects adopt a pattern at a known path, every new tool and every new agent knows where to look.
+      </p>
+
+      <h2>What NORTH.md is not</h2>
+
+      <p>
+        NORTH.md is not a roadmap. It does not list features, milestones, or delivery dates. Those belong in your issue tracker or project management tool, where they can be updated without touching a file that is meant to be relatively stable.
+      </p>
+
+      <p>
+        It is not a project plan. A project plan answers "what are we doing next?" NORTH.md answers "where does 'next' lead, and how far do we go?" These are complementary questions that deserve separate answers.
+      </p>
+
+      <p>
+        It is not OKRs. OKRs are quarterly. They cascade down from company objectives. They are tied to measurement cycles and review meetings. NORTH.md is closer to a constitution: it changes deliberately and rarely, and it describes the project's character rather than its current priorities.
+      </p>
+
+      <p>
+        It is not a manifesto. Manifestos are rhetorical artefacts designed to persuade an audience. NORTH.md is operational. It is information, not argument. The test of a good NORTH.md is not "is this inspiring?" but "does this change what an agent decides when it has two reasonable options in front of it?"
+      </p>
+
+      <hr class="section-rule" />
+
+      <h2>One file. Seven sections. Two screens.</h2>
+
+      <p>
+        The constraint is intentional. A NORTH.md that requires scrolling past two screens has already lost the plot. If the ambition cannot be stated in that space, it is not clear enough to be useful as context. The discipline of the format forces the discipline of the thinking.
+      </p>
+
+      <p>
+        There is a version of this convention that could have been a dashboard, a database schema, a structured API. That version would have been more powerful in theory and less useful in practice. The markdown file wins because it has friction in exactly the right places: easy to read, easy to reference, slightly effortful to write well.
+      </p>
+
+      <p>
+        That effort is precisely the point. Writing a good NORTH.md forces you to decide what you actually believe about your project's destination and quality bar, rather than leaving those beliefs as shared-but-unspoken assumptions that agents — and new team members — have no way to access.
+      </p>
+
+      <h2>Direction & Arbitration: Scaling Agency Without Scaling Drift</h2>
+
+      <p>
+        The problem <code>NORTH.md</code> addresses is structural to autonomous software development:
+        <em>tests and rules files prevent broken syntax, but they do nothing to prevent product drift.</em>
+      </p>
+
+      <p>
+        Two autonomous agents can write code that satisfies every linter, compiler check, and unit test in your CI pipeline. Yet one moves your architecture closer to its intended shape, while the other turns the repository into an incoherent accumulation of unrequested features, defensive abstractions, and architectural debt.
+      </p>
+
+      <p>
+        When agent execution scales across multiple sessions and parallel worktrees, higher throughput without explicit arbitration simply produces more work-in-progress (WIP). <code>NORTH.md</code> provides that missing anchor: precomputing trade-offs before code is written, codifying unambiguous refusals (anti-goals) that survive pushback, and establishing what quality threshold counts as genuinely finished.
+      </p>
+
+      <!-- Pull quote -->
+      <blockquote class="pull-quote">
+        "Without direction, more agent throughput simply produces more WIP."
+      </blockquote>
+
+      <p>
+        The specification is short enough to read in five minutes. Writing a first draft of your own NORTH.md takes perhaps thirty. The payoff is that every subsequent agent session starts from a better default — not because the agent has changed, but because you have finally given it judgment when the prompt runs out.
+      </p>
+
+      <hr class="section-rule" />
+
+      <!-- Closing CTA -->
+      <div class="closing-cta">
+        <p class="text-sm text-[var(--muted)] font-mono uppercase tracking-[0.15em] mb-4">Start here</p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="/spec"
+            class="inline-flex items-center gap-2 rounded-full bg-[var(--fg)] px-5 py-2.5 text-sm font-medium text-[var(--bg)] transition hover:opacity-90"
+          >
+            Read the specification &rarr;
+          </a>
+          <a
+            href="/"
+            class="inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)]"
+          >
+            Quick start template
+          </a>
+        </div>
+      </div>
+
+    </article>
+
+    <footer class="mt-32 border-t border-[var(--rule)] pt-10 text-sm text-[var(--muted)]">
+      <p>
+        MIT &copy; <a href="https://brthls.com" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Viktor Berthelius</a> &middot;
+        <a href="https://github.com/berthelius/north" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">GitHub</a>
+      </p>
+      <p class="mt-2">
+        Trinity: <a href="https://agents.md" class="hover:text-[var(--fg)]">AGENTS.md</a> &middot;
+        <a href="https://soul.md" class="hover:text-[var(--fg)]">SOUL.md</a> &middot;
+        <span class="text-[var(--fg)]">NORTH.md</span>
+      </p>
+    </footer>
+  </main>
+</Base>
+
+<style>
+  /* Essay typography */
+  .essay {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.78;
+    color: var(--fg);
+  }
+
+  .essay p {
+    max-width: 68ch;
+    margin-bottom: 1.5em;
+  }
+
+  /* Drop cap on first paragraph */
+  .essay .drop-cap::first-letter {
+    font-family: var(--font-display);
+    float: left;
+    font-size: 4.2em;
+    line-height: 0.82;
+    padding-right: 0.12em;
+    padding-top: 0.06em;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  /* Headings within essay */
+  .essay h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-top: 3rem;
+    margin-bottom: 1.2rem;
+    max-width: 58ch;
+    color: var(--fg);
+  }
+
+  /* Inline links */
+  .essay a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 4px;
+    transition: color 0.15s ease;
+  }
+
+  .essay a:hover {
+    color: var(--accent);
+  }
+
+  /* Code inline */
+  .essay code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--color-stone-100);
+    border-radius: 3px;
+    padding: 0.1em 0.35em;
+    color: var(--fg);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .essay code {
+      background: var(--color-stone-800);
+    }
+  }
+
+  /* Pull quotes */
+  .pull-quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.35rem;
+    line-height: 1.45;
+    color: var(--accent);
+    border-left: 2px solid var(--accent);
+    margin: 2.5rem 0;
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    max-width: 58ch;
+  }
+
+  /* Section dividers */
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 3rem 0;
+    max-width: 68ch;
+  }
+
+  /* Closing CTA block */
+  .closing-cta {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    max-width: 68ch;
+  }
+
+  /* Mobile — ensure 320px doesn't overflow */
+  @media (max-width: 640px) {
+    .essay {
+      font-size: 1rem;
+    }
+
+    .pull-quote {
+      font-size: 1.15rem;
+      padding-left: 1rem;
+      margin: 2rem 0;
+    }
+
+    .essay h2 {
+      font-size: 1.35rem;
+    }
+  }
+</style>

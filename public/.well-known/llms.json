@@ -1,0 +1,59 @@
+{
+  "name": "NORTH.md",
+  "description": "A markdown convention that declares a software project's purpose, ambition, and precomputed trade-off defaults in a form readable by both humans and AI coding agents. It gives agents judgment when the prompt runs out: scaling agency without scaling drift.",
+  "canonical": "https://northfile.dev",
+  "spec": "https://northfile.dev/spec",
+  "specMarkdown": "https://northfile.dev/spec.md",
+  "specVersioned": "https://northfile.dev/api/spec/v0.1.md",
+  "specJson": "https://northfile.dev/api/spec/v0.2.json",
+  "specJsonV01": "https://northfile.dev/api/spec/v0.1.json",
+  "llmsTxt": "https://northfile.dev/llms.txt",
+  "llmsFullTxt": "https://northfile.dev/llms-full.txt",
+  "compare": "https://northfile.dev/compare",
+  "examples": "https://northfile.dev/examples",
+  "why": "https://northfile.dev/why",
+  "faq": "https://northfile.dev/faq",
+  "changelog": "https://northfile.dev/changelog",
+  "badge": "https://northfile.dev/badge.svg",
+  "repository": "https://github.com/berthelius/north",
+  "license": "MIT",
+  "version": "0.1",
+  "status": "active",
+  "publishedAt": "2026-09-24",
+  "author": {
+    "name": "Viktor Berthelius",
+    "url": "https://brthls.com",
+    "github": "https://github.com/berthelius"
+  },
+  "ecosystem": [
+    {
+      "file": "AGENTS.md",
+      "purpose": "Agent operational instructions — how agents work",
+      "url": "https://agents.md"
+    },
+    {
+      "file": "SOUL.md",
+      "purpose": "Project identity and voice — who the project is",
+      "url": "https://soul.md"
+    },
+    {
+      "file": "CONSTITUTION.md",
+      "purpose": "Non-negotiable negative constraints — what lines never to cross",
+      "url": "https://agentconstitution.dev"
+    },
+    {
+      "file": "NORTH.md",
+      "purpose": "Project purpose, ambition, and trade-off defaults — how to choose when paths compete",
+      "url": "https://northfile.dev"
+    }
+  ],
+  "sections": [
+    "North Star",
+    "The Bar",
+    "Asymmetric Bets",
+    "Anti-Goals",
+    "Trade-off Defaults",
+    "Ambition Triggers",
+    "Reversibility"
+  ]
+}

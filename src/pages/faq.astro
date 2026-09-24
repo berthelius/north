@@ -1,0 +1,346 @@
+---
+import Base from "../layouts/Base.astro";
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
+
+interface FAQItem {
+  q: string;
+  a: string;
+  category: "adoption" | "spec" | "process" | "community";
+}
+
+const faqs: FAQItem[] = [
+  // Spec
+  {
+    category: "spec",
+    q: "Is NORTH.md a competitor to AGENTS.md or SOUL.md?",
+    a: "No. AGENTS.md and CLAUDE.md tell agents how to work; SOUL.md tells them who the project is; NORTH.md tells them why and how far. They are designed to coexist in the same repository. The term we use is the agent context trinity — three files, three distinct questions, zero overlap."
+  },
+  {
+    category: "spec",
+    q: "Why seven sections specifically?",
+    a: "Seven is the result of distillation, not arithmetic. Earlier drafts had twelve sections and were too heavy to maintain. Later drafts had four and left out the trade-off defaults, which turned out to be the most operationally useful part. Seven is the stable minimum that covers purpose, quality, investment prioritisation, deliberate refusals, precomputed decisions, ambition escalation, and reversibility mapping. Adding an eighth would dilute all seven."
+  },
+  {
+    category: "spec",
+    q: "What if I don't need all seven?",
+    a: "You can omit any section. The spec says the heading SHOULD be retained with a short note explaining the omission — this preserves the structure so agents and tools can still parse the file predictably. A section that says 'No asymmetric bets at this scale; everything gets the same effort' is still useful information."
+  },
+  {
+    category: "spec",
+    q: "Should AI agents actually read my NORTH.md?",
+    a: "Yes — ideally automatically. The most effective setup is a single line in your CLAUDE.md or AGENTS.md that says: 'See NORTH.md for project purpose and ambition.' Most coding agents load referenced files at session start. You can also paste the relevant NORTH.md sections directly into an agent prompt when you want to escalate scope on a specific task."
+  },
+  {
+    category: "spec",
+    q: "How is this different from a vision doc, mission statement, or OKRs?",
+    a: "Vision docs and mission statements are written for stakeholders and rarely updated. OKRs are quarterly and quantitative. NORTH.md is operational context for agents and team members working inside the codebase — it changes deliberately and rarely, and it prioritises clarity of trade-offs over inspiration. The test is not 'is this motivating?' but 'does this change what decision an agent makes when it has two reasonable options?'"
+  },
+  {
+    category: "spec",
+    q: "Why a markdown file instead of a structured schema (YAML/JSON)?",
+    a: "Prose has rhetorical force that structured data does not. A sentence in a document section lands differently than the same sentence as a YAML string. The success of CLAUDE.md, AGENTS.md, and llms.txt all point in the same direction: plain text at a known path is the most durable, widely-adopted format for ambient project context. A validator or schema may come later, once adoption shapes the spec — but the canonical format will stay markdown."
+  },
+  {
+    category: "spec",
+    q: "What goes in 'Asymmetric Bets'?",
+    a: "Two explicit lists: where you invest 10x effort, and where you deliberately accept 1.1x. For example: a legal tech startup might go 10x on document accuracy and zero-defect parsing, while accepting 1.1x on admin UI and internal dashboards. The purpose is to prevent two failure modes at once — over-investing in commodity work and under-investing in the work that actually compounds. The section only works if both sides are named; 'we care deeply about everything' is not an asymmetric bet."
+  },
+  {
+    category: "spec",
+    q: "How do 'Anti-Goals' differ from 'we don't do that'?",
+    a: "Anti-Goals are specific, written-down refusals for things that would be tempting or profitable but are explicitly out of scope. 'We don't do that' is an informal answer to a specific request. An Anti-Goal is a pre-decided answer to a class of requests, with a one-line justification that survives pushback. The Nordic ERP example uses: 'We do not build a CRM module — Twenty exists, we integrate rather than rebuild.' That refusal stops the conversation before it starts, for both humans and agents."
+  },
+  {
+    category: "spec",
+    q: "What's an 'Ambition Trigger' supposed to do in an AI prompt?",
+    a: "An Ambition Trigger is a short phrase that, when included in an agent prompt, signals that the default (safe, incremental) interpretation is too small for this task. Examples: 'Is there a 10x version of this?' or 'What would the team that ships shadcn do here?' The key property is that the trigger must be allowed to be answered with 'what we already have is the 10x version' — otherwise it is not a trigger, it is pressure."
+  },
+  // Adoption
+  {
+    category: "adoption",
+    q: "Should NORTH.md be public or private?",
+    a: "Public is strongly recommended. The file is most useful as ambient context: it should be readable by agents, contributors, and anyone evaluating the project. Private NORTH.md files are possible in private repositories, but most of the value — including LLM citability and badge propagation — comes from open access. If there are confidential strategy details, write the NORTH.md at the level of abstraction that can be public, and keep the detail in private notes."
+  },
+  {
+    category: "adoption",
+    q: "How often should I update my NORTH.md?",
+    a: "Rarely and deliberately. The North Star should be stable for years. The Bar may sharpen over time as the team's capability grows. Trade-off Defaults and Anti-Goals change only when a fundamental strategic shift warrants it. If you are updating NORTH.md every sprint, the content has slipped into roadmap territory — that belongs in your issue tracker, not here. A sensible cadence is a review at major version milestones or significant pivots."
+  },
+  {
+    category: "adoption",
+    q: "Can I have multiple NORTH.md files in a monorepo?",
+    a: "Yes. Each product with distinct ambition can have a NORTH.md in its package root. The repository root NORTH.md then describes the umbrella ambition — the destination that the entire monorepo serves. Where ambitions genuinely differ across packages, separate files are preferable to a single file that tries to cover everything with vague generalities."
+  },
+  {
+    category: "adoption",
+    q: "How do I propagate adoption inside my team?",
+    a: "Start with a first draft yourself, then review it with the people who regularly make architectural or prioritisation decisions. The most common reaction is surprise at how much shared-but-unspoken assumption the file surfaces. Once the team has agreed on the content, add a reference in CLAUDE.md or AGENTS.md, add the badge to the README, and let usage build the habit. Forcing adoption through process rarely works; building it into ambient context usually does."
+  },
+  {
+    category: "adoption",
+    q: "What if I disagree with the seven sections?",
+    a: "The spec explicitly allows additional sections after the canonical seven. If you find a section consistently missing from your context, propose it via RFC on the GitHub repository. The seven-section shape is stable at v0.1 but the spec is designed to evolve. What we want to avoid is the set of sections becoming arbitrary — each one earns its place by changing agent or team behaviour in a verifiable way."
+  },
+  {
+    category: "adoption",
+    q: "What about non-software projects?",
+    a: "The convention was designed for software repositories, but the underlying problem — agents and collaborators defaulting to the smallest interpretation of a task — is not specific to software. A design system, a research project, a book manuscript, or an open dataset could all benefit from a NORTH.md. The seven sections translate reasonably well: 'The Bar' becomes quality criteria for the output, 'Reversibility' maps editorial or structural decisions. We are curious to see how the community adapts it."
+  },
+  // Process
+  {
+    category: "process",
+    q: "Is there a validator or linter?",
+    a: "Not at v0.1. Building tooling now would risk locking in a file shape before adoption has revealed what actually matters. The Anti-Goals section of this project's own NORTH.md explicitly defers a linter until spec adoption matures. Once the spec is stable and common patterns have emerged from real usage, a validator — likely an AST-grep rule set or a small CLI — is a natural next step."
+  },
+  // Community
+  {
+    category: "community",
+    q: "Who is behind this?",
+    a: "NORTH.md was created by Viktor Berthelius (BRTHLS). It is an autonomous open-source initiative designed to formalise purpose, ambition, and precomputed trade-offs for software engineering teams working with AI agents. The specification is MIT-licensed, vendor-neutral, and not tied to any commercial product."
+  },
+  {
+    category: "community",
+    q: "Can I sponsor NORTH.md?",
+    a: "There is no paid tier and no commercial product. If NORTH.md saves your team significant time, the most useful forms of support are: starring the GitHub repository, opening a PR to add a real example NORTH.md to /examples, writing about it, or citing it in your own projects. If you have budget for infrastructure support, watch the GitHub repository — we may open a GitHub Sponsors page post-launch."
+  },
+  {
+    category: "community",
+    q: "Is the specification stable?",
+    a: "The current version is v0.1. The seven section names are treated as one-way doors — we will not rename them without a major version bump and a migration path for existing adopters. Everything else, including section guidance, examples, and propagation recommendations, may be updated in minor versions. Breaking changes follow semver: a v1.0 declaration will signal production stability."
+  },
+  {
+    category: "community",
+    q: "Where do I get help?",
+    a: "Open a GitHub issue at berthelius/north for spec questions, bug reports, or example submissions. For general discussion, the Discussions tab on the repository is the right place. The specification is the single source of truth — if something in the spec is unclear, that is a documentation bug and we want to know about it."
+  }
+];
+
+const categories: { id: FAQItem["category"]; label: string }[] = [
+  { id: "spec", label: "Specification" },
+  { id: "adoption", label: "Adoption" },
+  { id: "process", label: "Process" },
+  { id: "community", label: "Community" }
+];
+
+// Build JSON-LD FAQPage schema
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+};
+---
+
+<Base
+  title="FAQ — NORTH.md"
+  description="Common questions about the NORTH.md convention: spec details, adoption, process, and community."
+  canonical={`${siteUrl}/faq`}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+  <main class="mx-auto max-w-3xl px-6 py-24 md:py-32">
+
+    <!-- Back nav -->
+    <nav class="mb-16">
+      <a
+        href="/"
+        class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)] underline decoration-dotted underline-offset-4 hover:text-[var(--fg)] transition-colors"
+      >
+        &larr; northfile.dev
+      </a>
+    </nav>
+
+    <!-- Header -->
+    <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
+      faq &middot; 20 questions
+    </p>
+
+    <h1 class="mt-5 font-display text-4xl md:text-5xl leading-[1.05] tracking-tight">
+      Frequently asked questions
+    </h1>
+
+    <p class="mt-6 max-w-2xl text-lg text-[var(--muted)] leading-relaxed">
+      Honest answers. If something is unclear, open an issue on
+      <a href="https://github.com/berthelius/north" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">GitHub</a>
+      — unclear FAQ is a documentation bug.
+    </p>
+
+    <!-- Search -->
+    <div class="mt-10">
+      <input
+        id="faq-search"
+        type="search"
+        placeholder="Search questions..."
+        autocomplete="off"
+        class="w-full rounded-lg border border-[var(--rule)] bg-transparent px-4 py-3 text-sm font-sans text-[var(--fg)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none transition-colors"
+      />
+    </div>
+
+    <hr class="mt-10 border-[var(--rule)]" />
+
+    <!-- FAQ by category -->
+    {categories.map((cat) => {
+      const items = faqs.filter((f) => f.category === cat.id);
+      return (
+        <section class="faq-category mt-12" data-category={cat.id}>
+          <h2 class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)] mb-6">
+            {cat.label}
+          </h2>
+
+          <div class="faq-list space-y-0 divide-y divide-[var(--rule)] border-t border-[var(--rule)]">
+            {items.map((item) => (
+              <details class="faq-item group py-1">
+                <summary class="flex cursor-pointer items-start justify-between gap-4 py-4 font-sans text-[var(--fg)] text-base font-medium list-none select-none hover:text-[var(--accent)] transition-colors">
+                  <span class="faq-question max-w-[54ch] leading-snug">{item.q}</span>
+                  <span
+                    class="faq-icon mt-0.5 shrink-0 text-[var(--muted)] transition-transform duration-200 group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 2V14M2 8H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                </summary>
+                <div class="faq-answer pb-5 pr-8 text-[var(--muted)] leading-relaxed text-base max-w-[60ch]">
+                  {item.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
+      );
+    })}
+
+    <!-- No results message -->
+    <p id="faq-no-results" class="mt-12 text-[var(--muted)] text-sm hidden">
+      No questions match your search. Try a different term, or <a href="https://github.com/berthelius/north/issues" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">open an issue</a> if your question is missing.
+    </p>
+
+    <hr class="mt-20 border-[var(--rule)]" />
+
+    <!-- CTA -->
+    <div class="mt-12 flex flex-wrap gap-3">
+      <a
+        href="/spec"
+        class="inline-flex items-center gap-2 rounded-full bg-[var(--fg)] px-5 py-2.5 text-sm font-medium text-[var(--bg)] transition hover:opacity-90"
+      >
+        Read the specification &rarr;
+      </a>
+      <a
+        href="/why"
+        class="inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)]"
+      >
+        Why NORTH.md
+      </a>
+    </div>
+
+    <footer class="mt-32 border-t border-[var(--rule)] pt-10 text-sm text-[var(--muted)]">
+      <p>
+        MIT &copy; <a href="https://brthls.com" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Viktor Berthelius</a> &middot;
+        <a href="https://github.com/berthelius/north" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">GitHub</a>
+      </p>
+      <p class="mt-2">
+        Trinity: <a href="https://agents.md" class="hover:text-[var(--fg)]">AGENTS.md</a> &middot;
+        <a href="https://soul.md" class="hover:text-[var(--fg)]">SOUL.md</a> &middot;
+        <span class="text-[var(--fg)]">NORTH.md</span>
+      </p>
+    </footer>
+  </main>
+
+  <!-- Vanilla JS search — no deps -->
+  <script>
+    (function () {
+      const input = document.getElementById("faq-search") as HTMLInputElement | null;
+      const noResults = document.getElementById("faq-no-results");
+      if (!input) return;
+
+      const allItems = Array.from(document.querySelectorAll<HTMLElement>(".faq-item"));
+      const allCategories = Array.from(document.querySelectorAll<HTMLElement>(".faq-category"));
+
+      function normalize(str: string): string {
+        return str.toLowerCase().replace(/['']/g, "'");
+      }
+
+      input.addEventListener("input", () => {
+        const query = normalize(input.value.trim());
+
+        if (!query) {
+          allItems.forEach((el) => { el.style.display = ""; });
+          allCategories.forEach((el) => { el.style.display = ""; });
+          if (noResults) noResults.classList.add("hidden");
+          return;
+        }
+
+        let visibleCount = 0;
+
+        allItems.forEach((item) => {
+          const q = normalize(item.querySelector(".faq-question")?.textContent ?? "");
+          const a = normalize(item.querySelector(".faq-answer")?.textContent ?? "");
+          const match = q.includes(query) || a.includes(query);
+          item.style.display = match ? "" : "none";
+          if (match) visibleCount++;
+        });
+
+        // Show/hide category headings based on whether they have visible items
+        allCategories.forEach((cat) => {
+          const visibleInCat = Array.from(cat.querySelectorAll<HTMLElement>(".faq-item")).some(
+            (el) => el.style.display !== "none"
+          );
+          cat.style.display = visibleInCat ? "" : "none";
+        });
+
+        if (noResults) {
+          noResults.classList.toggle("hidden", visibleCount > 0);
+        }
+      });
+    })();
+  </script>
+</Base>
+
+<style>
+  /* Remove default marker from details/summary */
+  details summary::-webkit-details-marker,
+  details summary::marker {
+    display: none;
+    content: "";
+  }
+
+  /* Rotate icon on open */
+  details[open] .faq-icon {
+    transform: rotate(45deg);
+    color: var(--accent);
+  }
+
+  /* Answer typography */
+  .faq-answer {
+    font-family: var(--font-sans);
+    font-size: 0.9625rem;
+    line-height: 1.7;
+  }
+
+  /* Search field dark mode */
+  @media (prefers-color-scheme: dark) {
+    #faq-search {
+      background: transparent;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .faq-answer {
+      max-width: 100%;
+      padding-right: 0;
+    }
+
+    .faq-question {
+      max-width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# STEALTH mode — no crawler welcome until public launch decision.
+# Repo + landing maintained privately. See NORTH.md project notes.
