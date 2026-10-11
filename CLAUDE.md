@@ -4,13 +4,13 @@
 > See [NORTH.md](./NORTH.md) for project purpose and ambition (this is where
 > "how far" is decided; this file is for "how").
 
-## STATUS — PUBLIC v0.1 (2026-09-24)
+## STATUS — PUBLIC v0.1 (2026-10-11)
 
-Canonical public release of NORTH.md — the open convention for purpose, ambition, and precomputed trade-offs in the 5-layer agent governance stack.
+Public release of NORTH.md — an open convention for purpose, ambition, and precomputed trade-offs. It proposes (does not claim as an established standard) a five-layer model of agent context files.
 
 ## Project
 
-`northfile.dev` — canonical landing, spec, and reference implementation for the **NORTH.md** convention.
+`northfile.dev` — landing, spec, and reference implementation for the **NORTH.md** convention.
 
 ## Stack
 
@@ -75,13 +75,13 @@ examples → docs.
 
 - Not a SaaS product. No accounts, no billing, no API keys for end users.
 - Not a paid tier. Specification is free; tooling, if any, lives elsewhere.
-- Not a competitor to AGENTS.md, SOUL.md, or llms.txt. Trinity framing,
-  generous cross-links.
+- Not a competitor to AGENTS.md, SOUL.md, or llms.txt. Generous cross-links;
+  the five-layer model is a proposal.
 
 ## Related references
 
 - [NORTH.md](./NORTH.md) — the project's own purpose declaration.
-- [SPEC.md](./SPEC.md) — the canonical specification text.
+- [SPEC.md](./SPEC.md) — the specification text.
 - [README.md](./README.md) — public-facing repo intro.
 - Spec landing: `https://northfile.dev`
 - Author site: `https://brthls.com`

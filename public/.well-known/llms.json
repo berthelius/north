@@ -5,8 +5,7 @@
   "spec": "https://northfile.dev/spec",
   "specMarkdown": "https://northfile.dev/spec.md",
   "specVersioned": "https://northfile.dev/api/spec/v0.1.md",
-  "specJson": "https://northfile.dev/api/spec/v0.2.json",
-  "specJsonV01": "https://northfile.dev/api/spec/v0.1.json",
+  "specJson": "https://northfile.dev/api/spec/v0.1.json",
   "llmsTxt": "https://northfile.dev/llms.txt",
   "llmsFullTxt": "https://northfile.dev/llms-full.txt",
   "compare": "https://northfile.dev/compare",
@@ -19,7 +18,7 @@
   "license": "MIT",
   "version": "0.1",
   "status": "active",
-  "publishedAt": "2026-09-24",
+  "publishedAt": "2026-10-11",
   "author": {
     "name": "Viktor Berthelius",
     "url": "https://brthls.com",
@@ -33,12 +32,12 @@
     },
     {
       "file": "SOUL.md",
-      "purpose": "Project identity and voice — who the project is",
+      "purpose": "Agent persona, values and tone",
       "url": "https://soul.md"
     },
     {
       "file": "CONSTITUTION.md",
-      "purpose": "Non-negotiable negative constraints — what lines never to cross",
+      "purpose": "Non-negotiable principles and boundaries",
       "url": "https://agentconstitution.dev"
     },
     {

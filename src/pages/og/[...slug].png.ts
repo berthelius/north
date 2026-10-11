@@ -42,7 +42,7 @@ const SLUGS: Record<string, SlugConfig> = {
   },
   faq: {
     title: 'NORTH.md — FAQ',
-    subtitle: 'Common questions about the convention and the agent context trinity.',
+    subtitle: 'Common questions about the convention and agent context files.',
   },
   changelog: {
     title: 'NORTH.md — Changelog',
@@ -233,7 +233,7 @@ function buildOgElement(config: SlugConfig): unknown {
           'spec v0.1'
         )
       ),
-      // Trinity tag
+      // Five-layer tag
       el(
         'div',
         {
@@ -245,7 +245,7 @@ function buildOgElement(config: SlugConfig): unknown {
             letterSpacing: '0.3px',
           } as SatoriStyle,
         },
-        'AGENTS.md · SOUL.md · NORTH.md'
+        'CONSTITUTION.md · AGENTS.md · DESIGN.md · SOUL.md · NORTH.md'
       )
     )
   );

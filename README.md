@@ -53,7 +53,7 @@ relates to `NORTH.md`.
 [One sentence. The destination, not the roadmap.]
 
 ## 2. The Bar
-[What quality threshold counts as "shipped". Mechanical gates & truth assertions.]
+[What quality threshold counts as "shipped".]
 
 ## 3. Asymmetric Bets
 [Where we go 10x. Where we accept 1.1x.]

@@ -20,7 +20,7 @@
 
   <!-- Top Technical Rail -->
   <line x1="48" y1="48" x2="1152" y2="48" stroke="#e5e5e5" stroke-width="1"/>
-  <text x="48" y="38" font-family="'JetBrains Mono', monospace" font-size="10" fill="#737373" letter-spacing="0.25em" font-weight="600">SPECIFICATION // SPEC: V0.1 CANONICAL</text>
+  <text x="48" y="38" font-family="'JetBrains Mono', monospace" font-size="10" fill="#737373" letter-spacing="0.25em" font-weight="600">SPECIFICATION // SPEC: V0.1</text>
   <text x="1152" y="38" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10" fill="#a3a3a3" letter-spacing="0.2em">NORTHFILE.DEV · BRTHLS</text>
 
   <!-- Center Heading: NORTH.md -->

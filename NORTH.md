@@ -35,7 +35,7 @@
 
 - **We do not build a bloated linter CLI before spec adoption matures.** Tooling locks in shape prematurely.
 - **We do not track or identify users on the landing.** Privacy-first hosting (no cookies, no trackers).
-- **We do not claim territorial monopoly over the agent stack.** Modular composition with `CONSTITUTION.md`, `AGENTS.md`, `design.md`, and `SOUL.md`. Generous cross-links.
+- **We do not claim territorial monopoly over the agent stack.** Modular composition with `CONSTITUTION.md`, `AGENTS.md`, `DESIGN.md`, and `SOUL.md`. Generous cross-links.
 - **We do not ship a paid tier or proprietary paywall.** The specification and reference implementation are permanently free and MIT-licensed.
 
 ## 5. Trade-off Defaults

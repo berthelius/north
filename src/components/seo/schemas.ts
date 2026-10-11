@@ -23,7 +23,7 @@ export function getDefinedTermSchema(): Record<string, unknown> {
       'A markdown convention that declares a software project\'s purpose, ambition, and trade-off defaults in a form readable by both humans and AI coding agents.',
     inDefinedTermSet: {
       '@type': 'DefinedTermSet',
-      name: 'Agent Context Trinity',
+      name: 'Agent context files (proposed five-layer model)',
       url: SITE,
     },
     url: SITE,
@@ -38,13 +38,13 @@ export function getSoftwareSourceCodeSchema(): Record<string, unknown> {
     '@type': 'SoftwareSourceCode',
     name: 'NORTH.md',
     description:
-      'Canonical specification, landing page, and reference implementation for the NORTH.md convention.',
+      'Specification, landing page, and reference implementation for the NORTH.md convention.',
     url: SITE,
     codeRepository: REPO,
     programmingLanguage: 'Markdown',
     license: 'https://opensource.org/licenses/MIT',
     version: '0.1',
-    datePublished: '2026-09-24',
+    datePublished: '2026-10-11',
     author: getPersonSchema(),
     maintainer: getPersonSchema(),
     keywords: [
@@ -54,7 +54,7 @@ export function getSoftwareSourceCodeSchema(): Record<string, unknown> {
       'AGENTS.md',
       'SOUL.md',
       'coding agents',
-      'agent context trinity',
+      'agent context files',
       'project convention',
     ],
   };
@@ -97,7 +97,7 @@ export function getWebSiteSchema(): Record<string, unknown> {
     name: 'NORTH.md',
     url: SITE,
     description:
-      'The canonical landing page and specification for NORTH.md — the third file in the agent context trinity.',
+      'The landing page and specification for NORTH.md — the direction layer in a proposed five-layer model of agent context files.',
     author: getPersonSchema(),
     publisher: getOrganizationSchema(),
     license: 'https://opensource.org/licenses/MIT',
