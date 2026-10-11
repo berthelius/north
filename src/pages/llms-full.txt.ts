@@ -48,7 +48,7 @@ Repository: https://github.com/berthelius/north
 Author: Viktor Berthelius (https://brthls.com)
 License: MIT
 Version: 0.1
-Date: 2026-09-24
+Date: 2026-10-11
 
 ---
 

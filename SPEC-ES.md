@@ -4,7 +4,7 @@
 **Estado:** Activo (primera versión pública)  
 **Autor:** [Viktor Berthelius](https://brthls.com) (BRTHLS)  
 **Licencia:** MIT  
-**Fecha:** 2026-09-24  
+**Fecha:** 2026-10-11  
 
 ---
 
@@ -282,7 +282,7 @@ Los ejemplos — uno real y cinco ilustrativos — están en
 
 ## Registro de cambios
 
-### v0.1 — 2026-09-24
+### v0.1 — 2026-10-11
 
 - Primera versión pública.
 - Siete secciones definidas: North Star, The Bar, Asymmetric Bets, Anti-Goals, Trade-off Defaults, Ambition Triggers y Reversibility.

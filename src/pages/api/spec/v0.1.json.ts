@@ -7,7 +7,7 @@ const spec = {
   title: 'NORTH.md v0.1',
   version: '0.1',
   status: 'active',
-  publishedAt: '2026-09-24',
+  publishedAt: '2026-10-11',
   authors: [
     {
       name: 'Viktor Berthelius',
