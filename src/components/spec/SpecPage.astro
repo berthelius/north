@@ -73,10 +73,10 @@ const jsonLd = {
 };
 ---
 
-<Base title={t.title} description={t.description} canonical={url} lang={lang}>
+<Base title={t.title} description={t.description} canonical={url} lang={lang} ogImage="/og/spec.png">
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-  <div class="spec-layout">
+  <div class="spec-layout frame">
     <!-- Sticky TOC — desktop left column -->
     <aside class="toc-aside" aria-label={t.toc}>
       <nav class="toc-nav" aria-label={t.toc}>
@@ -134,7 +134,8 @@ const jsonLd = {
     <!-- Main content -->
     <main class="spec-main" id="main-content">
       <header class="spec-header">
-        <p class="spec-eyebrow">
+        <p class="spec-eyebrow label">
+          <span class="signal" aria-hidden="true"></span>
           <span class="version-badge">v{spec.version}</span>
         </p>
         <h1 class="spec-title">{spec.title}</h1>
@@ -191,22 +192,21 @@ const jsonLd = {
 </Base>
 
 <style is:global>
-  /* Layout */
+  /* Layout: contents rail on the left, the document on a reading measure. */
   .spec-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     min-height: 100dvh;
-    overflow-x: hidden;
   }
 
   @media (min-width: 1024px) {
     .spec-layout {
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 0;
+      grid-template-columns: 15rem minmax(0, 1fr);
+      column-gap: clamp(3rem, 6vw, 6rem);
     }
   }
 
-  /* TOC — desktop */
+  /* Contents rail (desktop) */
   .toc-aside {
     display: none;
   }
@@ -215,62 +215,62 @@ const jsonLd = {
     .toc-aside {
       display: block;
       position: sticky;
-      top: 0;
-      height: 100dvh;
+      top: var(--header-h);
+      height: calc(100dvh - var(--header-h));
       overflow-y: auto;
-      padding: 3rem 1.5rem 3rem 2rem;
-      border-right: 1px solid var(--rule);
+      padding: 3.5rem 0 3rem;
+      scrollbar-width: none;
     }
   }
 
-  .toc-nav {
-    /* natural scroll */
-  }
-
   .toc-heading {
+    margin: 0 0 1.25rem;
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
+    font-size: 0.6875rem;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
     color: var(--muted);
-    margin: 0 0 1rem;
   }
 
-  .toc-list {
+  .toc-list,
+  .toc-mobile-list {
     list-style: none;
-    padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
+    padding: 0;
+    border-left: 1px solid var(--rule);
   }
 
   .toc-link {
     display: block;
-    font-size: var(--text-sm);
+    margin-left: -1px;
+    padding: 0.4rem 0 0.4rem 1rem;
+    border-left: 2px solid transparent;
+    font-size: 0.8125rem;
+    line-height: 1.4;
     color: var(--muted);
     text-decoration: none;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    transition: color 0.15s, background 0.15s;
-    line-height: 1.4;
+    transition:
+      color 160ms,
+      border-color 160ms;
   }
 
-  .toc-link:hover,
-  .toc-link:focus-visible {
+  .toc-link:hover {
     color: var(--fg);
-    background: color-mix(in srgb, var(--fg) 6%, transparent);
-    outline: none;
+    border-left-color: var(--rule);
   }
 
   .toc-link.active {
-    color: var(--accent);
+    color: var(--fg);
+    border-left-color: var(--accent);
   }
 
-  /* TOC — mobile */
+  .toc-link:focus-visible {
+    outline-offset: -2px;
+  }
+
+  /* Contents (mobile): a ruled disclosure under the header */
   .toc-mobile {
     border-bottom: 1px solid var(--rule);
-    padding: 0 var(--spacing-gutter);
   }
 
   @media (min-width: 1024px) {
@@ -283,12 +283,12 @@ const jsonLd = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 0;
+    min-height: 3.25rem;
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
+    font-size: 0.6875rem;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--muted);
+    color: var(--fg);
     cursor: pointer;
     list-style: none;
     user-select: none;
@@ -299,7 +299,7 @@ const jsonLd = {
   }
 
   .toc-mobile-summary svg {
-    transition: transform 0.2s var(--ease-out-quart);
+    transition: transform 200ms var(--ease-out-quart);
   }
 
   details[open] .toc-mobile-summary svg {
@@ -307,76 +307,52 @@ const jsonLd = {
   }
 
   .toc-mobile-list {
-    list-style: none;
-    padding: 0 0 1rem;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+    margin-bottom: 1.25rem;
   }
 
-  /* Main spec content */
+  .toc-mobile-list .toc-link {
+    padding-block: 0.55rem;
+    font-size: 0.875rem;
+  }
+
+  /* The document */
   .spec-main {
-    max-width: 72ch;
     width: 100%;
+    max-width: 46rem;
     min-width: 0;
-    padding: 4rem var(--spacing-gutter) 6rem;
-    margin: 0 auto;
-    box-sizing: border-box;
+    padding: clamp(2.5rem, 6vw, 3.5rem) 0 clamp(4rem, 8vw, 6rem);
   }
 
-  @media (min-width: 1024px) {
-    .spec-main {
-      padding: 4rem 4rem 6rem;
-      margin: 0;
-    }
-  }
-
-  /* Header */
+  /* No rule of its own: the first part heading draws it. */
   .spec-header {
-    margin-bottom: 4rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--rule);
+    margin-bottom: clamp(3rem, 6vw, 4.5rem);
   }
 
   .spec-eyebrow {
-    margin: 0 0 1.5rem;
-  }
-
-  .version-badge {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--accent-hover);
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-    padding: 0.25rem 0.625rem;
-    border-radius: 999px;
+    gap: 0.65rem;
+    margin: 0 0 1.5rem;
+    color: var(--muted);
   }
 
   .spec-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.25rem, 5vw, 3rem);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    margin: 0 0 1rem;
+    margin: 0 0 1.5rem;
+    font-size: clamp(2.75rem, 9vw, 5.75rem);
+    letter-spacing: 0;
   }
 
   .spec-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem 0.75rem;
-    font-size: var(--text-sm);
+    margin-bottom: 1.75rem;
+    font-size: 0.875rem;
     color: var(--muted);
-    margin-bottom: 1.5rem;
   }
 
   .meta-sep {
-    color: var(--rule);
+    color: var(--muted);
   }
 
   .spec-actions {
@@ -388,38 +364,39 @@ const jsonLd = {
   .action-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.375rem;
-    font-size: var(--text-sm);
-    color: var(--muted);
-    text-decoration: none;
-    border: 1px solid var(--rule);
-    padding: 0.375rem 0.875rem;
-    border-radius: 6px;
-    transition: color 0.15s, border-color 0.15s;
-  }
-
-  .action-link:hover,
-  .action-link:focus-visible {
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
     color: var(--fg);
-    border-color: var(--muted);
-    outline: none;
+    text-decoration: none;
+    border: 1px solid var(--fg);
+    transition:
+      color 160ms,
+      background-color 160ms;
   }
 
-  /* Spec body typography */
+  .action-link:hover {
+    color: var(--bg);
+    background: var(--fg);
+  }
+
+  /* Body typography */
   .spec-body {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: 1.0625rem;
   }
 
   .spec-body section {
-    scroll-margin-top: 1.5rem;
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
   }
 
   .spec-body p {
     margin: 0 0 1em;
     line-height: 1.7;
-    max-width: 70ch;
   }
 
   .spec-body p:last-child {
@@ -428,254 +405,258 @@ const jsonLd = {
 
   .spec-body ul,
   .spec-body ol {
-    padding-left: 1.5rem;
-    margin: 0.75rem 0 1rem;
+    margin: 0.75rem 0 1.25rem;
+    padding-left: 1.25rem;
     line-height: 1.7;
-    max-width: 70ch;
   }
 
   .spec-body li {
     margin-bottom: 0.4rem;
+    padding-left: 0.25rem;
+  }
+
+  .spec-body li::marker {
+    color: var(--muted);
+  }
+
+  .spec-body strong {
+    font-weight: 650;
   }
 
   .spec-body code {
-    font-family: var(--font-mono);
-    font-size: 0.9em;
-    background: color-mix(in srgb, var(--fg) 7%, transparent);
-    padding: 0.15em 0.4em;
-    border-radius: 4px;
+    padding: 0.1em 0.35em;
+    font-size: 0.86em;
+    background: var(--surface);
   }
 
   .spec-body pre {
-    background: color-mix(in srgb, var(--fg) 5%, transparent);
-    border: 1px solid var(--rule);
-    border-radius: 8px;
-    padding: 1rem 1.25rem;
-    overflow-x: auto;
-    margin: 0.75rem 0;
+    margin: 1rem 0 1.25rem;
+    padding: 1.25rem 1.35rem;
     max-width: 100%;
-    box-sizing: border-box;
+    overflow-x: auto;
+    background: var(--ink-bg);
+    color: var(--ink-fg);
+    border: 1px solid var(--ink-rule);
+    scrollbar-color: var(--ink-rule) transparent;
   }
 
   .spec-body pre code {
-    background: none;
     padding: 0;
-    font-size: var(--text-sm);
-    line-height: 1.6;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    background: none;
   }
 
-  /* Section headings */
-  .section-heading {
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin: 0 0 1.25rem;
-    scroll-margin-top: 1.5rem;
+  .spec-body pre:focus-visible {
+    outline-color: var(--ink-accent);
+    outline-offset: -2px;
+  }
+
+  /* Headings: H2 opens a part under an ink rule; H3 is a numbered section. */
+  .section-heading,
+  .subsection-heading {
     display: flex;
-    align-items: center;
-    gap: 0.625rem;
+    align-items: baseline;
+    gap: 0.85rem;
+    margin: 0 0 1.25rem;
+    letter-spacing: 0.005em;
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+
+  .section-heading {
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--fg);
+    font-size: clamp(1.9rem, 4.2vw, 2.75rem);
   }
 
   .subsection-heading {
-    font-family: var(--font-display);
-    font-size: var(--text-xl);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin: 0 0 1rem;
-    scroll-margin-top: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
+    font-size: clamp(1.5rem, 3vw, 1.95rem);
   }
 
   .section-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 50%;
-    border: 1px solid var(--rule);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--muted);
     flex-shrink: 0;
+    min-width: 1.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--accent);
+    transform: translateY(-0.35em);
   }
 
-  /* Copy button */
-  .copy-btn {
+  /* Copy-section button: quiet until the heading is hovered or focused. */
+  .spec-body .copy-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.4rem;
+    align-self: center;
+    min-height: 2rem;
+    margin-left: auto;
+    padding: 0 0.6rem;
+    flex-shrink: 0;
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
+    font-size: 0.6875rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
     color: var(--muted);
     background: none;
     border: 1px solid transparent;
-    border-radius: 4px;
-    padding: 0.2rem 0.5rem;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.15s, color 0.15s, border-color 0.15s;
-    margin-left: auto;
-    flex-shrink: 0;
+    transition:
+      opacity 160ms,
+      color 160ms,
+      border-color 160ms;
   }
 
   .section-heading:hover .copy-btn,
   .section-heading:focus-within .copy-btn,
   .subsection-heading:hover .copy-btn,
-  .subsection-heading:focus-within .copy-btn {
+  .subsection-heading:focus-within .copy-btn,
+  .spec-body .copy-btn.copied {
     opacity: 1;
   }
 
-  .copy-btn:hover,
-  .copy-btn:focus-visible {
+  .spec-body .copy-btn:hover {
     color: var(--fg);
     border-color: var(--rule);
-    outline: none;
-    opacity: 1;
   }
 
-  .copy-btn.copied {
+  .spec-body .copy-btn.copied {
     color: var(--accent);
-    border-color: color-mix(in srgb, var(--accent) 30%, transparent);
-    opacity: 1;
+    border-color: var(--accent);
+  }
+
+  /* Touch screens have no hover: keep the button visible. */
+  @media (hover: none) {
+    .spec-body .copy-btn {
+      opacity: 1;
+    }
   }
 
   /* Blockquotes */
   .spec-body blockquote {
-    border-left: 3px solid var(--accent);
-    margin: 1.25rem 0;
-    padding: 0.75rem 0 0.75rem 1.25rem;
-    color: var(--muted);
+    margin: 1.5rem 0;
+    padding: 0.15rem 0 0.15rem 1.35rem;
+    border-left: 1px solid var(--accent);
     font-style: normal;
-    max-width: 70ch;
+    color: var(--muted);
   }
 
-  .spec-body blockquote em {
-    color: var(--fg);
-  }
-
+  .spec-body blockquote em,
   .spec-body blockquote strong {
     color: var(--fg);
     font-style: normal;
   }
 
-  /* Numbered sections */
-  .numbered-section {
-    padding-left: 0;
-  }
-
-  /* Seven sections intro */
   .seven-sections-intro {
     border-top: 1px solid var(--rule);
     padding-top: 0.5rem;
     margin-top: 0.5rem;
   }
 
-  /* Recommended note */
   .recommended-note {
     display: inline-flex;
     align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.85rem !important;
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
+    font-size: 0.6875rem;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
     color: var(--muted);
-    border: 1px solid var(--rule);
-    padding: 0.15rem 0.5rem;
-    border-radius: 4px;
-    margin: 0 0 0.75rem !important;
   }
 
-  /* Table */
+  .recommended-note::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+  }
+
+  /* Tables */
   .table-wrapper {
+    margin: 1.25rem 0;
     overflow-x: auto;
-    margin: 1rem 0;
+    border-top: 1px solid var(--fg);
   }
 
-  table {
+  .table-wrapper:focus-visible {
+    outline-offset: 2px;
+  }
+
+  .spec-body table {
     width: 100%;
     border-collapse: collapse;
-    font-size: var(--text-sm);
+    font-size: 0.9rem;
   }
 
-  th {
-    text-align: left;
+  .spec-body th {
+    padding: 0.75rem 1rem 0.75rem 0;
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    padding: 0.625rem 1rem;
-    border-bottom: 1px solid var(--rule);
+    font-size: 0.6875rem;
     font-weight: 400;
+    letter-spacing: 0.09em;
+    text-align: left;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
   }
 
-  td {
-    padding: 0.625rem 1rem;
-    border-bottom: 1px solid color-mix(in srgb, var(--rule) 50%, transparent);
+  .spec-body td {
+    padding: 0.8rem 1rem 0.8rem 0;
     vertical-align: top;
     line-height: 1.5;
+    border-bottom: 1px solid var(--rule);
   }
 
-  tr:last-child td {
-    border-bottom: none;
-  }
-
-  /* Changelog inline */
+  /* Changelog entries inside the spec */
   .changelog-version-inline {
-    font-family: var(--font-display);
-    font-size: var(--text-lg);
-    font-weight: 400;
-    margin: 0 0 0.75rem;
-    color: var(--fg);
     display: flex;
     align-items: baseline;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    margin: 0 0 0.75rem;
+    font-size: 1.35rem;
+    color: var(--fg);
   }
 
   .changelog-date-inline {
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: none;
     color: var(--muted);
-    font-weight: 400;
   }
 
   /* Links */
   .spec-link {
     color: var(--fg);
     text-decoration: underline;
-    text-decoration-color: var(--rule);
-    text-underline-offset: 3px;
-    transition: text-decoration-color 0.15s;
+    text-decoration-color: var(--muted);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    transition:
+      color 160ms,
+      text-decoration-color 160ms;
   }
 
-  .spec-link:hover,
-  .spec-link:focus-visible {
-    text-decoration-color: var(--fg);
-    outline: none;
+  .spec-link:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
   }
 
   /* Footer */
   .spec-footer {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--rule);
-    font-size: var(--text-sm);
+    margin-top: clamp(3.5rem, 7vw, 5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--fg);
+    font-size: 0.875rem;
     color: var(--muted);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
   }
 
   .spec-footer p {
     margin: 0;
   }
-
 </style>
 
 
@@ -688,7 +669,8 @@ const jsonLd = {
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        target.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "start" });
         history.pushState(null, "", href);
       }
     });
@@ -717,7 +699,7 @@ const jsonLd = {
   const copyText = store?.dataset.copy ?? "Copy";
   const copiedText = store?.dataset.copied ?? "Copied";
 
-  document.querySelectorAll<HTMLButtonElement>(".copy-btn").forEach((btn) => {
+  document.querySelectorAll<HTMLButtonElement>(".spec-body .copy-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const text = sectionMarkdown[btn.dataset.section ?? ""] ?? "";
       if (!text) return;
