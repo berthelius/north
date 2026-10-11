@@ -13,22 +13,22 @@ export const ui = {
     'nav.langTitle': 'Cambiar a Español',
 
     // Hero
-    'hero.eyebrow': 'spec v0.1 · canonical',
+    'hero.eyebrow': 'spec v0.1 · open convention',
     'hero.title1': 'Give your AI agents',
     'hero.titleAccent': 'judgment',
     'hero.title2': 'when the prompt runs out.',
-    'hero.body': 'NORTH.md is an open convention for project purpose, ambition, and precomputed trade-off defaults. One file. Seven canonical sections. Scaling agency without scaling drift.',
-    'hero.stackNote': 'The arbitration layer in the modern 5-layer agent governance stack, alongside CONSTITUTION.md (limits), AGENTS.md (how), design.md (tokens), and SOUL.md (who).',
+    'hero.body': 'NORTH.md is an open convention for project purpose, ambition, and precomputed trade-off defaults. One file. Seven sections. Designed to scale agency without scaling drift.',
+    'hero.stackNote': 'A proposed direction layer, alongside CONSTITUTION.md (limits), AGENTS.md (how), DESIGN.md (look), and SOUL.md (who).',
     'hero.ctaRead': 'Read the spec',
-    'hero.ctaCompare': 'Compare 5-layer stack',
+    'hero.ctaCompare': 'Compare the five layers',
     'hero.ctaCopy': 'Copy template',
 
     // Stack Section
-    'stack.kicker': '05-Layer Architecture',
-    'stack.title': 'The 5-layer agent governance stack',
-    'stack.desc': 'A mature AI-native codebase does not rely on a single monolithic prompt. Five modular files govern the agent lifecycle from negative safety boundaries to strategic leap decisions.',
-    'stack.summary': 'These five files are complementary, not competitive. Together they ensure coding agents operate with safety (L1), technical discipline (L2), visual consistency (L3), personality (L4), and decisive judgment (L5).',
-    'stack.compareLink': 'Explore full 5-layer comparison matrix →',
+    'stack.kicker': 'A proposed model',
+    'stack.title': 'A five-layer model for agent context files',
+    'stack.desc': 'We propose a five-layer model for the context files agents read, from non-negotiable limits to the direction of the project. Most repositories will use only some of them.',
+    'stack.summary': 'The five files complement each other; none replaces another. In this model they cover limits (L1), execution (L2), visual design (L3), agent persona (L4), and direction (L5).',
+    'stack.compareLink': 'See the full comparison →',
 
     // Seven Sections
     'sections.title': 'Seven sections, one file',
@@ -59,21 +59,21 @@ export const ui = {
 
     // Badge
     'badge.title': 'Wear the badge',
-    'badge.desc': 'Every adopter compounds discovery. Add this to your README and help the convention grow.',
+    'badge.desc': 'Add it to your README to show the repository has a NORTH.md and point readers to the spec.',
     'badge.linksBack': 'Links back to',
     'badge.copy': 'Copy',
     'badge.copied': 'Copied!',
 
     // Footer
-    'footer.stack': 'The 5-layer stack',
-    'footer.builtWith': 'MIT Licensed · Vendor-Neutral Open Standard',
+    'footer.stack': 'The five-layer model',
+    'footer.builtWith': 'MIT licensed · Vendor-neutral open convention',
   },
   es: {
     // Navigation
     'nav.brand': 'NORTH.MD',
     'nav.spec': 'Especificación',
     'nav.compare': 'Comparativa',
-    'nav.stack': 'Stack 5 Capas',
+    'nav.stack': 'Stack de 5 capas',
     'nav.why': 'Por qué',
     'nav.examples': 'Ejemplos',
     'nav.faq': 'Preguntas',
@@ -82,30 +82,30 @@ export const ui = {
     'nav.langTitle': 'Switch to English',
 
     // Hero
-    'hero.eyebrow': 'spec v0.1 · canónica',
+    'hero.eyebrow': 'spec v0.1 · convención abierta',
     'hero.title1': 'Dale a tus agentes de IA',
     'hero.titleAccent': 'criterio',
     'hero.title2': 'cuando el prompt se termina.',
-    'hero.body': 'NORTH.md es una convención abierta para declarar el propósito, ambición y arbitraje de trade-offs precalculados de un proyecto. Un solo archivo. Siete secciones canónicas. Escala la autonomía sin derivar en mediocridad.',
-    'hero.stackNote': 'La capa de arbitraje del stack de gobernanza de 5 capas, junto a CONSTITUTION.md (límites), AGENTS.md (cómo), design.md (diseño) y SOUL.md (voz).',
+    'hero.body': 'NORTH.md es una convención abierta para declarar el propósito, la ambición y los trade-offs precalculados de un proyecto. Un solo archivo. Siete secciones. Pensada para escalar la autonomía sin escalar la deriva.',
+    'hero.stackNote': 'Una capa de dirección que proponemos, junto a CONSTITUTION.md (límites), AGENTS.md (cómo), DESIGN.md (aspecto) y SOUL.md (quién).',
     'hero.ctaRead': 'Leer especificación',
-    'hero.ctaCompare': 'Comparar stack 5 capas',
+    'hero.ctaCompare': 'Comparar las cinco capas',
     'hero.ctaCopy': 'Copiar plantilla',
 
     // Stack Section
-    'stack.kicker': 'Arquitectura de 5 Capas',
-    'stack.title': 'El stack de gobernanza de agentes en 5 capas',
-    'stack.desc': 'Una base de código nativa de IA madura no depende de un único prompt monolítico. Cinco archivos modulares gobiernan el ciclo de vida del agente, desde límites de seguridad hasta decisiones de salto estratégico.',
-    'stack.summary': 'Estos cinco archivos son complementarios, no competitivos. Juntos aseguran que los agentes de código operen con seguridad (L1), disciplina técnica (L2), consistencia visual (L3), personalidad (L4) y criterio decisivo (L5).',
-    'stack.compareLink': 'Explorar matriz comparativa completa del stack →',
+    'stack.kicker': 'Un modelo propuesto',
+    'stack.title': 'Un modelo de cinco capas para el contexto de los agentes',
+    'stack.desc': 'Proponemos un modelo de cinco capas para los archivos de contexto que leen los agentes, desde los límites innegociables hasta la dirección del proyecto. La mayoría de los repositorios usará solo algunos.',
+    'stack.summary': 'Los cinco archivos se complementan; ninguno sustituye a otro. En este modelo cubren los límites (L1), la ejecución (L2), el diseño visual (L3), la persona del agente (L4) y la dirección (L5).',
+    'stack.compareLink': 'Ver la comparativa completa →',
 
     // Seven Sections
     'sections.title': 'Siete secciones, un solo archivo',
     'sections.desc': 'Todo lo que necesita un NORTH.md. Nada que sobre.',
     'sections.readFull': 'Leer la especificación completa →',
-    'sec.1.name': 'North Star',
-    'sec.1.desc': 'Una sola frase declarando el destino — no el roadmap ni el próximo trimestre.',
-    'sec.2.name': 'The Bar (El Listón)',
+    'sec.1.name': 'Estrella Polar',
+    'sec.1.desc': 'Una sola frase que declara el destino: ni el roadmap ni el próximo trimestre.',
+    'sec.2.name': 'El Listón',
     'sec.2.desc': 'El umbral de calidad que separa lo "entregado" de lo "empezado".',
     'sec.3.name': 'Apuestas Asimétricas',
     'sec.3.desc': 'Dónde invertir esfuerzo 10x, y dónde aceptar deliberadamente 1.1x.',
@@ -114,9 +114,9 @@ export const ui = {
     'sec.5.name': 'Trade-offs por Defecto',
     'sec.5.desc': 'Decisiones precalculadas sobre dilemas recurrentes: velocidad, alcance, build vs buy.',
     'sec.6.name': 'Disparadores de Ambición',
-    'sec.6.desc': 'Preguntas que escalan el alcance cuando el equipo está pensando en pequeño.',
+    'sec.6.desc': 'Frases que amplían el alcance cuando el equipo piensa en pequeño.',
     'sec.7.name': 'Reversibilidad',
-    'sec.7.desc': 'Puertas de un solo sentido para debatir. Puertas de doble sentido = avanza rápido.',
+    'sec.7.desc': 'Puertas de un solo sentido: se deliberan. Puertas de doble sentido: se avanza rápido.',
 
     // Template Block
     'template.title': 'Añádelo a tu repositorio',
@@ -128,14 +128,14 @@ export const ui = {
 
     // Badge
     'badge.title': 'Muestra el badge',
-    'badge.desc': 'Cada adopción multiplica el estándar. Añade esto a tu README y ayuda a expandir la convención.',
+    'badge.desc': 'Añádelo a tu README para indicar que el repositorio tiene un NORTH.md y enlazar a la especificación.',
     'badge.linksBack': 'Enlaza a',
     'badge.copy': 'Copiar',
     'badge.copied': '¡Copiado!',
 
     // Footer
-    'footer.stack': 'El stack de 5 capas',
-    'footer.builtWith': 'Licencia MIT · Estándar Abierto e Independiente',
+    'footer.stack': 'El modelo de cinco capas',
+    'footer.builtWith': 'Licencia MIT · Convención abierta e independiente',
   },
 } as const;
 

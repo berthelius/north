@@ -2,35 +2,38 @@
 
 > A markdown convention that declares a software project's purpose, ambition,
 > and precomputed trade-off defaults in a form readable by both humans and AI coding agents.
-> It gives agents judgment when the prompt runs out: scaling agency without scaling drift.
+> It is designed to give agents judgment when the prompt runs out.
 
 ## Specification
 
-- [Specification v0.1 (canonical)](https://northfile.dev/spec): the seven canonical sections, with rationale, empirical gates, and examples.
+- [Specification v0.1](https://northfile.dev/spec): the seven sections, with rationale and examples.
 - [Specification raw markdown](https://northfile.dev/spec.md): plain markdown, machine-readable.
-- [Spanish Specification](https://northfile.dev/es/spec): versión oficial en español de la especificación canónica.
+- [Spanish Specification](https://northfile.dev/es/spec): versión en español de la especificación.
 - [Spanish raw markdown](https://northfile.dev/es/spec.md): especificación en markdown plano en español.
 - [Full LLM dump](https://northfile.dev/llms-full.txt): full specification text inlined for LLM consumption.
-- [Ecosystem Comparison](https://northfile.dev/compare): comprehensive matrix comparing NORTH.md with AGENTS.md, design.md, SOUL.md, and CONSTITUTION.md.
+- [Comparison](https://northfile.dev/compare): how NORTH.md relates to AGENTS.md, CLAUDE.md, DESIGN.md, SOUL.md, VISION.md, and CONSTITUTION.md.
 
 ## Reference
 
 - [README](https://github.com/berthelius/north): repository introduction.
-- [Examples](https://northfile.dev/examples): NORTH.md files across multiple project domains (SaaS, OSS, agency, internal platform).
-- [Why](https://northfile.dev/why): why projects need an explicit direction and decision arbitration layer.
+- [Examples](https://northfile.dev/examples): one real NORTH.md (this site's own) and five illustrative ones (SaaS, OSS library, agency, side project, internal platform).
+- [Why](https://northfile.dev/why): why projects benefit from an explicit statement of direction.
 - [FAQ](https://northfile.dev/faq): common questions.
 - [Changelog](https://northfile.dev/changelog): specification version history.
 
 ## Machine-readable endpoints
 
-- [Canonical spec v0.1 (JSON)](https://northfile.dev/api/spec/v0.1.json): JSON Schema representation of the v0.1 spec.
-- [Canonical spec v0.1 (markdown)](https://northfile.dev/api/spec/v0.1.md): canonical raw markdown specification.
+- [Spec v0.1 (JSON)](https://northfile.dev/api/spec/v0.1.json): JSON representation of the v0.1 spec.
+- [Spec v0.1 (markdown)](https://northfile.dev/api/spec/v0.1.md): raw markdown specification (v0.1).
 - [LLM index (JSON)](https://northfile.dev/.well-known/llms.json): machine-readable pointer file for LLM agents discovering the spec.
 
-## Agent Context Ecosystem (5-Layer Stack)
+## Related conventions
 
-- [CONSTITUTION.md](https://agentconstitution.dev): non-negotiable negative safety boundaries (Layer 1).
-- [AGENTS.md](https://agents.md): agent operational instructions and execution (Layer 2).
-- [design.md](https://northfile.dev/compare): visual design system contracts and UI tokens (Layer 3).
-- [SOUL.md](https://soul.md): project identity and voice (Layer 4).
-- [NORTH.md](https://northfile.dev): project purpose, ambition, and trade-off defaults (Layer 5).
+The layer numbers refer to the five-layer model NORTH.md proposes; it is a model, not an established standard.
+
+- [CONSTITUTION.md](https://agentconstitution.dev): project-level principles and boundaries for coding agents (Layer 1, limits).
+- [AGENTS.md](https://agents.md): operational instructions for coding agents (Layer 2, how).
+- [DESIGN.md](https://github.com/google-labs-code/design.md): design tokens and rationale for coding agents, from Google Labs (Layer 3, look).
+- [SOUL.md](https://soul.md): the agent's persona, values, and tone (Layer 4, who).
+- [NORTH.md](https://northfile.dev): project purpose, ambition, and trade-off defaults (Layer 5, direction).
+- [llms.txt](https://llmstxt.org): the convention this file follows, for helping LLMs use a website.

@@ -7,13 +7,14 @@ const sections = [
   { id: "ubicacion", label: "Ubicación del archivo" },
   { id: "formato", label: "Formato del archivo" },
   { id: "siete-secciones", label: "Las siete secciones" },
-  { id: "north-star", label: "1. North Star" },
-  { id: "the-bar", label: "2. The Bar (El Listón)" },
-  { id: "apuestas-asimetricas", label: "3. Apuestas Asimétricas" },
-  { id: "anti-objetivos", label: "4. Anti-Objetivos" },
-  { id: "trade-offs", label: "5. Trade-offs por Defecto" },
-  { id: "disparadores", label: "6. Disparadores de Ambición" },
-  { id: "reversibilidad", label: "7. Reversibilidad" },
+  // Section ids match the English spec so /es/spec#<slug> links resolve.
+  { id: "north-star", label: "1. Estrella Polar" },
+  { id: "the-bar", label: "2. El Listón" },
+  { id: "asymmetric-bets", label: "3. Apuestas Asimétricas" },
+  { id: "anti-goals", label: "4. Anti-Objetivos" },
+  { id: "trade-off-defaults", label: "5. Trade-offs por Defecto" },
+  { id: "ambition-triggers", label: "6. Disparadores de Ambición" },
+  { id: "reversibility", label: "7. Reversibilidad" },
   { id: "propagacion", label: "Propagación" },
   { id: "versionado", label: "Versionado" },
   { id: "relacion", label: "Relación con otras convenciones" },
@@ -25,7 +26,7 @@ const jsonLd = {
   "@type": "TechArticle",
   headline: "Especificación NORTH.md (Español)",
   description:
-    "La especificación canónica de NORTH.md en español: siete secciones para declarar el propósito, ambición y arbitraje de trade-offs de un proyecto.",
+    "La especificación de NORTH.md en español: siete secciones para declarar el propósito, la ambición y los trade-offs precalculados de un proyecto.",
   version: "0.1",
   datePublished: "2026-09-24",
   dateModified: "2026-09-24",
@@ -47,7 +48,7 @@ const jsonLd = {
 
 <Base
   title="Especificación — NORTH.md"
-  description="La especificación canónica de NORTH.md. Siete secciones que dan criterio a tus agentes de IA cuando el prompt se termina."
+  description="La especificación de NORTH.md. Siete secciones pensadas para dar criterio a tus agentes de IA cuando el prompt se termina."
   canonical="https://northfile.dev/es/spec"
   lang="es"
 >
@@ -144,16 +145,19 @@ const jsonLd = {
           <h2 id="resumen" class="section-heading">Resumen</h2>
           <p>
             <code>NORTH.md</code> es un único archivo markdown situado en la raíz de un proyecto de software
-            que declara el <strong>propósito, ambición y trade-offs precalculados</strong> en un formato
-            directamente interpretable por personas y agentes de programación con IA.
+            que declara el <strong>propósito, la ambición y los trade-offs precalculados</strong> del proyecto en un
+            formato legible tanto por personas como por agentes de código con IA.
           </p>
-          <p>Es la capa decisoria del <strong>stack de gobernanza de agentes en 5 capas</strong>:</p>
+          <p>
+            Está pensado para convivir con los demás archivos de contexto que los agentes ya leen.
+            Proponemos verlos como un <strong>stack de cinco capas</strong>: un modelo, no un estándar establecido.
+          </p>
           <ul>
-            <li><code>CONSTITUTION.md</code> — <strong>límites</strong> (seguridad, red lines, restricciones negativas).</li>
-            <li><code>AGENTS.md</code> / <code>CLAUDE.md</code> — <strong>cómo</strong> operan los agentes (reglas, linters, tests).</li>
-            <li><code>design.md</code> — <strong>diseño</strong> (tokens de interfaz, responsive, layout).</li>
-            <li><code>SOUL.md</code> — <strong>quién</strong> es el producto (identidad, voz, valores).</li>
-            <li><code>NORTH.md</code> — <strong>por qué</strong> y <strong>hasta dónde</strong> (propósito, calidad, arbitraje).</li>
+            <li><code>CONSTITUTION.md</code> — <strong>límites</strong> (principios innegociables y fronteras).</li>
+            <li><code>AGENTS.md</code> / <code>CLAUDE.md</code> — <strong>cómo</strong> trabajan los agentes (build, test, entorno).</li>
+            <li><code>DESIGN.md</code> — <strong>aspecto</strong> (tokens de diseño y la razón de cada uno).</li>
+            <li><code>SOUL.md</code> — <strong>quién</strong> es el agente (persona, valores, tono).</li>
+            <li><code>NORTH.md</code> — <strong>por qué</strong> y <strong>hasta dónde</strong> (propósito, ambición, trade-offs por defecto, reversibilidad).</li>
           </ul>
         </section>
 
@@ -161,21 +165,21 @@ const jsonLd = {
         <section aria-labelledby="motivacion">
           <h2 id="motivacion" class="section-heading">Motivación</h2>
           <p>
-            Los agentes de programación actuales tienden por defecto a una <strong>producción segura e incremental</strong>.
+            Los agentes de programación tienden por defecto a una <strong>producción segura e incremental</strong>.
             Optimizan para "no romper lo que funciona" antes que para "subir de nivel". Ante una tarea ambigua,
-            eligen la interpretación más pequeña. Al proponer soluciones, sugieren parches en lugar de refactorizaciones estructurales.
-            Cuando dudan, añaden manejo de errores defensivo en lugar de resolver la causa raíz en su origen.
+            eligen la interpretación más pequeña. Al proponer soluciones, sugieren parches en lugar de reescrituras.
+            Cuando dudan, añaden manejo de errores en lugar de eliminar el modo de fallo en su origen.
           </p>
           <p>
-            Los archivos a nivel de repositorio (<code>CLAUDE.md</code>, <code>AGENTS.md</code>) cubren aspectos <em>operativos</em>:
-            qué comandos ejecutar, qué puertas de enlace respetar, qué convenciones seguir.
-            Los archivos de identidad (<code>SOUL.md</code>) cubren aspectos <em>estéticos</em>: voz, tono, quiénes somos.
+            Los archivos de reglas a nivel de repositorio (<code>CLAUDE.md</code>, <code>AGENTS.md</code>) cubren aspectos <em>operativos</em>:
+            qué comandos ejecutar, qué controles (gates) respetar, qué convenciones seguir.
+            Los archivos de identidad (<code>SOUL.md</code>) cubren el <em>carácter</em>: la voz, el tono y los valores del agente.
           </p>
-          <p>Ninguna de esas capas responde a la pregunta decisiva:</p>
+          <p>Ninguna de estas capas responde a la pregunta que decide si un agente entrega un <strong>parche competente</strong> o un <strong>salto ambicioso</strong>:</p>
           <blockquote>
             ¿Hacia dónde va este proyecto y hasta dónde estamos dispuestos a empujar para llegar allí?
           </blockquote>
-          <p><code>NORTH.md</code> responde a esa pregunta, en siete secciones canónicas, en un solo archivo.</p>
+          <p><code>NORTH.md</code> responde a esa pregunta, en siete secciones, en un solo archivo.</p>
         </section>
 
         <!-- Ubicación -->
@@ -183,16 +187,18 @@ const jsonLd = {
           <h2 id="ubicacion" class="section-heading">Ubicación del archivo</h2>
           <p><code>NORTH.md</code> DEBE ubicarse en la raíz del repositorio.</p>
           <p>
-            Si un monorepo contiene múltiples productos diferenciados, cada producto PUEDE tener su propio
-            <code>NORTH.md</code> en la raíz de su paquete. El <code>NORTH.md</code> de la raíz del monorepo describe
-            entonces la ambición compartida general.
+            Si un monorepo contiene varios productos diferenciados, cada producto PUEDE tener su propio
+            <code>NORTH.md</code> en la raíz de su paquete. El <code>NORTH.md</code> de la raíz describe
+            entonces la ambición común.
           </p>
         </section>
 
         <!-- Formato -->
         <section aria-labelledby="formato">
           <h2 id="formato" class="section-heading">Formato del archivo</h2>
-          <p><code>NORTH.md</code> es un archivo CommonMark. DEBE contener las siete secciones canónicas definidas a continuación, en orden, cada una como encabezado H2.</p>
+          <p><code>NORTH.md</code> es un archivo markdown CommonMark. DEBERÍA contener las siete secciones canónicas definidas a continuación, en orden, cada una como un encabezado H2.</p>
+          <p>Las secciones PUEDEN omitirse si no aplican, pero el encabezado DEBERÍA conservarse con una breve nota que explique la omisión.</p>
+          <p>Se PUEDEN añadir secciones adicionales después de las siete canónicas.</p>
         </section>
 
         <!-- Las siete secciones -->
@@ -202,171 +208,191 @@ const jsonLd = {
           <!-- 1. North Star -->
           <div class="spec-subsection" id="north-star">
             <h3 class="subsection-heading">1. North Star (Estrella Polar)</h3>
-            <p>Una sola frase declarando el destino final. No el roadmap. No el próximo trimestre. El destino.</p>
+            <p>Una sola frase que declara el destino. No el roadmap. No el próximo trimestre. El destino.</p>
             <ul>
-              <li><strong>Suficientemente específica para descartar alternativas.</strong></li>
-              <li><strong>Suficientemente ambiciosa para generar incomodidad.</strong></li>
-              <li><strong>Alcanzable en principio.</strong> Justifica decisiones de ingeniería difíciles.</li>
+              <li><strong>Lo bastante específica para descartar alternativas.</strong> "Ser el mejor ERP" no es una North Star. "Sustituir la contabilidad en hojas de cálculo de los autónomos europeos para 2030" sí lo es.</li>
+              <li><strong>Lo bastante ambiciosa para incomodar.</strong> Si la North Star parece segura, no es una North Star.</li>
+              <li><strong>Alcanzable en principio.</strong> Una North Star no es una fantasía. Es un destino que justifica decisiones difíciles.</li>
             </ul>
             <div class="example-box">
               <p class="example-label">Ejemplo</p>
-              <p class="example-text">Nordic ERP reemplaza el software tradicional para pymes europeas haciendo que la gestión empresarial nativa de IA sea el estándar por defecto para 2027.</p>
+              <p class="example-text">Arkwell hace que cerrar el mes en un día sea lo normal para los pequeños fabricantes europeos en 2030.</p>
             </div>
           </div>
 
           <!-- 2. The Bar -->
           <div class="spec-subsection" id="the-bar">
-            <h3 class="subsection-heading">2. The Bar (El Listón de Calidad)</h3>
-            <p>El umbral de calidad que distingue lo "entregado" de lo "empezado". Define qué trabajo es aceptable considerar completado.</p>
+            <h3 class="subsection-heading">2. The Bar (El Listón)</h3>
+            <p>El umbral de calidad que distingue lo "entregado" de lo "empezado". Define qué trabajo es aceptable dar por terminado.</p>
             <ul>
-              <li><strong>Medible u observable.</strong> Latencia, cobertura, accesibilidad AA, cero errores de tipado.</li>
-              <li><strong>Superior al promedio de la industria.</strong></li>
-              <li><strong>Defendido por barreras mecánicas.</strong> CI checks, linters, tests.</li>
+              <li><strong>Medible u observable.</strong> "Alta calidad" no es un Listón. "Latencia p95 por debajo de 200 ms, cero errores de tipos en CI, accesibilidad AA en cada página" sí lo es.</li>
+              <li><strong>Más alto que el estándar del sector.</strong> Un listón en la media del sector no es ningún listón.</li>
+              <li><strong>Defendido por controles.</strong> Los elementos del Listón DEBERÍAN asignarse a mecanismos de control: comprobaciones de CI, linters, reglas de revisión, runbooks.</li>
             </ul>
             <div class="example-box">
               <p class="example-label">Ejemplo</p>
-              <p class="example-text">Cada funcionalidad entregada pasa: typecheck, linter, suite completa de pruebas, Lighthouse ≥95 en todas las métricas, WCAG AA mediante axe, y paridad i18n. Cero excepciones, sin "TODO: pruebas luego".</p>
+              <p class="example-text">Cada funcionalidad entregada pasa: comprobación de tipos, linter, suite completa de pruebas, Lighthouse ≥95 en todas las métricas, WCAG AA mediante axe y paridad i18n en todos los idiomas soportados. Sin excepciones, sin "TODO: pruebas luego".</p>
             </div>
           </div>
 
           <!-- 3. Asymmetric Bets -->
-          <div class="spec-subsection" id="apuestas-asimetricas">
-            <h3 class="subsection-heading">3. Apuestas Asimétricas</h3>
-            <p>Los frentes donde deliberadamente invertimos un esfuerzo 10x, y los frentes donde 1.1x es deliberadamente correcto.</p>
+          <div class="spec-subsection" id="asymmetric-bets">
+            <h3 class="subsection-heading">3. Asymmetric Bets (Apuestas Asimétricas)</h3>
+            <p>Los frentes donde invertimos deliberadamente un esfuerzo 10x, y los frentes donde 1.1x es lo correcto.</p>
             <ul>
-              <li><strong>Dónde vamos a lo grande.</strong> Lo que merece inversión desproporcionada por ser decisivo.</li>
-              <li><strong>Dónde entregamos estándar.</strong> Lo que está bien al 80% para concentrar capacidad en lo que diferencia.</li>
+              <li><strong>Dónde vamos a lo grande.</strong> Lo que merece una inversión desproporcionada por ser estructural o estratégicamente decisivo.</li>
+              <li><strong>Dónde entregamos deliberadamente a medio gas.</strong> Lo que está bien al 80 % para poder dedicar la capacidad restante a las apuestas.</li>
             </ul>
+            <p>Esta sección previene dos modos de fallo: sobreinvertir en trabajo de commodity e infrainvertir en el trabajo que se acumula.</p>
             <div class="example-box">
               <p class="example-label">Ejemplo</p>
-              <p class="example-text">Apostar 10x en: modelo de interacción nativo de IA, cumplimiento fiscal, onboarding bajo 90 segundos.<br />Aceptar 1.1x en: pantallas de configuración admin, importación legacy, paneles internos.</p>
+              <p class="example-text">Apostar 10x en: conciliación entre inventario y contabilidad, corrección de la facturación electrónica, migración desde el sistema anterior.<br />Aceptar 1.1x en: interfaz de ajustes de administración, pulido de paneles, informes internos.</p>
             </div>
           </div>
 
           <!-- 4. Anti-Goals -->
-          <div class="spec-subsection" id="anti-objetivos">
-            <h3 class="subsection-heading">4. Anti-Objetivos</h3>
-            <p>Aquello que nos negamos explícitamente a hacer, incluso cuando sería fácil o rentable a corto plazo.</p>
+          <div class="spec-subsection" id="anti-goals">
+            <h3 class="subsection-heading">4. Anti-Goals (Anti-Objetivos)</h3>
+            <p>Aquello que nos negamos explícitamente a hacer, incluso cuando sería fácil o rentable a corto plazo. Los Anti-Objetivos son la forma de decir que no sin volver a decidirlo cada semana.</p>
             <ul>
-              <li><strong>Tentador.</strong> Si nadie lo pediría, no es un anti-objetivo.</li>
-              <li><strong>Justificado.</strong> Razón de una línea que resiste la presión.</li>
-              <li><strong>Específico.</strong> Qué rechazamos exactamente.</li>
+              <li><strong>Tentador.</strong> Si nadie lo pediría nunca, no es un Anti-Objetivo.</li>
+              <li><strong>Justificado.</strong> Una razón de una línea que resiste la presión.</li>
+              <li><strong>Específico.</strong> No "no hacemos chapuzas", sino "no entregamos funcionalidades que requieran la revisión de un contable externo antes de usarse".</li>
             </ul>
+            <div class="example-box">
+              <p class="example-label">Ejemplo</p>
+              <p class="example-text">No construimos un módulo de CRM. (Ya existen CRM maduros; nos integramos, no reconstruimos).<br />No soportamos despliegues on-premise. (Distraen de la velocidad de un producto cloud-first).<br />No aceptamos peticiones de funcionalidades sin un problema de usuario documentado. (El roadmap se basa en la demanda, no en la oferta).</p>
+            </div>
           </div>
 
-          <!-- 5. Trade-offs -->
-          <div class="spec-subsection" id="trade-offs">
-            <h3 class="subsection-heading">5. Trade-offs por Defecto</h3>
-            <p>Decisiones ya tomadas sobre dilemas recurrentes de ingeniería, documentadas una sola vez con condiciones explícitas de inversión (<em>Flip when</em>).</p>
-            <div class="table-wrapper" role="region" aria-label="Tabla de trade-offs de ejemplo" tabindex="0">
-              <table>
-                <thead>
-                  <tr>
-                    <th scope="col">Dilema</th>
-                    <th scope="col">Opción por Defecto</th>
-                    <th scope="col">Condición de Inversión (Flip when)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Velocidad vs. seguridad</td>
-                    <td>Seguridad en lógica financiera; velocidad en herramientas internas</td>
-                    <td>Nunca invertir en código fiscal o criptográfico</td>
-                  </tr>
-                  <tr>
-                    <td>Construir vs. comprar</td>
-                    <td>Comprar infraestructura estándar (Postgres, Sentry)</td>
-                    <td>El proveedor degrade la economía unitaria a >10k req/s</td>
-                  </tr>
-                </tbody>
-              </table>
+          <!-- 5. Trade-off Defaults -->
+          <div class="spec-subsection" id="trade-off-defaults">
+            <h3 class="subsection-heading">5. Trade-off Defaults (Trade-offs por Defecto)</h3>
+            <p>Decisiones ya tomadas sobre trade-offs habituales, escritas una sola vez para no volver a debatirlas en cada sprint. Para cada una: nombra la opción por defecto y las condiciones bajo las que esa opción se invierte.</p>
+            <p>Pares habituales: velocidad vs. seguridad, amplitud vs. profundidad, construir vs. comprar, generalidad vs. ajuste, compatibilidad hacia atrás vs. diseño limpio, inquilino único vs. multiinquilino.</p>
+            <div class="example-box">
+              <p class="example-label">Ejemplo</p>
+              <p class="example-text">Por defecto: velocidad sobre seguridad en herramientas internas; seguridad sobre velocidad en código fiscal. Se invierte: cualquier código que toque la facturación electrónica o las nóminas debe cumplir el criterio de seguridad, sea interno o externo.</p>
             </div>
           </div>
 
           <!-- 6. Ambition Triggers -->
-          <div class="spec-subsection" id="disparadores">
-            <h3 class="subsection-heading">6. Disparadores de Ambición</h3>
-            <p>Frases que escalan el alcance cuando el equipo o el modelo están pensando en pequeño.</p>
+          <div class="spec-subsection" id="ambition-triggers">
+            <h3 class="subsection-heading">6. Ambition Triggers (Disparadores de Ambición)</h3>
+            <p>Frases — usadas por personas y citadas en los prompts de los agentes de IA — que amplían el alcance cuando el equipo está pensando en pequeño.</p>
             <ul>
-              <li><em>"¿Existe una versión 10x de esto?"</em></li>
-              <li><em>"¿Qué entregaría un equipo de élite mundial en este caso?"</em></li>
-              <li><em>"Si tuviéramos tres semanas en lugar de tres días, ¿qué cambiaría?"</em></li>
+              <li><strong>Es lo bastante corto para recordarse.</strong></li>
+              <li><strong>Fuerza un cambio de marco concreto.</strong> No "sé ambicioso", sino "¿cómo sería la versión 10x?".</li>
+              <li><strong>Admite como respuesta 'esta ya es la versión 10x'.</strong></li>
             </ul>
+            <div class="example-box">
+              <p class="example-label">Ejemplos</p>
+              <p class="example-text">"¿Existe una versión 10x de esto?"<br />"¿Qué entregaría aquí [equipo de referencia]?"<br />"Si tuviéramos tres semanas en lugar de tres días, ¿qué cambiaría?"<br />"¿Cuál es la versión de esto que acabaría en la demo de una keynote?"</p>
+            </div>
           </div>
 
           <!-- 7. Reversibility -->
-          <div class="spec-subsection" id="reversibilidad">
-            <h3 class="subsection-heading">7. Reversibilidad</h3>
-            <p>Mapa entre puertas de un solo sentido (deliberar) y puertas de doble sentido (moverse rápido).</p>
+          <div class="spec-subsection" id="reversibility">
+            <h3 class="subsection-heading">7. Reversibility (Reversibilidad)</h3>
+            <p>Un mapa de qué decisiones son puertas de un solo sentido (costosas de revertir) y cuáles son puertas de doble sentido (baratas de revertir). Las puertas de un solo sentido merecen deliberación. Las de doble sentido merecen velocidad.</p>
             <ul>
-              <li><strong>Un solo sentido:</strong> Cambios de esquema de base de datos en producción, APIs públicas, cálculos fiscales.</li>
-              <li><strong>Doble sentido:</strong> Copy de UI, organización de carpetas internas, librerías auxiliares.</li>
-              <li><strong>Disposición por defecto:</strong> Ante la duda, tratar como doble sentido y avanzar.</li>
+              <li><strong>Puertas de un solo sentido en este proyecto.</strong> Cambios de esquema de base de datos en producción, contratos de API pública, identidad de marca, lógica de cálculo fiscal, fronteras de seguridad.</li>
+              <li><strong>Puertas de doble sentido en este proyecto.</strong> Textos de la interfaz, disposición de herramientas internas, estructura del código, dependencias de herramientas internas.</li>
+              <li><strong>La disposición por defecto.</strong> Ante la duda, cómo tratarla.</li>
             </ul>
+            <div class="example-box">
+              <p class="example-label">Ejemplo</p>
+              <p class="example-text">Puertas de un solo sentido: formato de firma de la factura electrónica, forma de las respuestas de la API pública, elección de dominio.<br />Puertas de doble sentido: interfaz de administración interna, dependencia de una librería OSS concreta, organización del código no público.<br />Ante la duda: tratar como puerta de doble sentido y avanzar.</p>
+            </div>
           </div>
         </section>
 
         <!-- Propagación -->
         <section aria-labelledby="propagacion">
-          <h2 id="propagacion" class="section-heading">Propagación</h2>
-          <p>Referéncialo desde <code>CLAUDE.md</code> o <code>AGENTS.md</code> y muestra el badge en tu README:</p>
+          <h2 id="propagacion" class="section-heading">Propagación (recomendada)</h2>
+          <p>Los proyectos que adoptan <code>NORTH.md</code> DEBERÍAN facilitar su descubrimiento:</p>
+          <p>1. <strong>Referéncialo desde <code>CLAUDE.md</code> / <code>AGENTS.md</code> / <code>SOUL.md</code></strong>: «Consulta NORTH.md para conocer el propósito y la ambición del proyecto».</p>
+          <p>2. <strong>Menciónalo en el README con un badge:</strong></p>
           <pre tabindex="0"><code>[![NORTH.md](https://northfile.dev/badge.svg)](https://northfile.dev/es)</code></pre>
+          <p>3. <strong>Mantenlo breve.</strong> Un NORTH.md de más de dos pantallas ha perdido el foco.</p>
         </section>
 
         <!-- Versionado -->
         <section aria-labelledby="versionado">
           <h2 id="versionado" class="section-heading">Versionado</h2>
-          <p>Esta especificación sigue Versionado Semántico (semver). Puedes fijar la versión en la primera línea:</p>
+          <p>Esta especificación sigue <a href="https://semver.org/lang/es/" class="spec-link">Versionado Semántico</a>.</p>
+          <ul>
+            <li><strong>MAJOR</strong> para cambios incompatibles en las secciones.</li>
+            <li><strong>MINOR</strong> para secciones añadidas o aclaraciones que puedan cambiar el comportamiento de los validadores.</li>
+            <li><strong>PATCH</strong> para cambios editoriales.</li>
+          </ul>
+          <p>Un archivo <code>NORTH.md</code> PUEDE declarar la versión de la especificación a la que se adhiere mediante un comentario HTML en la primera línea:</p>
           <pre tabindex="0"><code>&lt;!-- NORTH.md spec: v0.1 --&gt;</code></pre>
         </section>
 
         <!-- Relación -->
         <section aria-labelledby="relacion">
           <h2 id="relacion" class="section-heading">Relación con otras convenciones</h2>
-          <div class="table-wrapper" role="region" aria-label="Ecosistema de gobernanza" tabindex="0">
+          <p><code>NORTH.md</code> está diseñado para coexistir con las convenciones vecinas, no para reemplazarlas.</p>
+          <div class="table-wrapper" role="region" aria-label="Convenciones relacionadas" tabindex="0">
             <table>
               <thead>
                 <tr>
-                  <th scope="col">Capa</th>
                   <th scope="col">Archivo</th>
-                  <th scope="col">Pregunta Central</th>
-                  <th scope="col">Custodio</th>
+                  <th scope="col">Propósito</th>
+                  <th scope="col">Origen</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><code>Capa 1</code></td>
-                  <td><code>CONSTITUTION.md</code></td>
-                  <td>Límites y seguridad</td>
-                  <td>Anthropic</td>
+                  <td><code>README.md</code></td>
+                  <td>Presentación pública e incorporación de personas</td>
+                  <td>Convención de largo recorrido</td>
                 </tr>
                 <tr>
-                  <td><code>Capa 2</code></td>
                   <td><code>AGENTS.md</code></td>
-                  <td>Instrucciones de ejecución y tests</td>
-                  <td>Linux Foundation</td>
+                  <td>Instrucciones operativas para agentes de código: build, test, convenciones</td>
+                  <td><a href="https://agents.md" class="spec-link">agents.md</a>, bajo la Agentic AI Foundation (Linux Foundation)</td>
                 </tr>
                 <tr>
-                  <td><code>Capa 3</code></td>
-                  <td><code>design.md</code></td>
-                  <td>Tokens de UI y contratos visuales</td>
-                  <td>Google Material</td>
+                  <td><code>CLAUDE.md</code></td>
+                  <td>Instrucciones de proyecto que carga Claude Code</td>
+                  <td><a href="https://code.claude.com/docs/en/memory" class="spec-link">Anthropic</a></td>
                 </tr>
                 <tr>
-                  <td><code>Capa 4</code></td>
+                  <td><code>CONSTITUTION.md</code></td>
+                  <td>Principios innegociables y fronteras</td>
+                  <td>Convenciones de la comunidad, p. ej. <a href="https://agentconstitution.dev" class="spec-link">agentconstitution.dev</a>; GitHub Spec Kit mantiene una constitución de proyecto</td>
+                </tr>
+                <tr>
+                  <td><code>DESIGN.md</code></td>
+                  <td>Tokens de diseño y la razón de cada uno</td>
+                  <td><a href="https://github.com/google-labs-code/design.md" class="spec-link">Google Labs</a></td>
+                </tr>
+                <tr>
                   <td><code>SOUL.md</code></td>
-                  <td>Voz, tono y personalidad</td>
-                  <td>Comunidad</td>
+                  <td>La persona, los valores y el tono del agente</td>
+                  <td><a href="https://soul.md" class="spec-link">soul.md</a></td>
                 </tr>
                 <tr>
-                  <td><code>Capa 5</code></td>
+                  <td><code>VISION.md</code></td>
+                  <td>Dirección a largo plazo</td>
+                  <td>Sin convención formal</td>
+                </tr>
+                <tr>
                   <td><code>NORTH.md</code></td>
-                  <td>Propósito, calidad y trade-offs</td>
-                  <td>BRTHLS</td>
+                  <td>Propósito, ambición y trade-offs precalculados</td>
+                  <td>Esta especificación</td>
+                </tr>
+                <tr>
+                  <td><code>llms.txt</code></td>
+                  <td>Índice de un sitio web que ayuda a LLM y agentes a usarlo</td>
+                  <td><a href="https://llmstxt.org" class="spec-link">llmstxt.org</a>, propuesto por Jeremy Howard (2024)</td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <p>Usa la combinación que encaje con tu proyecto. El modelo de cinco capas del Resumen es una propuesta sobre cómo se reparten el trabajo estos archivos, no un estándar del sector. Comparativa detallada en <a href="/es/compare" class="spec-link">/es/compare</a>.</p>
         </section>
 
         <!-- Changelog -->
@@ -379,10 +405,12 @@ const jsonLd = {
             </span>
           </h3>
           <ul>
-            <li>Lanzamiento público canónico.</li>
-            <li>Formalización de las siete secciones canónicas.</li>
-            <li>Codificación del stack de gobernanza de agentes en 5 capas.</li>
-            <li>Esquema estructurado de trade-offs con condición Flip when.</li>
+            <li>Primera versión pública.</li>
+            <li>Siete secciones definidas: North Star, The Bar, Asymmetric Bets, Anti-Goals, Trade-off Defaults, Ambition Triggers y Reversibility.</li>
+            <li>Los Trade-offs por Defecto nombran cada opción por defecto y la condición bajo la que se invierte.</li>
+            <li>Propuesta de un modelo de cinco capas para los archivos de contexto de agentes (<code>CONSTITUTION.md</code>, <code>AGENTS.md</code>, <code>DESIGN.md</code>, <code>SOUL.md</code>, <code>NORTH.md</code>).</li>
+            <li>Guía de propagación y marcador opcional de versión de la especificación.</li>
+            <li>Política de versionado semver adoptada.</li>
           </ul>
         </section>
 

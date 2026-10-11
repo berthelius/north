@@ -1,8 +1,3 @@
-<!-- ────────────────────────────────────────────────────────────
-     NORTH.md · Canonical Specification & Reference Repository
-     hero art: /assets/hero-{dark,light}.svg
-──────────────────────────────────────────────────────────── -->
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://northfile.dev/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://northfile.dev/assets/hero-light.svg">
@@ -10,154 +5,125 @@
 </picture>
 
 <p align="center">
-  <em>Give your AI coding agents judgment when the prompt runs out.</em><br>
-  <sub>A single markdown file declaring purpose, ambition, and precomputed trade-offs to scale autonomous agency without drift.</sub><br>
-  <sub>◇ &nbsp;The direction and arbitration layer of the modern agent stack.</sub>
+  <a href="https://northfile.dev/spec"><img src="https://img.shields.io/badge/Spec-v0.1-161b22?style=flat-square&labelColor=161b22&color=B8895B" alt="Spec v0.1"></a>
+  &nbsp;
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-161b22?style=flat-square&labelColor=161b22&color=B8895B" alt="License: MIT"></a>
+  &nbsp;
+  <a href="https://northfile.dev"><img src="https://img.shields.io/badge/Web-northfile.dev-161b22?style=flat-square&labelColor=161b22&color=B8895B" alt="Website: northfile.dev"></a>
 </p>
 
-<p align="center">
-  <a href="https://northfile.dev/spec"><img src="https://img.shields.io/badge/SPEC-v0.1_Canonical-161b22?style=flat-square&labelColor=161b22&color=B8895B" alt="Spec v0.1"></a>
-  &nbsp;
-  <a href="https://northfile.dev/compare"><img src="https://img.shields.io/badge/Stack-5--Layer_Governance-161b22?style=flat-square&labelColor=161b22&color=B8895B" alt="5-Layer Governance"></a>
-  &nbsp;
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-161b22?style=flat-square&labelColor=161b22&color=B8895B" alt="License"></a>
-  &nbsp;
-  <a href="https://northfile.dev"><img src="https://img.shields.io/badge/Web-northfile.dev-161b22?style=flat-square&labelColor=161b22&color=B8895B" alt="Website"></a>
-</p>
+# NORTH.md
 
-<br>
+**NORTH.md is an open markdown convention: one file at the root of a repository
+that declares the project's purpose, ambition, and precomputed trade-offs, for
+humans and AI coding agents alike.**
 
-<h3 align="center">◇ &nbsp;T H E &nbsp; P R O B L E M</h3>
+## Why
 
-Coding agents in 2026 can write 2,000 lines of syntactically valid code in thirty seconds. But when given a task that touches multiple files or architecture, **they default to conservative mediocrity**:
+Coding agents tend to take the smaller interpretation of an ambiguous task. They
+patch where a rewrite was due, add error handling instead of removing the
+failure mode, and stop to ask "X or Y?" when the answer was a project decision
+nobody wrote down. In long-running runs (Claude Code's `/goal`, Jules, Devin)
+there is no one to ask, so the agent guesses.
 
-* They pick the easiest dependency rather than the architectural invariant.
-* They write boilerplate around problems instead of refactoring the root cause.
-* They ask *"Should I do X or Y?"* on every ambiguous edge case, stalling autonomous workflows.
-* Or, running in overnight background mode (`/goal`, Jules, Devin), they suffer from **Agentic Drift** — solving the immediate prompt while violating the project's unspoken engineering standards.
+The files agents already read cover other ground:
 
-`AGENTS.md` and `CLAUDE.md` tell agents **how** to build, test, and run.  
-`SOUL.md` tells agents **who** the product is (voice and persona).  
-`design.md` tells agents **what** tokens, layouts, and components to construct.  
-`CONSTITUTION.md` tells agents **what** is forbidden.
+- `AGENTS.md` / `CLAUDE.md` — **how** to build, test and work in the repository.
+- `CONSTITUTION.md` — **limits**: non-negotiable principles and boundaries.
+- `DESIGN.md` — **look**: design tokens and the rationale behind them.
+- `SOUL.md` — **who** the agent is: persona, values, tone.
 
-**Nothing tells them why the project exists, how far to go, and which trade-off to pick when two valid engineering choices collide.**
+None of them says why the project exists, how far to push, or which trade-off
+wins when two valid choices collide. `NORTH.md` does, in seven short sections.
 
-`NORTH.md` fills this exact vacuum.
+We propose seeing these five files as a five-layer model, with `NORTH.md` as the
+direction layer. It is a proposal, not an established standard, and most
+repositories will use only some of the layers. See
+[northfile.dev/compare](https://northfile.dev/compare) for how each file
+relates to `NORTH.md`.
 
-<br>
-
-<h3 align="center">◇ &nbsp;T H E &nbsp; 5 - L A Y E R &nbsp; A G E N T &nbsp; S T A C K</h3>
-
-`NORTH.md` is modular. It does not replace operational or safety instructions; it anchors them:
-
-| Layer | File Standard | Primary Custodian | Question it Answers |
-|:---:|---|---|---|
-| **5** | **`NORTH.md`** | **BRTHLS** | **Why & How Far:** Purpose, quality bar, ambition triggers, and precomputed trade-offs. |
-| **4** | `SOUL.md` | Community / Open Source | **Who:** Voice, persona, empathetic tone toward the end user. |
-| **3** | `design.md` | Google Material / Antigravity | **Look & Feel:** UI tokens, responsive grids, and design system contracts. |
-| **2** | `AGENTS.md` / `CLAUDE.md` | Linux Foundation (Agentic AI) | **How:** Build scripts, test runners, linter invocations, and workspace paths. |
-| **1** | `CONSTITUTION.md` | Anthropic / Safety Alignment | **Limits:** Hard negative boundaries, data privacy, and forbidden operations. |
-
-> See **[northfile.dev/compare](https://northfile.dev/compare)** for the complete comparison matrix and boundary definitions.
-
-<br>
-
-<h3 align="center">◇ &nbsp;T H E &nbsp; S E V E N &nbsp; S E C T I O N S</h3>
-
-A valid `NORTH.md` is a single file placed at the root of your repository consisting of seven canonical sections:
+## The template
 
 ```markdown
 <!-- NORTH.md spec: v0.1 -->
 
-# NORTH.md — Project Name
-
-> Project purpose, ambition, and precomputed trade-off defaults.
-> For how to run, see AGENTS.md. For design tokens, see design.md.
+# NORTH.md
 
 ## 1. North Star
-One falsifiable sentence declaring the destination. Disqualifies wrong moves immediately.
+[One sentence. The destination, not the roadmap.]
 
 ## 2. The Bar
-The non-negotiable definition of "done". Separates mechanical gates (Lighthouse, typecheck, coverage)
-from truth assertions (zero speculative abstractions).
+[What quality threshold counts as "shipped". Mechanical gates & truth assertions.]
 
 ## 3. Asymmetric Bets
-Where to invest 10x effort, and where 1.1x is deliberately correct. Prevents over-investing
-in commodity work while under-investing in what compounds.
+[Where we go 10x. Where we accept 1.1x.]
 
 ## 4. Anti-Goals
-Explicit written refusals of profitable or tempting features that are intentionally rejected.
-Every refusal must carry a crisp justification.
+[What we refuse, even when easy or profitable.]
 
 ## 5. Trade-off Defaults
-A structured decision table answering common dilemmas with explicit "Flip when" triggers:
-
 | Trade-off | Default | Flip when |
 |---|---|---|
-| Correctness vs. speed | Formal verification on financial core | Prototyping ephemeral UI widgets |
-| Build vs. buy | Buy standard infra (Postgres, Sentry) | Unit economics degrade at >10k req/s |
-| Spec depth vs. breadth | Depth on 7 canonical sections | Community RFC proves a new failure mode |
+| Speed vs. safety | Safety on core logic; speed on internal tools | Never flip on fiscal/security code |
+| Build vs. buy | Buy infrastructure; build core product | Vendor breaks unit economics |
 
 ## 6. Ambition Triggers
-Provocative questions an agent evaluates before concluding a task:
-- "Does this change give agents judgment when the prompt runs out, or just more instructions?"
-- "Would Linear, Stripe, or Vercel ship this surface?"
-- "If we had three more days, what would change — and why aren't we doing it now?"
+[Phrases that escalate scope when we are being too small.]
 
 ## 7. Reversibility
-Classification of decisions into one-way doors (stopping for human review)
-vs. two-way doors (executing autonomously with zero blocker).
+[One-way doors flagged. Two-way doors = move fast.]
 ```
 
-<br>
+The full definition of each section, with criteria and examples, is in
+[SPEC.md](SPEC.md) and at [northfile.dev/spec](https://northfile.dev/spec)
+([en español](https://northfile.dev/es/spec)).
 
-<h3 align="center">◇ &nbsp;I N S T A N T &nbsp; I N T E G R A T I O N</h3>
+## Adopt it in ten minutes
 
-Add this snippet to your `CLAUDE.md`, `AGENTS.md`, or `.cursorrules` to instruct coding agents to consult `NORTH.md`:
+1. **Create `NORTH.md`** at the repository root and paste the template.
+2. **Fill in the seven sections.** One sentence for the North Star. Real
+   refusals for the Anti-Goals. A flip condition for every Trade-off Default.
+   If a section does not apply, keep the heading and say why.
+3. **Point your agents at it.**
+   - In `CLAUDE.md`, add the line `@NORTH.md`. Claude Code imports the file
+     into context at the start of each session.
+   - In `AGENTS.md` or any other rules file, add:
 
-```markdown
-## Strategic Direction & Trade-off Arbitration
-Before making architectural decisions, choosing dependencies, or concluding refactors,
-consult [NORTH.md](./NORTH.md).
-- Adhere to the non-negotiables in "The Bar".
-- Reject features listed in "Anti-Goals".
-- When facing architectural dilemmas, execute the precomputed choice in "Trade-off Defaults".
-  Do not flip a default unless the documented "Flip when" condition is met.
-- For two-way doors ("Reversibility"), execute autonomously; do not stop to ask permission.
-```
+     ```markdown
+     See [NORTH.md](./NORTH.md) for project purpose and ambition. Before
+     architectural decisions, check The Bar, the Anti-Goals and the Trade-off
+     Defaults; do not flip a default unless its "Flip when" condition is met.
+     ```
+4. **Optionally, add the badge** to your README:
 
-<br>
+   ```markdown
+   [![NORTH.md](https://northfile.dev/badge.svg)](https://northfile.dev)
+   ```
 
-<h3 align="center">◇ &nbsp;A D O P T E R &nbsp; B A D G E</h3>
+Keep it short. A NORTH.md longer than two screens has lost the plot.
 
-Signal that your project scales agency with precomputed judgment:
+## Examples
 
-```markdown
-[![north.md](https://northfile.dev/badge.svg)](https://northfile.dev)
-```
+[northfile.dev/examples](https://northfile.dev/examples) has one real file —
+this repository's own [NORTH.md](NORTH.md) — and five illustrative ones for a
+SaaS product, an open-source library, a creative agency, a side project and an
+internal platform. The illustrative examples are composites of fictional
+organisations.
 
-```html
-<a href="https://northfile.dev"><img src="https://northfile.dev/badge.svg" alt="north.md v0.1"></a>
-```
+## Machine-readable endpoints
 
-<br>
+- Raw specification: [`northfile.dev/spec.md`](https://northfile.dev/spec.md)
+- JSON representation: [`northfile.dev/api/spec/v0.1.json`](https://northfile.dev/api/spec/v0.1.json)
+- LLM index: [`northfile.dev/llms.txt`](https://northfile.dev/llms.txt)
+- Full LLM dump: [`northfile.dev/llms-full.txt`](https://northfile.dev/llms-full.txt)
+- Discovery pointer: [`northfile.dev/.well-known/llms.json`](https://northfile.dev/.well-known/llms.json)
 
-<h3 align="center">◇ &nbsp;M A C H I N E - R E A D A B L E &nbsp; E N D P O I N T S</h3>
+## Contributing
 
-Designed for direct ingestion by LLM crawlers, context windows, and autonomous agents:
+Examples, editorial fixes and site improvements are welcome. Specification
+changes go through an RFC first. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-* **Raw Markdown:** [`https://northfile.dev/spec.md`](https://northfile.dev/spec.md)
-* **LLM Index:** [`https://northfile.dev/llms.txt`](https://northfile.dev/llms.txt)
-* **Full Context Dump:** [`https://northfile.dev/llms-full.txt`](https://northfile.dev/llms-full.txt)
-* **JSON Schema:** [`https://northfile.dev/api/spec/v0.1.json`](https://northfile.dev/api/spec/v0.1.json)
-* **Discovery Pointer:** [`https://northfile.dev/.well-known/llms.json`](https://northfile.dev/.well-known/llms.json)
+## Author and license
 
-<br>
-
-<h3 align="center">◇ &nbsp;A U T H O R &nbsp; &amp; &nbsp; L I C E N S E</h3>
-
-Created by **[Viktor Berthelius](https://brthls.com)** ([BRTHLS](https://brthls.com)).  
-An autonomous, vendor-neutral initiative for engineering teams working with AI agents.
-
-Released under the **[MIT License](LICENSE)**.
+Created by [Viktor Berthelius](https://brthls.com) (BRTHLS). Released under the
+[MIT License](LICENSE).

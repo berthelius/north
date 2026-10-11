@@ -6,8 +6,8 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
 const compareJsonLd = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Comparación de Convenciones de Contexto para Agentes — NORTH.md vs AGENTS.md, SOUL.md, design.md y CONSTITUTION.md",
-  "description": "Comparación arquitectónica exhaustiva de archivos de contexto en repositorios para agentes de IA de código. Cómo NORTH.md arbitra decisiones junto a archivos operativos, constitucionales y de identidad.",
+  "headline": "Comparación de convenciones de contexto para agentes — NORTH.md frente a AGENTS.md, SOUL.md, DESIGN.md, VISION.md y CONSTITUTION.md",
+  "description": "Una comparación de los archivos de contexto de un repositorio para agentes de IA de código, y de dónde encaja NORTH.md junto a los archivos operativos, de diseño, de persona y constitucionales.",
   "inLanguage": "es",
   "author": {
     "@type": "Person",
@@ -19,7 +19,7 @@ const compareJsonLd = {
     "name": "NORTH.md",
     "url": siteUrl
   },
-  "datePublished": "2026-09-23",
+  "datePublished": "2026-09-24",
   "url": `${siteUrl}/es/compare`,
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -31,65 +31,58 @@ const conventions = [
   {
     file: "README.md",
     question: "¿Qué es este proyecto?",
-    focus: "Onboarding humano, arquitectura de alto nivel, instalación, vitrina pública.",
-    consumer: "Humanos (usuarios, colaboradores, evaluadores).",
-    failureMode: "Nadie sabe cómo ejecutar o utilizar el proyecto.",
-    boundaryWithNorth: "README explica qué existe hoy para humanos; NORTH declara hasta dónde empujar mañana para agentes.",
+    consumer: "Personas: usuarios, colaboradores, evaluadores.",
+    boundaryWithNorth: "README explica lo que existe hoy; NORTH.md declara hasta dónde empujar a continuación.",
   },
   {
     file: "AGENTS.md / CLAUDE.md",
     question: "¿Cómo se trabaja aquí?",
-    focus: "Gates operativos, comandos de build, reglas de linter, workflows de tests, propiedad de archivos.",
-    consumer: "Agentes de codificación con IA (Claude Code, Cursor, Copilot, Codex).",
-    failureMode: "Los agentes rompen el build, commitean directo a main o violan el flujo de trabajo del repo.",
-    boundaryWithNorth: "AGENTS le dice a un agente cómo correr tests; NORTH le dice qué listón de calidad cuenta como desplegable.",
+    consumer: "Agentes de código. AGENTS.md lo leen muchas herramientas (ver agents.md); CLAUDE.md, Claude Code.",
+    boundaryWithNorth: "AGENTS.md le dice a un agente cómo ejecutar los tests; NORTH.md le dice qué calidad cuenta como entregada.",
   },
   {
     file: "SOUL.md",
-    question: "¿Quién eres?",
-    focus: "Voz del proyecto, tono, personalidad, valores, estética de comunicación.",
-    consumer: "Humanos y agentes de IA redactando copy de cara al usuario o respuestas conversacionales.",
-    failureMode: "El texto generado por IA se siente corporativo, genérico o tonalmente disonante.",
-    boundaryWithNorth: "SOUL define la voz estética; NORTH define la ambición arquitectónica y las compensaciones.",
+    question: "¿Quién es el agente?",
+    consumer: "El propio agente: su persona, sus valores y su tono.",
+    boundaryWithNorth: "SOUL.md define cómo habla y se comporta el agente; NORTH.md define qué optimiza el proyecto.",
   },
   {
-    file: "design.md",
-    question: "¿Qué contratos visuales y tokens de UI rigen las interfaces?",
-    focus: "Componentes de interfaz, tokens de color, jerarquía de layout, breakpoints responsivos, sistemas de diseño.",
-    consumer: "Ingenieros frontend, diseñadores de UI, agentes autónomos de interfaz (Google Antigravity, Claude Code).",
-    failureMode: "Los agentes inventan CSS arbitrario, rompen layouts responsivos o introducen inconsistencias visuales.",
-    boundaryWithNorth: "design.md dicta la gramática visual y componentes; NORTH.md dicta si el pulido visual es una apuesta 10x o un commodity 1.1x.",
+    file: "DESIGN.md",
+    question: "¿Cómo debe verse la interfaz, y por qué?",
+    consumer: "Agentes de código que generan interfaz.",
+    boundaryWithNorth: "DESIGN.md define los tokens; NORTH.md dice si el pulido visual es una apuesta 10x o una superficie 1.1x.",
   },
   {
     file: "VISION.md",
     question: "¿Qué futuro perseguimos?",
-    focus: "Destino a cinco años, visión de mercado, horizonte aspiracional, roadmap a largo plazo.",
-    consumer: "Fundadores, líderes de producto, humanos, agentes de planificación de alto nivel.",
-    failureMode: "Poesía inspiracional sin consecuencias operativas; incapaz de arbitrar dilemas en el sprint.",
-    boundaryWithNorth: "VISION es teleológico (el destino); NORTH es algorítmico (las reglas de arbitraje para la PR de hoy).",
+    consumer: "Fundadores y planificadores. No existe una convención formal.",
+    boundaryWithNorth: "Una visión describe el destino; NORTH.md añade los valores por defecto que deciden la pull request de hoy.",
   },
   {
     file: "CONSTITUTION.md",
-    question: "¿Qué líneas jamás debemos cruzar?",
-    focus: "Límites negativos no negociables, leyes de cumplimiento, barreras de privacidad, perímetros de seguridad.",
-    consumer: "Evaluadores de seguridad, sistemas de guardrails, agentes de IA.",
-    failureMode: "Parálisis por hiperregulación sin dirección positiva sobre qué construir.",
-    boundaryWithNorth: "CONSTITUTION impone límites estrictos negativos; NORTH define vectores de optimización positiva.",
+    question: "¿Qué principios y fronteras son innegociables?",
+    consumer: "Agentes de código y las personas que los revisan.",
+    boundaryWithNorth: "Una constitución fija límites y principios; NORTH.md fija la dirección, la ambición y los trade-offs por defecto dentro de ellos.",
   },
   {
     file: "NORTH.md",
-    question: "¿Cómo elegimos cuando varias opciones válidas compiten?",
-    focus: "Propósito, listón de calidad, apuestas asimétricas (10x vs 1.1x), anti-objetivos, trade-offs precalculados, reversibilidad.",
-    consumer: "Humanos y agentes de codificación arbitrando decisiones no triviales de implementación.",
-    failureMode: "Los agentes caen en mediocridad segura, parches incrementales y dispersión descontrolada de WIP.",
-    boundaryWithNorth: "La capa definitiva de arbitraje: criterio cuando las instrucciones operativas se agotan.",
+    question: "¿Cómo elegimos cuando compiten varios caminos válidos?",
+    consumer: "Personas y agentes de código que toman decisiones de implementación no triviales.",
+    boundaryWithNorth: "La capa de dirección que proponemos: criterio cuando se agotan las instrucciones operativas.",
   },
+];
+
+const layers = [
+  { label: "Capa 1: Límites", file: "CONSTITUTION.md", desc: "Principios innegociables y fronteras.", origin: "Comunidad · agentconstitution.dev" },
+  { label: "Capa 2: Ejecución", file: "AGENTS.md", desc: "Comandos de build, tests, convenciones y flujo de trabajo.", origin: "agents.md · Linux Foundation" },
+  { label: "Capa 3: Aspecto", file: "DESIGN.md", desc: "Tokens de diseño y la razón de cada uno.", origin: "Google Labs" },
+  { label: "Capa 4: Persona", file: "SOUL.md", desc: "Quién es el agente: persona, valores y tono.", origin: "soul.md" },
 ];
 ---
 
 <Base
-  title="Comparación de Convenciones de Contexto para Agentes — NORTH.md"
-  description="Cómo encaja NORTH.md junto a AGENTS.md, SOUL.md, design.md, VISION.md y CONSTITUTION.md en el stack moderno de agentes."
+  title="Comparación de convenciones de contexto para agentes — NORTH.md"
+  description="Cómo encaja NORTH.md junto a AGENTS.md, CLAUDE.md, SOUL.md, DESIGN.md, VISION.md y CONSTITUTION.md."
   canonical={`${siteUrl}/es/compare`}
   ogImage="/og/compare.png"
   lang="es"
@@ -109,16 +102,16 @@ const conventions = [
 
     <!-- Eyebrow -->
     <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-      guía arquitectónica &middot; septiembre 2026
+      guía &middot; septiembre de 2026
     </p>
 
     <!-- Title -->
     <h1 class="mt-5 font-display text-4xl md:text-5xl leading-[1.05] tracking-tight">
-      Comparación de Convenciones de Contexto para Agentes
+      Comparación de convenciones de contexto para agentes
     </h1>
 
     <p class="mt-4 text-lg text-[var(--muted)] leading-relaxed max-w-2xl">
-      El stack de contexto en repositorios modernos ha evolucionado rápidamente. Hoy, los agentes autónomos conviven con archivos de reglas, identidad, declaraciones de visión y barreras constitucionales. ¿Dónde se posiciona <strong class="text-[var(--fg)]">NORTH.md</strong> y por qué existe?
+      Los agentes de código ya leen varios tipos de archivo en un repositorio: archivos de reglas, de persona, de diseño, declaraciones de visión y constituciones. ¿Dónde encaja <strong class="text-[var(--fg)]">NORTH.md</strong> y por qué existe?
     </p>
 
     <hr class="mt-10 border-[var(--rule)]" />
@@ -128,23 +121,23 @@ const conventions = [
       <!-- Section: The Skeptic's Challenge -->
       <section>
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          La Pregunta del Escéptico: "¿Para qué otro archivo Markdown?"
+          La pregunta del escéptico: "¿Para qué otro archivo Markdown?"
         </h2>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          Cualquier ingeniero riguroso recibe un nuevo archivo en el repositorio con recelo. Ya tenemos <code>README.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>SOUL.md</code>, <code>design.md</code> y <code>.cursorrules</code>. Inyectar otro archivo de varias páginas consume tokens del contexto y arriesga diluir la atención del modelo.
+          Cualquier ingeniero riguroso recibe un archivo nuevo en el repositorio con recelo. Ya tenemos <code>README.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>SOUL.md</code>, <code>DESIGN.md</code> y los archivos de reglas de cada editor. Otro archivo de varias páginas cuesta tokens de contexto y puede diluir la atención del modelo.
         </p>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          Si <code>NORTH.md</code> fuese simplemente "otro documento de visión" o "una lista de consejos", merecería ser eliminado. Pero los agentes en producción enfrentan un modo de fallo que ni las reglas ni la visión logran prevenir: <strong class="text-[var(--fg)]">el dilema entre caminos válidos que compiten</strong>.
+          Si <code>NORTH.md</code> fuese simplemente "otro documento de visión" o "una lista de consejos", merecería borrarse. Existe para una situación que ni las reglas ni las declaraciones de visión resuelven: <strong class="text-[var(--fg)]">elegir entre caminos válidos que compiten</strong>.
         </p>
         <div class="mt-6 rounded-lg border border-[var(--rule)] bg-[var(--color-stone-100,#f5f5f4)] dark:bg-[var(--color-stone-900,#1c1917)] p-6">
-          <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] mb-2">El Dilema de Producción</p>
+          <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] mb-2">El dilema</p>
           <p class="text-sm text-[var(--fg)] leading-relaxed italic">
-            "Cuando un agente recibe una tarea ambigua de refactorización, tres caminos distintos pasan el CI, obedecen AGENTS.md y respetan CONSTITUTION.md:
-            <br />1. El parche incremental temeroso que deja intactas las causas raíz.
-            <br />2. La reescritura megalómana que abre 15 dependencias no solicitadas y dispara el WIP.
-            <br />3. El salto calibrado que multiplica la ventaja del producto sin sobrediseñar código genérico.
+            Un agente recibe una tarea de refactorización ambigua. Tres caminos pasan el CI, obedecen AGENTS.md y respetan CONSTITUTION.md:
+            <br />1. El parche incremental tímido que deja la causa raíz en su sitio.
+            <br />2. La reescritura desmedida que añade dependencias y trabajo en curso que nadie pidió.
+            <br />3. El salto calibrado que elimina el modo de fallo sin sobrediseñar código genérico.
             <br /><br />
-            ¿Cuál escoge el agente? Sin NORTH.md, casi siempre se inclina por el #1 o el #2."
+            ¿Cuál elige el agente? Nuestra hipótesis: si nada declara la dirección del proyecto, deriva hacia el #1 o el #2. NORTH.md está pensado para que el #3 sea la opción evidente.
           </p>
         </div>
       </section>
@@ -152,10 +145,10 @@ const conventions = [
       <!-- Section: Master Comparison Table -->
       <section>
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          La Matriz de Contexto
+          La matriz de contexto
         </h2>
         <p class="mt-3 text-[var(--muted)] leading-relaxed">
-          Cómo cada archivo responde a una pregunta distinta y no superpuesta en el ciclo de vida del desarrollo:
+          Cada archivo responde a una pregunta distinta:
         </p>
 
         <div
@@ -168,7 +161,7 @@ const conventions = [
             <thead>
               <tr class="border-b border-[var(--rule)] bg-[var(--color-stone-100,#f5f5f4)] dark:bg-[var(--color-stone-900,#1c1917)]">
                 <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Archivo</th>
-                <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Pregunta Central</th>
+                <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Pregunta central</th>
                 <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Consumidor</th>
                 <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Frontera con NORTH.md</th>
               </tr>
@@ -198,7 +191,7 @@ const conventions = [
       <!-- Section: Deep Dives -->
       <section class="space-y-8">
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          Análisis en Profundidad: Resolviendo Ambigüedades Habituales
+          En profundidad: ambigüedades habituales
         </h2>
 
         <!-- Deep Dive 1: VISION.md -->
@@ -207,10 +200,10 @@ const conventions = [
             1. NORTH.md frente a VISION.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>VISION.md</strong> es teleológico: describe cómo será el mundo en 2030 si tu empresa triunfa. Está escrito para inspirar a inversores, candidatos y offsites de planificación trimestral. Pero un agente de IA ejecutando una PR un martes por la tarde no puede deducir si construir o comprar una cola de webhooks a partir de una misión inspiracional.
+            <strong>VISION.md</strong> no tiene una convención formal, pero donde existe suele describir el mundo que el proyecto aspira a crear. Está escrito para inspirar. Un agente que trabaja en una pull request un martes por la tarde no puede deducir de él si construir o comprar una cola de webhooks.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> es arbitraje operativo: declara apuestas asimétricas concretas (<em>"Ve 10x en la firma criptográfica de facturas; acepta 1.1x en la UI de ajustes"</em>), negativas específicas (<em>"Anti-objetivo: No construimos CRM"</em>) y valores por defecto precalculados para trade-offs (<em>"Seguridad sobre velocidad en código fiscal; velocidad sobre seguridad en admin interno"</em>).
+            <strong>NORTH.md</strong> es operativo: declara apuestas asimétricas concretas (<em>"10x en la corrección de la facturación electrónica; 1.1x en la interfaz de ajustes"</em>), negativas específicas (<em>"Anti-objetivo: no construimos un CRM"</em>) y trade-offs por defecto precalculados (<em>"Seguridad sobre velocidad en código fiscal; velocidad sobre seguridad en la administración interna"</em>).
           </p>
         </div>
 
@@ -220,10 +213,10 @@ const conventions = [
             2. NORTH.md frente a CONSTITUTION.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>CONSTITUTION.md</strong> impone <em>límites negativos infranqueables</em>: jamás filtrar credenciales, jamás borrar una base de datos sin confirmación interactiva, jamás saltarse políticas de cumplimiento. Es un conjunto de restricciones legales invariantes.
+            <strong>CONSTITUTION.md</strong> fija <em>principios y fronteras innegociables</em>. No hay un estándar único: <a href="https://agentconstitution.dev" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">agentconstitution.dev</a> propone un formato a nivel de proyecto, y GitHub Spec Kit mantiene una constitución de proyecto con principios y gobernanza. Algunos formatos también recogen "pares en tensión" (X por encima de Y).
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> proporciona <em>vectores de optimización positiva</em>. Saber qué tienes prohibido hacer no te dice qué calibre de trabajo se espera que entregues. NORTH le dice al agente dónde ser ambicioso y cuándo rechazar la complejidad accesoria.
+            <strong>NORTH.md</strong> fija la <em>dirección</em>. Saber lo que nunca debes hacer no te dice qué calibre de trabajo se espera. NORTH.md le dice al agente dónde ser ambicioso y dónde parar. Si tu constitución ya recoge trade-offs, enlázala desde NORTH.md en lugar de repetirlos.
           </p>
         </div>
 
@@ -233,23 +226,23 @@ const conventions = [
             3. NORTH.md frente a AGENTS.md / CLAUDE.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>AGENTS.md</strong> gobierna la <em>mecánica de ejecución</em>: cómo compilar, qué linter ejecutar, qué límites de archivos pertenecen a qué subagente. Garantiza que el agente no rompa el arnés del repositorio.
+            <strong>AGENTS.md</strong> cubre la <em>mecánica de ejecución</em>: cómo compilar, qué linter ejecutar, qué convenciones seguir. Evita que el agente rompa el repositorio.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> gobierna el <em>criterio del incremento</em>: ¿está realmente "terminada" una funcionalidad cuando pasan los unit tests, o exige el "Listón de Calidad" una llamada MCP tool, un nodo n8n y registros de auditoría sin defectos?
+            <strong>NORTH.md</strong> cubre el <em>criterio del incremento</em>: ¿está realmente terminada una funcionalidad cuando pasan los tests unitarios, o El Listón exige además documentación, una API pública y un registro de auditoría?
           </p>
         </div>
 
-        <!-- Deep Dive 4: design.md -->
+        <!-- Deep Dive 4: DESIGN.md -->
         <div class="border-l-2 border-[var(--rule)] pl-6 py-2">
           <h3 class="font-display text-xl text-[var(--fg)]">
-            4. NORTH.md frente a design.md (Google)
+            4. NORTH.md frente a DESIGN.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>design.md</strong> gobierna el <em>contrato del sistema visual</em>: design tokens, escalas tipográficas, breakpoints responsivos y estándares de componentes de UI (como las convenciones de Google Material o Antigravity).
+            <strong>DESIGN.md</strong> es un formato de <a href="https://github.com/google-labs-code/design.md" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Google Labs</a> para describir una identidad visual a los agentes de código: tokens de diseño legibles por máquina en el front matter YAML, con la justificación en markdown. Está en fase alfa.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> gobierna la <em>prioridad estratégica de la artesanía visual</em>: le indica al agente si las microanimaciones pixel-perfect son una apuesta asimétrica 10x (ej. en la experiencia de landing) o una distracción sobre-ingenierizada (ej. en tablas CRUD de administración interna).
+            <strong>NORTH.md</strong> fija la <em>prioridad del oficio visual</em>: le indica al agente si las microanimaciones al píxel son una apuesta 10x (por ejemplo, en una landing) o una distracción sobrediseñada (en una tabla de administración interna).
           </p>
         </div>
       </section>
@@ -257,60 +250,27 @@ const conventions = [
       <!-- Section: The Composition Model -->
       <section class="border-t border-[var(--rule)] pt-10">
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          El Principio de Composición en 5 Capas
+          Un modelo de cinco capas que proponemos
         </h2>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          El futuro del desarrollo de software nativo de IA no es un único prompt monolítico de 500 líneas. Es la <strong class="text-[var(--fg)]">composición modular de contexto en 5 capas</strong>:
+          En lugar de un único archivo largo de instrucciones, proponemos <strong class="text-[var(--fg)]">cinco archivos pequeños, cada uno con una pregunta</strong>. Es un modelo, no un estándar establecido, y la mayoría de los repositorios usará solo algunas de las capas.
         </p>
 
         <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          <div class="rounded-lg border border-[var(--rule)] p-4 flex flex-col justify-between">
-            <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Capa 1: Límites</p>
-              <h3 class="mt-1 font-mono text-base font-semibold text-[var(--fg)]">CONSTITUTION.md</h3>
-              <p class="mt-2 text-xs text-[var(--muted)] leading-normal">
-                Límites negativos no negociables, privacidad e invariantes de seguridad.
-              </p>
+          {layers.map((l) => (
+            <div class="rounded-lg border border-[var(--rule)] p-4 flex flex-col justify-between">
+              <div>
+                <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">{l.label}</p>
+                <h3 class="mt-1 font-mono text-base font-semibold text-[var(--fg)]">{l.file}</h3>
+                <p class="mt-2 text-xs text-[var(--muted)] leading-normal">{l.desc}</p>
+              </div>
+              <p class="mt-3 text-[0.65rem] font-mono text-[var(--muted)]">{l.origin}</p>
             </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--muted)]">Anthropic</p>
-          </div>
-
-          <div class="rounded-lg border border-[var(--rule)] p-4 flex flex-col justify-between">
-            <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Capa 2: Ejecución</p>
-              <h3 class="mt-1 font-mono text-base font-semibold text-[var(--fg)]">AGENTS.md</h3>
-              <p class="mt-2 text-xs text-[var(--muted)] leading-normal">
-                Comandos de build, linters, workflows de testing y reglas del arnés.
-              </p>
-            </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--muted)]">Linux Foundation</p>
-          </div>
-
-          <div class="rounded-lg border border-[var(--rule)] p-4 flex flex-col justify-between">
-            <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Capa 3: Visual</p>
-              <h3 class="mt-1 font-mono text-base font-semibold text-[var(--fg)]">design.md</h3>
-              <p class="mt-2 text-xs text-[var(--muted)] leading-normal">
-                Tokens de UI, breakpoints responsivos, grillas y contratos de diseño.
-              </p>
-            </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--muted)]">Google Material</p>
-          </div>
-
-          <div class="rounded-lg border border-[var(--rule)] p-4 flex flex-col justify-between">
-            <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Capa 4: Voz</p>
-              <h3 class="mt-1 font-mono text-base font-semibold text-[var(--fg)]">SOUL.md</h3>
-              <p class="mt-2 text-xs text-[var(--muted)] leading-normal">
-                Carácter del proyecto, personalidad, tono de comunicación y empatía.
-              </p>
-            </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--muted)]">Comunidad</p>
-          </div>
+          ))}
 
           <div class="rounded-lg border-2 border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_5%,transparent)] p-4 flex flex-col justify-between">
             <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">Capa 5: Cúspide</p>
+              <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">Capa 5: Dirección</p>
               <h3 class="mt-1 font-mono text-base font-bold text-[var(--fg)] flex items-center gap-1.5">
                 NORTH.md
                 <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
@@ -319,7 +279,7 @@ const conventions = [
                 Propósito, listón de calidad, apuestas asimétricas y trade-offs precalculados.
               </p>
             </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--accent)] font-semibold">BRTHLS</p>
+            <p class="mt-3 text-[0.65rem] font-mono text-[var(--accent)] font-semibold">Esta especificación · MIT</p>
           </div>
         </div>
 
@@ -328,13 +288,13 @@ const conventions = [
             href="/es/spec"
             class="inline-flex items-center gap-2 rounded-full bg-[var(--fg)] px-5 py-2.5 text-sm font-medium text-[var(--bg)] transition hover:opacity-85"
           >
-            Leer la Especificación v0.1 &rarr;
+            Leer la especificación v0.1 &rarr;
           </a>
           <a
             href="/es"
             class="inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)]"
           >
-            Volver al Inicio
+            Volver al inicio
           </a>
         </div>
       </section>

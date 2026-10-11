@@ -6,8 +6,8 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
 const compareJsonLd = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Comparing Agent Context Conventions — NORTH.md vs AGENTS.md, SOUL.md, VISION.md, and CONSTITUTION.md",
-  "description": "An exhaustive architectural comparison of repository context files for AI coding agents. How NORTH.md provides decision arbitration alongside operational, constitutional, and identity files.",
+  "headline": "Comparing Agent Context Conventions — NORTH.md vs AGENTS.md, SOUL.md, DESIGN.md, VISION.md, and CONSTITUTION.md",
+  "description": "A comparison of repository context files for AI coding agents, and where NORTH.md fits alongside operational, design, persona, and constitutional files.",
   "author": {
     "@type": "Person",
     "name": "Viktor Berthelius",
@@ -18,7 +18,7 @@ const compareJsonLd = {
     "name": "NORTH.md",
     "url": siteUrl
   },
-  "datePublished": "2026-09-23",
+  "datePublished": "2026-09-24",
   "url": `${siteUrl}/compare`,
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -30,65 +30,58 @@ const conventions = [
   {
     file: "README.md",
     question: "What is this project?",
-    focus: "Human onboarding, high-level architecture, installation, public showcase.",
-    consumer: "Humans (users, contributors, evaluators).",
-    failureMode: "Nobody knows how to run or use the project.",
-    boundaryWithNorth: "README explains what exists today for humans; NORTH declares how far to push tomorrow for agents.",
+    consumer: "Humans: users, contributors, evaluators.",
+    boundaryWithNorth: "README explains what exists today; NORTH.md declares how far to push next.",
   },
   {
     file: "AGENTS.md / CLAUDE.md",
     question: "How do you work here?",
-    focus: "Operational gates, build commands, lint rules, testing workflows, file ownership.",
-    consumer: "AI coding agents (Claude Code, Cursor, Copilot, Codex).",
-    failureMode: "Agents break the build, commit directly to main, violate repo workflow.",
-    boundaryWithNorth: "AGENTS tells an agent how to run tests; NORTH tells it what quality standard counts as shippable.",
+    consumer: "Coding agents. AGENTS.md is read by many tools (see agents.md); CLAUDE.md by Claude Code.",
+    boundaryWithNorth: "AGENTS.md tells an agent how to run the tests; NORTH.md tells it what quality counts as shipped.",
   },
   {
     file: "SOUL.md",
-    question: "Who are you?",
-    focus: "Project voice, tone, personality, values, communication aesthetics.",
-    consumer: "Humans and AI agents drafting user-facing copy or conversational responses.",
-    failureMode: "AI-generated text feels corporate, generic, or tonally dissonant.",
-    boundaryWithNorth: "SOUL defines aesthetic voice; NORTH defines architectural ambition and trade-offs.",
+    question: "Who is the agent?",
+    consumer: "The agent itself: its persona, values, and tone.",
+    boundaryWithNorth: "SOUL.md shapes how the agent speaks and behaves; NORTH.md shapes what the project optimises for.",
   },
   {
-    file: "design.md",
-    question: "What visual contracts and UI tokens govern interfaces?",
-    focus: "UI components, color tokens, layout hierarchy, responsive breakpoints, design systems.",
-    consumer: "Frontend engineers, UI designers, autonomous UI agents (Google Antigravity, Claude Code).",
-    failureMode: "Agents invent arbitrary CSS, break responsive layouts, or introduce visual inconsistency.",
-    boundaryWithNorth: "design.md dictates the UI grammar and components; NORTH.md dictates whether UI polish is a 10x bet or a 1.1x commodity.",
+    file: "DESIGN.md",
+    question: "What should the interface look like, and why?",
+    consumer: "Coding agents generating UI.",
+    boundaryWithNorth: "DESIGN.md defines the tokens; NORTH.md says whether visual polish is a 10x bet or a 1.1x surface.",
   },
   {
     file: "VISION.md",
     question: "What future are we pursuing?",
-    focus: "Five-year destination, market vision, aspirational horizon, long-term roadmap.",
-    consumer: "Founders, product leaders, humans, high-level planning agents.",
-    failureMode: "Inspirational poetry without operational consequences; fails to arbitrate sprint dilemmas.",
-    boundaryWithNorth: "VISION is teleological (the destination); NORTH is algorithmic (the arbitration rules for today's PR).",
+    consumer: "Founders and planners. No formal convention exists.",
+    boundaryWithNorth: "A vision describes the destination; NORTH.md adds the defaults that decide today's pull request.",
   },
   {
     file: "CONSTITUTION.md",
-    question: "What lines must we never cross?",
-    focus: "Non-negotiable negative constraints, compliance laws, privacy guardrails, security boundaries.",
-    consumer: "Safety evaluators, guardrail systems, AI agents.",
-    failureMode: "Paralysis by hyper-regulation without positive direction on what to build.",
-    boundaryWithNorth: "CONSTITUTION enforces negative hard boundaries; NORTH defines positive optimization defaults.",
+    question: "Which principles and boundaries are non-negotiable?",
+    consumer: "Coding agents and the humans who review them.",
+    boundaryWithNorth: "A constitution sets limits and principles; NORTH.md sets direction, ambition, and trade-off defaults within them.",
   },
   {
     file: "NORTH.md",
     question: "How do we choose when valid paths compete?",
-    focus: "Purpose, ambition bar, asymmetric bets (10x vs 1.1x), anti-goals, precomputed trade-offs, reversibility.",
-    consumer: "Humans and AI coding agents arbitrating non-trivial implementation decisions.",
-    failureMode: "Agents default to safe mediocrity, incremental patches, and runaway WIP drift.",
-    boundaryWithNorth: "The definitive arbitration layer: judgment when operational instructions run out.",
+    consumer: "Humans and coding agents making non-trivial implementation decisions.",
+    boundaryWithNorth: "The proposed direction layer: judgment when operational instructions run out.",
   },
+];
+
+const layers = [
+  { label: "Layer 1: Limits", file: "CONSTITUTION.md", desc: "Non-negotiable principles and boundaries.", origin: "Community · agentconstitution.dev" },
+  { label: "Layer 2: Execution", file: "AGENTS.md", desc: "Build commands, tests, conventions, and workflow.", origin: "agents.md · Linux Foundation" },
+  { label: "Layer 3: Look", file: "DESIGN.md", desc: "Design tokens and the rationale behind them.", origin: "Google Labs" },
+  { label: "Layer 4: Persona", file: "SOUL.md", desc: "Who the agent is: persona, values, and tone.", origin: "soul.md" },
 ];
 ---
 
 <Base
   title="Comparing Agent Context Conventions — NORTH.md"
-  description="How NORTH.md fits alongside AGENTS.md, SOUL.md, VISION.md, CONSTITUTION.md, and scoped rules in the modern agent stack."
+  description="How NORTH.md fits alongside AGENTS.md, CLAUDE.md, SOUL.md, DESIGN.md, VISION.md, and CONSTITUTION.md."
   canonical={`${siteUrl}/compare`}
   ogImage="/og/compare.png"
 >
@@ -107,7 +100,7 @@ const conventions = [
 
     <!-- Eyebrow -->
     <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-      architectural guide &middot; september 2026
+      guide &middot; september 2026
     </p>
 
     <!-- Title -->
@@ -116,7 +109,7 @@ const conventions = [
     </h1>
 
     <p class="mt-4 text-lg text-[var(--muted)] leading-relaxed max-w-2xl">
-      The modern repository context stack has evolved rapidly. Today, autonomous agents encounter rules files, identity files, vision statements, and constitutional boundaries. Where does <strong class="text-[var(--fg)]">NORTH.md</strong> sit, and why does it exist?
+      Coding agents now read several kinds of repository file: rules files, persona files, design files, vision statements, and constitutions. Where does <strong class="text-[var(--fg)]">NORTH.md</strong> sit, and why does it exist?
     </p>
 
     <hr class="mt-10 border-[var(--rule)]" />
@@ -129,20 +122,20 @@ const conventions = [
           The Skeptic's Question: "Why another Markdown file?"
         </h2>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          Any disciplined engineer should greet a new repository file with suspicion. We already have <code>README.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>SOUL.md</code>, and <code>.cursorrules</code>. Injecting another multi-page file burns context window tokens and risks diluting the model's attention.
+          Any disciplined engineer should greet a new repository file with suspicion. We already have <code>README.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>SOUL.md</code>, <code>DESIGN.md</code>, and editor-specific rules files. Another multi-page file costs context tokens and can dilute the model's attention.
         </p>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          If <code>NORTH.md</code> were merely "another vision doc" or "a list of tips," it would deserve to be deleted. But agents in production face a failure mode that neither rules nor vision can prevent: <strong class="text-[var(--fg)]">the dilemma of competing valid paths</strong>.
+          If <code>NORTH.md</code> were merely "another vision doc" or "a list of tips", it would deserve to be deleted. It exists for one situation that neither rules nor vision statements address: <strong class="text-[var(--fg)]">choosing between competing valid paths</strong>.
         </p>
         <div class="mt-6 rounded-lg border border-[var(--rule)] bg-[var(--color-stone-100,#f5f5f4)] dark:bg-[var(--color-stone-900,#1c1917)] p-6">
-          <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] mb-2">The Production Dilemma</p>
+          <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] mb-2">The Dilemma</p>
           <p class="text-sm text-[var(--fg)] leading-relaxed italic">
-            "When an agent receives an ambiguous refactor task, three distinct paths all pass CI, obey AGENTS.md, and respect CONSTITUTION.md:
-            <br />1. The cowardly incremental patch that leaves root causes intact.
-            <br />2. The megalomaniacal rewrite that opens 15 unrequested dependencies and explodes WIP.
-            <br />3. The calibrated leap that compounds product advantage without over-engineering commodity code.
+            An agent receives an ambiguous refactor task. Three paths all pass CI, obey AGENTS.md, and respect CONSTITUTION.md:
+            <br />1. The timid incremental patch that leaves the root cause in place.
+            <br />2. The sprawling rewrite that adds unrequested dependencies and work in progress.
+            <br />3. The calibrated leap that removes the failure mode without over-engineering commodity code.
             <br /><br />
-            Which one does the agent choose? Without NORTH.md, it almost always defaults to #1 or #2."
+            Which one does the agent choose? Our hypothesis: with nothing stating the project's direction, it drifts to #1 or #2. NORTH.md is designed to make #3 the obvious choice.
           </p>
         </div>
       </section>
@@ -153,7 +146,7 @@ const conventions = [
           The Context Matrix
         </h2>
         <p class="mt-3 text-[var(--muted)] leading-relaxed">
-          How each file answers a distinct, non-overlapping question in the development lifecycle:
+          Each file answers a different question:
         </p>
 
         <div
@@ -205,10 +198,10 @@ const conventions = [
             1. NORTH.md vs. VISION.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>VISION.md</strong> is teleological: it describes what the world looks like in 2030 if your company triumphs. It is written to inspire investors, recruits, and quarterly planning offsites. But an AI agent executing a PR on a Tuesday afternoon cannot derive whether to build or buy a webhook queue from an aspirational mission statement.
+            <strong>VISION.md</strong> has no formal convention, but where it exists it usually describes the world the project hopes to create. It is written to inspire. An agent working on a pull request on a Tuesday afternoon cannot derive from it whether to build or buy a webhook queue.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> is operational arbitration: it declares concrete asymmetric bets (<em>"Go 10x on crypto invoice signing; accept 1.1x on settings UI"</em>), specific refusals (<em>"Anti-goal: We do not build CRM"</em>), and precomputed trade-off defaults (<em>"Safety over speed on fiscal code; speed over safety on internal admin"</em>).
+            <strong>NORTH.md</strong> is operational: it declares concrete asymmetric bets (<em>"Go 10x on e-invoicing correctness; accept 1.1x on the settings UI"</em>), specific refusals (<em>"Anti-goal: we do not build a CRM"</em>), and precomputed trade-off defaults (<em>"Safety over speed on fiscal code; speed over safety on internal admin"</em>).
           </p>
         </div>
 
@@ -218,10 +211,10 @@ const conventions = [
             2. NORTH.md vs. CONSTITUTION.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>CONSTITUTION.md</strong> enforces <em>negative hard boundaries</em>: never leak credentials, never drop a database without interactive confirmation, never bypass compliance policies. It is a set of invariant legal constraints.
+            <strong>CONSTITUTION.md</strong> sets <em>non-negotiable principles and boundaries</em>. There is no single standard: <a href="https://agentconstitution.dev" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">agentconstitution.dev</a> proposes a project-level format, and GitHub Spec Kit keeps a project constitution of principles and governance. Some formats also record "tension pairs" (X over Y).
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> provides <em>positive optimization vectors</em>. Knowing what you are forbidden from doing does not tell you what calibre of work you are expected to ship. NORTH tells the agent where to be ambitious and when to refuse commodity bloat.
+            <strong>NORTH.md</strong> sets <em>direction</em>. Knowing what you must never do does not tell you what calibre of work is expected. NORTH.md tells the agent where to be ambitious and where to stop. If your constitution already records trade-offs, point to it from NORTH.md rather than repeating them.
           </p>
         </div>
 
@@ -231,23 +224,23 @@ const conventions = [
             3. NORTH.md vs. AGENTS.md / CLAUDE.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>AGENTS.md</strong> governs the <em>mechanics of execution</em>: how to compile, which linter to run, which file boundaries belong to which subagent stream. It ensures the agent does not break the repository harness.
+            <strong>AGENTS.md</strong> covers the <em>mechanics of execution</em>: how to build, which linter to run, which conventions to follow. It keeps the agent from breaking the repository.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> governs the <em>judgment of the increment</em>: is a feature truly "done" when the unit tests pass, or does "The Bar" demand an MCP server tool call, an n8n node, and zero-defect audit logs?
+            <strong>NORTH.md</strong> covers the <em>judgment of the increment</em>: is a feature really done when the unit tests pass, or does The Bar also demand documentation, a public API, and an audit trail?
           </p>
         </div>
 
-        <!-- Deep Dive 4: design.md -->
+        <!-- Deep Dive 4: DESIGN.md -->
         <div class="border-l-2 border-[var(--rule)] pl-6 py-2">
           <h3 class="font-display text-xl text-[var(--fg)]">
-            4. NORTH.md vs. design.md (Google)
+            4. NORTH.md vs. DESIGN.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>design.md</strong> governs the <em>visual system contract</em>: design tokens, typography scales, responsive breakpoints, and UI component standards (such as Google Material or Antigravity design conventions).
+            <strong>DESIGN.md</strong> is a format from <a href="https://github.com/google-labs-code/design.md" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Google Labs</a> for describing a visual identity to coding agents: machine-readable design tokens in YAML front matter, with the rationale in markdown. It is in alpha.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> governs the <em>strategic priority of visual craft</em>: it tells the agent whether pixel-perfect micro-animations are an asymmetric 10x bet (e.g. for landing experiences) or an over-engineered distraction (e.g. for internal admin CRUD tables).
+            <strong>NORTH.md</strong> sets the <em>priority of visual craft</em>: it tells the agent whether pixel-perfect micro-animations are a 10x bet (a landing page, say) or an over-engineered distraction (an internal admin table).
           </p>
         </div>
       </section>
@@ -255,60 +248,27 @@ const conventions = [
       <!-- Section: The Composition Model -->
       <section class="border-t border-[var(--rule)] pt-10">
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          The 5-Layer Composition Principle
+          A Proposed Five-Layer Model
         </h2>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          The future of AI-native software engineering is not a single 500-line monolithic prompt file. It is <strong class="text-[var(--fg)]">modular 5-layer context composition</strong>:
+          Instead of one long instruction file, we propose <strong class="text-[var(--fg)]">five small files, each answering one question</strong>. This is a model, not an established standard, and most repositories will use only some of the layers.
         </p>
 
         <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          <div class="rounded-lg border border-[var(--rule)] p-4 flex flex-col justify-between">
-            <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Layer 1: Limits</p>
-              <h3 class="mt-1 font-mono text-base font-semibold text-[var(--fg)]">CONSTITUTION.md</h3>
-              <p class="mt-2 text-xs text-[var(--muted)] leading-normal">
-                Non-negotiable negative boundaries, privacy, and safety invariants.
-              </p>
+          {layers.map((l) => (
+            <div class="rounded-lg border border-[var(--rule)] p-4 flex flex-col justify-between">
+              <div>
+                <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">{l.label}</p>
+                <h3 class="mt-1 font-mono text-base font-semibold text-[var(--fg)]">{l.file}</h3>
+                <p class="mt-2 text-xs text-[var(--muted)] leading-normal">{l.desc}</p>
+              </div>
+              <p class="mt-3 text-[0.65rem] font-mono text-[var(--muted)]">{l.origin}</p>
             </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--muted)]">Anthropic</p>
-          </div>
-
-          <div class="rounded-lg border border-[var(--rule)] p-4 flex flex-col justify-between">
-            <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Layer 2: Execution</p>
-              <h3 class="mt-1 font-mono text-base font-semibold text-[var(--fg)]">AGENTS.md</h3>
-              <p class="mt-2 text-xs text-[var(--muted)] leading-normal">
-                Build commands, linters, testing workflows, and harness rules.
-              </p>
-            </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--muted)]">Linux Foundation</p>
-          </div>
-
-          <div class="rounded-lg border border-[var(--rule)] p-4 flex flex-col justify-between">
-            <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Layer 3: Visual</p>
-              <h3 class="mt-1 font-mono text-base font-semibold text-[var(--fg)]">design.md</h3>
-              <p class="mt-2 text-xs text-[var(--muted)] leading-normal">
-                UI tokens, responsive breakpoints, layout grids, and design contracts.
-              </p>
-            </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--muted)]">Google Material</p>
-          </div>
-
-          <div class="rounded-lg border border-[var(--rule)] p-4 flex flex-col justify-between">
-            <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Layer 4: Voice</p>
-              <h3 class="mt-1 font-mono text-base font-semibold text-[var(--fg)]">SOUL.md</h3>
-              <p class="mt-2 text-xs text-[var(--muted)] leading-normal">
-                Project character, persona, communication tone, and empathy.
-              </p>
-            </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--muted)]">Community</p>
-          </div>
+          ))}
 
           <div class="rounded-lg border-2 border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_5%,transparent)] p-4 flex flex-col justify-between">
             <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">Layer 5: Apex</p>
+              <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">Layer 5: Direction</p>
               <h3 class="mt-1 font-mono text-base font-bold text-[var(--fg)] flex items-center gap-1.5">
                 NORTH.md
                 <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
@@ -317,7 +277,7 @@ const conventions = [
                 Purpose, quality bar, asymmetric bets, and precomputed trade-offs.
               </p>
             </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--accent)] font-semibold">BRTHLS</p>
+            <p class="mt-3 text-[0.65rem] font-mono text-[var(--accent)] font-semibold">This spec · MIT</p>
           </div>
         </div>
 
@@ -332,7 +292,7 @@ const conventions = [
             href="/why"
             class="inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)]"
           >
-            Why NORTH Matters
+            Why NORTH.md
           </a>
         </div>
       </section>

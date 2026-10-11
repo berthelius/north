@@ -3,7 +3,7 @@
 Thanks for considering a contribution. The NORTH.md project welcomes three
 kinds of contribution:
 
-1. **Example NORTH.md files** for `/examples`.
+1. **Example NORTH.md files** for [northfile.dev/examples](https://northfile.dev/examples).
 2. **Editorial improvements** to the specification text (`SPEC.md`).
 3. **Landing site and tooling** improvements to `northfile.dev`.
 
@@ -11,18 +11,30 @@ kinds of contribution:
 
 ## Examples (lowest friction)
 
-Open a PR adding a new file to `/examples/<your-project>.md` containing a real
-or representative `NORTH.md` from your project.
+Open a PR adding `src/content/examples/<slug>.md`. The body is the
+`NORTH.md` itself; the frontmatter describes it:
+
+```yaml
+---
+title: "Project name"
+domain: "saas-b2b" # open-convention | saas-b2b | oss-library | agency | side-project | internal-tool
+subtitle: "One line on what the project is"
+description: "Two or three sentences of context."
+whyItWorks: "What makes this NORTH.md a useful example."
+kind: "real" # real = a file in use, reproduced verbatim; illustrative = fictional
+order: 7
+---
+```
 
 Guidelines:
 
-- Use all seven canonical sections.
+- Use all seven sections.
 - Keep it concrete. Avoid abstract aspirations.
 - Two-screen maximum.
-- Add a short header comment naming the project domain (SaaS, OSS, agency,
-  internal tool, side project, etc).
+- Mark it `kind: "real"` only if the file is in use in a project you can
+  link to. Otherwise it is `illustrative`.
 
-We curate `/examples` for breadth across domains. If a domain is already well
+We curate the examples for breadth across domains. If a domain is already well
 represented, your example may be linked rather than included.
 
 ---
@@ -54,9 +66,9 @@ welcome. Quality bar:
 
 ## Code of conduct
 
-Be kind. Assume good faith. Disagree without dismissing. The agent context
-trinity (`CLAUDE.md` / `SOUL.md` / `NORTH.md`) is collaborative, not
-competitive — that applies to contributors here too.
+Be kind. Assume good faith. Disagree without dismissing. NORTH.md is meant to
+sit alongside `AGENTS.md`, `CLAUDE.md`, `SOUL.md`, `DESIGN.md` and the rest,
+not to compete with them — that applies to contributors here too.
 
 ---
 
