@@ -6,8 +6,8 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Why NORTH.md — The missing layer in your agent context stack",
-  "description": "AI coding agents tend to default to safe, incremental output. NORTH.md is designed to correct that by naming the destination, setting the bar above the default, and giving agents permission to be ambitious.",
+  "headline": "Agents know how. Nobody told them how far.",
+  "description": "Coding agents tend to ship the safe, incremental version. NORTH.md writes down where a project is going and how far to push, so agents don't have to guess.",
   "author": {
     "@type": "Person",
     "name": "Viktor Berthelius",
@@ -28,8 +28,8 @@ const articleJsonLd = {
 ---
 
 <Base
-  title="Why NORTH.md — The missing layer in your agent context stack"
-  description="AI coding agents tend to default to safe, incremental output. NORTH.md is designed to correct that by naming the destination, setting the bar above the default, and giving agents permission to be ambitious."
+  title="Why NORTH.md — Agents know how, not how far"
+  description="Coding agents tend to ship the safe, incremental version. NORTH.md writes down where a project is going and how far to push, so agents don't have to guess."
   canonical={`${siteUrl}/why`}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
@@ -48,17 +48,17 @@ const articleJsonLd = {
 
     <!-- Eyebrow -->
     <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-      essay &middot; september 2026
+      essay &middot; october 2026
     </p>
 
     <!-- Title -->
     <h1 class="mt-5 font-display text-4xl md:text-5xl leading-[1.05] tracking-tight">
-      The missing layer in your agent context stack
+      Agents know how. Nobody told them how far.
     </h1>
 
     <p class="mt-4 text-sm text-[var(--muted)]">
       By <a href="https://brthls.com" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Viktor Berthelius</a>
-      &middot; 7 min read
+      &middot; 6 min read
     </p>
 
     <hr class="mt-10 border-[var(--rule)]" />
@@ -67,150 +67,142 @@ const articleJsonLd = {
     <article class="essay mt-10">
 
       <p class="drop-cap">
-        Ask a capable AI agent to refactor a slow function, and you will get a faster function.
-        Ask it to make the whole module ten times better, and you will still get a faster function — perhaps with a few more test cases. The task expands to fill the instruction, but never beyond it. The agent is not being obtuse. It is doing exactly what its context tells it to do: stay within the lines, do not break anything, ship the increment. The problem is that nobody told it where the lines end.
+        Ask a capable coding agent to speed up a slow report and you will usually get a faster report. Ask it to make reporting ten times better and you may well get the same report, a little faster, with a few more tests. The work expands to fill the instruction and stops exactly there. The agent is not being lazy. It is being safe: stay inside the lines, break nothing, ship the increment. Nobody told it where the lines end.
       </p>
 
       <p>
-        This is not a capability problem. The same agent that hands you a tidy patch could, in principle, rewrite the module from scratch with a better interface, cut three dependencies, and leave behind a suite of tests that would have caught the original bug two months ago. It has the raw ability. What it lacks is <em>authorisation</em> — a clear signal that the bigger move is within scope, that the team will accept it, that the bar is set somewhere above "does not regress".
+        This is not a capability problem. The agent that hands you a tidy patch could, in principle, redesign the module behind it: a cleaner interface, three fewer dependencies, tests that would have caught last quarter&rsquo;s bug. What it lacks is not skill but <em>permission</em>: a signal that the bigger move is in scope, that the team wants it, and that the bar sits somewhere above &ldquo;does not regress&rdquo;.
       </p>
 
       <!-- Pull quote -->
       <blockquote class="pull-quote">
-        "The agent is not being obtuse. It is doing exactly what its context tells it to do: stay within the lines, do not break anything, ship the increment. The problem is that nobody told it where the lines end."
+        Capability without direction defaults to caution.
       </blockquote>
 
-      <h2>The layer we built, and the one we forgot</h2>
+      <h2>The files we already write</h2>
 
       <p>
-        The first wave of agent tooling gave us operational context. <code>CLAUDE.md</code>, <code>AGENTS.md</code>, and their equivalents tell an agent <em>how</em> to work: run these gates before committing, follow these conventions, respect these file boundaries, do not push to main directly. This was the right first move. Agents without operational guardrails cause chaos — broken builds, mismerged migrations, violated conventions. The rule file solved a real problem.
+        The first wave of agent context was operational. <code>AGENTS.md</code> and <code>CLAUDE.md</code> tell an agent <em>how</em> to work in a repository: which commands to run, which gates to pass, which conventions to keep. That was the right first move. An agent without operational context breaks builds.
       </p>
 
       <p>
-        Then came persona context. <code>SOUL.md</code> tells an agent <em>who</em> it is: its voice, its values, its character. It answers questions like "should this reply be terse or warm?" This too was a useful move. Without a persona, an agent's voice drifts from one session to the next — technically correct but tonally mismatched.
+        Others followed. <code>SOUL.md</code> describes <em>who</em> the agent is: its persona, values and tone. <code>DESIGN.md</code> hands it the design tokens and the reasons behind them. A constitution, where a project keeps one, draws the lines it must never cross. Each answers a real question, and each earns its place.
       </p>
 
       <p>
-        What neither layer answers is the question that ultimately determines whether an agent ships a competent patch or an ambitious leap:
+        None of them answers the question that decides whether an agent ships a competent patch or an ambitious leap:
       </p>
 
       <blockquote class="pull-quote">
-        "Where is this project going, and how far are we willing to push to get there?"
+        Where is this project going, and how far are we willing to push to get there?
       </blockquote>
 
       <p>
-        Without an answer, agents tend to default to the safe interpretation. Not because safe is wrong, but because <em>safe is the only interpretation that requires no assumption about ambition</em>. The agent cannot know whether you are trying to build the best tool in your category or just keep the lights on for one more quarter. In the absence of that information, it hedges. It patches. It increments.
+        Without an answer, the safe reading wins. Not because safe is right, but because <em>safe is the only reading that assumes nothing about ambition</em>. The agent cannot tell whether you are building the best tool in your category or keeping the lights on for one more quarter. So it hedges. It patches. It increments.
       </p>
 
-      <h2>What happens in practice</h2>
+      <h2>Same task, two contexts</h2>
 
       <p>
-        Consider a common scenario. A product is two years old. The data model has several seams showing — a <code>status</code> field that has accumulated seven possible values, a permissions system that started as a boolean and was extended with string checks, a reporting layer that queries the same table four times per request. None of these is a crisis. All of them are slowing the team down.
-      </p>
-
-      <p>
-        An agent asked to "clean up the reporting layer" will consolidate the four queries into two, maybe three, add an index, and return. A reasonable patch. A good one, even.
+        Take a product two years in. A <code>status</code> field has grown seven values. Permissions started as a boolean and picked up string checks along the way. The reporting layer queries the same table four times per request. None of it is a crisis. All of it slows the team down.
       </p>
 
       <p>
-        But an agent that knows the project is building toward a specific, declared destination — that performance at the reporting layer is load-bearing for the entire product strategy, that the acceptable bar includes sub-200ms p95, that the team has explicitly decided clean design takes priority over backward compatibility in internal tools — that agent has the information it needs to propose the bolder move. Not because it suddenly became more capable, but because the context has shifted from "what is safe to do?" to "what is right to do?"
+        Ask an agent to &ldquo;clean up the reporting layer&rdquo; and a reasonable one will merge the four queries into two, add an index and stop. A good patch, even.
+      </p>
+
+      <p>
+        Now give the same agent four lines from a NORTH.md:
+      </p>
+
+      <p>
+        <strong>North Star.</strong> Month-end reporting is the reason customers stay.<br />
+        <strong>The Bar.</strong> p95 under 200&nbsp;ms on every report screen.<br />
+        <strong>Trade-off Defaults.</strong> Clean design over backward compatibility on internal APIs; flip when an external consumer exists.<br />
+        <strong>Reversibility.</strong> The reporting schema is internal: a two-way door.
+      </p>
+
+      <p>
+        Now the agent can see that reporting is load-bearing, that two queries will not clear the Bar, that nothing outside the team depends on the current shape, and that a redesign is cheap to undo. It can propose the bolder move, and it knows the move is allowed. The agent did not get smarter. The question changed, from &ldquo;what is safe to do?&rdquo; to &ldquo;what is right to do here?&rdquo;
       </p>
 
       <hr class="section-rule" />
 
-      <h2>What NORTH.md actually does</h2>
+      <h2>Not bigger. Calibrated.</h2>
 
       <p>
-        NORTH.md is a single markdown file, seven sections long, that lives at the root of your repository. It answers the ambition question in a form that both humans and agents can read without special tooling.
+        Timidity is only half the failure. Give an agent more autonomy without direction and the opposite happens too: the sprawling rewrite, the feature nobody asked for, the defensive abstraction nobody will ever need.
       </p>
 
       <p>
-        The first section — the North Star — names the destination in one sentence. Not a vision statement. Not a mission. A destination: specific enough to disqualify wrong moves, ambitious enough to be uncomfortable, grounded enough to be reachable. The second section — the Bar — states what "done" means in concrete, observable terms. Not "high quality" but "Lighthouse 100, WCAG AA, zero type errors in CI, and i18n parity across every supported locale. No exceptions."
+        Two agents can both satisfy every linter, compiler check and test in your pipeline. One moves the architecture towards its intended shape. The other turns the repository into an accumulation of reasonable-looking detours. CI cannot tell them apart. <em>Tests prevent broken builds; they do little to prevent drift.</em>
       </p>
 
       <p>
-        The remaining five sections handle trade-offs, asymmetric investments, explicit refusals, ambition triggers, and reversibility. Together they precompute the decisions that would otherwise be made implicitly, and often inconsistently, in every agent session.
+        So NORTH.md cuts both ways. Asymmetric Bets say where to go 10x and, just as explicitly, where 1.1x is the right call. Anti-Goals decline the tempting detours before anyone proposes them. Trade-off Defaults settle the recurring arguments and name the one condition that reopens each. The point is not ambition everywhere. It is ambition in the right places, and restraint in the rest.
+      </p>
+
+      <p>
+        This matters more as agents run longer and in parallel. When there is no one to ask mid-run, every decision nobody wrote down becomes a guess, and parallel sessions guess differently.
       </p>
 
       <!-- Pull quote -->
       <blockquote class="pull-quote">
-        "NORTH.md precomputes the decisions that would otherwise be made implicitly, and often inconsistently, in every agent session."
+        Without direction, more agent throughput tends to produce more work in progress, not more progress.
       </blockquote>
 
-      <p>
-        The intent is not to make agents reckless. It is to stop them defaulting to the smallest legal interpretation of every task. They still respect the operational rules in <code>CLAUDE.md</code>. They still honour the persona in <code>SOUL.md</code>. But now they also know that this project is going somewhere specific, that certain investments deserve a disproportionate share of effort, and that some tempting shortcuts are pre-declined.
-      </p>
-
-      <h2>Why a markdown file, specifically</h2>
+      <h2>Seven sections, one job</h2>
 
       <p>
-        <code>CLAUDE.md</code> and <code>AGENTS.md</code> showed something that was not obvious a few years ago: a plain markdown file at a known path is a simple, durable way to put context where both humans and agents will find it. Humans read it during onboarding. Agents load it at session start. It is indexed by crawlers. It appears in repository search. It is versioned by git with no additional infrastructure.
+        A NORTH.md has seven sections, and each answers a question an agent would otherwise have to guess. The <strong>North Star</strong> names the destination in one sentence. <strong>The Bar</strong> says what done means, in terms a gate can check. <strong>Asymmetric Bets</strong> split effort between 10x and 1.1x. <strong>Anti-Goals</strong> list what the project refuses, each with a reason. <strong>Trade-off Defaults</strong> record decisions already made, and when they flip. <strong>Ambition Triggers</strong> are short questions that escalate scope. <strong>Reversibility</strong> marks which doors are one-way.
       </p>
 
       <p>
-        A YAML schema would be more machine-parseable. A JSON file would be easier to validate programmatically. But both would be worse at the primary job, which is changing how humans and agents <em>think</em> about a project, not just how they <em>process</em> its metadata. Prose has rhetorical force that structured data does not. The sentence "this project replaces spreadsheet bookkeeping for European freelancers by 2030" lands differently in a YAML string than in a document section with a heading and context around it.
+        Together they precompute the decisions that would otherwise be made implicitly, and inconsistently, in every agent session.
+      </p>
+
+      <h2>Why plain markdown</h2>
+
+      <p>
+        <code>AGENTS.md</code> and <code>CLAUDE.md</code> proved something simple: a plain file at a known path is a durable way to put context where humans and agents will both find it. It is versioned by git, reviewed in pull requests and readable without tooling. A change of direction goes through code review like any other change.
       </p>
 
       <p>
-        <code>llms.txt</code> applies the same idea to websites: a plain text file at a predictable URL. Conventions compound. Once enough projects use a pattern at a known path, new tools and new agents know where to look.
-      </p>
-
-      <h2>What NORTH.md is not</h2>
-
-      <p>
-        NORTH.md is not a roadmap. It does not list features, milestones, or delivery dates. Those belong in your issue tracker or project management tool, where they can be updated without touching a file that is meant to be relatively stable.
+        A YAML schema would validate better and persuade worse. Rules without reasons do not travel. An agent can follow &ldquo;safety over speed on fiscal code&rdquo; to the letter, but only the reason lets it apply the rule to a case the author never imagined. Prose carries reasons. That is the job.
       </p>
 
       <p>
-        It is not a project plan. A project plan answers "what are we doing next?" NORTH.md answers "where does 'next' lead, and how far do we go?" These are complementary questions that deserve separate answers.
+        <code>llms.txt</code> applies the same idea to websites: a plain file at a predictable URL. Conventions compound. Once enough projects put a file in the same place, tools know where to look.
+      </p>
+
+      <h2>What it is not</h2>
+
+      <p>
+        <strong>Not a roadmap.</strong> No features, no dates. Those belong in the tracker, where they can change every week without touching a file that is meant to stay put.
       </p>
 
       <p>
-        It is not OKRs. OKRs are quarterly. They cascade down from company objectives. They are tied to measurement cycles and review meetings. NORTH.md is closer to a constitution: it changes deliberately and rarely, and it describes the project's character rather than its current priorities.
+        <strong>Not OKRs.</strong> OKRs are quarterly and measured on a cycle. A NORTH.md changes rarely, and deliberately.
       </p>
 
       <p>
-        It is not a manifesto. Manifestos are rhetorical artefacts designed to persuade an audience. NORTH.md is operational. It is information, not argument. The test of a good NORTH.md is not "is this inspiring?" but "does this change what an agent decides when it has two reasonable options in front of it?"
+        <strong>Not a vision statement or a manifesto.</strong> Those are written to inspire or to persuade. A NORTH.md is written to decide. The test is not &ldquo;is this inspiring?&rdquo; but &ldquo;does this change what an agent does when it has two reasonable options in front of it?&rdquo;
       </p>
 
       <hr class="section-rule" />
 
-      <h2>One file. Seven sections. Two screens.</h2>
+      <h2>Two screens, on purpose</h2>
 
       <p>
-        The constraint is intentional. A NORTH.md that requires scrolling past two screens has already lost the plot. If the ambition cannot be stated in that space, it is not clear enough to be useful as context. The discipline of the format forces the discipline of the thinking.
+        The format is short by design. A NORTH.md that runs past two screens has lost the plot: if the ambition cannot be stated in that space, it is not clear enough to steer anyone. The discipline of the format forces the discipline of the thinking.
       </p>
 
       <p>
-        There is a version of this convention that could have been a dashboard, a database schema, a structured API. That version would have been more powerful in theory and less useful in practice. The markdown file wins because it has friction in exactly the right places: easy to read, easy to reference, slightly effortful to write well.
+        That is also the real cost. Writing a good NORTH.md means deciding what you actually believe about your destination, your bar and your trade-offs, instead of leaving them as shared, unspoken assumptions that agents, and new team members, have no way to reach.
       </p>
 
       <p>
-        That effort is precisely the point. Writing a good NORTH.md forces you to decide what you actually believe about your project's destination and quality bar, rather than leaving those beliefs as shared-but-unspoken assumptions that agents — and new team members — have no way to access.
-      </p>
-
-      <h2>Direction & Arbitration: Scaling Agency Without Scaling Drift</h2>
-
-      <p>
-        The problem <code>NORTH.md</code> addresses is structural to autonomous software development:
-        <em>tests and rules files prevent broken builds, but they do little to prevent product drift.</em>
-      </p>
-
-      <p>
-        Two autonomous agents can write code that satisfies every linter, compiler check, and unit test in your CI pipeline. Yet one moves your architecture closer to its intended shape, while the other turns the repository into an incoherent accumulation of unrequested features, defensive abstractions, and architectural debt.
-      </p>
-
-      <p>
-        When agent execution scales across multiple sessions and parallel worktrees, higher throughput without explicit direction tends to produce more work in progress (WIP), not more progress. <code>NORTH.md</code> provides that missing anchor: precomputing trade-offs before code is written, codifying unambiguous refusals (anti-goals) that survive pushback, and establishing what quality threshold counts as genuinely finished.
-      </p>
-
-      <!-- Pull quote -->
-      <blockquote class="pull-quote">
-        "Without direction, more agent throughput tends to produce more WIP, not more progress."
-      </blockquote>
-
-      <p>
-        The specification is short enough to read in five minutes, and a first NORTH.md can be in place in ten; a good one takes longer. The aim is that every later agent session starts from a better default — not because the agent has changed, but because you have finally given it judgment when the prompt runs out.
+        The spec reads in five minutes. A first NORTH.md takes ten. A good one takes longer. The aim is simple: every session after it starts from a better default. Not because the agent changed, but because someone finally wrote down how far.
       </p>
 
       <hr class="section-rule" />
@@ -226,10 +218,10 @@ const articleJsonLd = {
             Read the specification &rarr;
           </a>
           <a
-            href="/"
+            href="/#template"
             class="inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)]"
           >
-            Quick start template
+            Get the template
           </a>
         </div>
       </div>
