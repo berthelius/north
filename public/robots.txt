@@ -1,5 +1,47 @@
-User-agent: *
-Disallow: /
+# northfile.dev - open to all crawlers, including AI crawlers.
 
-# STEALTH mode — no crawler welcome until public launch decision.
-# Repo + landing maintained privately. See NORTH.md project notes.
+User-agent: *
+Allow: /
+Disallow: /404
+
+User-agent: GPTBot
+Allow: /
+Disallow: /404
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /404
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /404
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /404
+
+User-agent: Claude-User
+Allow: /
+Disallow: /404
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /404
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /404
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /404
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /404
+
+User-agent: CCBot
+Allow: /
+Disallow: /404
+
+Sitemap: https://northfile.dev/sitemap-index.xml

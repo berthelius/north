@@ -57,6 +57,8 @@ for (const file of pages) {
   const ogUrl = og && attr(og, 'content');
   if (!ogUrl || !ogUrl.startsWith(SITE + '/')) err(`og:image not an absolute apex URL (${ogUrl})`);
 
+  const robots = html.match(/<meta\b[^>]*name="robots"[^>]*>/)?.[0];
+  if (!is404 && robots) err(`unexpected robots meta (${robots}); site is open to crawlers`);
   if (is404 && !/<meta\b[^>]*name="robots"[^>]*noindex/.test(html)) err('404 must be noindex');
 
   for (const m of html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
@@ -84,6 +86,14 @@ try {
   for (const l of locs) if (!l.startsWith(SITE + '/')) errors.push(`sitemap URL off-apex: ${l}`);
 } catch {
   errors.push('sitemap-0.xml missing');
+}
+
+try {
+  const robotsTxt = readFileSync(`${DIST}/robots.txt`, 'utf8');
+  if (/^Disallow:\s*\/\s*$/m.test(robotsTxt)) errors.push('robots.txt disallows the whole site');
+  if (!robotsTxt.includes(`Sitemap: ${SITE}/sitemap-index.xml`)) errors.push('robots.txt is missing the Sitemap line');
+} catch {
+  errors.push('robots.txt missing');
 }
 
 if (errors.length) {

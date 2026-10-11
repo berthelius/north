@@ -60,15 +60,8 @@ const alternateLinks = getAlternateLinks(Astro.url.pathname, siteUrl);
       <link rel="alternate" hreflang={l} href={href} />
     ))}
 
-    <!-- Launch switch: kept noindex/nofollow until Commit B -->
-    {noindex ? (
-      <meta name="robots" content="noindex,nofollow" />
-    ) : (
-      <>
-        <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex" />
-        <meta name="googlebot" content="noindex,nofollow" />
-      </>
-    )}
+    <!-- Indexable by default; only pages that opt out (404) are noindex -->
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
 
     <!-- AIO / LLM Endpoints -->
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM index" />
