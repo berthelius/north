@@ -17,11 +17,9 @@ Public release of NORTH.md — an open convention for purpose, ambition, and pre
 - **Astro 5.18** static-first + Vercel adapter
 - **Tailwind 4** with `@theme` design tokens
 - **Typography**: Anton (display) + JetBrains Mono (code) + Inter Variable (body)
-- **Motion**: `motion.dev` (Framer Motion v12) + native View Transitions API
-- **Docs sub-route**: Astro Starlight (if added)
-- **OG dynamic**: `@vercel/og`
-- **Search**: Pagefind (if added)
-- **Analytics**: Umami self-hosted (no cookies, no GDPR pop-up)
+- **Motion**: CSS transitions and keyframes, plus one small inline spring script (the hero compass); no motion library is imported
+- **OG images**: `@vercel/og` (satori + resvg), prerendered to static PNGs at build time
+- **Analytics**: none (if ever added: Umami self-hosted, no cookies)
 - **Deploy**: Vercel
 
 ## Quality bar

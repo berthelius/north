@@ -122,7 +122,6 @@ export const GET: APIRoute = ({ url }) => {
     status: 200,
     headers: {
       'Content-Type': 'image/svg+xml; charset=utf-8',
-      'Cache-Control': 'public, max-age=86400, s-maxage=86400',
       'X-Content-Type-Options': 'nosniff',
     },
   });

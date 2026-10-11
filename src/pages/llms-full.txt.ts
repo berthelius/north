@@ -171,7 +171,6 @@ Generated at: https://northfile.dev/llms-full.txt
     status: 200,
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
-      'Cache-Control': 'public, max-age=300, s-maxage=3600',
     },
   });
 }

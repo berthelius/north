@@ -9,8 +9,9 @@
  * -26deg (start) and +12.8deg, which is where the two bearings are drawn.
  */
 interface Props {
-  /** Fixed needle bearing in degrees. Set it and the needle holds that heading
-   *  instead of settling on north (the 404 page is off course). */
+  /** Needle bearing in degrees. Set it and the needle rests on that heading
+   *  instead of swinging in and settling on north (the 404 page is off course).
+   *  Scrolling still jostles it, and it settles back on that heading. */
   bearing?: number;
 }
 const { bearing } = Astro.props;
