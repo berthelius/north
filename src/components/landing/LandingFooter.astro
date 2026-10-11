@@ -122,7 +122,8 @@ const newTab = t("a11y.newTab");
   }
 
   /* Lockup and credits share a line where they fit; in the narrow desktop
-     column the credits drop below the lockup as one line, not mid-credit. */
+     column the credits drop below the lockup. Between about 960 and 1000px the
+     last credit can still wrap onto its own line. */
   .site-footer__meta {
     display: flex;
     flex-wrap: wrap;

@@ -5,11 +5,11 @@
 </picture>
 
 <p align="center">
-  <a href="https://northfile.dev/spec"><img src="https://img.shields.io/badge/Spec-v0.1-161b22?style=flat-square&labelColor=161b22&color=B8895B" alt="Spec v0.1"></a>
+  <a href="https://northfile.dev/spec"><img src="https://img.shields.io/badge/Spec-v0.1-111111?style=flat-square&labelColor=111111&color=fafafa" alt="Spec v0.1"></a>
   &nbsp;
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-161b22?style=flat-square&labelColor=161b22&color=B8895B" alt="License: MIT"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-111111?style=flat-square&labelColor=111111&color=fafafa" alt="License: MIT"></a>
   &nbsp;
-  <a href="https://northfile.dev"><img src="https://img.shields.io/badge/Web-northfile.dev-161b22?style=flat-square&labelColor=161b22&color=B8895B" alt="Website: northfile.dev"></a>
+  <a href="https://northfile.dev"><img src="https://img.shields.io/badge/Web-northfile.dev-111111?style=flat-square&labelColor=111111&color=fafafa" alt="Website: northfile.dev"></a>
 </p>
 
 # NORTH.md
