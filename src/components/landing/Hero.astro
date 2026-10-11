@@ -16,7 +16,14 @@ const t = useTranslations(lang);
   <div class="frame hero__grid">
     <p class="hero__eyebrow label">
       <span class="signal" aria-hidden="true"></span>
-      {t("hero.eyebrow")}
+      <span class="hero__eyebrow-text">
+        {t("hero.eyebrow").split(" · ").map((part, i, all) => (
+          <Fragment>
+            {i > 0 && " "}
+            <span class="hero__eyebrow-part">{i < all.length - 1 ? `${part} ·` : part}</span>
+          </Fragment>
+        ))}
+      </span>
     </p>
 
     <div class="hero__instrument">
@@ -78,6 +85,15 @@ const t = useTranslations(lang);
     padding-right: 1rem;
     color: var(--muted);
     border-bottom: 1px solid var(--fg);
+  }
+
+  /* Wrap only between parts, and evenly, so a narrow masthead never strands "· MIT". */
+  .hero__eyebrow-text {
+    text-wrap: balance;
+  }
+
+  .hero__eyebrow-part {
+    white-space: nowrap;
   }
 
   .hero__instrument {
@@ -181,8 +197,13 @@ const t = useTranslations(lang);
       border: 0;
     }
 
+    /* Sized so the longest locale headline (ES) still sets in three lines; capped where the frame stops growing (90rem). */
     .hero__title {
-      font-size: clamp(3.5rem, 6.4vw, 6.5rem);
+      font-size: clamp(3.5rem, 5.8vw, 5.25rem);
+    }
+
+    .hero__lead {
+      max-width: 40rem;
     }
   }
 </style>
