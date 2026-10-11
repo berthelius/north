@@ -75,7 +75,6 @@ const domainKeys = Object.keys(domainLabels);
           <a
             href={`/examples/${example.id}`}
             class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded"
-            aria-label={`Read ${example.data.title} — ${example.data.subtitle}`}
           >
             <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div class="flex-1 min-w-0">
@@ -120,7 +119,7 @@ const domainKeys = Object.keys(domainLabels);
         different pattern.
       </p>
       <a
-        href="https://github.com/berthelius/north/issues/new?template=add-example.md"
+        href="https://github.com/berthelius/north/issues/new"
         class="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)]"
         target="_blank"
         rel="noopener noreferrer"
