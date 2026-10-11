@@ -19,7 +19,7 @@ const spec = {
   repository: 'https://github.com/berthelius/north',
   source: 'https://northfile.dev/spec.md',
   description:
-    "NORTH.md declares a software project's purpose, ambition, and precomputed trade-offs in a form readable by both humans and AI coding agents. It is designed to give agents judgment when the prompt runs out.",
+    "NORTH.md is an open convention: one markdown file that declares a project's purpose, ambition and precomputed trade-offs for humans and AI coding agents. It is designed to give agents judgment when the prompt runs out.",
   abstract:
     'A proposed direction layer for agent context files. It sits alongside CONSTITUTION.md (limits), AGENTS.md / CLAUDE.md (how agents work), DESIGN.md (look and feel), and SOUL.md (who the agent is). The five-layer model is a proposal, not an established standard.',
   fileLocation:
@@ -130,7 +130,7 @@ const spec = {
       slug: 'ambition-triggers',
       required: false,
       description:
-        'Phrases, used by humans and quoted in AI agent prompts, that escalate scope when the team is being too small.',
+        'Phrases, used by humans and quoted in AI agent prompts, that escalate scope when the team is thinking too small.',
       criteria: [
         'Short enough to remember.',
         'Forces a specific reframe.',

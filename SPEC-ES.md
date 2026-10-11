@@ -28,7 +28,7 @@ establecido.
 
 ## Motivación
 
-Los agentes de programación tienden por defecto a una **producción segura e incremental**. Optimizan para
+Los agentes de programación tienden por defecto a un **trabajo seguro e incremental**. Optimizan para
 "no romper lo que funciona" antes que para "subir de nivel". Ante una tarea ambigua,
 eligen la interpretación más pequeña. Al proponer soluciones, sugieren
 parches en lugar de reescrituras. Cuando dudan, añaden manejo de errores en lugar de
@@ -87,7 +87,7 @@ Una North Star bien planteada es:
   que justifica decisiones difíciles.
 
 > **Ejemplo.** _Arkwell hace que cerrar el mes en un día sea lo normal para los pequeños
-> fabricantes europeos en 2030._
+> fabricantes europeos para 2030._
 
 ### 2. The Bar (El Listón)
 
@@ -118,11 +118,11 @@ Una sección de Apuestas Asimétricas bien planteada nombra ambos lados:
 - **Dónde entregamos deliberadamente a medio gas.** Lo que está bien al 80 % para poder dedicar la
   capacidad restante a las apuestas.
 
-Esta sección previene dos modos de fallo: sobreinvertir en trabajo de commodity e
-infrainvertir en el trabajo que se acumula.
+Esta sección previene dos modos de fallo: sobreinvertir en trabajo genérico e
+infrainvertir en el trabajo cuyo valor se multiplica con el tiempo.
 
 > **Ejemplo.**  
-> _Apostar 10x en: conciliación entre inventario y contabilidad, corrección de la facturación electrónica,
+> _Apostar 10x en: conciliación entre inventario y contabilidad, exactitud de la facturación electrónica,
 > migración desde el sistema anterior._  
 > _Aceptar 1.1x en: interfaz de ajustes de administración, pulido de paneles, informes internos._
 
@@ -199,7 +199,7 @@ Una sección de Reversibilidad bien planteada lista:
   contratos de API pública, identidad de marca, lógica de cálculo fiscal, fronteras de seguridad.
 - **Puertas de doble sentido en este proyecto.** Textos de la interfaz, disposición de herramientas internas, estructura
   del código, dependencias de herramientas internas.
-- **La disposición por defecto.** Ante la duda, cómo tratarla.
+- **La disposición por defecto.** Qué tipo de puerta suponer ante la duda.
 
 > **Ejemplo.**  
 > _Puertas de un solo sentido: formato de firma de la factura electrónica, forma de las respuestas de la API pública,

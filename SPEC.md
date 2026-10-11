@@ -136,7 +136,7 @@ A well-formed Anti-Goal is:
 
 - **Tempting.** If no one would ever ask for it, it is not an Anti-Goal.
 - **Justified.** A one-line reason that survives pushback.
-- **Specific.** Not "we don't do crap", but "we don't ship features that require
+- **Specific.** Not "we don't do sloppy work", but "we don't ship features that require
   external accountant review before use".
 
 > **Example.**
@@ -159,7 +159,7 @@ Cover the trade-offs that come up repeatedly in your domain. Common pairs:
 - Build vs. buy
 - Generality vs. fit
 - Backward compatibility vs. clean design
-- Single tenant vs. multi tenant
+- Single-tenant vs. multi-tenant
 
 For each: name the default, and name the conditions under which the default
 flips.
@@ -172,7 +172,7 @@ flips.
 ### 6. Ambition Triggers
 
 Phrases — used by humans and quoted in AI agent prompts — that escalate scope
-when the team is being too small.
+when the team is thinking too small.
 
 A well-formed Ambition Trigger:
 
@@ -200,7 +200,7 @@ A well-formed Reversibility section lists:
   boundaries.
 - **Two-way doors in this project.** UI copy, internal tool layout, code
   structure, dependency choices on internal tools.
-- **The default disposition.** When in doubt, treat it as which.
+- **The default disposition.** Which kind of door to assume when in doubt.
 
 > **Example.**
 > _One-way doors: e-invoice signature format, public API response shape,
