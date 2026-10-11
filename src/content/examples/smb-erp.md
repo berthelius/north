@@ -2,8 +2,8 @@
 title: "Arkwell"
 domain: "saas-b2b"
 subtitle: "Cloud ERP for European small manufacturers"
-description: "Arkwell is a cloud ERP for small European manufacturers and wholesalers: stock, purchasing, invoicing and the general ledger in one system, with e-invoicing to the EN 16931 standard. Its NORTH.md is built around one measurable outcome — closing the month in a day."
-whyItWorks: "The North Star names a measurable outcome (a one-day month-end close) for a narrow segment, which disqualifies chasing every small business at once. The Bar ties each claim to a gate: balanced postings, schema validation, locale parity, a latency budget. The anti-goals are things customers genuinely ask for — a CRM, on-prem installs, custom forks — each with a one-line reason. The trade-off table states when each default flips, so an agent can settle most disagreements without a meeting."
+description: "A fictional cloud ERP for small European manufacturers and wholesalers: stock, purchasing, invoicing and the general ledger in one system, with e-invoicing to the EN 16931 standard. Its NORTH.md is built around one measurable outcome: closing the month in a day."
+whyItWorks: "The North Star names a measurable outcome (a one-day month-end close) for a narrow segment, which rules out chasing every small business at once. The Bar ties each claim to a gate: balanced postings, schema validation, locale parity, a latency budget. The anti-goals are things customers really do ask for (a CRM, on-prem installs, custom forks), each with a one-line reason. Every trade-off names the condition that flips it, so an agent can settle most disagreements without a meeting."
 kind: "illustrative"
 order: 2
 ---
@@ -26,7 +26,7 @@ A 20-person workshop should close its books the day after month end, with stock,
 Every change that reaches `main`:
 
 - Keeps the ledger balanced. Every posting is double-entry and idempotent, and a property test checks that debits equal credits.
-- Validates every outgoing e-invoice against the EN 16931 rules in CI. One validation failure blocks the release.
+- Validates e-invoice output against the EN 16931 rules in CI, across the full fixture set. One validation failure blocks the release.
 - Passes typecheck, lint and the full test suite with zero warnings.
 - Ships every user-facing string in every supported locale. A missing key fails the build.
 - Holds p95 under 300 ms on stock, invoice and ledger screens, measured against a 50,000-item fixture catalogue.
@@ -60,7 +60,7 @@ Every change that reaches `main`:
 
 | Trade-off | Default | Flip when |
 |---|---|---|
-| Speed vs. safety | Speed on internal tooling; safety on anything that posts to the ledger | Never flip on tax, invoicing or ledger code |
+| Speed vs. safety | Safety on anything that posts to the ledger; speed on internal tooling | An internal tool starts writing ledger or tax data; it inherits the safety default |
 | Build vs. buy | Buy infrastructure (database, payments, error tracking); build accounting and stock logic | A vendor's price or terms break unit economics |
 | Breadth vs. depth | Depth in manufacturing and wholesale | Three lost deals in a quarter cite the same missing feature for another segment |
 | Backward compatibility vs. clean design | Version the public API; never break an integration silently | The endpoint is internal and has a single consumer |

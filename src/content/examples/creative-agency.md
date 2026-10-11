@@ -2,8 +2,8 @@
 title: "Vantolm Studio"
 domain: "agency"
 subtitle: "Four clients a year, zero retainers"
-description: "Vantolm is a three-person creative studio specialising in brand identity and digital experience for funded technology companies. The studio takes four client projects per year — deliberately — and treats each one as a potential case study rather than a billable engagement. Revenue targets are set to sustain the model, not to grow headcount."
-whyItWorks: "This NORTH.md works because it confronts the central tension of creative agency life honestly: retainers are lucrative and also suffocating. The anti-goals name the tempting things (retainers, brief-and-bid pitches, AI-generated decks) and justify each refusal with a sentence that survives a bad month. The trade-off table makes the depth-over-breadth default explicit and names the flip condition — which is how you know it is a real default and not just aspiration. The ambition triggers are calibrated for creative work, not engineering, which makes them genuinely useful."
+description: "A fictional three-person creative studio doing brand identity and digital work for funded technology companies. It takes four client projects a year, by choice, and treats each one as a future case study rather than a billable engagement. Revenue targets exist to sustain that model, not to grow headcount."
+whyItWorks: "It confronts the central tension of studio life honestly: retainers pay the bills and slowly flatten the work. The anti-goals name the tempting moves (retainers, unpaid pitches, a bigger team) and justify each refusal with a sentence that survives a bad month. Every trade-off names the condition that flips it, which is how you tell a real default from an aspiration. The ambition triggers are written for creative work, not engineering, so they help the people and agents who draft a proposal or a deck."
 kind: "illustrative"
 order: 4
 ---
@@ -13,80 +13,80 @@ order: 4
 # NORTH.md — Vantolm Studio
 
 > Project purpose, ambition, and trade-off defaults.
-> For client onboarding process, see `process/onboarding.md`.
+> For client onboarding, see `process/onboarding.md`.
 > For brand voice and aesthetic standards, see `SOUL.md`.
 
 ## 1. North Star
 
-**Build a body of work that is cited as a reference in the brand conversations of the next generation of technology companies — with four client projects per year, not forty.**
+**By 2030, publish ten case studies that technology founders name, unprompted, when they describe the brand they want — from four client projects a year, not forty.**
 
-The studio's output, not its revenue, is the asset. Every project either advances the portfolio or it does not ship.
+The work, not the revenue, is the asset. Every project either advances that body of work or we do not take it. We know it is working when most new enquiries arrive citing a specific case study.
 
 ## 2. The Bar
 
-A project is shippable as a case study when:
+A project is ready to publish as a case study when:
 
-- The brand system is documented well enough that a different designer could extend it without a brief.
-- The digital deliverable passes WCAG AA, scores ≥90 on Lighthouse performance, and renders correctly at 320 px.
-- The client can articulate the positioning change — not just the visual change — from before to after.
-- We would be comfortable citing it publicly under Vantolm's name within six months of delivery.
+- The brand system is documented well enough that a different designer could extend it without a briefing.
+- The digital deliverable passes WCAG AA, scores at least 90 for Lighthouse performance and renders correctly at 320 px.
+- The client can explain the change in positioning, not just the change in visuals, from before to after.
+- We would put Vantolm's name on it publicly within six months of delivery.
 
-If a project does not meet the fourth criterion at kickoff, we decline it before it starts.
+If we cannot see a project meeting the fourth criterion at kickoff, we decline it before it starts.
 
 ## 3. Asymmetric Bets
 
 **Go 10x on:**
 
 - **Positioning and strategy, not execution speed.** The most valuable work happens in the first two weeks, before a pixel is placed. We spend disproportionate time on the brief and the strategic framing.
-- **Case study production quality.** The documentation of the work is a product in itself. A weak case study undermines a strong project.
-- **Client selection.** Saying no to a project takes ten minutes. Recovering from a bad client takes six months. We invest disproportionately in evaluation before we commit.
+- **Case study quality.** The write-up of the work is a product in itself. A weak case study undermines a strong project.
+- **Client selection.** Saying no to a project takes ten minutes. Recovering from the wrong client takes six months. We invest heavily in evaluation before we commit.
 
 **Accept 1.1x on:**
 
-- **Internal tooling and process documentation.** Good enough to function; not polished for outside eyes.
-- **Social media presence.** Work travels via referral and reputation, not posting cadence.
+- **Internal tooling and process documentation.** Good enough to work; not polished for outside eyes.
+- **Social media presence.** The work travels through referral and reputation, not posting cadence.
 - **Proposal and contract templates.** Standard and clear; not distinctive.
 
 ## 4. Anti-Goals
 
-- **We do not take retainers.** Monthly retainers feel like recurring revenue; they are actually recurring obligation with declining creative quality as the relationship becomes transactional. Every client engagement has a defined end.
-- **We do not participate in brief-and-bid pitches.** Speculative creative work for a selection process devalues the work and selects for clients who do not know what they are buying. We will always meet first; we will never pitch free.
-- **We do not produce AI-generated decks for client presentations.** Not because the tools are bad, but because the clients who hire Vantolm are paying for judgment, not throughput. The deck is where the judgment is visible.
-- **We do not grow the studio beyond five people.** Growth in headcount would require growth in project volume, which would require retainers or brief-and-bid to sustain, which defeats the model. Revenue grows via rate, not headcount.
+- **We do not take retainers.** A monthly retainer looks like recurring revenue; in practice it is a recurring obligation, and the work declines as the relationship turns transactional. Every engagement has a defined end.
+- **We do not do unpaid creative pitches.** Speculative work for a selection process devalues the work and selects for clients who do not yet know what they are buying. We always meet first; we never pitch for free.
+- **We do not send clients AI-generated decks.** Not because the tools are bad, but because clients hire Vantolm for judgment, and the deck is where the judgment shows. Agents may draft research and structure; a person writes the deck.
+- **We do not grow beyond five people.** More people would need more projects, which would need retainers or unpaid pitches to sustain, which defeats the model. Revenue grows through rates, not headcount.
 - **We do not take projects we cannot finish well.** A project that strains capacity produces work we cannot defend. We refer clients we cannot serve to studios we trust.
 
 ## 5. Trade-off Defaults
 
 | Trade-off | Default | Flip when |
 |---|---|---|
-| Depth vs. breadth | Depth — one project done exceptionally > two projects done adequately | A client needs a narrow scope with high certainty of quality (e.g., a single deliverable with clear constraints) |
-| Speed vs. craft | Craft — we build in revision time as a structural feature of every project timeline | A hard external deadline exists (regulatory filing, board presentation, product launch) — document the trade-off explicitly |
-| Strategy vs. execution | Strategy first; execution follows the brief, not the reverse | A client has already resolved their positioning and needs production capacity specifically |
-| Client relationships vs. new work | New work — relationships are maintained but do not generate new projects automatically | A prior client is launching something that represents a genuine creative step forward for them |
-| Portfolio visibility vs. client confidentiality | Confidentiality during embargo period; portfolio rights negotiated in every contract | Client proactively offers early case study rights in exchange for a rate reduction — evaluate case by case |
+| Depth vs. breadth | Depth: one project done exceptionally beats two done adequately | A small, tightly scoped piece of work fits a gap between projects without moving any deadline |
+| Speed vs. craft | Craft: revision time is built into every timeline | A hard external date (a launch, a funding announcement, a regulatory filing); protect the date, cut scope and record the trade-off in the project log |
+| Strategy vs. execution | Strategy first; execution follows the brief, never the reverse | The client arrives with positioning already resolved and tested; go straight to execution |
+| New clients vs. past clients | New clients: past clients get first call on our time, not an automatic slot | A past client brings a project that would move the portfolio forward rather than repeat the first one |
+| Portfolio visibility vs. client confidentiality | Visibility: every contract includes the right to publish after an agreed embargo | The client needs permanent confidentiality; accept only at a higher rate, because the project cannot earn its portfolio slot |
 
 ## 6. Ambition Triggers
 
-- *"Would we include this in a pitch deck for the best client we have ever had?"*
-- *"If this case study ran in a design publication, what would the headline be — and is that a headline worth writing?"*
-- *"What would this project look like if we had three more weeks and a clearly articulated strategic brief?"*
-- *"Which studio's work does this remind us of — and is that the right answer?"*
-- *"If the client had to explain the strategy change to their board, what would they say — and is that what we built?"*
+- _"Would we show this to the best client we have ever had?"_
+- _"If this case study ran in a design publication, what would the headline be, and is it worth writing?"_
+- _"What would this project look like with three more weeks and a sharper strategic brief?"_
+- _"Which studio's work does this remind us of, and is that the right answer?"_
+- _"If the client had to explain the strategy change to their board, what would they say, and is that what we built?"_
 
 ## 7. Reversibility
 
 **One-way doors — decide deliberately:**
 
-- Client selection. Declining a project is easy. Exiting a bad engagement damages reputation and costs more than the revenue.
-- Positioning statements committed to in brand guidelines. Clients build on these; reversing them requires a new engagement.
+- Client selection. Declining a project is easy. Leaving a bad engagement damages our reputation and costs more than the fee.
+- Positioning committed to in brand guidelines. Clients build on it; reversing it means a new engagement.
 - Case study publication. Once public, a case study is part of the studio's permanent record.
-- Rate setting. Reducing rates to close a deal establishes a reference point that is difficult to reverse with that client.
+- Rates. A discount to close a deal sets a reference point that is hard to undo with that client.
 
 **Two-way doors — move fast:**
 
-- Internal process documentation and templates — update freely between projects.
-- Social media strategy and posting format — change whenever evidence suggests a different approach.
-- Software and tooling choices — Figma, Notion, Linear, whatever works. Migrate when a better option appears.
-- Draft visual directions during a project — direction is two-way until the client presentation; after that it is one-way.
+- Internal process documentation and templates. Update freely between projects.
+- Social media strategy and format. Change it whenever the evidence suggests a better approach.
+- Software and tooling for design, notes and project tracking. Migrate when a better option appears.
+- Draft visual directions during a project. A direction is two-way until the client presentation; after that, it is one-way.
 
-**When in doubt:** treat as two-way and move.
+**When in doubt:** if the client will see it, treat it as one-way; internally, treat it as two-way and move.
