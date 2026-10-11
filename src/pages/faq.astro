@@ -10,117 +10,122 @@ interface FAQItem {
 }
 
 const faqs: FAQItem[] = [
-  // Spec
+  // The convention
   {
     category: "spec",
     q: "Is NORTH.md a competitor to AGENTS.md or SOUL.md?",
-    a: "No. AGENTS.md and CLAUDE.md tell agents how to work; SOUL.md tells an agent who it is; DESIGN.md and CONSTITUTION.md cover look and limits; NORTH.md says why the project exists and how far to push. They are designed to coexist in the same repository, each answering a different question. Where two of them touch — a constitution that already records trade-offs, say — point from one file to the other instead of repeating it."
+    a: "No. Each file answers a different question. AGENTS.md and CLAUDE.md say how to work in the repository; SOUL.md says who the agent is; DESIGN.md covers the look; a CONSTITUTION.md sets the limits. NORTH.md says why the project exists and how far to push. They are meant to live in the same repository. Where two overlap (a constitution that already records trade-offs, say), point from one file to the other instead of repeating it."
   },
   {
     category: "spec",
-    q: "Why seven sections specifically?",
-    a: "Each section answers a question an agent otherwise has to guess: where the project is going, what counts as done, where effort pays off, what is refused, which trade-offs are settled, when to push for more, and which decisions are hard to undo. Fewer sections would leave one of those questions open; more would make the file harder to keep current. Seven is a design choice for v0.1, and the spec allows additional sections after them."
+    q: "How is it different from a vision doc, a mission statement or OKRs?",
+    a: "It is written to decide, not to inspire. Vision docs and mission statements are written for stakeholders and rarely change. OKRs are quarterly and measured on a cycle. A NORTH.md is working context for the agents and people inside the codebase: it changes rarely and deliberately, and it puts clear trade-offs ahead of inspiration. The test is simple: does it change what an agent decides when it has two reasonable options?"
   },
   {
     category: "spec",
-    q: "What if I don't need all seven?",
-    a: "You can omit any section. The spec says the heading SHOULD be retained with a short note explaining the omission — this preserves the structure so agents and tools can still parse the file predictably. A section that says 'No asymmetric bets at this scale; everything gets the same effort' is still useful information."
+    q: "Why seven sections?",
+    a: "Because without them an agent has to guess seven things: where the project is going, what counts as done, where effort pays off, what is refused, which trade-offs are settled, when to push for more, and which decisions are hard to undo. Fewer sections would leave one of those open; more would make the file harder to keep current. Seven is a design choice for v0.1, and the spec allows extra sections after them."
   },
   {
     category: "spec",
-    q: "Should AI agents actually read my NORTH.md?",
-    a: "Yes, and ideally without anyone having to ask. Claude Code loads CLAUDE.md at the start of every session, and a line reading @NORTH.md in CLAUDE.md imports the file along with it. In AGENTS.md or another rules file, add a pointer such as 'See NORTH.md for project purpose and ambition'; whether the agent then opens the file depends on the tool, so use an import where one exists. You can also paste the relevant sections into a prompt when you want to escalate scope on a specific task."
+    q: "Why markdown, and not YAML or JSON?",
+    a: "Because the file has to carry reasons, and prose carries reasons better than fields do. A rule without its reason covers only the cases its author imagined; the reason lets an agent apply it to the next one. Plain text at a known path is also easy to read, version and find, as CLAUDE.md, AGENTS.md and llms.txt show. A schema or validator may come later, once real use has shaped the spec. The format will stay markdown."
   },
   {
     category: "spec",
-    q: "How is this different from a vision doc, mission statement, or OKRs?",
-    a: "Vision docs and mission statements are written for stakeholders and rarely updated. OKRs are quarterly and quantitative. NORTH.md is operational context for agents and team members working inside the codebase — it changes deliberately and rarely, and it prioritises clarity of trade-offs over inspiration. The test is not 'is this motivating?' but 'does this change what decision an agent makes when it has two reasonable options?'"
+    q: "What goes in Asymmetric Bets?",
+    a: "Two named lists: where you invest 10x, and where you deliberately accept 1.1x. A legal-tech product might go 10x on document accuracy and accept 1.1x on its admin screens. Naming both sides prevents two failures at once: over-investing in commodity work and under-investing in the work that compounds. ‘We care about everything’ is not an asymmetric bet."
   },
   {
     category: "spec",
-    q: "Why a markdown file instead of a structured schema (YAML/JSON)?",
-    a: "Prose has rhetorical force that structured data does not. A sentence in a document section lands differently than the same sentence as a YAML string. CLAUDE.md, AGENTS.md and llms.txt all point the same way: plain text at a known path is easy to read, easy to version, and easy for tools to find. A validator or schema may come later, once real use shapes the spec, but the format will stay markdown."
+    q: "How is an Anti-Goal different from ‘we don’t do that’?",
+    a: "An Anti-Goal is decided once, for a whole class of requests, with a reason that survives pushback. ‘We don’t do that’ is improvised, one request at a time. From the Arkwell example: ‘We do not build a CRM. Mature CRMs exist; we sync customers and orders through the API instead of rebuilding contact management.’ That line ends the conversation before it starts, for humans and agents alike."
   },
   {
     category: "spec",
-    q: "What goes in 'Asymmetric Bets'?",
-    a: "Two explicit lists: where you invest 10x effort, and where you deliberately accept 1.1x. For example: a legal tech startup might go 10x on document accuracy and zero-defect parsing, while accepting 1.1x on admin UI and internal dashboards. The purpose is to prevent two failure modes at once — over-investing in commodity work and under-investing in the work that actually compounds. The section only works if both sides are named; 'we care deeply about everything' is not an asymmetric bet."
+    q: "What does an Ambition Trigger do in a prompt?",
+    a: "It tells the agent that the safe, incremental reading is too small for this task. Examples: ‘Is there a 10x version of this?’ or ‘What would [reference team] ship here?’ One property matters: a trigger must allow the answer ‘what we have is already the 10x version’. Otherwise it is not a trigger. It is pressure."
   },
-  {
-    category: "spec",
-    q: "How do 'Anti-Goals' differ from 'we don't do that'?",
-    a: "Anti-Goals are specific, written-down refusals for things that would be tempting or profitable but are explicitly out of scope. 'We don't do that' is an informal answer to a specific request. An Anti-Goal is a pre-decided answer to a class of requests, with a one-line justification that survives pushback. The Arkwell example uses: 'We do not build a CRM. Mature CRMs exist; we sync customers and orders through the API instead of rebuilding contact management.' That refusal stops the conversation before it starts, for both humans and agents."
-  },
-  {
-    category: "spec",
-    q: "What's an 'Ambition Trigger' supposed to do in an AI prompt?",
-    a: "An Ambition Trigger is a short phrase that, when included in an agent prompt, signals that the default (safe, incremental) interpretation is too small for this task. Examples: 'Is there a 10x version of this?' or 'What would [reference team] ship here?' The key property is that the trigger must be allowed to be answered with 'what we already have is the 10x version' — otherwise it is not a trigger, it is pressure."
-  },
-  // Adoption
+  // Writing and adopting
   {
     category: "adoption",
-    q: "Should NORTH.md be public or private?",
-    a: "Public where you can. The file is most useful as ambient context: readable by agents, contributors, and anyone evaluating the project. A NORTH.md in a private repository works the same way for the agents that read it; being public adds discoverability, such as LLM citation and badge links. If there are confidential strategy details, write the NORTH.md at the level of abstraction that can be public, and keep the detail in private notes."
+    q: "How do agents find my NORTH.md?",
+    a: "Point them at it. In Claude Code, add the line @NORTH.md to CLAUDE.md: Claude Code loads CLAUDE.md at the start of every session, and the import brings NORTH.md with it. In AGENTS.md or any other rules file, add a one-line pointer such as ‘See NORTH.md for project purpose and ambition’; whether the agent then opens the file depends on the tool, so prefer an import wherever one exists. For a single task, paste the relevant sections into the prompt."
   },
   {
     category: "adoption",
-    q: "How often should I update my NORTH.md?",
-    a: "Rarely and deliberately. The North Star should be stable for years. The Bar may sharpen over time as the team's capability grows. Trade-off Defaults and Anti-Goals change only when a fundamental strategic shift warrants it. If you are updating NORTH.md every sprint, the content has slipped into roadmap territory — that belongs in your issue tracker, not here. A sensible cadence is a review at major version milestones or significant pivots."
+    q: "What if a section doesn’t apply?",
+    a: "Keep the heading and say why. The spec lets you omit any section, but recommends keeping the heading with a short note so people and tools can still read the file predictably. ‘No asymmetric bets at this scale; everything gets the same effort’ is still useful information."
   },
   {
     category: "adoption",
-    q: "Can I have multiple NORTH.md files in a monorepo?",
-    a: "Yes. Each product with distinct ambition can have a NORTH.md in its package root. The repository root NORTH.md then describes the umbrella ambition — the destination that the entire monorepo serves. Where ambitions genuinely differ across packages, separate files are preferable to a single file that tries to cover everything with vague generalities."
+    q: "Should my NORTH.md be public or private?",
+    a: "Public where you can. Agents read a private NORTH.md exactly as they read a public one; public adds discoverability for contributors, evaluators and LLMs. If parts of your strategy are confidential, write the NORTH.md at the level of abstraction you can publish, and keep the detail in private notes."
   },
   {
     category: "adoption",
-    q: "How do I propagate adoption inside my team?",
-    a: "Start with a first draft yourself, then review it with the people who regularly make architectural or prioritisation decisions. Expect the draft to surface assumptions the team shares but has never written down. Once the team has agreed on the content, add a reference in CLAUDE.md or AGENTS.md, add the badge to the README, and let usage build the habit. Put it where people and agents already look rather than mandating it through process."
+    q: "How often should it change?",
+    a: "Rarely, and on purpose. The North Star should hold for years. The Bar may rise as the team gets better. Trade-off Defaults and Anti-Goals change only when the strategy does. If you are editing it every sprint, the roadmap has crept in, and the roadmap belongs in your tracker. Review it at major versions and real pivots."
   },
   {
     category: "adoption",
-    q: "What if I disagree with the seven sections?",
-    a: "The spec explicitly allows additional sections after the canonical seven. If you find a section consistently missing from your context, propose it via RFC on the GitHub repository. The seven-section shape is stable at v0.1 but the spec is designed to evolve. What we want to avoid is the set of sections becoming arbitrary — each one should earn its place by changing what an agent or a team decides."
+    q: "Can a monorepo have more than one NORTH.md?",
+    a: "Yes. Each product with its own ambition can have a NORTH.md in its package root; the root file then describes the umbrella ambition the whole repository serves. Where ambitions genuinely differ, separate files beat one file vague enough to cover everything."
   },
   {
     category: "adoption",
-    q: "What about non-software projects?",
-    a: "The convention was designed for software repositories, but the underlying problem — agents and collaborators defaulting to the smallest interpretation of a task — is not specific to software. A design system, a research project, a book manuscript, or an open dataset could all benefit from a NORTH.md. The seven sections translate reasonably well: 'The Bar' becomes quality criteria for the output, 'Reversibility' maps editorial or structural decisions. We are curious to see how the community adapts it."
+    q: "How do I get my team to adopt it?",
+    a: "Draft it yourself, then review it with the people who make architectural and prioritisation calls. Expect the draft to surface assumptions the team shares but has never written down; that is the point. Once it is agreed, link it from CLAUDE.md or AGENTS.md, add the badge if you like, and let use build the habit. Put it where people and agents already look, rather than mandating it through process."
   },
-  // Process
+  {
+    category: "adoption",
+    q: "Does it work outside software?",
+    a: "Possibly, though it was designed for code repositories. The underlying problem, collaborators taking the smallest reading of a task, is not specific to software. A design system, a research project or an open dataset could use the same seven sections: The Bar becomes the quality criteria for the output, and Reversibility maps the editorial or structural decisions that are hard to undo. If you try it, tell us how it went."
+  },
+  // Evidence and tooling
+  {
+    category: "process",
+    q: "Is there evidence that it changes agent behaviour?",
+    a: "Not measured yet. NORTH.md v0.1 rests on a hypothesis: that agents choose better between valid options when the project’s direction is written down. We have not published an evaluation, and the only NORTH.md we can point to in use is this site’s own. If you test it, with and without a NORTH.md, we want the results, including the unflattering ones."
+  },
   {
     category: "process",
     q: "Is there a validator or linter?",
-    a: "Not at v0.1. Building tooling now would risk locking in a file shape before adoption has revealed what actually matters. The Anti-Goals section of this project's own NORTH.md explicitly defers a linter until spec adoption matures. Once the spec is stable and common patterns have emerged from real usage, a validator is a natural next step."
+    a: "Not at v0.1, deliberately. Tooling now would lock in a file shape before real use has shown what matters; this project’s own NORTH.md lists a premature linter as an Anti-Goal. Once the spec settles and common patterns emerge, a validator is the natural next step."
   },
-  // Community
+  {
+    category: "process",
+    q: "What if I disagree with the seven sections?",
+    a: "Add what you need after them, and propose changes by RFC. The spec allows extra sections after the canonical seven. If one keeps proving essential, open an issue on GitHub. The seven names are stable at v0.1, but the spec is built to evolve, and every section has to earn its place by changing what an agent or a team decides."
+  },
+  // The project
   {
     category: "community",
     q: "Who is behind this?",
-    a: "NORTH.md was created by Viktor Berthelius (BRTHLS). It is an independent open-source project for writing down purpose, ambition, and precomputed trade-offs in teams that work with AI agents. The specification is MIT-licensed, vendor-neutral, and not tied to any commercial product."
-  },
-  {
-    category: "community",
-    q: "Can I sponsor NORTH.md?",
-    a: "There is no paid tier and no commercial product. If NORTH.md saves your team significant time, the most useful forms of support are: starring the GitHub repository, opening a PR to add a real example NORTH.md to /examples, writing about it, or citing it in your own projects. If you have budget for infrastructure support, watch the GitHub repository — we may open a GitHub Sponsors page post-launch."
+    a: "Viktor Berthelius (BRTHLS). NORTH.md is an independent open-source project: MIT-licensed, vendor-neutral and not tied to any commercial product."
   },
   {
     category: "community",
     q: "Is the specification stable?",
-    a: "The current version is v0.1. The seven section names are treated as one-way doors — we will not rename them without a major version bump and a migration path for anyone who has adopted it. Everything else, including section guidance, examples, and propagation recommendations, may be updated in minor versions. Breaking changes follow semver: a v1.0 declaration will signal production stability."
+    a: "Its shape is; the detail can still move. The current version is v0.1. The seven section names are treated as one-way doors: they will not be renamed without a major version and a migration path for anyone using them. Section guidance, examples and propagation advice may change in minor versions. Versions follow semver, and v1.0 will mark stability."
+  },
+  {
+    category: "community",
+    q: "Can I sponsor or support NORTH.md?",
+    a: "There is nothing to pay for: no paid tier, no commercial product. The most useful support is to use it, tell us where it breaks, contribute a real NORTH.md to the examples, or write about it."
   },
   {
     category: "community",
     q: "Where do I get help?",
-    a: "Open a GitHub issue at berthelius/north for spec questions, bug reports, general discussion, or example submissions. The specification is the single source of truth — if something in the spec is unclear, that is a documentation bug and we want to know about it."
+    a: "Open an issue at github.com/berthelius/north for questions, bugs, discussion or example submissions. The specification is the single source of truth: if it is unclear, that is a documentation bug, and we want to know."
   }
 ];
 
 const categories: { id: FAQItem["category"]; label: string }[] = [
-  { id: "spec", label: "Specification" },
-  { id: "adoption", label: "Adoption" },
-  { id: "process", label: "Process" },
-  { id: "community", label: "Community" }
+  { id: "spec", label: "The convention" },
+  { id: "adoption", label: "Writing and adopting" },
+  { id: "process", label: "Evidence and tooling" },
+  { id: "community", label: "The project" }
 ];
 
 // Build JSON-LD FAQPage schema
@@ -139,8 +144,8 @@ const faqJsonLd = {
 ---
 
 <Base
-  title="FAQ — NORTH.md"
-  description="Common questions about the NORTH.md convention: spec details, adoption, process, and community."
+  title="NORTH.md FAQ — How it works and how to adopt it"
+  description="Straight answers on NORTH.md: how it differs from AGENTS.md and SOUL.md, how agents load it, what each section is for, and what is not proven yet."
   canonical={`${siteUrl}/faq`}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
@@ -163,13 +168,13 @@ const faqJsonLd = {
     </p>
 
     <h1 class="mt-5 font-display text-4xl md:text-5xl leading-[1.05] tracking-tight">
-      Frequently asked questions
+      Straight answers
     </h1>
 
     <p class="mt-6 max-w-2xl text-lg text-[var(--muted)] leading-relaxed">
-      Honest answers. If something is unclear, open an issue on
+      Answer first, then the reasoning. If something is still unclear, open an issue on
       <a href="https://github.com/berthelius/north" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">GitHub</a>
-      — unclear FAQ is a documentation bug.
+      — an unclear answer is a documentation bug.
     </p>
 
     <!-- Search -->
@@ -177,7 +182,7 @@ const faqJsonLd = {
       <input
         id="faq-search"
         type="search"
-        placeholder="Search questions..."
+        placeholder="Search the questions…"
         autocomplete="off"
         class="w-full rounded-lg border border-[var(--rule)] bg-transparent px-4 py-3 text-sm font-sans text-[var(--fg)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none transition-colors"
       />
@@ -220,7 +225,7 @@ const faqJsonLd = {
 
     <!-- No results message -->
     <p id="faq-no-results" class="mt-12 text-[var(--muted)] text-sm hidden">
-      No questions match your search. Try a different term, or <a href="https://github.com/berthelius/north/issues" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">open an issue</a> if your question is missing.
+      No questions match. Try another term, or <a href="https://github.com/berthelius/north/issues" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">open an issue</a> if yours is missing.
     </p>
 
     <hr class="mt-20 border-[var(--rule)]" />
