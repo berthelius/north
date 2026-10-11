@@ -23,7 +23,7 @@ const jsonLd = {
   "@type": "Article",
   headline: "NORTH.md Specification Changelog",
   description:
-    "Version history for the NORTH.md specification — a markdown convention for declaring project purpose, ambition, and trade-off defaults.",
+    "Every change to the NORTH.md specification, version by version, and the semver policy that decides when an existing NORTH.md needs updating.",
   datePublished: "2026-10-11",
   author: {
     "@type": "Person",
@@ -41,8 +41,8 @@ const jsonLd = {
 ---
 
 <Base
-  title="Changelog — NORTH.md"
-  description="Specification version history for NORTH.md — the markdown convention for project purpose and ambition."
+  title="NORTH.md changelog — Specification version history"
+  description="Every change to the NORTH.md specification, version by version, and the semver policy that decides when an existing NORTH.md needs updating."
   canonical="https://northfile.dev/changelog"
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
@@ -53,8 +53,8 @@ const jsonLd = {
       <p class="changelog-eyebrow">Specification history</p>
       <h1 class="changelog-title">Changelog</h1>
       <p class="changelog-subtitle">
-        Version history for the <a href="/spec" class="cl-link">NORTH.md specification</a>.
-        Follows <a href="https://semver.org" class="cl-link">Semantic Versioning</a>.
+        Every change to the <a href="/spec" class="cl-link">NORTH.md specification</a>, newest first.
+        Versions follow <a href="https://semver.org" class="cl-link">Semantic Versioning</a>.
       </p>
       <div class="changelog-actions">
         <a href="/spec.md" class="action-link" download>
@@ -106,20 +106,20 @@ const jsonLd = {
       <dl class="semver-list">
         <div class="semver-item">
           <dt><code>MAJOR</code></dt>
-          <dd>Breaking section changes. Adopters must update their files.</dd>
+          <dd>Breaking changes to the sections. Existing files may need to change, and the release says how.</dd>
         </div>
         <div class="semver-item">
           <dt><code>MINOR</code></dt>
-          <dd>Additive sections or clarifications that may change validator behaviour.</dd>
+          <dd>New sections, or clarifications that may change how a file is validated.</dd>
         </div>
         <div class="semver-item">
           <dt><code>PATCH</code></dt>
-          <dd>Editorial changes. No file updates required.</dd>
+          <dd>Editorial changes. Existing files need nothing.</dd>
         </div>
       </dl>
       <p class="semver-note">
-        Declare the target spec version in your <code>NORTH.md</code> with
-        <code>&lt;!-- NORTH.md spec: v0.1 --&gt;</code> on the first line.
+        Optional: declare the spec version your <code>NORTH.md</code> targets with
+        <code>&lt;!-- NORTH.md spec: v0.1 --&gt;</code> on its first line.
       </p>
     </section>
 
