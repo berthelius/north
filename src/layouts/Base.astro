@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
-import { getAlternateLinks, type Language } from "../lib/i18n";
+import { getAlternateLinks, normalizePath, type Language } from "../lib/i18n";
 
 interface Props {
   title?: string;
@@ -10,6 +10,7 @@ interface Props {
   canonical?: string;
   lang?: Language;
   showHeader?: boolean;
+  noindex?: boolean;
 }
 
 const {
@@ -19,14 +20,15 @@ const {
   canonical,
   lang = "en",
   showHeader = true,
+  noindex = false,
 } = Astro.props;
 
 const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
-const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
+// One canonical form site-wide: apex host, no trailing slash (root stays "/").
+const canonicalUrl = new URL(normalizePath(new URL(canonical ?? Astro.url.pathname, siteUrl).pathname), siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
 
 const alternateLinks = getAlternateLinks(Astro.url.pathname, siteUrl);
-const canonicalEn = alternateLinks.find((l) => l.lang === "en")?.href ?? `${siteUrl}/`;
 ---
 
 <!doctype html>
@@ -44,15 +46,20 @@ const canonicalEn = alternateLinks.find((l) => l.lang === "en")?.href ?? `${site
     {alternateLinks.map(({ lang: l, href }) => (
       <link rel="alternate" hreflang={l} href={href} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={canonicalEn} />
 
     <!-- Launch switch: kept noindex/nofollow until Commit B -->
-    <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex" />
-    <meta name="googlebot" content="noindex,nofollow" />
+    {noindex ? (
+      <meta name="robots" content="noindex,nofollow" />
+    ) : (
+      <>
+        <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex" />
+        <meta name="googlebot" content="noindex,nofollow" />
+      </>
+    )}
 
     <!-- AIO / LLM Endpoints -->
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM index" />
-    <link rel="alternate" type="text/markdown" href="/spec.md" title="Specification (markdown)" />
+    <link rel="alternate" type="text/markdown" href={lang === "es" ? "/es/spec.md" : "/spec.md"} title="Specification (markdown)" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
