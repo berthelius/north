@@ -52,7 +52,7 @@ npm run typecheck   # Astro check (0 errors, 0 warnings, 0 hints)
 npm run lint        # oxlint
 npm run check:links # internal links and anchors across dist/
 npm run check:seo   # canonical, lang, hreflang, og:image, JSON-LD, sitemap, robots
-npm run check:spec  # JSON spec and spec.md agree on the seven sections
+npm run check:spec  # JSON spec and spec.md agree; the skill matches README (template, AGENTS.md block, LICENSE) and agentskills.io
 ```
 
 CI (`.github/workflows/ci.yml`) runs the same gates on pushes to main and on pull requests.

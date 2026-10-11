@@ -81,6 +81,11 @@ const prompt = src(`${SKILL}/PROMPT.md`);
 const integration = src(`${SKILL}/references/integration.md`);
 const skill = src(`${SKILL}/SKILL.md`);
 
+// The CLI installs only the skill folder, so it carries its own copy of the MIT notice.
+const license = src('LICENSE');
+const skillLicense = src(`${SKILL}/LICENSE`);
+if (license !== null && skillLicense !== null && license !== skillLicense) errors.push(`${SKILL}/LICENSE: differs from the root LICENSE`);
+
 if (readme !== null) {
   const tpl = /^## The template\n\n```markdown\n([\s\S]*?)\n```$/m.exec(readme)?.[1].trimEnd();
   if (!tpl) errors.push('README.md: no ```markdown block directly under "## The template"');
