@@ -22,7 +22,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check --minimumFailingSeverity hint",
-    "lint": "oxlint --ignore-path .gitignore",
+    "lint": "oxlint --deny-warnings --ignore-path .gitignore",
     "check:links": "node scripts/check-links.mjs",
     "check:spec": "node scripts/check-spec.mjs",
     "check:seo": "node scripts/check-seo.mjs"

@@ -85,8 +85,6 @@ const alternateLinks = getAlternateLinks(Astro.url.pathname, siteUrl);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="/favicon.ico" />
 
-    <!-- View Transitions -->
-    <meta name="view-transition" content="same-origin" />
   </head>
   <body>
     {showHeader && <Header lang={lang} currentPath={Astro.url.pathname} />}

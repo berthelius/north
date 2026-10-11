@@ -8,9 +8,9 @@
 
 ## 2. The Bar
 
-**Automated gates (CI, every push):**
+**Automated gates (CI, on main and every pull request):**
 - Zero broken internal links or missing anchor targets across all static surfaces.
-- The machine-readable JSON specification (/api/spec/v0.1.json) is valid and agrees with spec.md section by section.
+- The machine-readable JSON specification (/api/spec/v0.1.json) is valid and lists the same seven sections as spec.md, in the same order, at the same version.
 - `astro check` reports zero errors, zero warnings and zero hints.
 
 **Release checks (before every deploy):**

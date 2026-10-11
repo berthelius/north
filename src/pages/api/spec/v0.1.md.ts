@@ -11,7 +11,6 @@ export async function GET(): Promise<Response> {
     status: 200,
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
-      'X-Spec-Version': '0.1',
     },
   });
 }

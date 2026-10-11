@@ -216,7 +216,6 @@ export async function GET(): Promise<Response> {
     status: 200,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      'X-Spec-Version': '0.1',
     },
   });
 }

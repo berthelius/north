@@ -55,7 +55,7 @@ npm run check:seo   # canonical, lang, hreflang, og:image, JSON-LD, sitemap, rob
 npm run check:spec  # JSON spec and spec.md agree on the seven sections
 ```
 
-CI (`.github/workflows/ci.yml`) runs the same gates on every push and PR.
+CI (`.github/workflows/ci.yml`) runs the same gates on pushes to main and on pull requests.
 
 ## What this project is NOT
 
