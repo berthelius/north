@@ -3,13 +3,33 @@
 @import "@fontsource/anton";
 @import "@fontsource-variable/inter";
 @import "@fontsource/jetbrains-mono/400.css";
-@import "@fontsource/jetbrains-mono/500.css";
 @import "@fontsource/jetbrains-mono/700.css";
+
+/* Metric-matched fallback for Anton (measured: Anton/Arial width ratio 0.698 on
+   the all-caps headline copy) so the font swap does not shift layout. */
+@font-face {
+  font-family: "Anton Fallback";
+  src: local("Arial"), local("Helvetica Neue"), local("Liberation Sans");
+  size-adjust: 69.8%;
+  ascent-override: 169%;
+  descent-override: 47.3%;
+  line-gap-override: 0%;
+}
+
+/* Same for Inter (Inter/Arial width ratio 1.076 on body copy). */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("Helvetica Neue"), local("Liberation Sans");
+  size-adjust: 107.6%;
+  ascent-override: 90.1%;
+  descent-override: 22.3%;
+  line-gap-override: 0%;
+}
 
 @theme {
   /* Typography */
-  --font-display: "Anton", Impact, "Arial Narrow", sans-serif;
-  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Anton", "Anton Fallback", Impact, "Arial Narrow", sans-serif;
+  --font-sans: "Inter Variable", "Inter Fallback", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Type scale (editorial) */
@@ -59,6 +79,9 @@
   --rule: #e5e5e5;
   --accent: #c2410c;
   --accent-hover: #9a3412;
+  /* 72ch of Inter at 16px, in rem: a ch-based width changes when the web font
+     replaces the fallback and shifts the whole layout (CLS). */
+  --max-prose: 45.42rem;
 }
 
 @media (prefers-color-scheme: dark) {
