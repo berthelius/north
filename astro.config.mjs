@@ -33,7 +33,8 @@ export default defineConfig({
     defaultStrategy: 'viewport',
   },
   build: {
-    inlineStylesheets: 'auto',
+    // Inline every stylesheet: no render-blocking CSS request before first paint.
+    inlineStylesheets: 'always',
   },
   experimental: {
     contentIntellisense: true,
