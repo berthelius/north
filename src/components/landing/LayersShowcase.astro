@@ -1,5 +1,5 @@
 ---
-import { useTranslations } from "../../data/locales";
+import { useTranslations, type TranslationKey } from "../../data/locales";
 import { buildLocalizedPath, type Language } from "../../lib/i18n";
 import Arrow from "../ui/Arrow.astro";
 
@@ -11,49 +11,27 @@ const { lang = "en" } = Astro.props;
 const t = useTranslations(lang);
 
 // The five strata, from the floor (limits) up to the direction (NORTH.md).
+// Copy lives in locales (layer.N.*); only file names and link targets live here.
 const layers = [
-  {
-    level: "L1",
-    word: "Limits",
-    tag: "Safety",
-    file: "CONSTITUTION.md",
-    desc: "Negative invariants, compliance red lines, and forbidden operations.",
-    origin: { text: "Community · agentconstitution.dev" },
-  },
-  {
-    level: "L2",
-    word: "How",
-    tag: "Execution",
-    file: "AGENTS.md",
-    desc: "Build commands, linter flags, workspace paths, and test runners.",
-    origin: { text: "Linux Foundation", href: "https://agents.md", external: true },
-  },
-  {
-    level: "L3",
-    word: "Look",
-    tag: "UI Contract",
-    file: "DESIGN.md",
-    desc: "UI tokens, responsive layout contracts, and design system primitives.",
-    origin: { text: "Google Labs" },
-  },
-  {
-    level: "L4",
-    word: "Who",
-    tag: "Voice",
-    file: "SOUL.md",
-    desc: "Agent persona: voice, values, tone.",
-    origin: { text: "soul.md", href: "https://soul.md", external: true },
-  },
-  {
-    level: "L5",
-    word: "Why",
-    tag: "Direction",
-    file: "NORTH.md",
-    desc: "Purpose, the quality bar, asymmetric bets, and precomputed trade-offs.",
-    origin: { text: "BRTHLS · Spec v0.1", href: buildLocalizedPath("/spec", lang) },
-    north: true,
-  },
-];
+  { n: 1, file: "CONSTITUTION.md" },
+  { n: 2, file: "AGENTS.md", href: "https://agents.md" },
+  { n: 3, file: "DESIGN.md" },
+  { n: 4, file: "SOUL.md", href: "https://soul.md" },
+  { n: 5, file: "NORTH.md", href: buildLocalizedPath("/spec", lang), north: true },
+].map((layer) => {
+  const copy = (field: string) => t(`layer.${layer.n}.${field}` as TranslationKey);
+  // "L1 · Limits" is set as two pieces: the level index and the display word.
+  const [level, word] = copy("label").split(" · ");
+  return {
+    ...layer,
+    level,
+    word,
+    tag: copy("tag"),
+    desc: copy("desc"),
+    origin: copy("origin"),
+    external: layer.href?.startsWith("https://"),
+  };
+});
 ---
 
 <section class="section layers" aria-labelledby="stack-heading">
@@ -78,17 +56,17 @@ const layers = [
           </div>
           <span class="stratum__tag label">{layer.tag}</span>
           <span class="stratum__origin label">
-            {layer.origin.href ? (
+            {layer.href ? (
               <a
-                href={layer.origin.href}
-                target={layer.origin.external ? "_blank" : undefined}
-                rel={layer.origin.external ? "noopener noreferrer" : undefined}
+                href={layer.href}
+                target={layer.external ? "_blank" : undefined}
+                rel={layer.external ? "noopener noreferrer" : undefined}
               >
-                {layer.origin.text}
-                <Arrow dir={layer.origin.external ? "up-right" : "right"} />
+                {layer.origin}
+                <Arrow dir={layer.external ? "up-right" : "right"} />
               </a>
             ) : (
-              layer.origin.text
+              layer.origin
             )}
           </span>
         </li>
