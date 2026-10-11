@@ -10,6 +10,8 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-111111?style=flat-square&labelColor=111111&color=fafafa" alt="License: MIT"></a>
   &nbsp;
   <a href="https://northfile.dev"><img src="https://img.shields.io/badge/Web-northfile.dev-111111?style=flat-square&labelColor=111111&color=fafafa" alt="Website: northfile.dev"></a>
+  &nbsp;
+  <a href="https://www.skillsdirectory.com/skills/berthelius-north-adoption"><img src="https://img.shields.io/badge/Skills_Directory-Security_A-111111?style=flat-square&labelColor=111111&color=fafafa" alt="Skills Directory: security grade A"></a>
 </p>
 
 # NORTH.md

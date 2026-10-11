@@ -89,6 +89,7 @@ export const ui = {
     'skill.copyPrompt': 'Copy the prompt',
     'skill.promptCopied': 'Prompt copied',
     'skill.github': 'View the skill on GitHub',
+    'skill.directory': 'Skills Directory: security grade A',
 
     // Badge
     'badge.title': 'Add the badge',
@@ -209,6 +210,7 @@ export const ui = {
     'skill.copyPrompt': 'Copiar el prompt',
     'skill.promptCopied': 'Prompt copiado',
     'skill.github': 'Ver la skill en GitHub',
+    'skill.directory': 'Skills Directory: nota de seguridad A',
 
     // Badge
     'badge.title': 'Añade el badge',

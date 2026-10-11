@@ -15,6 +15,9 @@ const t = useTranslations(lang);
 
 const command = "npx skills add berthelius/north --skill north-adoption";
 const skillUrl = "https://github.com/berthelius/north/tree/main/skills/north-adoption";
+// The grade in `skill.directory` is copied from this listing (scanned 2026-10-11);
+// re-check it after changing SKILL.md.
+const directoryUrl = "https://www.skillsdirectory.com/skills/berthelius-north-adoption";
 ---
 
 <section id="skill" class="section skill" aria-labelledby="skill-heading">
@@ -40,6 +43,10 @@ const skillUrl = "https://github.com/berthelius/north/tree/main/skills/north-ado
     <p class="skill__foot">
       <a href={skillUrl} target="_blank" rel="noopener noreferrer" class="text-link" aria-label={`${t("skill.github")} (${t("a11y.newTab")})`}>
         {t("skill.github")}
+        <Arrow dir="up-right" />
+      </a>
+      <a href={directoryUrl} target="_blank" rel="noopener noreferrer" class="text-link" aria-label={`${t("skill.directory")} (${t("a11y.newTab")})`}>
+        {t("skill.directory")}
         <Arrow dir="up-right" />
       </a>
     </p>
@@ -80,6 +87,9 @@ const skillUrl = "https://github.com/berthelius/north/tree/main/skills/north-ado
   }
 
   .skill__foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
     margin: clamp(2rem, 4vw, 3rem) 0 0;
   }
 

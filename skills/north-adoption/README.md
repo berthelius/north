@@ -1,5 +1,7 @@
 # north-adoption
 
+[![Skills Directory: security grade A](https://img.shields.io/badge/Skills_Directory-Security_A-111111?style=flat-square&labelColor=111111&color=fafafa)](https://www.skillsdirectory.com/skills/berthelius-north-adoption)
+
 An [Agent Skill](https://agentskills.io/specification) that helps you write a
 [NORTH.md](https://northfile.dev/spec) for your project with your coding agent.
 
