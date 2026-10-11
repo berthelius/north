@@ -6,8 +6,8 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
 const compareJsonLd = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Comparing Agent Context Conventions — NORTH.md vs AGENTS.md, SOUL.md, DESIGN.md, VISION.md, and CONSTITUTION.md",
-  "description": "A comparison of repository context files for AI coding agents, and where NORTH.md fits alongside operational, design, persona, and constitutional files.",
+  "headline": "Where NORTH.md fits: AGENTS.md, CLAUDE.md, SOUL.md, DESIGN.md, CONSTITUTION.md and VISION.md compared",
+  "description": "What AGENTS.md, CLAUDE.md, SOUL.md, DESIGN.md, CONSTITUTION.md and VISION.md each answer, and where NORTH.md fits: a fair, file-by-file comparison.",
   "author": {
     "@type": "Person",
     "name": "Viktor Berthelius",
@@ -30,12 +30,12 @@ const conventions = [
   {
     file: "README.md",
     question: "What is this project?",
-    consumer: "Humans: users, contributors, evaluators.",
-    boundaryWithNorth: "README explains what exists today; NORTH.md declares how far to push next.",
+    consumer: "People: users, contributors, evaluators.",
+    boundaryWithNorth: "README describes what exists today; NORTH.md declares where it is going and how far to push.",
   },
   {
     file: "AGENTS.md / CLAUDE.md",
-    question: "How do you work here?",
+    question: "How do we work here?",
     consumer: "Coding agents. AGENTS.md is read by many tools (see agents.md); CLAUDE.md by Claude Code.",
     boundaryWithNorth: "AGENTS.md tells an agent how to run the tests; NORTH.md tells it what quality counts as shipped.",
   },
@@ -48,7 +48,7 @@ const conventions = [
   {
     file: "DESIGN.md",
     question: "What should the interface look like, and why?",
-    consumer: "Coding agents generating UI.",
+    consumer: "Coding agents that generate UI.",
     boundaryWithNorth: "DESIGN.md defines the tokens; NORTH.md says whether visual polish is a 10x bet or a 1.1x surface.",
   },
   {
@@ -60,28 +60,28 @@ const conventions = [
   {
     file: "CONSTITUTION.md",
     question: "Which principles and boundaries are non-negotiable?",
-    consumer: "Coding agents and the humans who review them.",
-    boundaryWithNorth: "A constitution sets limits and principles; NORTH.md sets direction, ambition, and trade-off defaults within them.",
+    consumer: "Coding agents and the people who review their work.",
+    boundaryWithNorth: "A constitution sets the limits; NORTH.md sets direction, ambition and trade-off defaults inside them.",
   },
   {
     file: "NORTH.md",
-    question: "How do we choose when valid paths compete?",
-    consumer: "Humans and coding agents making non-trivial implementation decisions.",
-    boundaryWithNorth: "The proposed direction layer: judgment when operational instructions run out.",
+    question: "Where are we going, and how far do we push?",
+    consumer: "People and coding agents making non-trivial decisions.",
+    boundaryWithNorth: "The proposed direction layer: judgment for when every rule is satisfied and more than one path is still valid.",
   },
 ];
 
 const layers = [
   { label: "Layer 1: Limits", file: "CONSTITUTION.md", desc: "Non-negotiable principles and boundaries.", origin: "Community · agentconstitution.dev" },
-  { label: "Layer 2: Execution", file: "AGENTS.md", desc: "Build commands, tests, conventions, and workflow.", origin: "agents.md · Linux Foundation" },
+  { label: "Layer 2: Execution", file: "AGENTS.md", desc: "How to build, test and work in the repository.", origin: "agents.md · Linux Foundation" },
   { label: "Layer 3: Look", file: "DESIGN.md", desc: "Design tokens and the rationale behind them.", origin: "Google Labs" },
-  { label: "Layer 4: Persona", file: "SOUL.md", desc: "Who the agent is: persona, values, and tone.", origin: "soul.md" },
+  { label: "Layer 4: Persona", file: "SOUL.md", desc: "The agent's persona, values and tone.", origin: "soul.md" },
 ];
 ---
 
 <Base
-  title="Comparing Agent Context Conventions — NORTH.md"
-  description="How NORTH.md fits alongside AGENTS.md, CLAUDE.md, SOUL.md, DESIGN.md, VISION.md, and CONSTITUTION.md."
+  title="NORTH.md vs AGENTS.md, SOUL.md, DESIGN.md and more"
+  description="What AGENTS.md, CLAUDE.md, SOUL.md, DESIGN.md, CONSTITUTION.md and VISION.md each answer, and where NORTH.md fits: a fair, file-by-file comparison."
   canonical={`${siteUrl}/compare`}
   ogImage="/og/compare.png"
 >
@@ -105,11 +105,11 @@ const layers = [
 
     <!-- Title -->
     <h1 class="mt-5 font-display text-4xl md:text-5xl leading-[1.05] tracking-tight">
-      Comparing Agent Context Conventions
+      Where NORTH.md fits
     </h1>
 
     <p class="mt-4 text-lg text-[var(--muted)] leading-relaxed max-w-2xl">
-      Coding agents now read several kinds of repository file: rules files, persona files, design files, vision statements, and constitutions. Where does <strong class="text-[var(--fg)]">NORTH.md</strong> sit, and why does it exist?
+      Coding agents now read several kinds of repository file: rules, personas, design tokens, constitutions, vision statements. Each answers a different question. Here is what each one covers, where <strong class="text-[var(--fg)]">NORTH.md</strong> sits, and why it exists at all.
     </p>
 
     <hr class="mt-10 border-[var(--rule)]" />
@@ -119,23 +119,23 @@ const layers = [
       <!-- Section: The Skeptic's Challenge -->
       <section>
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          The Skeptic's Question: "Why another Markdown file?"
+          The fair objection: why another markdown file?
         </h2>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          Any disciplined engineer should greet a new repository file with suspicion. We already have <code>README.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>SOUL.md</code>, <code>DESIGN.md</code>, and editor-specific rules files. Another multi-page file costs context tokens and can dilute the model's attention.
+          Any disciplined engineer should meet a new repository file with suspicion. You already have <code>README.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>SOUL.md</code>, <code>DESIGN.md</code> and your editor's rules files. Every extra file costs context tokens and competes for the model's attention.
         </p>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          If <code>NORTH.md</code> were merely "another vision doc" or "a list of tips", it would deserve to be deleted. It exists for one situation that neither rules nor vision statements address: <strong class="text-[var(--fg)]">choosing between competing valid paths</strong>.
+          If <code>NORTH.md</code> were just another vision doc or a list of tips, it would deserve deletion. It exists for one situation that neither rules nor vision statements address: <strong class="text-[var(--fg)]">choosing between valid paths that compete</strong>.
         </p>
         <div class="mt-6 rounded-lg border border-[var(--rule)] bg-[var(--color-stone-100,#f5f5f4)] dark:bg-[var(--color-stone-900,#1c1917)] p-6">
           <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] mb-2">The Dilemma</p>
           <p class="text-sm text-[var(--fg)] leading-relaxed italic">
-            An agent receives an ambiguous refactor task. Three paths all pass CI, obey AGENTS.md, and respect CONSTITUTION.md:
-            <br />1. The timid incremental patch that leaves the root cause in place.
-            <br />2. The sprawling rewrite that adds unrequested dependencies and work in progress.
-            <br />3. The calibrated leap that removes the failure mode without over-engineering commodity code.
+            An agent receives an ambiguous refactoring task. Three paths all pass CI, obey AGENTS.md and respect CONSTITUTION.md:
+            <br />1. The timid patch that leaves the root cause in place.
+            <br />2. The sprawling rewrite that adds dependencies and work nobody asked for.
+            <br />3. The calibrated move that removes the failure mode without over-engineering commodity code.
             <br /><br />
-            Which one does the agent choose? Our hypothesis: with nothing stating the project's direction, it drifts to #1 or #2. NORTH.md is designed to make #3 the obvious choice.
+            Which does the agent choose? Our hypothesis: with nothing stating the project's direction, it drifts to 1 or 2. NORTH.md is designed to make 3 the obvious choice.
           </p>
         </div>
       </section>
@@ -143,7 +143,7 @@ const layers = [
       <!-- Section: Master Comparison Table -->
       <section>
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          The Context Matrix
+          Who answers what
         </h2>
         <p class="mt-3 text-[var(--muted)] leading-relaxed">
           Each file answers a different question:
@@ -159,8 +159,8 @@ const layers = [
             <thead>
               <tr class="border-b border-[var(--rule)] bg-[var(--color-stone-100,#f5f5f4)] dark:bg-[var(--color-stone-900,#1c1917)]">
                 <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">File</th>
-                <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Core Question</th>
-                <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Consumer</th>
+                <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Core question</th>
+                <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Read by</th>
                 <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Boundary with NORTH.md</th>
               </tr>
             </thead>
@@ -189,7 +189,7 @@ const layers = [
       <!-- Section: Deep Dives -->
       <section class="space-y-8">
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          Deep Dives: Resolving Common Ambiguities
+          Where the lines blur
         </h2>
 
         <!-- Deep Dive 1: VISION.md -->
@@ -198,10 +198,10 @@ const layers = [
             1. NORTH.md vs. VISION.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>VISION.md</strong> has no formal convention, but where it exists it usually describes the world the project hopes to create. It is written to inspire. An agent working on a pull request on a Tuesday afternoon cannot derive from it whether to build or buy a webhook queue.
+            <strong>VISION.md</strong> has no formal convention. Where it exists, it usually describes the world the project hopes to create, and it is written to inspire. An agent working on a pull request on a Tuesday afternoon cannot derive from it whether to build or buy a webhook queue.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> is operational: it declares concrete asymmetric bets (<em>"Go 10x on e-invoicing correctness; accept 1.1x on the settings UI"</em>), specific refusals (<em>"Anti-goal: we do not build a CRM"</em>), and precomputed trade-off defaults (<em>"Safety over speed on fiscal code; speed over safety on internal admin"</em>).
+            <strong>NORTH.md</strong> is operational. It declares concrete asymmetric bets (<em>&ldquo;Go 10x on e-invoicing correctness; accept 1.1x on the settings UI&rdquo;</em>), specific refusals (<em>&ldquo;We do not build a CRM&rdquo;</em>) and precomputed trade-off defaults (<em>&ldquo;Safety over speed on fiscal code; speed over safety on internal admin&rdquo;</em>).
           </p>
         </div>
 
@@ -211,10 +211,10 @@ const layers = [
             2. NORTH.md vs. CONSTITUTION.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>CONSTITUTION.md</strong> sets <em>non-negotiable principles and boundaries</em>. There is no single standard: <a href="https://agentconstitution.dev" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">agentconstitution.dev</a> proposes a project-level format, and GitHub Spec Kit keeps a project constitution of principles and governance. Some formats also record "tension pairs" (X over Y).
+            <strong>CONSTITUTION.md</strong> sets <em>non-negotiable principles and boundaries</em>. There is no single standard: <a href="https://agentconstitution.dev" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">agentconstitution.dev</a> proposes a project-level format, and GitHub Spec Kit keeps a project constitution of principles and governance. Some formats also record &ldquo;tension pairs&rdquo; (X over Y).
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> sets <em>direction</em>. Knowing what you must never do does not tell you what calibre of work is expected. NORTH.md tells the agent where to be ambitious and where to stop. If your constitution already records trade-offs, point to it from NORTH.md rather than repeating them.
+            <strong>NORTH.md</strong> sets <em>direction</em>. Knowing what you must never do does not tell you what calibre of work is expected, or where to be ambitious and where to stop. If your constitution already records trade-offs, link to it from NORTH.md instead of repeating them.
           </p>
         </div>
 
@@ -227,7 +227,7 @@ const layers = [
             <strong>AGENTS.md</strong> covers the <em>mechanics of execution</em>: how to build, which linter to run, which conventions to follow. It keeps the agent from breaking the repository.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> covers the <em>judgment of the increment</em>: is a feature really done when the unit tests pass, or does The Bar also demand documentation, a public API, and an audit trail?
+            <strong>NORTH.md</strong> covers the <em>judgment of the increment</em>: is a feature done when the unit tests pass, or does The Bar also demand documentation, a public API and an audit trail?
           </p>
         </div>
 
@@ -240,7 +240,7 @@ const layers = [
             <strong>DESIGN.md</strong> is a format from <a href="https://github.com/google-labs-code/design.md" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Google Labs</a> for describing a visual identity to coding agents: machine-readable design tokens in YAML front matter, with the rationale in markdown. It is in alpha.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> sets the <em>priority of visual craft</em>: it tells the agent whether pixel-perfect micro-animations are a 10x bet (a landing page, say) or an over-engineered distraction (an internal admin table).
+            <strong>NORTH.md</strong> sets the <em>priority of visual craft</em>: whether pixel-perfect micro-animations are a 10x bet (a landing page, say) or an over-engineered distraction (an internal admin table).
           </p>
         </div>
       </section>
@@ -248,10 +248,10 @@ const layers = [
       <!-- Section: The Composition Model -->
       <section class="border-t border-[var(--rule)] pt-10">
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          A Proposed Five-Layer Model
+          A proposed five-layer model
         </h2>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          Instead of one long instruction file, we propose <strong class="text-[var(--fg)]">five small files, each answering one question</strong>. This is a model, not an established standard, and most repositories will use only some of the layers.
+          Instead of one long instruction file, we propose <strong class="text-[var(--fg)]">five small files, each answering one question</strong>. It is a model, not an established standard, and most repositories will use only some of the layers.
         </p>
 
         <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -274,7 +274,7 @@ const layers = [
                 <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
               </h3>
               <p class="mt-2 text-xs text-[var(--fg)] font-medium leading-normal">
-                Purpose, quality bar, asymmetric bets, and precomputed trade-offs.
+                Purpose, ambition and precomputed trade-offs.
               </p>
             </div>
             <p class="mt-3 text-[0.65rem] font-mono text-[var(--accent)] font-semibold">This spec · MIT</p>
@@ -286,7 +286,7 @@ const layers = [
             href="/spec"
             class="inline-flex items-center gap-2 rounded-full bg-[var(--fg)] px-5 py-2.5 text-sm font-medium text-[var(--bg)] transition hover:opacity-85"
           >
-            Read the v0.1 Spec &rarr;
+            Read the spec v0.1 &rarr;
           </a>
           <a
             href="/why"

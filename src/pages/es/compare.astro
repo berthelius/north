@@ -6,8 +6,8 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
 const compareJsonLd = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Comparación de convenciones de contexto para agentes — NORTH.md frente a AGENTS.md, SOUL.md, DESIGN.md, VISION.md y CONSTITUTION.md",
-  "description": "Una comparación de los archivos de contexto de un repositorio para agentes de IA de código, y de dónde encaja NORTH.md junto a los archivos operativos, de diseño, de persona y constitucionales.",
+  "headline": "Dónde encaja NORTH.md: AGENTS.md, CLAUDE.md, SOUL.md, DESIGN.md, CONSTITUTION.md y VISION.md, comparados",
+  "description": "Qué responde AGENTS.md, CLAUDE.md, SOUL.md, DESIGN.md, CONSTITUTION.md y VISION.md, y dónde encaja NORTH.md: una comparativa justa, archivo por archivo.",
   "inLanguage": "es",
   "author": {
     "@type": "Person",
@@ -32,11 +32,11 @@ const conventions = [
     file: "README.md",
     question: "¿Qué es este proyecto?",
     consumer: "Personas: usuarios, colaboradores, evaluadores.",
-    boundaryWithNorth: "README explica lo que existe hoy; NORTH.md declara hasta dónde empujar a continuación.",
+    boundaryWithNorth: "README describe lo que existe hoy; NORTH.md declara hacia dónde va y hasta dónde empujar.",
   },
   {
     file: "AGENTS.md / CLAUDE.md",
-    question: "¿Cómo se trabaja aquí?",
+    question: "¿Cómo trabajamos aquí?",
     consumer: "Agentes de código. AGENTS.md lo leen muchas herramientas (ver agents.md); CLAUDE.md, Claude Code.",
     boundaryWithNorth: "AGENTS.md le dice a un agente cómo ejecutar los tests; NORTH.md le dice qué calidad cuenta como entregada.",
   },
@@ -61,28 +61,28 @@ const conventions = [
   {
     file: "CONSTITUTION.md",
     question: "¿Qué principios y fronteras son innegociables?",
-    consumer: "Agentes de código y las personas que los revisan.",
-    boundaryWithNorth: "Una constitución fija límites y principios; NORTH.md fija la dirección, la ambición y los trade-offs por defecto dentro de ellos.",
+    consumer: "Agentes de código y las personas que revisan su trabajo.",
+    boundaryWithNorth: "Una constitución fija los límites; NORTH.md fija la dirección, la ambición y los trade-offs por defecto dentro de ellos.",
   },
   {
     file: "NORTH.md",
-    question: "¿Cómo elegimos cuando compiten varios caminos válidos?",
-    consumer: "Personas y agentes de código que toman decisiones de implementación no triviales.",
-    boundaryWithNorth: "La capa de dirección que proponemos: criterio cuando se agotan las instrucciones operativas.",
+    question: "¿Hacia dónde vamos y hasta dónde empujamos?",
+    consumer: "Personas y agentes de código que toman decisiones no triviales.",
+    boundaryWithNorth: "La capa de dirección que proponemos: criterio para cuando se cumplen todas las reglas y sigue habiendo más de un camino válido.",
   },
 ];
 
 const layers = [
   { label: "Capa 1: Límites", file: "CONSTITUTION.md", desc: "Principios innegociables y fronteras.", origin: "Comunidad · agentconstitution.dev" },
-  { label: "Capa 2: Ejecución", file: "AGENTS.md", desc: "Comandos de build, tests, convenciones y flujo de trabajo.", origin: "agents.md · Linux Foundation" },
+  { label: "Capa 2: Ejecución", file: "AGENTS.md", desc: "Cómo compilar, probar y trabajar en el repositorio.", origin: "agents.md · Linux Foundation" },
   { label: "Capa 3: Aspecto", file: "DESIGN.md", desc: "Tokens de diseño y la razón de cada uno.", origin: "Google Labs" },
-  { label: "Capa 4: Persona", file: "SOUL.md", desc: "Quién es el agente: persona, valores y tono.", origin: "soul.md" },
+  { label: "Capa 4: Persona", file: "SOUL.md", desc: "La persona, los valores y el tono del agente.", origin: "soul.md" },
 ];
 ---
 
 <Base
-  title="Comparación de convenciones de contexto para agentes — NORTH.md"
-  description="Cómo encaja NORTH.md junto a AGENTS.md, CLAUDE.md, SOUL.md, DESIGN.md, VISION.md y CONSTITUTION.md."
+  title="NORTH.md frente a AGENTS.md, SOUL.md, DESIGN.md y más"
+  description="Qué responde AGENTS.md, CLAUDE.md, SOUL.md, DESIGN.md, CONSTITUTION.md y VISION.md, y dónde encaja NORTH.md: una comparativa justa, archivo por archivo."
   canonical={`${siteUrl}/es/compare`}
   ogImage="/og/compare.png"
   lang="es"
@@ -107,11 +107,11 @@ const layers = [
 
     <!-- Title -->
     <h1 class="mt-5 font-display text-4xl md:text-5xl leading-[1.05] tracking-tight">
-      Comparación de convenciones de contexto para agentes
+      Dónde encaja NORTH.md
     </h1>
 
     <p class="mt-4 text-lg text-[var(--muted)] leading-relaxed max-w-2xl">
-      Los agentes de código ya leen varios tipos de archivo en un repositorio: archivos de reglas, de persona, de diseño, declaraciones de visión y constituciones. ¿Dónde encaja <strong class="text-[var(--fg)]">NORTH.md</strong> y por qué existe?
+      Los agentes de código ya leen varios tipos de archivo en un repositorio: reglas, personas, tokens de diseño, constituciones, declaraciones de visión. Cada uno responde a una pregunta distinta. Aquí verás qué cubre cada uno, dónde encaja <strong class="text-[var(--fg)]">NORTH.md</strong> y por qué existe.
     </p>
 
     <hr class="mt-10 border-[var(--rule)]" />
@@ -121,23 +121,23 @@ const layers = [
       <!-- Section: The Skeptic's Challenge -->
       <section>
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          La pregunta del escéptico: "¿Para qué otro archivo Markdown?"
+          La objeción justa: ¿para qué otro archivo markdown?
         </h2>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          Cualquier ingeniero riguroso recibe un archivo nuevo en el repositorio con recelo. Ya tenemos <code>README.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>SOUL.md</code>, <code>DESIGN.md</code> y los archivos de reglas de cada editor. Otro archivo de varias páginas cuesta tokens de contexto y puede diluir la atención del modelo.
+          Cualquier ingeniero riguroso debería recibir con recelo un archivo nuevo en el repositorio. Ya tienes <code>README.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>SOUL.md</code>, <code>DESIGN.md</code> y los archivos de reglas de tu editor. Cada archivo extra cuesta tokens de contexto y compite por la atención del modelo.
         </p>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          Si <code>NORTH.md</code> fuese simplemente "otro documento de visión" o "una lista de consejos", merecería borrarse. Existe para una situación que ni las reglas ni las declaraciones de visión resuelven: <strong class="text-[var(--fg)]">elegir entre caminos válidos que compiten</strong>.
+          Si <code>NORTH.md</code> fuese solo otro documento de visión o una lista de consejos, merecería borrarse. Existe para una situación que ni las reglas ni las declaraciones de visión resuelven: <strong class="text-[var(--fg)]">elegir entre caminos válidos que compiten</strong>.
         </p>
         <div class="mt-6 rounded-lg border border-[var(--rule)] bg-[var(--color-stone-100,#f5f5f4)] dark:bg-[var(--color-stone-900,#1c1917)] p-6">
           <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] mb-2">El dilema</p>
           <p class="text-sm text-[var(--fg)] leading-relaxed italic">
             Un agente recibe una tarea de refactorización ambigua. Tres caminos pasan el CI, obedecen AGENTS.md y respetan CONSTITUTION.md:
-            <br />1. El parche incremental tímido que deja la causa raíz en su sitio.
-            <br />2. La reescritura desmedida que añade dependencias y trabajo en curso que nadie pidió.
-            <br />3. El salto calibrado que elimina el modo de fallo sin sobrediseñar código genérico.
+            <br />1. El parche tímido que deja la causa raíz en su sitio.
+            <br />2. La reescritura desmedida que añade dependencias y trabajo que nadie pidió.
+            <br />3. El movimiento calibrado que elimina el modo de fallo sin sobrediseñar código genérico.
             <br /><br />
-            ¿Cuál elige el agente? Nuestra hipótesis: si nada declara la dirección del proyecto, deriva hacia el #1 o el #2. NORTH.md está pensado para que el #3 sea la opción evidente.
+            ¿Cuál elige el agente? Nuestra hipótesis: si nada declara la dirección del proyecto, deriva hacia el 1 o el 2. NORTH.md está pensado para que el 3 sea la opción evidente.
           </p>
         </div>
       </section>
@@ -145,7 +145,7 @@ const layers = [
       <!-- Section: Master Comparison Table -->
       <section>
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          La matriz de contexto
+          Quién responde a qué
         </h2>
         <p class="mt-3 text-[var(--muted)] leading-relaxed">
           Cada archivo responde a una pregunta distinta:
@@ -162,7 +162,7 @@ const layers = [
               <tr class="border-b border-[var(--rule)] bg-[var(--color-stone-100,#f5f5f4)] dark:bg-[var(--color-stone-900,#1c1917)]">
                 <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Archivo</th>
                 <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Pregunta central</th>
-                <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Consumidor</th>
+                <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Lo lee</th>
                 <th class="p-4 font-mono text-xs uppercase tracking-wider text-[var(--muted)]">Frontera con NORTH.md</th>
               </tr>
             </thead>
@@ -191,7 +191,7 @@ const layers = [
       <!-- Section: Deep Dives -->
       <section class="space-y-8">
         <h2 class="font-display text-2xl md:text-3xl text-[var(--fg)]">
-          En profundidad: ambigüedades habituales
+          Donde se difuminan las fronteras
         </h2>
 
         <!-- Deep Dive 1: VISION.md -->
@@ -200,10 +200,10 @@ const layers = [
             1. NORTH.md frente a VISION.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>VISION.md</strong> no tiene una convención formal, pero donde existe suele describir el mundo que el proyecto aspira a crear. Está escrito para inspirar. Un agente que trabaja en una pull request un martes por la tarde no puede deducir de él si construir o comprar una cola de webhooks.
+            <strong>VISION.md</strong> no tiene una convención formal. Donde existe, suele describir el mundo que el proyecto aspira a crear, y está escrito para inspirar. Un agente que trabaja en una pull request un martes por la tarde no puede deducir de él si construir o comprar una cola de webhooks.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> es operativo: declara apuestas asimétricas concretas (<em>"10x en la corrección de la facturación electrónica; 1.1x en la interfaz de ajustes"</em>), negativas específicas (<em>"Anti-objetivo: no construimos un CRM"</em>) y trade-offs por defecto precalculados (<em>"Seguridad sobre velocidad en código fiscal; velocidad sobre seguridad en la administración interna"</em>).
+            <strong>NORTH.md</strong> es operativo. Declara apuestas asimétricas concretas (<em>«10x en la exactitud de la facturación electrónica; 1.1x en la pantalla de ajustes»</em>), negativas específicas (<em>«No construimos un CRM»</em>) y trade-offs por defecto precalculados (<em>«Seguridad antes que velocidad en el código fiscal; velocidad antes que seguridad en la administración interna»</em>).
           </p>
         </div>
 
@@ -213,10 +213,10 @@ const layers = [
             2. NORTH.md frente a CONSTITUTION.md
           </h3>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>CONSTITUTION.md</strong> fija <em>principios y fronteras innegociables</em>. No hay un estándar único: <a href="https://agentconstitution.dev" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">agentconstitution.dev</a> propone un formato a nivel de proyecto, y GitHub Spec Kit mantiene una constitución de proyecto con principios y gobernanza. Algunos formatos también recogen "pares en tensión" (X por encima de Y).
+            <strong>CONSTITUTION.md</strong> fija <em>principios y fronteras innegociables</em>. No hay un estándar único: <a href="https://agentconstitution.dev" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">agentconstitution.dev</a> propone un formato a nivel de proyecto, y GitHub Spec Kit mantiene una constitución de proyecto con principios y gobernanza. Algunos formatos también recogen «pares en tensión» (X por encima de Y).
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> fija la <em>dirección</em>. Saber lo que nunca debes hacer no te dice qué calibre de trabajo se espera. NORTH.md le dice al agente dónde ser ambicioso y dónde parar. Si tu constitución ya recoge trade-offs, enlázala desde NORTH.md en lugar de repetirlos.
+            <strong>NORTH.md</strong> fija la <em>dirección</em>. Saber lo que nunca debes hacer no te dice qué calibre de trabajo se espera, ni dónde ser ambicioso y dónde parar. Si tu constitución ya recoge trade-offs, enlázala desde NORTH.md en lugar de repetirlos.
           </p>
         </div>
 
@@ -229,7 +229,7 @@ const layers = [
             <strong>AGENTS.md</strong> cubre la <em>mecánica de ejecución</em>: cómo compilar, qué linter ejecutar, qué convenciones seguir. Evita que el agente rompa el repositorio.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> cubre el <em>criterio del incremento</em>: ¿está realmente terminada una funcionalidad cuando pasan los tests unitarios, o El Listón exige además documentación, una API pública y un registro de auditoría?
+            <strong>NORTH.md</strong> cubre el <em>criterio del incremento</em>: ¿está terminada una funcionalidad cuando pasan los tests unitarios, o El Listón exige además documentación, una API pública y un registro de auditoría?
           </p>
         </div>
 
@@ -242,7 +242,7 @@ const layers = [
             <strong>DESIGN.md</strong> es un formato de <a href="https://github.com/google-labs-code/design.md" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Google Labs</a> para describir una identidad visual a los agentes de código: tokens de diseño legibles por máquina en el front matter YAML, con la justificación en markdown. Está en fase alfa.
           </p>
           <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-            <strong>NORTH.md</strong> fija la <em>prioridad del oficio visual</em>: le indica al agente si las microanimaciones al píxel son una apuesta 10x (por ejemplo, en una landing) o una distracción sobrediseñada (en una tabla de administración interna).
+            <strong>NORTH.md</strong> fija la <em>prioridad del oficio visual</em>: si las microanimaciones al píxel son una apuesta 10x (en una landing, por ejemplo) o una distracción sobrediseñada (en una tabla de administración interna).
           </p>
         </div>
       </section>
@@ -253,7 +253,7 @@ const layers = [
           Un modelo de cinco capas que proponemos
         </h2>
         <p class="mt-4 text-[var(--muted)] leading-relaxed">
-          En lugar de un único archivo largo de instrucciones, proponemos <strong class="text-[var(--fg)]">cinco archivos pequeños, cada uno con una pregunta</strong>. Es un modelo, no un estándar establecido, y la mayoría de los repositorios usará solo algunas de las capas.
+          En lugar de un único archivo largo de instrucciones, proponemos <strong class="text-[var(--fg)]">cinco archivos pequeños, cada uno para una pregunta</strong>. Es un modelo, no un estándar establecido, y la mayoría de los repositorios usará solo algunas de las capas.
         </p>
 
         <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -276,7 +276,7 @@ const layers = [
                 <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
               </h3>
               <p class="mt-2 text-xs text-[var(--fg)] font-medium leading-normal">
-                Propósito, listón de calidad, apuestas asimétricas y trade-offs precalculados.
+                Propósito, ambición y trade-offs precalculados.
               </p>
             </div>
             <p class="mt-3 text-[0.65rem] font-mono text-[var(--accent)] font-semibold">Esta especificación · MIT</p>
