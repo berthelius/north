@@ -1,7 +1,7 @@
 # NORTH.md Specification
 
 **Version:** 0.1
-**Status:** Active (Canonical Public Release)
+**Status:** Active (first public release)
 **Authors:** [Viktor Berthelius](https://brthls.com) (BRTHLS)
 **License:** MIT
 **Date:** 2026-09-24
@@ -14,19 +14,21 @@
 that declares the project's **purpose, ambition, and precomputed trade-offs** in a
 form readable by both humans and AI coding agents.
 
-It anchors the **5-layer agent governance stack**:
+It is written to sit alongside the other context files agents already read. We
+propose seeing them as a **five-layer stack** — a model, not an established
+standard:
 
-- `CONSTITUTION.md` — **limits** (safety, negative boundaries, invariant red lines).
+- `CONSTITUTION.md` — **limits** (non-negotiable principles and boundaries).
 - `AGENTS.md` / `CLAUDE.md` — **how** agents work (build, test, environment).
-- `design.md` — **look & feel** (UI tokens, layout contracts, design systems).
-- `SOUL.md` — **who** the product is (voice, persona, tone).
+- `DESIGN.md` — **look & feel** (design tokens and the rationale behind them).
+- `SOUL.md` — **who** the agent is (persona, values, tone).
 - `NORTH.md` — **why** and **how far** (purpose, ambition, trade-off defaults, reversibility).
 
 ---
 
 ## Motivation
 
-Modern coding agents default to **safe, incremental output**. They optimise for
+Coding agents tend to default to **safe, incremental output**. They optimise for
 "don't break what works" rather than "level up". When given an ambiguous task,
 they choose the smaller interpretation. When proposing solutions, they suggest
 patches rather than rewrites. When uncertain, they add error handling instead of
@@ -34,8 +36,8 @@ removing the failure mode at its source.
 
 Repository-level rule files (`CLAUDE.md`, `AGENTS.md`) cover *operational* concerns:
 which commands to run, which gates to respect, which conventions to follow.
-Identity files (`SOUL.md`) cover *aesthetic* and *cultural* concerns: voice, tone,
-who we are.
+Identity files (`SOUL.md`) cover *character*: the agent's voice, tone, and
+values.
 
 Neither layer answers the question that determines whether an agent ships a
 **competent patch** or an **ambitious leap**:
@@ -78,14 +80,14 @@ quarter. The destination.
 A well-formed North Star is:
 
 - **Specific enough to disqualify alternatives.** "Be the best ERP" is not a
-  North Star. "Replace QuickBooks for European freelancers by 2027" is.
+  North Star. "Replace spreadsheet bookkeeping for European freelancers by 2030" is.
 - **Ambitious enough to be uncomfortable.** If the North Star feels safe, it is
   not a North Star.
 - **Reachable in principle.** A North Star is not a fantasy. It is a destination
   that justifies hard choices.
 
-> **Example.** _Nordic ERP replaces traditional ERP software for European SMBs by
-> making AI-native business management the default by 2027._
+> **Example.** _Arkwell makes a one-day month-end close the norm for European
+> small manufacturers by 2030._
 
 ### 2. The Bar
 
@@ -101,8 +103,8 @@ A well-formed Bar is:
   linters, review rules, runbooks.
 
 > **Example.** _Every shipped feature passes: typecheck, lint, full test suite,
-> Lighthouse ≥95 on all metrics, WCAG AA via axe, and i18n parity across 15
-> languages. No exceptions, no "TODO: tests later"._
+> Lighthouse ≥95 on all metrics, WCAG AA via axe, and i18n parity across every
+> supported locale. No exceptions, no "TODO: tests later"._
 
 ### 3. Asymmetric Bets
 
@@ -120,9 +122,9 @@ This section prevents two failure modes: over-investing in commodity work, and
 under-investing in the work that compounds.
 
 > **Example.**
-> _Go 10x on: AI-native interaction model, fiscal compliance correctness,
-> onboarding under 90 seconds._
-> _Accept 1.1x on: admin settings UI, legacy import UX, internal dashboards._
+> _Go 10x on: stock-to-ledger reconciliation, e-invoicing correctness,
+> migration from the incumbent system._
+> _Accept 1.1x on: admin settings UI, dashboard polish, internal reports._
 
 ### 4. Anti-Goals
 
@@ -138,7 +140,7 @@ A well-formed Anti-Goal is:
   external accountant review before use".
 
 > **Example.**
-> _We do not build a CRM module. (Twenty exists; we integrate, we don't
+> _We do not build a CRM module. (Mature CRMs exist; we integrate, we don't
 > rebuild.)_
 > _We do not support on-prem deployment. (Distracts from cloud-first product
 > velocity.)_
@@ -164,7 +166,7 @@ flips.
 
 > **Example.**
 > _Default: speed over safety on internal tooling, safety over speed on fiscal
-> code. Flips: any code touching VeriFactu or payroll must pass the safety
+> code. Flips: any code touching e-invoicing or payroll must pass the safety
 > default regardless of internal-vs-external scope._
 
 ### 6. Ambition Triggers
@@ -201,7 +203,7 @@ A well-formed Reversibility section lists:
 - **The default disposition.** When in doubt, treat it as which.
 
 > **Example.**
-> _One-way doors: VeriFactu signature format, public API response shape,
+> _One-way doors: e-invoice signature format, public API response shape,
 > domain name choice._
 > _Two-way doors: internal admin UI, dependency on a given OSS library,
 > non-public code organisation._
@@ -249,29 +251,33 @@ on the first line:
 
 `NORTH.md` is designed to coexist with, not replace, related conventions:
 
-| File | Purpose | Audience |
+| File | Purpose | Origin |
 |---|---|---|
-| `README.md` | Human onboarding and public overview | Humans |
-| `AGENTS.md` / `CLAUDE.md` | Operational execution, gates, and workflow | Coding agents |
-| `SOUL.md` | Project identity, tone, and character | Humans + agents |
-| `VISION.md` | Long-term market future and destination | Humans + planning agents |
-| `CONSTITUTION.md` | Non-negotiable negative constraints | Guardrails + agents |
-| `NORTH.md` | Decision arbitration, ambition, and trade-offs | Humans + agents |
-| `llms.txt` | LLM-readable site index | LLM web crawlers |
+| `README.md` | Human onboarding and public overview | Long-standing convention |
+| `AGENTS.md` | Operational instructions for coding agents: build, test, conventions | [agents.md](https://agents.md), stewarded by the Agentic AI Foundation (Linux Foundation) |
+| `CLAUDE.md` | Project instructions loaded by Claude Code | [Anthropic](https://code.claude.com/docs/en/memory) |
+| `CONSTITUTION.md` | Non-negotiable principles and boundaries | Community conventions, e.g. [agentconstitution.dev](https://agentconstitution.dev); GitHub Spec Kit keeps a project constitution |
+| `DESIGN.md` | Design tokens and the rationale behind them | [Google Labs](https://github.com/google-labs-code/design.md) |
+| `SOUL.md` | The agent's persona, values, and tone | [soul.md](https://soul.md) |
+| `VISION.md` | Long-term direction | No formal convention |
+| `NORTH.md` | Purpose, ambition, and precomputed trade-offs | This specification |
+| `llms.txt` | A site index that helps LLMs and agents use a website | [llmstxt.org](https://llmstxt.org), proposed by Jeremy Howard (2024) |
 
-An ambitious engineering project may compose all seven modularly.
+Use whichever combination fits the project. The five-layer model in the
+Abstract is a proposal for how these files divide the work, not an industry
+standard.
 
 ---
 
 ## Reference implementation
 
-The canonical reference and template lives at
+The specification site and template live at
 **[https://northfile.dev](https://northfile.dev)**.
 
-Ecosystem comparison matrix lives at
+A comparison with related conventions lives at
 **[https://northfile.dev/compare](https://northfile.dev/compare)**.
 
-Examples across multiple domains live at
+Examples — one real, five illustrative — live at
 **[https://northfile.dev/examples](https://northfile.dev/examples)**.
 
 ---
@@ -280,9 +286,9 @@ Examples across multiple domains live at
 
 ### v0.1 — 2026-09-24
 
-- Canonical public specification release.
-- Seven canonical sections codified: North Star, The Bar, Asymmetric Bets, Anti-Goals, Trade-off Defaults, Ambition Triggers, and Reversibility.
-- Structured Trade-off Defaults table schema with explicit `Flip when` conditions.
-- Distinction between Mechanical Automated Gates and Truth Assertions codified in The Bar.
-- Formal 5-layer agent governance stack defined (`CONSTITUTION.md`, `AGENTS.md`, `design.md`, `SOUL.md`, `NORTH.md`).
+- First public release.
+- Seven sections defined: North Star, The Bar, Asymmetric Bets, Anti-Goals, Trade-off Defaults, Ambition Triggers, and Reversibility.
+- Trade-off Defaults name each default and the condition under which it flips.
+- Proposed a five-layer model for agent context files (`CONSTITUTION.md`, `AGENTS.md`, `DESIGN.md`, `SOUL.md`, `NORTH.md`).
+- Propagation guidance and an optional spec-version marker.
 - Versioning policy adopted (semver).

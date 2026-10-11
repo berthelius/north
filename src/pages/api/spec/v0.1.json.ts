@@ -1,5 +1,6 @@
 export const prerender = true;
 
+// Mirrors SPEC.md. When SPEC.md changes, update this file in the same commit.
 const spec = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $id: 'https://northfile.dev/api/spec/v0.1.json',
@@ -16,18 +17,22 @@ const spec = {
   license: 'MIT',
   homepage: 'https://northfile.dev',
   repository: 'https://github.com/berthelius/north',
+  source: 'https://northfile.dev/spec.md',
   description:
-    'NORTH.md declares a software project\'s purpose, ambition, and precomputed trade-off defaults in a form readable by both humans and AI coding agents. It gives agents judgment when the prompt runs out: scaling agency without scaling drift.',
+    "NORTH.md declares a software project's purpose, ambition, and precomputed trade-offs in a form readable by both humans and AI coding agents. It is designed to give agents judgment when the prompt runs out.",
   abstract:
-    'The decision arbitration layer in the modern agent stack. Complements CONSTITUTION.md (limits), AGENTS.md / CLAUDE.md (execution), design.md (visual system), and SOUL.md (identity). NORTH.md governs decision arbitration, quality bar enforcement, and ambition when competing valid paths exist.',
-  fileLocation: 'Repository root (NORTH.md). Monorepo packages may each have their own package-level NORTH.md.',
-  fileFormat: 'CommonMark markdown with seven canonical H2 sections.',
+    'A proposed direction layer for agent context files. It sits alongside CONSTITUTION.md (limits), AGENTS.md / CLAUDE.md (how agents work), DESIGN.md (look and feel), and SOUL.md (who the agent is). The five-layer model is a proposal, not an established standard.',
+  fileLocation:
+    'MUST be placed at the repository root. In a monorepo with multiple distinct products, each product MAY have its own NORTH.md in its package root; the root file then describes the umbrella ambition.',
+  fileFormat: 'CommonMark markdown.',
+  conformance:
+    'SHOULD contain the seven canonical sections, in order, each as an H2 heading. Sections MAY be omitted if not applicable, but the heading SHOULD be retained with a brief note explaining the omission. Additional sections MAY be added after the seven canonical ones.',
   sections: [
     {
       order: 1,
       name: 'North Star',
       slug: 'north-star',
-      required: true,
+      required: false,
       description:
         'A single sentence declaring the destination. Not the roadmap. Not the next quarter. The destination.',
       criteria: [
@@ -36,74 +41,86 @@ const spec = {
         'Reachable in principle.',
       ],
       example:
-        'Nordic ERP replaces traditional ERP software for European SMBs by making AI-native business management the default by 2027.',
+        'Arkwell makes a one-day month-end close the norm for European small manufacturers by 2030.',
     },
     {
       order: 2,
       name: 'The Bar',
       slug: 'the-bar',
-      required: true,
+      required: false,
       description:
-        'The non-negotiable threshold separating shipped from started. Combines mechanical automated gates with truth assertions.',
+        'The quality threshold that distinguishes "shipped" from "started". Defines what work is acceptable to call done.',
       criteria: [
-        'Distinguishes mechanical automated gates (typecheck, lint, test coverage, WCAG AA) from truth assertions (zero speculative abstractions).',
-        'Observable, auditable, and automated wherever possible.',
-        'Non-negotiable — applies equally to humans and agents.',
+        'Measurable or observable.',
+        'Higher than industry default.',
+        'Defended by gates: items SHOULD map to enforcement (CI checks, linters, review rules, runbooks).',
       ],
       example:
-        'Every shipped feature passes: typecheck, lint, full test suite, Lighthouse 95, WCAG AA, and complete programmatic surface coverage (UI, REST API, MCP tool, SDK).',
+        'Every shipped feature passes: typecheck, lint, full test suite, Lighthouse ≥95 on all metrics, WCAG AA via axe, and i18n parity across every supported locale. No exceptions, no "TODO: tests later".',
     },
     {
       order: 3,
-      name: 'Current Ambition',
-      slug: 'current-ambition',
-      required: true,
+      name: 'Asymmetric Bets',
+      slug: 'asymmetric-bets',
+      required: false,
       description:
-        'The active horizon where the project chooses to over-invest. Changes across releases.',
+        'The places where we deliberately invest 10x effort, and the places where 1.1x is correct.',
       criteria: [
-        'Names 2-4 areas receiving disproportionate engineering investment.',
-        'Names what is intentionally deferred.',
-        'Updated as horizons are reached or abandoned.',
+        'Names where we go big: what deserves disproportionate investment because it is load-bearing or strategically decisive.',
+        'Names where we deliberately ship medium: what is fine at 80% so capacity goes to the bets.',
       ],
-      example:
-        'We over-invest in: sub-second cold starts, zero-runtime static pre-rendering, and exhaustive MCP schema documentation.',
+      example: {
+        goTenX: [
+          'Stock-to-ledger reconciliation',
+          'E-invoicing correctness',
+          'Migration from the incumbent system',
+        ],
+        acceptOnePointOneX: ['Admin settings UI', 'Dashboard polish', 'Internal reports'],
+      },
     },
     {
       order: 4,
       name: 'Anti-Goals',
       slug: 'anti-goals',
-      required: true,
+      required: false,
       description:
-        'Explicit, written-down refusals of things that would be tempting or profitable but are out of scope.',
+        'The things we explicitly refuse to do, even when they would be easy or profitable in the short term.',
       criteria: [
-        'Refuses things that someone would genuinely ask for.',
-        'Carries a one-line justification that survives pushback.',
-        'Updated when the team repeatedly says no to the same request.',
+        'Tempting: if no one would ever ask for it, it is not an Anti-Goal.',
+        'Justified: a one-line reason that survives pushback.',
+        'Specific.',
       ],
-      example:
-        'We do not build custom CRM modules — Twenty exists, integrate rather than rebuild.',
+      example: [
+        "We do not build a CRM module. (Mature CRMs exist; we integrate, we don't rebuild.)",
+        'We do not support on-prem deployment. (Distracts from cloud-first product velocity.)',
+        'We do not accept feature requests with no documented user pain. (Roadmap is pull-based, not push-based.)',
+      ],
     },
     {
       order: 5,
       name: 'Trade-off Defaults',
       slug: 'trade-off-defaults',
-      required: true,
+      required: false,
       description:
-        'Structured precomputed decisions with explicit flip conditions. Enables autonomous execution without human blocker.',
-      schema: {
+        'Decisions already made about common trade-offs, written down once so they are not re-debated each sprint. For each: name the default, and name the conditions under which the default flips.',
+      commonPairs: [
+        'Speed vs. safety',
+        'Breadth vs. depth',
+        'Build vs. buy',
+        'Generality vs. fit',
+        'Backward compatibility vs. clean design',
+        'Single tenant vs. multi tenant',
+      ],
+      templateFormat: {
         format: 'markdown-table',
         columns: ['Trade-off', 'Default', 'Flip when'],
+        normative: false,
       },
-      criteria: [
-        'Declares the pair of competing valid values.',
-        'Names the default unequivocally.',
-        'Defines the measurable condition under which the default inverts.',
-      ],
       example: [
         {
-          tradeoff: 'Build vs. buy',
-          default: 'Buy standard infra (Postgres, Stripe, Sentry)',
-          flipWhen: 'Vendor pricing breaks unit economics at scale',
+          tradeoff: 'Speed vs. safety',
+          default: 'Speed on internal tooling; safety on fiscal code',
+          flipWhen: 'Any code touching e-invoicing or payroll takes the safety default',
         },
       ],
     },
@@ -111,80 +128,86 @@ const spec = {
       order: 6,
       name: 'Ambition Triggers',
       slug: 'ambition-triggers',
-      required: true,
+      required: false,
       description:
-        'Provocative self-audit questions an agent evaluates before concluding a task to combat conservative regression to the mean.',
+        'Phrases, used by humans and quoted in AI agent prompts, that escalate scope when the team is being too small.',
       criteria: [
-        'Questions that disqualify mediocre implementations.',
-        'Challenges the agent to consider the broader system impact.',
-        'Invites uncomfortable, high-calibre refactoring.',
+        'Short enough to remember.',
+        'Forces a specific reframe.',
+        "Allowed to be answered with 'this is the 10x version'.",
       ],
       example: [
-        'Does this change give agents judgment when the prompt runs out, or just more instructions?',
-        'Would Linear, Stripe, or Vercel ship this surface?',
-        'If we had three more days, what changes — and why aren\'t we doing that now?',
+        'Is there a 10x version of this?',
+        'What would [reference team] ship here?',
+        'If we had three weeks instead of three days, what would change?',
+        "What's the version of this that ends up in the keynote demo?",
       ],
     },
     {
       order: 7,
       name: 'Reversibility',
       slug: 'reversibility',
-      required: true,
+      required: false,
       description:
-        'Classification of decisions into one-way doors (stopping for human review) vs. two-way doors (executing autonomously).',
+        'A map of which decisions are one-way doors (expensive to reverse) and which are two-way doors (cheap to reverse). One-way doors deserve deliberation. Two-way doors deserve speed.',
       criteria: [
-        'One-way doors: public API signatures, storage migrations, security boundaries.',
-        'Two-way doors: internal refactors, styling details, non-breaking helper utilities.',
+        'Lists the one-way doors in this project.',
+        'Lists the two-way doors in this project.',
+        'States the default disposition when in doubt.',
       ],
       example: {
-        oneWayDoors: [
-          'Public API breaking schema changes.',
-          'Database schema drops or irreversible migrations.',
-        ],
+        oneWayDoors: ['E-invoice signature format', 'Public API response shape', 'Domain name choice'],
         twoWayDoors: [
-          'Internal component refactoring.',
-          'Copy polish on existing landing pages.',
+          'Internal admin UI',
+          'Dependency on a given OSS library',
+          'Non-public code organisation',
         ],
+        whenInDoubt: 'Treat as two-way and move.',
       },
     },
   ],
-  governanceStack: [
-    {
-      layer: 1,
-      file: 'CONSTITUTION.md',
-      focus: 'Limits & Safety',
-      answers: 'What is forbidden?',
-    },
-    {
-      layer: 2,
-      file: 'AGENTS.md / CLAUDE.md',
-      focus: 'Operations & Execution',
-      answers: 'How to build, test, and run?',
-    },
-    {
-      layer: 3,
-      file: 'design.md',
-      focus: 'Visual & Design System',
-      answers: 'What tokens, layouts, and components to construct?',
-    },
-    {
-      layer: 4,
-      file: 'SOUL.md',
-      focus: 'Voice & Persona',
-      answers: 'Who is the product toward the end user?',
-    },
-    {
-      layer: 5,
-      file: 'NORTH.md',
-      focus: 'Purpose & Arbitration',
-      answers: 'Why does it exist, how far to go, and which trade-offs to pick?',
-    },
-  ],
+  proposedStack: {
+    note: 'A model proposed by this specification, not an established standard. Most repositories will use only some of these files.',
+    layers: [
+      {
+        layer: 1,
+        file: 'CONSTITUTION.md',
+        focus: 'Limits',
+        answers: 'Which principles and boundaries are non-negotiable?',
+      },
+      {
+        layer: 2,
+        file: 'AGENTS.md / CLAUDE.md',
+        focus: 'How agents work',
+        answers: 'How do we build, test, and run?',
+      },
+      {
+        layer: 3,
+        file: 'DESIGN.md',
+        focus: 'Look and feel',
+        answers: 'Which design tokens, and why?',
+      },
+      {
+        layer: 4,
+        file: 'SOUL.md',
+        focus: 'Agent persona',
+        answers: 'Who is the agent: voice, values, tone?',
+      },
+      {
+        layer: 5,
+        file: 'NORTH.md',
+        focus: 'Direction',
+        answers:
+          'Why does the project exist, how far do we push, and which trade-offs are already decided?',
+      },
+    ],
+  },
   versioning: {
     policy: 'semver',
     declareInFile: '<!-- NORTH.md spec: v0.1 -->',
-    breakingChangeDefinition:
-      'Renaming, removing, or changing the required status of any of the seven canonical sections.',
+    major: 'Breaking section changes.',
+    minor: 'Additive sections or clarifications that may change validator behaviour.',
+    patch: 'Editorial changes.',
   },
 };
 
