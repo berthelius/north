@@ -79,6 +79,16 @@ export const ui = {
     'template.step2Suffix': ' or AGENTS.md.',
     'template.step3': 'Optional: add the badge to your README.',
 
+    // Agent skill
+    'skill.title': 'Create your NORTH with your agent',
+    'skill.desc': 'Your agent reads the repository first, asks you one question at a time, drafts the seven sections, tests the draft against three decisions from your project and links it from the files your agents already read.',
+    'skill.withSkills': 'If your agent supports skills',
+    'skill.withoutSkills': 'If it does not',
+    'skill.promptNote': 'Copy the prompt and paste it into the chat: the same interview, in one message.',
+    'skill.copyPrompt': 'Copy the prompt',
+    'skill.promptCopied': 'Prompt copied',
+    'skill.github': 'View the skill on GitHub',
+
     // Badge
     'badge.title': 'Add the badge',
     'badge.desc': 'One line in your README. It tells readers the repository has a NORTH.md and links them to the spec.',
@@ -187,6 +197,16 @@ export const ui = {
     'template.step2': 'Enlázalo desde',
     'template.step2Suffix': ' o AGENTS.md.',
     'template.step3': 'Opcional: añade el badge a tu README.',
+
+    // Agent skill
+    'skill.title': 'Crea tu NORTH con tu agente',
+    'skill.desc': 'Tu agente lee primero el repositorio, te hace una pregunta cada vez, redacta las siete secciones, pone a prueba el borrador con tres decisiones de tu proyecto y lo enlaza desde los archivos que tus agentes ya leen.',
+    'skill.withSkills': 'Si tu agente admite skills',
+    'skill.withoutSkills': 'Si no las admite',
+    'skill.promptNote': 'Copia el prompt y pégalo en el chat: la misma entrevista, en un solo mensaje.',
+    'skill.copyPrompt': 'Copiar el prompt',
+    'skill.promptCopied': 'Prompt copiado',
+    'skill.github': 'Ver la skill en GitHub',
 
     // Badge
     'badge.title': 'Añade el badge',

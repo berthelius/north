@@ -1,0 +1,91 @@
+---
+import CodeBlock from "../interactive/CodeBlock.astro";
+import CopyButton from "../interactive/CopyButton.astro";
+import Arrow from "../ui/Arrow.astro";
+import prompt from "../../../skills/north-adoption/PROMPT.md?raw";
+import { useTranslations } from "../../data/locales";
+import type { Language } from "../../lib/i18n";
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
+
+const command = "npx skills add berthelius/north --skill north-adoption";
+const skillUrl = "https://github.com/berthelius/north/tree/main/skills/north-adoption";
+---
+
+<section id="skill" class="section skill" aria-labelledby="skill-heading">
+  <div class="frame">
+    <header class="section-head">
+      <h2 id="skill-heading" class="section-title">{t("skill.title")}</h2>
+      <p class="section-desc">{t("skill.desc")}</p>
+    </header>
+
+    <div class="skill__grid">
+      <div class="skill__route">
+        <h3 class="label skill__kicker">{t("skill.withSkills")}</h3>
+        <CodeBlock code={command} lang="bash" locale={lang} />
+      </div>
+
+      <div class="skill__route">
+        <h3 class="label skill__kicker">{t("skill.withoutSkills")}</h3>
+        <p class="skill__note">{t("skill.promptNote")}</p>
+        <CopyButton value={prompt.trimEnd()} lang={lang} label={t("skill.copyPrompt")} successLabel={t("skill.promptCopied")} />
+      </div>
+    </div>
+
+    <p class="skill__foot">
+      <a href={skillUrl} target="_blank" rel="noopener noreferrer" class="text-link" aria-label={`${t("skill.github")} (${t("a11y.newTab")})`}>
+        {t("skill.github")}
+        <Arrow dir="up-right" />
+      </a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .skill__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  .skill__route {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .skill__route :global(.code-block) {
+    align-self: stretch;
+  }
+
+  .skill__kicker {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .skill__note {
+    margin: 0;
+    max-width: 26rem;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--fg);
+  }
+
+  .skill__foot {
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+  }
+
+  @media (min-width: 960px) {
+    .skill__grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    }
+  }
+</style>
