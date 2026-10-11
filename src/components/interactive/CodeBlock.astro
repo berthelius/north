@@ -2,7 +2,7 @@
 /**
  * CodeBlock: code on an ink surface, with a language label and CopyButton.
  * Markdown gets a light, build-time highlight (structure in the bright tone,
- * syntax and placeholders muted, section numbers in the signal colour). The
+ * syntax and placeholders muted, section numbers bold in the bright tone). The
  * spans carry no extra text, so the copied text is the source, byte for byte.
  *
  * `lang` is the code language; `locale` is the page language for the UI labels.
@@ -99,16 +99,15 @@ const lines = code.split("\n").map(tokenize);
     color: var(--ink-muted);
   }
 
-  .tk-num {
-    color: var(--ink-accent);
-  }
-
+  .tk-num,
   .tk-head {
     color: #ffffff;
     font-weight: 700;
   }
 
+  /* The ring sits inside the ink block, so it takes the block's bright tone. */
   pre:focus-visible {
+    outline-color: var(--ink-fg);
     outline-offset: -2px;
   }
 </style>

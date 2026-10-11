@@ -139,10 +139,15 @@ const sections = [
       color 160ms;
   }
 
-  .index__row:hover .index__name,
   .index__row:hover .index__num,
   .index__row:hover :global(.index__arrow) {
-    color: var(--accent);
+    color: var(--fg);
+  }
+
+  .index__row:hover .index__name {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.12em;
   }
 
   .index__row:hover :global(.index__arrow) {

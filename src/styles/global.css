@@ -27,9 +27,10 @@
 }
 
 /* ------------------------------------------------------------------------
-   Tokens. Monochrome editorial system with one signal colour: rust, the
-   needle. Sibling of the BRTHLS system (same faces, same paper and ink),
-   with its own mark and accent.
+   Tokens. Monochrome editorial system: white, black and neutral greys, no
+   accent colour. Sibling of the BRTHLS system (same faces, same paper and
+   ink); its own mark is the compass needle. Emphasis is carried by weight,
+   outline, rules and ink squares, never by hue.
    ------------------------------------------------------------------------ */
 @theme {
   --font-display: "Anton", "Anton Fallback", Impact, "Arial Narrow", sans-serif;
@@ -50,8 +51,6 @@
 
   --color-ink: #111111;
   --color-paper: #fafafa;
-  --color-rust: #c2410c;
-  --color-rust-deep: #9a3412;
   /* Neutral scale, retuned against the #fafafa / #111111 grounds. */
   --color-stone-50: #f7f7f7;
   --color-stone-100: #efefef;
@@ -88,22 +87,17 @@
   --muted: #5c5c5c;
   --rule: #d6d6d6;
   --surface: #f0f0f0;
-  --accent: #c2410c;
-  --accent-hover: #9a3412;
 
-  /* Inverse: a true swap of ground and figure (the NORTH.md layer row). The
-     accent swaps with it so it keeps AA contrast on either ground. */
+  /* Inverse: a true swap of ground and figure (the NORTH.md layer row). */
   --inv-bg: var(--fg);
   --inv-fg: var(--bg);
   --inv-muted: #a3a3a3;
-  --inv-accent: #f0682c;
 
   /* Ink block: stays dark in both schemes (code, the template spread). */
   --ink-bg: #111111;
   --ink-fg: #f2f2f2;
   --ink-muted: #a3a3a3;
   --ink-rule: #2f2f2f;
-  --ink-accent: #f0682c;
 
   --frame: 90rem;
   /* 72ch of Inter at 16px, in rem: a ch-based width changes when the web font
@@ -131,11 +125,8 @@
     --muted: #a3a3a3;
     --rule: #2f2f2f;
     --surface: #1b1b1b;
-    --accent: #f0682c;
-    --accent-hover: #ff8f5c;
 
     --inv-muted: #5c5c5c;
-    --inv-accent: #c2410c;
 
     --ink-bg: #1a1a1a;
     --ink-rule: #333333;
@@ -195,13 +186,14 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--fg);
     outline-offset: 3px;
   }
 
+  /* A neutral wash rather than an inversion: the text keeps its own colour,
+     so selection reads on paper, on the ink blocks and in both schemes. */
   ::selection {
-    background: var(--accent);
-    color: #ffffff;
+    background: rgb(115 115 115 / 0.4);
   }
 
   ::placeholder {
@@ -211,12 +203,6 @@
 
   hr {
     border-color: var(--rule);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  ::selection {
-    color: #111111;
   }
 }
 
@@ -261,16 +247,17 @@
   font-weight: 400;
 }
 
-/* The signal: a small rust square, the only ornament in the system. */
+/* The marker: a small ink square, the only ornament in the system (the
+   same square that closes the BRTHLS wordmark). */
 .signal {
   display: inline-block;
   width: 7px;
   height: 7px;
   flex-shrink: 0;
-  background: var(--accent);
+  background: var(--fg);
 }
 
-/* Buttons: rectangular ink blocks; the arrow moves, the block fills. */
+/* Buttons: rectangular ink blocks; the arrow moves, the fill swaps. */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -295,9 +282,8 @@
 }
 
 .btn-primary:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #ffffff;
+  background: transparent;
+  color: var(--fg);
 }
 
 .btn-secondary {
@@ -318,13 +304,7 @@
   transform: translateX(3px);
 }
 
-@media (prefers-color-scheme: dark) {
-  .btn-primary:hover {
-    color: #111111;
-  }
-}
-
-/* Text link: hairline underline, rust on hover. */
+/* Text link: hairline underline that thickens on hover. */
 .text-link {
   display: inline-flex;
   align-items: center;
@@ -334,11 +314,11 @@
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.35em;
-  transition: color 160ms;
+  transition: text-decoration-thickness 160ms;
 }
 
 .text-link:hover {
-  color: var(--accent);
+  text-decoration-thickness: 2px;
 }
 
 /* Arrow icons follow the text colour and nudge on hover of their link. */
@@ -412,7 +392,7 @@ article.essay blockquote.pull-quote {
   line-height: 1.15;
   font-size: clamp(1.4rem, 3vw, 1.9rem);
   color: var(--fg);
-  border-left: 1px solid var(--accent);
+  border-left: 1px solid var(--fg);
   padding: 0.25rem 0 0.25rem 1.5rem;
 }
 

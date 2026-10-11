@@ -132,7 +132,7 @@ const layers = [
           Si <code>NORTH.md</code> fuese solo otro documento de visión o una lista de consejos, merecería borrarse. Existe para una situación que ni las reglas ni las declaraciones de visión resuelven: <strong class="text-[var(--fg)]">elegir entre caminos válidos que compiten</strong>.
         </p>
         <div class="mt-6 rounded-lg border border-[var(--rule)] bg-[var(--color-stone-100,#f5f5f4)] dark:bg-[var(--color-stone-900,#1c1917)] p-6">
-          <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] mb-2">El dilema</p>
+          <p class="font-mono text-xs uppercase tracking-wider text-[var(--fg)] font-semibold mb-2">El dilema</p>
           <p class="text-sm text-[var(--fg)] leading-relaxed italic">
             Un agente recibe una tarea de refactorización ambigua. Tres caminos pasan el CI, obedecen AGENTS.md y respetan CONSTITUTION.md:
             <br />1. El parche tímido que deja la causa raíz en su sitio.
@@ -154,7 +154,7 @@ const layers = [
         </p>
 
         <div
-          class="mt-8 overflow-x-auto border border-[var(--rule)] rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent)]"
+          class="mt-8 overflow-x-auto border border-[var(--rule)] rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--fg)]"
           tabindex="0"
           role="region"
           aria-label="Tabla de comparación de contexto de agentes"
@@ -170,7 +170,7 @@ const layers = [
             </thead>
             <tbody class="divide-y divide-[var(--rule)]">
               {conventions.map((c) => (
-                <tr class={c.file === "NORTH.md" ? "bg-[color-mix(in_srgb,var(--accent)_6%,transparent)]" : ""}>
+                <tr class={c.file === "NORTH.md" ? "bg-[color-mix(in_srgb,var(--fg)_6%,transparent)]" : ""}>
                   <td class="p-4 font-mono font-medium text-[var(--fg)] whitespace-nowrap">
                     {c.file}
                   </td>
@@ -270,18 +270,18 @@ const layers = [
             </div>
           ))}
 
-          <div class="rounded-lg border-2 border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_5%,transparent)] p-4 flex flex-col justify-between">
+          <div class="rounded-lg border-2 border-[var(--fg)] p-4 flex flex-col justify-between">
             <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">Capa 5: Dirección</p>
+              <p class="font-mono text-xs uppercase tracking-wider text-[var(--fg)] font-semibold">Capa 5: Dirección</p>
               <h3 class="mt-1 font-mono text-base font-bold text-[var(--fg)] flex items-center gap-1.5">
                 NORTH.md
-                <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+                <span class="inline-block w-1.5 h-1.5 bg-[var(--fg)]" aria-hidden="true"></span>
               </h3>
               <p class="mt-2 text-xs text-[var(--fg)] font-medium leading-normal">
                 Propósito, ambición y trade-offs precalculados.
               </p>
             </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--accent)] font-semibold">Esta especificación · MIT</p>
+            <p class="mt-3 text-[0.65rem] font-mono text-[var(--fg)] font-semibold">Esta especificación · MIT</p>
           </div>
         </div>
 

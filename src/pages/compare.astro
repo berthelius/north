@@ -130,7 +130,7 @@ const layers = [
           If <code>NORTH.md</code> were just another vision doc or a list of tips, it would deserve deletion. It exists for one situation that neither rules nor vision statements address: <strong class="text-[var(--fg)]">choosing between valid paths that compete</strong>.
         </p>
         <div class="mt-6 rounded-lg border border-[var(--rule)] bg-[var(--color-stone-100,#f5f5f4)] dark:bg-[var(--color-stone-900,#1c1917)] p-6">
-          <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] mb-2">The Dilemma</p>
+          <p class="font-mono text-xs uppercase tracking-wider text-[var(--fg)] font-semibold mb-2">The Dilemma</p>
           <p class="text-sm text-[var(--fg)] leading-relaxed italic">
             An agent receives an ambiguous refactoring task. Three paths all pass CI, obey AGENTS.md and respect CONSTITUTION.md:
             <br />1. The timid patch that leaves the root cause in place.
@@ -152,7 +152,7 @@ const layers = [
         </p>
 
         <div
-          class="mt-8 overflow-x-auto border border-[var(--rule)] rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent)]"
+          class="mt-8 overflow-x-auto border border-[var(--rule)] rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--fg)]"
           tabindex="0"
           role="region"
           aria-label="Agent context comparison table"
@@ -168,7 +168,7 @@ const layers = [
             </thead>
             <tbody class="divide-y divide-[var(--rule)]">
               {conventions.map((c) => (
-                <tr class={c.file === "NORTH.md" ? "bg-[color-mix(in_srgb,var(--accent)_6%,transparent)]" : ""}>
+                <tr class={c.file === "NORTH.md" ? "bg-[color-mix(in_srgb,var(--fg)_6%,transparent)]" : ""}>
                   <td class="p-4 font-mono font-medium text-[var(--fg)] whitespace-nowrap">
                     {c.file}
                   </td>
@@ -268,18 +268,18 @@ const layers = [
             </div>
           ))}
 
-          <div class="rounded-lg border-2 border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_5%,transparent)] p-4 flex flex-col justify-between">
+          <div class="rounded-lg border-2 border-[var(--fg)] p-4 flex flex-col justify-between">
             <div>
-              <p class="font-mono text-xs uppercase tracking-wider text-[var(--accent)] font-semibold">Layer 5: Direction</p>
+              <p class="font-mono text-xs uppercase tracking-wider text-[var(--fg)] font-semibold">Layer 5: Direction</p>
               <h3 class="mt-1 font-mono text-base font-bold text-[var(--fg)] flex items-center gap-1.5">
                 NORTH.md
-                <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+                <span class="inline-block w-1.5 h-1.5 bg-[var(--fg)]" aria-hidden="true"></span>
               </h3>
               <p class="mt-2 text-xs text-[var(--fg)] font-medium leading-normal">
                 Purpose, ambition and precomputed trade-offs.
               </p>
             </div>
-            <p class="mt-3 text-[0.65rem] font-mono text-[var(--accent)] font-semibold">This spec · MIT</p>
+            <p class="mt-3 text-[0.65rem] font-mono text-[var(--fg)] font-semibold">This spec · MIT</p>
           </div>
         </div>
 

@@ -180,17 +180,9 @@ const layers = [
     color: var(--inv-fg);
   }
 
-  .stratum--north .stratum__word,
+  /* --fg is the inverse figure here, so links and focus rings follow it. */
   .stratum--north .stratum__tag {
-    color: var(--inv-accent);
-  }
-
-  .stratum--north .stratum__origin a:hover {
-    color: var(--inv-accent);
-  }
-
-  .stratum--north :focus-visible {
-    outline-color: var(--inv-accent);
+    color: var(--fg);
   }
 
   .layers__foot {

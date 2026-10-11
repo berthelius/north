@@ -184,7 +184,7 @@ const faqJsonLd = {
         type="search"
         placeholder="Search the questions…"
         autocomplete="off"
-        class="w-full rounded-lg border border-[var(--rule)] bg-transparent px-4 py-3 text-sm font-sans text-[var(--fg)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none transition-colors"
+        class="w-full rounded-lg border border-[var(--rule)] bg-transparent px-4 py-3 text-sm font-sans text-[var(--fg)] placeholder:text-[var(--muted)] focus:border-[var(--fg)] focus:outline-none transition-colors"
       />
     </div>
 
@@ -202,7 +202,7 @@ const faqJsonLd = {
           <div class="faq-list space-y-0 divide-y divide-[var(--rule)] border-t border-[var(--rule)]">
             {items.map((item) => (
               <details class="faq-item group py-1">
-                <summary class="flex cursor-pointer items-start justify-between gap-4 py-4 font-sans text-[var(--fg)] text-base font-medium list-none select-none hover:text-[var(--accent)] transition-colors">
+                <summary class="flex cursor-pointer items-start justify-between gap-4 py-4 font-sans text-[var(--fg)] text-base font-medium list-none select-none">
                   <span class="faq-question max-w-[54ch] leading-snug">{item.q}</span>
                   <span
                     class="faq-icon mt-0.5 shrink-0 text-[var(--muted)] transition-transform duration-200 group-open:rotate-45"
@@ -319,9 +319,15 @@ const faqJsonLd = {
   }
 
   /* Rotate icon on open */
+  summary:hover .faq-question {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+  }
+
   details[open] .faq-icon {
     transform: rotate(45deg);
-    color: var(--accent);
+    color: var(--fg);
   }
 
   /* Answer typography */

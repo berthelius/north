@@ -198,7 +198,7 @@ const domainKeys = Object.keys(domainLabels);
   }
 
   .tag--accent {
-    color: var(--accent);
+    color: var(--fg);
     border-color: currentColor;
   }
 
@@ -229,9 +229,14 @@ const domainKeys = Object.keys(domainLabels);
       color 160ms;
   }
 
-  .example-row:hover .example-row__title,
   .example-row:hover :global(.example-row__arrow) {
-    color: var(--accent);
+    color: var(--fg);
+  }
+
+  .example-row:hover .example-row__title {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.12em;
   }
 
   .example-row:hover :global(.example-row__arrow) {
@@ -289,7 +294,7 @@ const domainKeys = Object.keys(domainLabels);
   }
 
   .page-foot a:hover {
-    color: var(--accent);
+    text-decoration-thickness: 2px;
   }
 
   @media (min-width: 960px) {

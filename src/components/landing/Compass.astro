@@ -123,12 +123,12 @@ const bearings = [-26, 12.8].map((deg) => {
   }
 
   .compass__tick--north {
-    stroke: var(--accent);
+    stroke: var(--fg);
     stroke-width: 2;
   }
 
   .compass__lubber {
-    fill: var(--accent);
+    fill: var(--fg);
   }
 
   .compass__bearing {
@@ -137,10 +137,9 @@ const bearings = [-26, 12.8].map((deg) => {
     stroke-dasharray: 2 5;
   }
 
-  .compass__north-w {
-    fill: var(--accent);
-  }
-
+  /* North half solid ink, south half in outline: the needle reads its
+     heading by fill, not by colour. */
+  .compass__north-w,
   .compass__north-e {
     fill: var(--fg);
   }
