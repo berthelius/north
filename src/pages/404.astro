@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Compass from "../components/landing/Compass.astro";
 ---
 
 <Base
@@ -7,16 +8,87 @@ import Base from "../layouts/Base.astro";
   description="This page does not exist. Go back to the NORTH.md specification."
   noindex
 >
-  <main id="main-content" class="mx-auto max-w-3xl px-6 py-24 md:py-32">
-    <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">404</p>
-    <h1 class="mt-5 font-display text-4xl md:text-5xl leading-[1.05] tracking-tight">
-      Off course
-    </h1>
-    <p class="mt-6 max-w-prose text-[var(--muted)]">
-      There is no page at this address. The destination has not moved:
-      <a href="/" class="text-[var(--fg)] underline decoration-dotted underline-offset-4 hover:text-[var(--accent)]">home</a>
-      or
-      <a href="/spec" class="text-[var(--fg)] underline decoration-dotted underline-offset-4 hover:text-[var(--accent)]">the specification</a>.
+  <main id="main-content" class="frame lost">
+    <p class="label lost__code">
+      <span class="signal" aria-hidden="true"></span>
+      404
     </p>
+    <div class="lost__grid">
+      <div>
+        <h1 class="lost__title">Off course</h1>
+        <p class="lost__text">
+          There is no page at this address. The destination has not moved:
+          <a href="/">home</a>
+          or
+          <a href="/spec">the specification</a>.
+        </p>
+      </div>
+      <div class="lost__instrument">
+        <Compass bearing={132} />
+      </div>
+    </div>
   </main>
 </Base>
+
+<style>
+  .lost {
+    padding-block: clamp(2rem, 5vw, 3.5rem) clamp(4rem, 9vw, 7rem);
+  }
+
+  .lost__code {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0;
+    padding-bottom: 0.9rem;
+    color: var(--muted);
+    border-bottom: 1px solid var(--fg);
+  }
+
+  .lost__grid {
+    display: grid;
+    gap: 3rem;
+    margin-top: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .lost__title {
+    margin: 0;
+    font-size: clamp(3.5rem, 13vw, 9.5rem);
+    line-height: 0.9;
+  }
+
+  .lost__text {
+    margin: 1.75rem 0 0;
+    max-width: 30rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .lost__text a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+
+  .lost__text a:hover {
+    color: var(--accent);
+  }
+
+  .lost__instrument {
+    width: min(100%, 15rem);
+  }
+
+  @media (min-width: 960px) {
+    .lost__grid {
+      grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+      align-items: center;
+    }
+
+    .lost__instrument {
+      justify-self: end;
+      width: min(100%, 24rem);
+    }
+  }
+</style>

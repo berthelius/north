@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { getCollection } from "astro:content";
+import Arrow from "../../components/ui/Arrow.astro";
 
 const allExamples = await getCollection("examples");
 const examples = allExamples.sort((a, b) => a.data.order - b.data.order);
@@ -20,129 +21,313 @@ const domainKeys = Object.keys(domainLabels);
 <Base
   title="Examples — NORTH.md across domains"
   description="NORTH.md examples: this site's own file, plus five illustrative files for a SaaS, an open-source library, a creative agency, a side project, and an internal platform."
+  ogImage="/og/examples.png"
 >
-  <main class="mx-auto max-w-3xl px-6 py-24 md:py-32">
-    <!-- Header -->
-    <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-      northfile.dev / examples
-    </p>
-
-    <h1 class="mt-6 font-display text-4xl md:text-5xl leading-[1.0] tracking-tight">
-      Examples
-    </h1>
-
-    <p class="mt-5 max-w-2xl text-lg text-[var(--muted)] leading-relaxed">
-      NORTH.md reads differently depending on the project type. The first
-      example is real: the NORTH.md at the root of this site's repository. The other five
-      are illustrative — composites of fictional organisations, with invented
-      names, figures and domains — written as complete files you could adapt.
-    </p>
+  <main class="frame examples">
+    <header class="examples__head">
+      <p class="label examples__crumb">
+        <span class="signal" aria-hidden="true"></span>
+        northfile.dev / examples
+      </p>
+      <h1 class="examples__title">Examples</h1>
+      <p class="examples__intro">
+        NORTH.md reads differently depending on the project type. The first
+        example is real: the NORTH.md at the root of this site's repository. The other five
+        are illustrative — composites of fictional organisations, with invented
+        names, figures and domains — written as complete files you could adapt.
+      </p>
+    </header>
 
     <!-- Domain filter chips -->
-    <div
-      class="mt-8 flex flex-wrap gap-2"
-      id="filter-chips"
-      role="group"
-      aria-label="Filter examples by domain"
-    >
-      <button
-        class="filter-chip active font-mono text-xs px-3 py-1.5 rounded-full border border-[var(--rule)] text-[var(--fg)] transition hover:border-[var(--accent)] data-[active=true]:bg-[var(--fg)] data-[active=true]:text-[var(--bg)] data-[active=true]:border-[var(--fg)]"
-        data-domain="all"
-        data-active="true"
-        aria-pressed="true"
-      >
-        All
-      </button>
+    <div class="chips" id="filter-chips" role="group" aria-label="Filter examples by domain">
+      <button class="filter-chip label" data-domain="all" data-active="true" aria-pressed="true">All</button>
       {domainKeys.map((d) => (
-        <button
-          class="filter-chip font-mono text-xs px-3 py-1.5 rounded-full border border-[var(--rule)] text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--fg)] data-[active=true]:bg-[var(--fg)] data-[active=true]:text-[var(--bg)] data-[active=true]:border-[var(--fg)]"
-          data-domain={d}
-          data-active="false"
-          aria-pressed="false"
-        >
+        <button class="filter-chip label" data-domain={d} data-active="false" aria-pressed="false">
           {domainLabels[d]}
         </button>
       ))}
     </div>
 
     <!-- Example list -->
-    <ul class="mt-12 space-y-0" id="example-list" role="list">
+    <ul class="example-list" id="example-list" role="list">
       {examples.map((example) => (
-        <li
-          class="example-card border-t border-[var(--rule)] py-8 group"
-          data-domain={example.data.domain}
-        >
-          <a
-            href={`/examples/${example.id}`}
-            class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded"
-          >
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center gap-3 flex-wrap">
-                  <span
-                    class="font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border"
-                    style={`color: var(--accent); border-color: currentColor;`}
-                  >
-                    {domainLabels[example.data.domain]}
-                  </span>
-                  <span class="font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border border-[var(--rule)] text-[var(--muted)]">
-                    {example.data.kind === "real" ? "Real" : "Illustrative"}
-                  </span>
-                </div>
-                <h2 class="mt-2 font-display text-2xl md:text-3xl leading-tight tracking-tight group-hover:text-[var(--accent)] transition-colors">
-                  {example.data.title}
-                </h2>
-                <p class="mt-1.5 text-[var(--muted)] text-base leading-snug">
-                  {example.data.subtitle}
-                </p>
-              </div>
-              <span
-                class="shrink-0 text-[var(--muted)] text-xl group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all hidden sm:block mt-1"
-                aria-hidden="true"
-              >
-                →
-              </span>
-            </div>
+        <li class="example-card" data-domain={example.data.domain}>
+          <a href={`/examples/${example.id}`} class="example-row">
+            <span class="example-row__tags">
+              <span class="tag tag--accent label">{domainLabels[example.data.domain]}</span>
+              <span class="tag label">{example.data.kind === "real" ? "Real" : "Illustrative"}</span>
+            </span>
+            <h2 class="example-row__title">{example.data.title}</h2>
+            <p class="example-row__sub">{example.data.subtitle}</p>
+            <Arrow class="example-row__arrow" />
           </a>
         </li>
       ))}
     </ul>
 
-    <div class="border-t border-[var(--rule)] pt-8 mt-2"></div>
-
     <!-- Submit CTA -->
-    <div class="mt-8 rounded-lg border border-[var(--rule)] p-6">
-      <h2 class="font-display text-xl">Submit your NORTH.md</h2>
-      <p class="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-        Have a NORTH.md that exemplifies the convention for your domain? Open a
-        GitHub issue — we review and add examples that demonstrate a genuinely
-        different pattern.
-      </p>
-      <a
-        href="https://github.com/berthelius/north/issues/new"
-        class="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)]"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Open an issue
-        <span aria-hidden>↗</span>
-      </a>
-    </div>
+    <section class="submit" aria-labelledby="submit-heading">
+      <h2 id="submit-heading" class="submit__title">Submit your NORTH.md</h2>
+      <div>
+        <p class="submit__text">
+          Have a NORTH.md that exemplifies the convention for your domain? Open a
+          GitHub issue — we review and add examples that demonstrate a genuinely
+          different pattern.
+        </p>
+        <a
+          href="https://github.com/berthelius/north/issues/new"
+          class="btn btn-secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open an issue
+          <Arrow dir="up-right" class="btn-arrow" />
+        </a>
+      </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="mt-20 border-t border-[var(--rule)] pt-10 text-sm text-[var(--muted)]">
+    <footer class="page-foot">
       <p>
-        <a href="/" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">← Back to northfile.dev</a>
+        <a href="/">← Back to northfile.dev</a>
       </p>
-      <p class="mt-3">
+      <p>
         MIT ©{" "}
-        <a href="https://brthls.com" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Viktor Berthelius</a>
+        <a href="https://brthls.com">Viktor Berthelius</a>
         {" "}·{" "}
-        <a href="https://github.com/berthelius/north" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">GitHub</a>
+        <a href="https://github.com/berthelius/north">GitHub</a>
       </p>
     </footer>
   </main>
 </Base>
+
+<style>
+  .examples {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 6vw, 5rem);
+  }
+
+  .examples__head {
+    display: grid;
+    gap: 1.5rem clamp(2rem, 5vw, 5rem);
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--fg);
+  }
+
+  .examples__crumb {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .examples__title {
+    margin: 0;
+    font-size: clamp(3.5rem, 13vw, 9rem);
+    line-height: 0.9;
+  }
+
+  .examples__intro {
+    margin: 0;
+    max-width: 36rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: clamp(1.75rem, 3vw, 2.5rem) 0;
+  }
+
+  .filter-chip {
+    min-height: 2.75rem;
+    padding: 0 0.95rem;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--rule);
+    cursor: pointer;
+    transition:
+      color 160ms,
+      border-color 160ms,
+      background-color 160ms;
+  }
+
+  .filter-chip:hover {
+    color: var(--fg);
+    border-color: var(--fg);
+  }
+
+  .filter-chip[data-active="true"] {
+    color: var(--bg);
+    background: var(--fg);
+    border-color: var(--fg);
+  }
+
+  .example-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .example-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "tags arrow"
+      "title title"
+      "sub sub";
+    align-items: center;
+    padding-block: 1.5rem 1.6rem;
+    border-top: 1px solid var(--rule);
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .example-row__tags {
+    grid-area: tags;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    padding: 0.2rem 0.5rem;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+  }
+
+  .tag--accent {
+    color: var(--accent);
+    border-color: currentColor;
+  }
+
+  .example-row__title {
+    grid-area: title;
+    margin: 0.9rem 0 0;
+    font-size: clamp(1.9rem, 7vw, 3.25rem);
+    line-height: 1;
+    transition: color 160ms;
+  }
+
+  .example-row__sub {
+    grid-area: sub;
+    margin: 0.6rem 0 0;
+    max-width: 34rem;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .example-row :global(.example-row__arrow) {
+    grid-area: arrow;
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--muted);
+    transition:
+      transform 260ms var(--ease-out-expo),
+      color 160ms;
+  }
+
+  .example-row:hover .example-row__title,
+  .example-row:hover :global(.example-row__arrow) {
+    color: var(--accent);
+  }
+
+  .example-row:hover :global(.example-row__arrow) {
+    transform: translateX(4px);
+  }
+
+  .example-row:focus-visible {
+    outline-offset: -2px;
+  }
+
+  .submit {
+    display: grid;
+    gap: 1.25rem clamp(2rem, 5vw, 5rem);
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--fg);
+  }
+
+  .submit__title {
+    margin: 0;
+    font-size: clamp(1.9rem, 4vw, 2.75rem);
+  }
+
+  .submit__text {
+    margin: 0 0 1.5rem;
+    max-width: 34rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .page-foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .page-foot p {
+    margin: 0;
+  }
+
+  .page-foot a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  .page-foot a:hover {
+    color: var(--accent);
+  }
+
+  @media (min-width: 960px) {
+    .examples__head {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      align-items: end;
+    }
+
+    .examples__crumb {
+      grid-column: 1 / -1;
+    }
+
+    .example-row {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr) 3rem;
+      grid-template-areas: "tags title sub arrow";
+      align-items: baseline;
+      column-gap: 2rem;
+      padding-block: 1.75rem;
+    }
+
+    .example-row__title,
+    .example-row__sub {
+      margin: 0;
+    }
+
+    .example-row :global(.example-row__arrow) {
+      justify-self: end;
+      align-self: center;
+    }
+
+    .submit {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    }
+  }
+</style>
 
 <script>
   const chips = document.querySelectorAll<HTMLButtonElement>(".filter-chip");
@@ -157,7 +342,7 @@ const domainKeys = Object.keys(domainLabels);
 
     cards.forEach((card) => {
       const matches = domain === "all" || card.dataset.domain === domain;
-      (card as HTMLElement).style.display = matches ? "" : "none";
+      card.style.display = matches ? "" : "none";
     });
   }
 

@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { getCollection, render } from "astro:content";
+import Arrow from "../../components/ui/Arrow.astro";
 
 export async function getStaticPaths() {
   const examples = await getCollection("examples");
@@ -39,167 +40,296 @@ const sourceUrl = isReal
   description={isReal
     ? `${example.data.subtitle}. The real NORTH.md behind northfile.dev, reproduced verbatim.`
     : `${example.data.subtitle}. An illustrative NORTH.md example for the ${domainLabel} domain.`}
+  ogImage="/og/examples.png"
 >
-  <main class="mx-auto max-w-3xl px-6 py-24 md:py-32">
+  <main class="frame specimen">
     <!-- Breadcrumb -->
-    <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-      <a href="/examples" class="hover:text-[var(--fg)] transition-colors">examples</a>
-      <span class="mx-2">/</span>
-      <span class="text-[var(--fg)]">{example.data.title}</span>
+    <p class="label specimen__crumb">
+      <span class="signal" aria-hidden="true"></span>
+      <a href="/examples">examples</a>
+      <span aria-hidden="true">/</span>
+      <span class="specimen__here">{example.data.title}</span>
     </p>
 
-    <!-- Header -->
-    <div class="mt-6">
-      <div class="flex items-center gap-2 flex-wrap">
-        <span
-          class="inline-block font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border"
-          style="color: var(--accent); border-color: currentColor;"
-        >
-          {domainLabel}
-        </span>
-        <span class="inline-block font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border border-[var(--rule)] text-[var(--muted)]">
-          {isReal ? "Real" : "Illustrative"}
-        </span>
+    <div class="specimen__grid">
+      <!-- The rail: what this file is, and how to take it -->
+      <div class="specimen__rail">
+        <div class="specimen__tags">
+          <span class="tag tag--accent label">{domainLabel}</span>
+          <span class="tag label">{isReal ? "Real" : "Illustrative"}</span>
+        </div>
+
+        <h1 class="specimen__title">{example.data.title}</h1>
+        <p class="specimen__sub">{example.data.subtitle}</p>
+        <p class="specimen__kind">{kindNote}</p>
+
+        <aside class="specimen__note" aria-label={isReal ? "About this file" : "Why this NORTH.md works"}>
+          <p class="label specimen__note-label">{isReal ? "About this file" : "Why this NORTH.md works"}</p>
+          <p class="specimen__note-text">{example.data.whyItWorks}</p>
+        </aside>
+
+        <div class="specimen__copy">
+          <button id="copy-btn" class="btn btn-primary" data-body={rawBody}>
+            <span id="copy-label">Copy template</span>
+          </button>
+          <span id="copy-feedback" class="specimen__feedback" aria-live="polite" aria-atomic="true">
+            Copied to clipboard
+          </span>
+        </div>
       </div>
 
-      <h1 class="mt-3 font-display text-4xl md:text-5xl leading-[1.0] tracking-tight">
-        {example.data.title}
-      </h1>
-      <p class="mt-3 text-lg text-[var(--muted)] leading-snug">
-        {example.data.subtitle}
-      </p>
-      <p class="mt-2 text-sm text-[var(--muted)]">
-        {kindNote}
-      </p>
+      <!-- Rendered NORTH.md body -->
+      <article class="prose-north" aria-label={`${example.data.title} NORTH.md content`}>
+        <Content />
+      </article>
     </div>
-
-    <!-- Editor's note callout -->
-    <aside
-      class="mt-8 border-l-2 border-[var(--accent)] pl-5 py-1"
-      aria-label={isReal ? "About this file" : "Why this NORTH.md works"}
-    >
-      <p class="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--accent)] mb-2">
-        {isReal ? "About this file" : "Why this NORTH.md works"}
-      </p>
-      <p class="text-sm italic text-[var(--muted)] leading-relaxed">
-        {example.data.whyItWorks}
-      </p>
-    </aside>
-
-    <!-- Copy button -->
-    <div class="mt-8 flex items-center gap-3">
-      <button
-        id="copy-btn"
-        class="inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-        data-body={rawBody}
-      >
-        <span id="copy-label">Copy template</span>
-      </button>
-      <span
-        id="copy-feedback"
-        class="text-sm text-[var(--muted)] opacity-0 transition-opacity"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        Copied to clipboard
-      </span>
-    </div>
-
-    <!-- Rendered NORTH.md body -->
-    <article
-      class="prose-north mt-12"
-      aria-label={`${example.data.title} NORTH.md content`}
-    >
-      <Content />
-    </article>
 
     <!-- Footer actions -->
-    <div class="mt-16 border-t border-[var(--rule)] pt-8 flex flex-wrap gap-4 items-center justify-between">
-      <a
-        href="/examples"
-        class="inline-flex items-center gap-2 text-sm text-[var(--muted)] hover:text-[var(--fg)] transition-colors"
-      >
-        <span aria-hidden>←</span> All examples
+    <div class="specimen__actions">
+      <a href="/examples" class="text-link">
+        <Arrow dir="left" /> All examples
       </a>
-      <a
-        href={sourceUrl}
-        class="inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-4 py-2 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)]"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href={sourceUrl} class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
         View source on GitHub
-        <span aria-hidden>↗</span>
+        <Arrow dir="up-right" class="btn-arrow" />
       </a>
     </div>
 
     <!-- Site footer -->
-    <footer class="mt-16 border-t border-[var(--rule)] pt-8 text-sm text-[var(--muted)]">
+    <footer class="specimen__foot">
       <p>
         MIT ©{" "}
-        <a href="https://brthls.com" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Viktor Berthelius</a>
+        <a href="https://brthls.com">Viktor Berthelius</a>
         {" "}·{" "}
-        <a href="https://github.com/berthelius/north" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">GitHub</a>
+        <a href="https://github.com/berthelius/north">GitHub</a>
         {" "}·{" "}
-        <a href="/" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">northfile.dev</a>
+        <a href="/">northfile.dev</a>
       </p>
     </footer>
   </main>
 </Base>
 
-<style is:global>
-  /* Prose styles for the rendered NORTH.md body */
-  .prose-north {
+<style>
+  .specimen {
+    padding-block: clamp(2rem, 5vw, 3.5rem) clamp(3rem, 6vw, 5rem);
+  }
+
+  .specimen__crumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0;
+    padding-bottom: 1rem;
+    color: var(--muted);
+    border-bottom: 1px solid var(--fg);
+  }
+
+  .specimen__crumb a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-block: -0.75rem;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  .specimen__crumb a:hover {
+    color: var(--accent);
+  }
+
+  .specimen__here {
     color: var(--fg);
+  }
+
+  .specimen__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 4rem) clamp(3rem, 6vw, 6rem);
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .specimen__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    padding: 0.2rem 0.5rem;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+  }
+
+  .tag--accent {
+    color: var(--accent);
+    border-color: currentColor;
+  }
+
+  .specimen__title {
+    margin: 1.25rem 0 0;
+    font-size: clamp(3rem, 10vw, 5.25rem);
+    line-height: 0.92;
+  }
+
+  .specimen__sub {
+    margin: 1rem 0 0;
+    font-size: 1.125rem;
+    line-height: 1.45;
+    color: var(--fg);
+  }
+
+  .specimen__kind {
+    margin: 0.75rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .specimen__note {
+    margin-top: 2rem;
+    padding: 0.1rem 0 0.1rem 1.25rem;
+    border-left: 1px solid var(--accent);
+  }
+
+  .specimen__note-label {
+    margin: 0 0 0.6rem;
+    color: var(--accent);
+  }
+
+  .specimen__note-text {
+    margin: 0;
+    font-size: 0.9375rem;
     line-height: 1.6;
-    max-width: none;
+    color: var(--muted);
+  }
+
+  .specimen__copy {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .specimen__copy .btn {
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* Hidden until a copy succeeds: becoming visible is what the live
+     region announces. */
+  .specimen__feedback {
+    visibility: hidden;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .specimen__feedback.is-shown {
+    visibility: visible;
+  }
+
+  .specimen__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--fg);
+  }
+
+  .specimen__foot {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .specimen__foot p {
+    margin: 0;
+  }
+
+  .specimen__foot a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  .specimen__foot a:hover {
+    color: var(--accent);
+  }
+
+  @media (min-width: 1024px) {
+    .specimen__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      align-items: start;
+    }
+  }
+
+  /* Pin the rail only when it fits on screen. */
+  @media (min-width: 1024px) and (min-height: 760px) {
+    .specimen__rail {
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
+  }
+</style>
+
+<style is:global>
+  /* The rendered NORTH.md, set as a document under its own ink rule. */
+  .prose-north {
+    max-width: 46rem;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--fg);
   }
 
   .prose-north h1 {
-    font-family: var(--font-display);
-    font-size: var(--text-3xl);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    margin-top: 0;
-    margin-bottom: 1.25rem;
+    margin: 0 0 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--fg);
+    font-size: clamp(2rem, 4vw, 2.75rem);
   }
 
   .prose-north h2 {
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-top: 2.5rem;
-    margin-bottom: 0.75rem;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 0.5rem;
+    margin: 2.75rem 0 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rule);
+    font-size: clamp(1.45rem, 2.6vw, 1.85rem);
   }
 
   .prose-north h3 {
+    margin: 1.75rem 0 0.5rem;
     font-family: var(--font-sans);
-    font-size: var(--text-base);
-    font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 650;
+    letter-spacing: 0;
+    line-height: 1.4;
+    text-transform: none;
   }
 
   .prose-north p {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: var(--fg);
+    margin: 0 0 1rem;
   }
 
   .prose-north ul,
   .prose-north ol {
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    padding-left: 1.5rem;
+    margin: 0.5rem 0 1.1rem;
+    padding-left: 1.25rem;
   }
 
   .prose-north li {
-    margin-bottom: 0.375rem;
-    color: var(--fg);
+    margin-bottom: 0.4rem;
+    padding-left: 0.25rem;
   }
 
   .prose-north li::marker {
@@ -207,8 +337,7 @@ const sourceUrl = isReal
   }
 
   .prose-north strong {
-    font-weight: 600;
-    color: var(--fg);
+    font-weight: 650;
   }
 
   .prose-north em {
@@ -217,104 +346,75 @@ const sourceUrl = isReal
   }
 
   .prose-north code {
-    font-family: var(--font-mono);
-    font-size: 0.875em;
-    background: var(--color-stone-100);
-    color: var(--fg);
-    padding: 0.125rem 0.35rem;
-    border-radius: 0.25rem;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .prose-north code {
-      background: var(--color-stone-800);
-    }
+    padding: 0.1em 0.35em;
+    font-size: 0.86em;
+    background: var(--surface);
   }
 
   .prose-north pre {
-    background: var(--color-stone-100);
-    border: 1px solid var(--rule);
-    border-radius: 0.5rem;
-    padding: 1.25rem;
-    overflow-x: auto;
     margin: 1.25rem 0;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .prose-north pre {
-      background: var(--color-stone-900);
-    }
+    padding: 1.25rem 1.35rem;
+    overflow-x: auto;
+    background: var(--ink-bg);
+    color: var(--ink-fg);
+    border: 1px solid var(--ink-rule);
   }
 
   .prose-north pre code {
-    background: none;
     padding: 0;
-    font-size: 0.875rem;
-    line-height: 1.6;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    background: none;
   }
 
   .prose-north blockquote {
-    border-left: 2px solid var(--rule);
-    padding-left: 1.25rem;
     margin: 1.25rem 0;
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--accent);
     color: var(--muted);
-    font-style: italic;
   }
 
   .prose-north hr {
-    border: none;
-    border-top: 1px solid var(--rule);
     margin: 2rem 0;
+    border: 0;
+    border-top: 1px solid var(--rule);
   }
 
-  /* Tables */
   .prose-north table {
+    display: block;
     width: 100%;
-    border-collapse: collapse;
-    font-size: var(--text-sm);
     margin: 1.25rem 0;
     overflow-x: auto;
-    display: block;
-  }
-
-  .prose-north thead {
-    border-bottom: 1px solid var(--rule);
+    border-collapse: collapse;
+    border-top: 1px solid var(--fg);
+    font-size: 0.9rem;
   }
 
   .prose-north th {
-    text-align: left;
-    padding: 0.5rem 0.75rem;
-    font-weight: 600;
-    font-size: 0.8125rem;
-    color: var(--muted);
+    padding: 0.75rem 1rem 0.75rem 0;
     font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.09em;
+    text-align: left;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
     white-space: nowrap;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
   }
 
   .prose-north td {
-    padding: 0.625rem 0.75rem;
-    border-bottom: 1px solid var(--rule);
+    padding: 0.75rem 1rem 0.75rem 0;
     vertical-align: top;
     line-height: 1.5;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .prose-north tr:last-child td {
-    border-bottom: none;
-  }
-
-  /* HTML comment visibility suppression */
-  .prose-north comment {
-    display: none;
-  }
-
-  /* Links */
   .prose-north a {
     color: var(--fg);
     text-decoration: underline;
-    text-decoration-style: dotted;
-    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
   }
 
   .prose-north a:hover {
@@ -325,7 +425,7 @@ const sourceUrl = isReal
 <script>
   const copyBtn = document.getElementById("copy-btn") as HTMLButtonElement | null;
   const copyLabel = document.getElementById("copy-label");
-  const copyFeedback = document.getElementById("copy-feedback") as HTMLElement | null;
+  const copyFeedback = document.getElementById("copy-feedback");
 
   copyBtn?.addEventListener("click", async () => {
     const body = copyBtn.dataset.body ?? "";
@@ -335,19 +435,14 @@ const sourceUrl = isReal
       await navigator.clipboard.writeText(body);
 
       if (copyLabel) copyLabel.textContent = "Copied";
-      if (copyFeedback) {
-        copyFeedback.style.opacity = "1";
-        setTimeout(() => {
-          if (copyFeedback) copyFeedback.style.opacity = "0";
-          if (copyLabel) copyLabel.textContent = "Copy template";
-        }, 2000);
-      }
+      copyFeedback?.classList.add("is-shown");
+      setTimeout(() => {
+        copyFeedback?.classList.remove("is-shown");
+        if (copyLabel) copyLabel.textContent = "Copy template";
+      }, 2000);
     } catch {
-      // Clipboard API not available — open GitHub source as fallback
-      window.open(
-        `https://github.com/berthelius/north/blob/main/src/content/examples/${slug}.md`,
-        "_blank"
-      );
+      // Clipboard API not available: open the GitHub source as a fallback.
+      window.open(`https://github.com/berthelius/north/blob/main/src/content/examples/${slug}.md`, "_blank");
     }
   });
 </script>
