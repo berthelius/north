@@ -72,7 +72,8 @@ const jsonLd = {
     </aside>
 
     <!-- Mobile TOC — collapsible -->
-    <details class="toc-mobile" aria-label="Table of contents">
+    <nav class="toc-mobile" aria-label="Table of contents (mobile)">
+    <details>
       <summary class="toc-mobile-summary">
         <span>Contents</span>
         <svg
@@ -90,7 +91,7 @@ const jsonLd = {
             stroke-linejoin="round"></path>
         </svg>
       </summary>
-      <nav aria-label="Table of contents (mobile)">
+      <div>
         <ol class="toc-mobile-list">
           {
             sections.map((s) => (
@@ -102,8 +103,9 @@ const jsonLd = {
             ))
           }
         </ol>
-      </nav>
+      </div>
     </details>
+    </nav>
 
     <!-- Main content -->
     <main class="spec-main" id="main-content">
@@ -821,7 +823,7 @@ const jsonLd = {
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--accent);
+    color: var(--accent-hover);
     background: color-mix(in srgb, var(--accent) 10%, transparent);
     border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
     padding: 0.25rem 0.625rem;

@@ -71,6 +71,7 @@ const codeColor = variant === 'dark'
     >{lang}</span>
     <CopyButton
       target={`#${id}`}
+      onDark={variant === 'dark'}
       label="Copy"
       successLabel="Copied!"
     />

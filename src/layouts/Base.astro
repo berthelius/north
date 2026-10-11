@@ -1,6 +1,11 @@
 ---
 import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
+// Preload only latin subsets that gate LCP. Measured (Lighthouse mobile): on the
+// landing the LCP element is the Anton h1, and preloading Inter as well delays it
+// (LCP 1.8s vs 1.1s); on text pages the LCP element is an Inter paragraph.
+import antonLatin from "@fontsource/anton/files/anton-latin-400-normal.woff2?url";
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import { getAlternateLinks, normalizePath, type Language } from "../lib/i18n";
 
 interface Props {
@@ -28,6 +33,9 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
 const canonicalUrl = new URL(normalizePath(new URL(canonical ?? Astro.url.pathname, siteUrl).pathname), siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
 
+const isLanding = ["/", "/es"].includes(normalizePath(Astro.url.pathname));
+const fontPreloads = isLanding ? [antonLatin] : [antonLatin, interLatin];
+
 const alternateLinks = getAlternateLinks(Astro.url.pathname, siteUrl);
 ---
 
@@ -41,6 +49,11 @@ const alternateLinks = getAlternateLinks(Astro.url.pathname, siteUrl);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Fonts: latin subsets only; the rest load on demand via unicode-range -->
+    {fontPreloads.map((href) => (
+      <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />
+    ))}
 
     <!-- Language Alternates (Hreflang) -->
     {alternateLinks.map(({ lang: l, href }) => (

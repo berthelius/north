@@ -14,6 +14,8 @@ interface Props {
   target?: string;
   label?: string;
   successLabel?: string;
+  /** Render for a dark surface (stone-900) so text keeps AA contrast. */
+  onDark?: boolean;
   class?: string;
 }
 
@@ -22,6 +24,7 @@ const {
   target,
   label = 'Copy',
   successLabel = 'Copied!',
+  onDark = false,
   class: className = '',
 } = Astro.props;
 
@@ -37,13 +40,13 @@ const dataTarget = target ?? '';
     'px-2.5 py-1',
     'text-xs font-mono font-medium',
     'rounded',
-    'border border-[var(--rule,#e7e5e4)]',
-    'text-[var(--muted,#78716c)]',
+    onDark
+      ? 'border border-[var(--color-stone-600)] text-[var(--color-stone-300)] hover:border-[var(--color-stone-100)] hover:text-[var(--color-stone-100)]'
+      : 'border border-[var(--rule,#e7e5e4)] text-[var(--muted,#78716c)] hover:border-[var(--fg,#0a0a0a)] hover:text-[var(--fg,#0a0a0a)]',
     'bg-transparent',
     'cursor-pointer',
     'select-none',
     'transition-all duration-150',
-    'hover:border-[var(--fg,#0a0a0a)] hover:text-[var(--fg,#0a0a0a)]',
     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent,#c2410c)]',
     'active:scale-95',
     'disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none',
