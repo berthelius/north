@@ -9,6 +9,8 @@
  *   <JsonLd data={getDefinedTermSchema()} />
  */
 
+import type { Language } from '../../lib/i18n';
+
 const SITE = 'https://northfile.dev';
 const REPO = 'https://github.com/berthelius/north';
 
@@ -85,8 +87,8 @@ export function getPersonSchema(): Record<string, unknown> {
   };
 }
 
-/** WebSite — for sitelinks searchbox and canonical site identity. */
-export function getWebSiteSchema(): Record<string, unknown> {
+/** WebSite — canonical site identity; inLanguage follows the page. */
+export function getWebSiteSchema(lang: Language = 'en'): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -98,6 +100,6 @@ export function getWebSiteSchema(): Record<string, unknown> {
     author: getPersonSchema(),
     publisher: getOrganizationSchema(),
     license: 'https://opensource.org/licenses/MIT',
-    inLanguage: 'en',
+    inLanguage: lang,
   };
 }
