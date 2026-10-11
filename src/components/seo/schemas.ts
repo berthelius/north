@@ -20,7 +20,7 @@ export function getDefinedTermSchema(): Record<string, unknown> {
     '@id': `${SITE}/#north-md`,
     name: 'NORTH.md',
     description:
-      'A markdown convention that declares a software project\'s purpose, ambition, and trade-off defaults in a form readable by both humans and AI coding agents.',
+      "NORTH.md is an open convention: one markdown file that declares a project's purpose, ambition and precomputed trade-offs for humans and AI coding agents.",
     inDefinedTermSet: {
       '@type': 'DefinedTermSet',
       name: 'Agent context files (proposed five-layer model)',
@@ -65,9 +65,9 @@ export function getOrganizationSchema(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': 'https://brthls.com/#organization',
+    '@id': 'https://www.brthls.com/#organization',
     name: 'BRTHLS',
-    url: 'https://brthls.com',
+    url: 'https://www.brthls.com',
     founder: getPersonSchema(),
     sameAs: ['https://github.com/berthelius'],
   };
@@ -78,13 +78,10 @@ export function getPersonSchema(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    '@id': 'https://brthls.com/#viktor',
+    '@id': 'https://www.brthls.com/about#person',
     name: 'Viktor Berthelius',
-    url: 'https://brthls.com',
-    sameAs: [
-      'https://brthls.com',
-      'https://github.com/berthelius',
-    ],
+    url: 'https://www.brthls.com/about',
+    sameAs: ['https://www.brthls.com', 'https://github.com/berthelius'],
   };
 }
 
