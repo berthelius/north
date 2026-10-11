@@ -18,7 +18,6 @@ const t = useTranslations(lang);
     <span class="inline-block w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" aria-hidden="true"></span>
     <p
       class="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--muted)] select-none"
-      aria-label={t("hero.eyebrow")}
     >
       {t("hero.eyebrow")}
     </p>
@@ -99,14 +98,12 @@ const t = useTranslations(lang);
 </section>
 
 <style>
-  /* Enter animations — fade + lift */
+  /* Enter animation: lift only. No opacity fade, so text is painted (and counted as LCP) from the first frame. */
   @keyframes fade-up {
     from {
-      opacity: 0;
       transform: translateY(18px);
     }
     to {
-      opacity: 1;
       transform: translateY(0);
     }
   }

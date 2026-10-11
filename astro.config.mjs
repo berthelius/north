@@ -10,6 +10,8 @@ const SITE = process.env.PUBLIC_SITE_URL ?? 'https://northfile.dev';
 export default defineConfig({
   site: SITE,
   output: 'static',
+  // Canonical URL form site-wide: no trailing slash (matches vercel.json).
+  trailingSlash: 'never',
   adapter: vercel({
     webAnalytics: { enabled: false },
     imageService: true,
@@ -19,6 +21,7 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.8,
       lastmod: new Date(),
+      filter: (page) => !/\/404\/?$/.test(page),
     }),
   ],
   vite: {

@@ -1,7 +1,12 @@
 ---
 import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
-import { getAlternateLinks, type Language } from "../lib/i18n";
+// Preload only latin subsets that gate LCP. Measured (Lighthouse mobile): on the
+// landing the LCP element is the Anton h1, and preloading Inter as well delays it
+// (LCP 1.8s vs 1.1s); on text pages the LCP element is an Inter paragraph.
+import antonLatin from "@fontsource/anton/files/anton-latin-400-normal.woff2?url";
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import { getAlternateLinks, normalizePath, type Language } from "../lib/i18n";
 
 interface Props {
   title?: string;
@@ -10,6 +15,7 @@ interface Props {
   canonical?: string;
   lang?: Language;
   showHeader?: boolean;
+  noindex?: boolean;
 }
 
 const {
@@ -19,14 +25,18 @@ const {
   canonical,
   lang = "en",
   showHeader = true,
+  noindex = false,
 } = Astro.props;
 
 const siteUrl = import.meta.env.PUBLIC_SITE_URL ?? "https://northfile.dev";
-const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
+// One canonical form site-wide: apex host, no trailing slash (root stays "/").
+const canonicalUrl = new URL(normalizePath(new URL(canonical ?? Astro.url.pathname, siteUrl).pathname), siteUrl).href;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
 
+const isLanding = ["/", "/es"].includes(normalizePath(Astro.url.pathname));
+const fontPreloads = isLanding ? [antonLatin] : [antonLatin, interLatin];
+
 const alternateLinks = getAlternateLinks(Astro.url.pathname, siteUrl);
-const canonicalEn = alternateLinks.find((l) => l.lang === "en")?.href ?? `${siteUrl}/`;
 ---
 
 <!doctype html>
@@ -40,19 +50,22 @@ const canonicalEn = alternateLinks.find((l) => l.lang === "en")?.href ?? `${site
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
 
+    <!-- Fonts: latin subsets only; the rest load on demand via unicode-range -->
+    {fontPreloads.map((href) => (
+      <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />
+    ))}
+
     <!-- Language Alternates (Hreflang) -->
     {alternateLinks.map(({ lang: l, href }) => (
       <link rel="alternate" hreflang={l} href={href} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={canonicalEn} />
 
-    <!-- Launch switch: kept noindex/nofollow until Commit B -->
-    <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex" />
-    <meta name="googlebot" content="noindex,nofollow" />
+    <!-- Indexable by default; only pages that opt out (404) are noindex -->
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
 
     <!-- AIO / LLM Endpoints -->
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM index" />
-    <link rel="alternate" type="text/markdown" href="/spec.md" title="Specification (markdown)" />
+    <link rel="alternate" type="text/markdown" href={lang === "es" ? "/es/spec.md" : "/spec.md"} title="Specification (markdown)" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
