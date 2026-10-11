@@ -42,7 +42,7 @@ The file follows the specification:
 - **The Bar**: measurable or observable, above the industry default, and mapped to what enforces it (a CI check, linter, review rule or runbook). Keep the target, the mechanism that checks it and what is demonstrated today apart; never present a target as current compliance.
 - **Asymmetric Bets**: both sides, where the project goes 10x and where 1.1x is right.
 - **Anti-Goals**: tempting, specific, each with a one-line reason.
-- **Trade-off Defaults**: keep the table and its column labels (`Trade-off`, `Default`, `Flip when`), which the standard AGENTS.md line refers to. Every row needs an observable flip condition. Replace the template's example rows with the project's own.
+- **Trade-off Defaults**: keep the table and its column labels (`Trade-off`, `Default`, `Flip when`), which the recommended AGENTS.md line refers to. Every row needs an observable flip condition. Replace the template's example rows with the project's own.
 - **Ambition Triggers**: short questions that force a specific reframe, and that may be answered "this is already the 10x version".
 - **Reversibility**: the one-way doors, the two-way doors and the default disposition when in doubt.
 
