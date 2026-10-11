@@ -4,9 +4,10 @@
  * Uses @vercel/og (satori + resvg) to generate 1200x630 PNG images.
  * Pre-renders all known slugs as static assets at build time.
  *
- * Design: the site's system on one card. Paper ground, Anton title,
- * JetBrains Mono for labels and the standfirst, the rust signal, and the compass instrument from the
- * landing hero, settled on north.
+ * Design: the site's system on one card, in monochrome. Paper ground, Anton
+ * title, JetBrains Mono for labels and the standfirst, the ink square, the
+ * needle closing the host name (as in the header lockup), and the compass
+ * instrument from the landing hero, settled on north.
  */
 
 import type { APIRoute, GetStaticPaths } from 'astro';
@@ -84,7 +85,6 @@ const PAPER = '#fafafa';
 const INK = '#111111';
 const MUTED = '#5c5c5c';
 const RULE = '#d6d6d6';
-const RUST = '#c2410c';
 
 // The compass from the landing hero (Compass.astro), settled on north.
 function compassSvg(): string {
@@ -97,7 +97,7 @@ function compassSvg(): string {
   const ticks = Array.from({ length: 72 }, (_, i) => {
     const deg = i * 5;
     const len = deg % 90 === 0 ? 22 : deg % 30 === 0 ? 13 : 6;
-    const colour = deg === 0 ? RUST : deg % 30 === 0 ? INK : MUTED;
+    const colour = deg % 30 === 0 ? INK : MUTED;
     const width = deg % 90 === 0 ? 2 : 1;
     const [x1, y1] = polar(deg, R);
     const [x2, y2] = polar(deg, R - len);
@@ -116,9 +116,9 @@ function compassSvg(): string {
 <line x1="200" y1="62" x2="200" y2="338" stroke="${RULE}" stroke-width="1"/>
 <line x1="62" y1="200" x2="338" y2="200" stroke="${RULE}" stroke-width="1"/>
 ${ticks}
-<path d="M193 1 L207 1 L200 11 Z" fill="${RUST}"/>
+<path d="M193 1 L207 1 L200 11 Z" fill="${INK}"/>
 ${bearings}
-<path d="M200 58 L189 200 L200 200 Z" fill="${RUST}"/>
+<path d="M200 58 L189 200 L200 200 Z" fill="${INK}"/>
 <path d="M200 58 L211 200 L200 200 Z" fill="${INK}"/>
 <path d="M189 200 L200 342 L211 200 Z" fill="${PAPER}" stroke="${INK}" stroke-width="1"/>
 <circle cx="200" cy="200" r="6" fill="${PAPER}" stroke="${INK}" stroke-width="1"/>
@@ -126,8 +126,10 @@ ${bearings}
 }
 
 const COMPASS_URI = `data:image/svg+xml;base64,${Buffer.from(compassSvg()).toString('base64')}`;
+// The needle (NorthMark.astro), 1:2.6, in whole pixels (Satori rounds image boxes).
+const NEEDLE = { width: 5, height: 13 };
 const MARK_URI = `data:image/svg+xml;base64,${Buffer.from(
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 28" width="20" height="28"><path d="M10 0.5 L1.5 27.5 L10 21.5 Z" fill="${RUST}"/><path d="M10 0.5 L18.5 27.5 L10 21.5 Z" fill="${INK}"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 26" width="${NEEDLE.width}" height="${NEEDLE.height}"><path d="M5 0 10 26 5 21.5 0 26Z" fill="${INK}"/></svg>`,
 ).toString('base64')}`;
 
 // ---------------------------------------------------------------------------
@@ -160,17 +162,19 @@ function buildOgElement(config: SlugConfig): unknown {
 
   return box(
     { flexDirection: 'column', width: '100%', height: '100%', backgroundColor: PAPER, padding: '56px 72px 52px', color: INK },
-    // Masthead: mark + host on the left, the version on the right, ink rule below.
+    // Masthead: host + needle on the left, the version on the right, ink rule below.
+    // The needle hangs from the top of the line, just above the ascenders, where
+    // BRTHLS sets its square (header lockup proportions).
     box(
       { alignItems: 'center', justifyContent: 'space-between', paddingBottom: 20, borderBottom: `2px solid ${INK}` },
       box(
-        { alignItems: 'center', gap: 16 },
-        el('img', { src: MARK_URI, width: 20, height: 28 }),
+        { alignItems: 'flex-start', gap: 6 },
         box({ ...label, fontFamily: 'MonoBold', fontSize: 20, letterSpacing: 1, textTransform: 'none' }, 'northfile.dev'),
+        el('img', { src: MARK_URI, width: NEEDLE.width, height: NEEDLE.height, style: { marginTop: -1 } }),
       ),
       box(
         { alignItems: 'center', gap: 12 },
-        box({ width: 10, height: 10, backgroundColor: RUST }),
+        box({ width: 10, height: 10, backgroundColor: INK }),
         box({ ...label, color: MUTED }, 'spec v0.1'),
       ),
     ),

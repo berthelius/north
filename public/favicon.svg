@@ -1,12 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <style>
-    .w { fill: #c2410c; }
-    .e { fill: #111111; }
+    path { fill: #111111; }
     @media (prefers-color-scheme: dark) {
-      .w { fill: #f0682c; }
-      .e { fill: #f2f2f2; }
+      path { fill: #fafafa; }
     }
   </style>
-  <path class="w" d="M16 2.5 L6.5 29.5 L16 23 Z"/>
-  <path class="e" d="M16 2.5 L25.5 29.5 L16 23 Z"/>
+  <path transform="translate(10.615 2) scale(1.0769)" d="M5 0 10 26 5 21.5 0 26Z"/>
 </svg>

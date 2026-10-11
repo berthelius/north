@@ -7,7 +7,10 @@
  *
  * Pre-renders the default variant (flat + auto) at build time.
  * For static output mode this endpoint is pre-rendered as /badge.svg
- * Flat colour fields, no gloss: the site's ink, paper and rust.
+ * Flat fields, no gloss, monochrome: an ink half and a paper half inside a
+ * hairline frame. Each half's text contrasts with its own field, so the badge
+ * reads on light and dark READMEs even where the auto theme cannot tell
+ * which one it sits on.
  */
 
 import type { APIRoute } from 'astro';
@@ -16,7 +19,6 @@ export const prerender = true;
 
 const INK = '#111111';
 const PAPER = '#fafafa';
-const RUST = '#c2410c';
 
 interface BadgeOptions {
   style: 'flat' | 'flat-square' | 'for-the-badge';
@@ -52,34 +54,20 @@ function buildSVG(opts: BadgeOptions): string {
   const rightWidth = measureText(rightText, fontSize);
   const totalWidth = leftWidth + rightWidth;
 
-  // Theme colours
-  let leftBg: string;
-  let rightBg: string = RUST;
-  let leftTextColor: string;
-  let rightTextColor = '#ffffff';
-
-  if (theme === 'dark') {
-    leftBg = PAPER;
-    leftTextColor = INK;
-  } else {
-    // light or auto (auto uses CSS @media in SVG)
-    leftBg = INK;
-    leftTextColor = '#ffffff';
-  }
+  // Light: ink label, paper version, ink frame. Dark swaps ink and paper.
+  // Auto draws light and swaps through CSS @media inside the SVG.
+  const [fig, ground] = theme === 'dark' ? [PAPER, INK] : [INK, PAPER];
 
   const autoCSS = theme === 'auto'
     ? `
       <style>
         @media (prefers-color-scheme: dark) {
-          .lb { fill: ${PAPER} !important; }
-          .lt { fill: ${INK} !important; }
+          .fig { fill: ${PAPER}; }
+          .ground { fill: ${INK}; }
+          .frame { stroke: ${PAPER}; }
         }
       </style>`
     : '';
-
-  const leftBgClass = theme === 'auto' ? 'lb' : '';
-  const leftTextClass = theme === 'auto' ? 'lt' : '';
-  const leftBgStyle = theme === 'auto' ? `fill="${leftBg}"` : `fill="${leftBg}"`;
 
   const leftCX = Math.round(leftWidth / 2);
   const rightCX = leftWidth + Math.round(rightWidth / 2);
@@ -92,12 +80,13 @@ function buildSVG(opts: BadgeOptions): string {
     </clipPath>${autoCSS}
   </defs>
   <g clip-path="url(#r)">
-    <rect class="${leftBgClass}" ${leftBgStyle} width="${leftWidth}" height="${height}"/>
-    <rect fill="${rightBg}" x="${leftWidth}" width="${rightWidth}" height="${height}"/>
+    <rect class="fig" fill="${fig}" width="${leftWidth}" height="${height}"/>
+    <rect class="ground" fill="${ground}" x="${leftWidth}" width="${rightWidth}" height="${height}"/>
   </g>
+  <rect class="frame" fill="none" stroke="${fig}" x="0.5" y="0.5" width="${totalWidth - 1}" height="${height - 1}" rx="${rx}"/>
   <g text-anchor="middle" font-family="${fontFamily}" font-size="${fontSize}" font-weight="${fontWeight}" letter-spacing="${letterSpacing}">
-    <text class="${leftTextClass}" fill="${leftTextColor}" x="${leftCX}" y="${textY}">${leftText}</text>
-    <text fill="${rightTextColor}" x="${rightCX}" y="${textY}">${rightText}</text>
+    <text class="ground" fill="${ground}" x="${leftCX}" y="${textY}">${leftText}</text>
+    <text class="fig" fill="${fig}" x="${rightCX}" y="${textY}">${rightText}</text>
   </g>
 </svg>`;
 }

@@ -3,15 +3,15 @@
   <rect x="0.5" y="0.5" width="1199" height="359" stroke="#2f2f2f" stroke-width="1"/>
 
   <!-- Masthead -->
-  <rect x="48" y="31" width="7" height="7" fill="#f0682c"/>
+  <rect x="48" y="31" width="7" height="7" fill="#f2f2f2"/>
   <text x="66" y="38" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#a3a3a3" letter-spacing="0.12em">SPECIFICATION // SPEC: V0.1</text>
   <text x="1152" y="38" text-anchor="end" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#a3a3a3" letter-spacing="0.12em">NORTHFILE.DEV · BRTHLS</text>
   <line x1="48" y1="54.5" x2="1152" y2="54.5" stroke="#f2f2f2" stroke-width="1"/>
 
-  <!-- Title: the mark, then the name -->
-  <path d="M63 92 L48 140 L63 129 Z" fill="#f0682c"/>
-  <path d="M63 92 L78 140 L63 129 Z" fill="#f2f2f2"/>
-  <text x="96" y="188" font-family="'Anton', Impact, 'Arial Narrow', sans-serif" font-size="120" fill="#f2f2f2" letter-spacing="0.005em">NORTH.md</text>
+  <!-- Title: the lockup, wordmark then needle. Inter 900 outlined to paths so it
+       renders the same without the font; the needle as in NorthMark.astro. -->
+  <path transform="translate(48 84.3)" fill="#f2f2f2" d="M30 103.7L5.6 103.7L5.6 16.3L31.4 16.3L52.2 50.6Q55.5 56.0 58.2 61.5Q61.0 67.0 63.7 74.4L63.7 74.4Q63.3 67.7 62.8 60.4Q62.3 53.1 62.3 48.3L62.3 48.3L62.3 16.3L86.7 16.3L86.7 103.7L60.9 103.7L41.5 71.8Q37.5 65.1 34.7 59.4Q31.8 53.7 28.7 46.4L28.7 46.4Q29.2 53.9 29.6 60.7Q30 67.4 30 71.8L30 71.8L30 103.7ZM130.5 104.8L130.5 104.8Q118.6 104.8 108.9 99.7Q99.3 94.5 93.7 84.5Q88.0 74.5 88.0 60.1L88.0 60.1Q88.0 45.5 93.7 35.4Q99.3 25.4 108.9 20.3Q118.6 15.2 130.5 15.2L130.5 15.2Q142.4 15.2 152.0 20.3Q161.6 25.4 167.2 35.4Q172.9 45.5 172.9 60.1L172.9 60.1Q172.9 74.6 167.2 84.6Q161.6 94.6 152.0 99.7Q142.4 104.8 130.5 104.8ZM130.5 84.2L130.5 84.2Q139.3 84.2 143.9 78.0Q148.5 71.8 148.5 60.1L148.5 60.1Q148.5 48.3 143.9 42.0Q139.3 35.8 130.5 35.8L130.5 35.8Q121.7 35.8 117.0 42.0Q112.4 48.3 112.4 60.1L112.4 60.1Q112.4 71.8 117.0 78.0Q121.7 84.2 130.5 84.2ZM197.9 103.7L174.2 103.7L174.2 16.3L211.8 16.3Q221.6 16.3 228.9 19.9Q236.1 23.4 240.2 30.1Q244.3 36.7 244.3 46.0L244.3 46.0Q244.3 55.1 240.3 61.4Q236.4 67.7 229.4 71.1L229.4 71.1L247.2 103.7L221.4 103.7L206.1 74.8L197.9 74.8L197.9 103.7ZM197.9 35.3L197.9 56.4L206.2 56.4Q212.5 56.4 216.0 54.0Q219.6 51.6 219.6 46.0L219.6 46.0Q219.6 40.4 216.0 37.9Q212.5 35.3 206.2 35.3L206.2 35.3L197.9 35.3ZM269.7 35.4L243.6 35.4L243.6 16.3L319.4 16.3L319.4 35.4L293.4 35.4L293.4 103.7L269.7 103.7L269.7 35.4ZM343.6 103.7L320.0 103.7L320.0 16.3L343.6 16.3L343.6 49.5L375.0 49.5L375.0 16.3L398.7 16.3L398.7 103.7L375.0 103.7L375.0 68.6L343.6 68.6L343.6 103.7Z  M418.4 105.1L418.4 105.1Q413.2 105.1 409.8 101.7Q406.3 98.3 406.3 93.2L406.3 93.2Q406.3 88.1 409.8 84.7Q413.2 81.3 418.4 81.3L418.4 81.3Q423.5 81.3 427.0 84.7Q430.5 88.1 430.5 93.2L430.5 93.2Q430.5 98.3 427.0 101.7Q423.5 105.1 418.4 105.1ZM465.5 103.7L441.9 103.7L441.9 38.1L463.4 38.1L464.6 51.6Q467.4 43.9 472.6 40.6Q477.7 37.3 483.7 37.3L483.7 37.3Q489.9 37.3 493.9 40.9Q498.0 44.5 500.7 53.1L500.7 53.1Q503.8 44.5 509.6 40.9Q515.5 37.3 522.1 37.3L522.1 37.3Q531.5 37.3 537.3 43.4Q543.2 49.4 543.2 59.5L543.2 59.5L543.2 103.7L519.6 103.7L519.6 65.4Q519.6 61.2 517.5 58.7Q515.3 56.3 511.7 56.3L511.7 56.3Q508.0 56.3 505.9 58.7Q503.8 61.2 503.8 65.4L503.8 65.4L503.8 103.7L481.3 103.7L481.3 65.4Q481.3 61.2 479.1 58.7Q477.0 56.3 473.3 56.3L473.3 56.3Q469.7 56.3 467.6 58.7Q465.5 61.2 465.5 65.4L465.5 65.4L465.5 103.7ZM573.8 104.5L573.8 104.5Q566.8 104.5 560.9 100.8Q555.0 97.1 551.5 89.7Q548.0 82.3 548.0 71.0L548.0 71.0Q548.0 59.1 551.7 51.7Q555.4 44.2 561.2 40.8Q567.1 37.3 573.5 37.3L573.5 37.3Q580.9 37.3 585.5 41.0Q590.1 44.6 591.9 49.6L591.9 49.6L592.3 49.6L592.3 16.3L615.9 16.3L615.9 103.7L592.5 103.7L592.5 92.9L591.9 92.9Q590.0 97.9 585.3 101.2Q580.7 104.5 573.8 104.5ZM582.5 86.4L582.5 86.4Q587.3 86.4 590.1 82.2Q592.9 78.0 592.9 71.0L592.9 71.0Q592.9 63.6 590.1 59.5Q587.3 55.4 582.5 55.4L582.5 55.4Q577.6 55.4 574.9 59.5Q572.3 63.6 572.3 71.0L572.3 71.0Q572.3 78.2 574.9 82.3Q577.6 86.4 582.5 86.4Z "/>
+  <path transform="translate(685.44 86.58) scale(2.286)" fill="#f2f2f2" d="M5 0 10 26 5 21.5 0 26Z"/>
 
   <text x="48" y="238" font-family="'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" fill="#f2f2f2" font-weight="600" letter-spacing="-0.01em">Give your AI agents judgment when the prompt runs out.</text>
   <text x="48" y="266" font-family="'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#a3a3a3">One markdown file that declares a project's purpose, ambition and precomputed trade-offs.</text>
@@ -21,7 +21,7 @@
     <circle cx="1040" cy="184" r="108.56" stroke="#f2f2f2" stroke-width="1"/>
     <circle cx="1040" cy="184" r="88.50" stroke="#2f2f2f" stroke-width="1"/>
     <path d="M1040.00 102.58 L1040.00 265.42 M958.58 184.00 L1121.42 184.00" stroke="#2f2f2f" stroke-width="1"/>
-    <path d="M1040.00 75.44 L1040.00 88.42" stroke="#f0682c" stroke-width="2"/>
+    <path d="M1040.00 75.44 L1040.00 88.42" stroke="#f2f2f2" stroke-width="2"/>
     <path d="M1049.46 75.85 L1049.15 79.38" stroke="#a3a3a3" stroke-width="1"/>
     <path d="M1058.85 77.09 L1058.24 80.58" stroke="#a3a3a3" stroke-width="1"/>
     <path d="M1068.10 79.14 L1067.18 82.56" stroke="#a3a3a3" stroke-width="1"/>
@@ -93,10 +93,10 @@
     <path d="M1011.90 79.14 L1012.82 82.56" stroke="#a3a3a3" stroke-width="1"/>
     <path d="M1021.15 77.09 L1021.76 80.58" stroke="#a3a3a3" stroke-width="1"/>
     <path d="M1030.54 75.85 L1030.85 79.38" stroke="#a3a3a3" stroke-width="1"/>
-    <path d="M1035.87 66.59 L1044.13 66.59 L1040.00 72.49 Z" fill="#f0682c"/>
+    <path d="M1035.87 66.59 L1044.13 66.59 L1040.00 72.49 Z" fill="#f2f2f2"/>
     <path d="M1035.34 174.45 L1001.20 104.46" stroke="#a3a3a3" stroke-width="1" stroke-dasharray="2 4"/>
     <path d="M1042.35 173.64 L1059.61 97.70" stroke="#a3a3a3" stroke-width="1" stroke-dasharray="2 4"/>
-    <path d="M1040.00 100.22 L1033.51 184.00 L1040.00 184.00 Z" fill="#f0682c"/>
+    <path d="M1040.00 100.22 L1033.51 184.00 L1040.00 184.00 Z" fill="#f2f2f2"/>
     <path d="M1040.00 100.22 L1046.49 184.00 L1040.00 184.00 Z" fill="#f2f2f2"/>
     <path d="M1033.51 184.00 L1040.00 267.78 L1046.49 184.00 Z" fill="#111111" stroke="#f2f2f2" stroke-width="1"/>
     <circle cx="1040" cy="184" r="4.54" fill="#111111" stroke="#f2f2f2" stroke-width="1"/>
@@ -104,7 +104,7 @@
 
   <!-- Footer rail -->
   <line x1="48" y1="312.5" x2="1152" y2="312.5" stroke="#2f2f2f" stroke-width="1"/>
-  <text x="48" y="336" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#a3a3a3" letter-spacing="0.04em">LAYER 5: <tspan fill="#f0682c" font-weight="700">DIRECTION &amp; ARBITRATION</tspan></text>
+  <text x="48" y="336" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#a3a3a3" letter-spacing="0.04em">LAYER 5: <tspan fill="#f2f2f2" font-weight="700">DIRECTION &amp; ARBITRATION</tspan></text>
   <text x="340" y="336" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#a3a3a3" letter-spacing="0.04em">COMPLEMENTS: <tspan fill="#f2f2f2">AGENTS.md</tspan> · <tspan fill="#f2f2f2">DESIGN.md</tspan> · <tspan fill="#f2f2f2">SOUL.md</tspan> · <tspan fill="#f2f2f2">CONSTITUTION.md</tspan></text>
-  <text x="1152" y="336" text-anchor="end" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#f0682c" font-weight="700" letter-spacing="0.04em">MIT LICENSE ◇ OPEN CONVENTION</text>
+  <text x="1152" y="336" text-anchor="end" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#f2f2f2" font-weight="700" letter-spacing="0.04em">MIT LICENSE ◇ OPEN CONVENTION</text>
 </svg>
