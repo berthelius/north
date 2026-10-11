@@ -7,15 +7,15 @@
  *
  * Pre-renders the default variant (flat + auto) at build time.
  * For static output mode this endpoint is pre-rendered as /badge.svg
- * in addition to the static fallback in /public/badge.svg.
+ * Flat colour fields, no gloss: the site's ink, paper and rust.
  */
 
 import type { APIRoute } from 'astro';
 
 export const prerender = true;
 
-const INK = '#0a0a0a';
-const PAPER = '#f5f5f4';
+const INK = '#111111';
+const PAPER = '#fafafa';
 const RUST = '#c2410c';
 
 interface BadgeOptions {
@@ -38,7 +38,7 @@ function buildSVG(opts: BadgeOptions): string {
   const height = isFTB ? 28 : 20;
   const fontSize = isFTB ? 12 : 11;
   const textY = isFTB ? 18 : 15;
-  const rx = isSquare ? 0 : 3;
+  const rx = isSquare ? 0 : 2;
   const fontFamily = "-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif";
   const fontWeight = isFTB ? '700' : '600';
   const labelText = isFTB ? 'NORTH.MD' : 'north.md';
@@ -84,20 +84,9 @@ function buildSVG(opts: BadgeOptions): string {
   const leftCX = Math.round(leftWidth / 2);
   const rightCX = leftWidth + Math.round(rightWidth / 2);
 
-  // Gradient overlay for depth (flat only, not for-the-badge)
-  const gradientDefs = !isFTB ? `
-    <linearGradient id="s" x1="0" x2="0" y1="0" y2="100%">
-      <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
-      <stop offset="1" stop-opacity=".1"/>
-    </linearGradient>` : '';
-
-  const gradientRect = !isFTB
-    ? `<rect width="${totalWidth}" height="${height}" fill="url(#s)"/>`
-    : '';
-
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${totalWidth}" height="${height}" role="img" aria-label="${labelText}: ${versionText}">
   <title>${labelText} ${versionText}</title>
-  <defs>${gradientDefs}
+  <defs>
     <clipPath id="r">
       <rect width="${totalWidth}" height="${height}" rx="${rx}" fill="#fff"/>
     </clipPath>${autoCSS}
@@ -105,7 +94,6 @@ function buildSVG(opts: BadgeOptions): string {
   <g clip-path="url(#r)">
     <rect class="${leftBgClass}" ${leftBgStyle} width="${leftWidth}" height="${height}"/>
     <rect fill="${rightBg}" x="${leftWidth}" width="${rightWidth}" height="${height}"/>
-    ${gradientRect}
   </g>
   <g text-anchor="middle" font-family="${fontFamily}" font-size="${fontSize}" font-weight="${fontWeight}" letter-spacing="${letterSpacing}">
     <text class="${leftTextClass}" fill="${leftTextColor}" x="${leftCX}" y="${textY}">${leftText}</text>

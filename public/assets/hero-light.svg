@@ -1,59 +1,110 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="100%" height="100%" fill="none">
-  <defs>
-    <linearGradient id="bg-light" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#fafafa"/>
-    </linearGradient>
-    <linearGradient id="rust-grad-light" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#c2410c"/>
-      <stop offset="100%" stop-color="#9a3412"/>
-    </linearGradient>
-    <pattern id="grid-dots-light" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1" fill="#e5e5e5"/>
-    </pattern>
-  </defs>
+  <rect width="1200" height="360" fill="#fafafa"/>
+  <rect x="0.5" y="0.5" width="1199" height="359" stroke="#d6d6d6" stroke-width="1"/>
 
-  <!-- Background Canvas -->
-  <rect width="1200" height="360" rx="12" fill="url(#bg-light)"/>
-  <rect width="1200" height="360" rx="12" fill="url(#grid-dots-light)" opacity="0.8"/>
-  <rect x="0.5" y="0.5" width="1199" height="359" rx="11.5" stroke="#e5e5e5" stroke-width="1"/>
+  <!-- Masthead -->
+  <rect x="48" y="31" width="7" height="7" fill="#c2410c"/>
+  <text x="66" y="38" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#5c5c5c" letter-spacing="0.12em">SPECIFICATION // SPEC: V0.1</text>
+  <text x="1152" y="38" text-anchor="end" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#5c5c5c" letter-spacing="0.12em">NORTHFILE.DEV · BRTHLS</text>
+  <line x1="48" y1="54.5" x2="1152" y2="54.5" stroke="#111111" stroke-width="1"/>
 
-  <!-- Top Technical Rail -->
-  <line x1="48" y1="48" x2="1152" y2="48" stroke="#e5e5e5" stroke-width="1"/>
-  <text x="48" y="38" font-family="'JetBrains Mono', monospace" font-size="10" fill="#737373" letter-spacing="0.25em" font-weight="600">SPECIFICATION // SPEC: V0.1</text>
-  <text x="1152" y="38" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10" fill="#a3a3a3" letter-spacing="0.2em">NORTHFILE.DEV · BRTHLS</text>
+  <!-- Title: the mark, then the name -->
+  <path d="M63 92 L48 140 L63 129 Z" fill="#c2410c"/>
+  <path d="M63 92 L78 140 L63 129 Z" fill="#111111"/>
+  <text x="96" y="188" font-family="'Anton', Impact, 'Arial Narrow', sans-serif" font-size="120" fill="#111111" letter-spacing="0.005em">NORTH.md</text>
 
-  <!-- Center Heading: NORTH.md -->
-  <g transform="translate(48, 165)">
-    <!-- Compass Pointer Motif -->
-    <path d="M 0 -45 L 8 -15 L 0 -22 L -8 -15 Z" fill="url(#rust-grad-light)"/>
-    <text x="24" y="0" font-family="'Anton', Impact, 'Arial Narrow', sans-serif" font-size="108" fill="#0a0a0a" letter-spacing="0.02em" font-weight="900">NORTH.md</text>
+  <text x="48" y="238" font-family="'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" fill="#111111" font-weight="600" letter-spacing="-0.01em">Give your AI coding agents judgment when the prompt runs out.</text>
+  <text x="48" y="266" font-family="'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5c5c5c">Purpose, ambition, and precomputed trade-off defaults to scale autonomous agency without drift.</text>
+
+  <!-- Instrument -->
+  <g>
+    <circle cx="1040" cy="184" r="108.56" stroke="#111111" stroke-width="1"/>
+    <circle cx="1040" cy="184" r="88.50" stroke="#d6d6d6" stroke-width="1"/>
+    <path d="M1040.00 102.58 L1040.00 265.42 M958.58 184.00 L1121.42 184.00" stroke="#d6d6d6" stroke-width="1"/>
+    <path d="M1040.00 75.44 L1040.00 88.42" stroke="#c2410c" stroke-width="2"/>
+    <path d="M1049.46 75.85 L1049.15 79.38" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1058.85 77.09 L1058.24 80.58" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1068.10 79.14 L1067.18 82.56" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1077.13 81.99 L1075.92 85.31" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1085.88 85.61 L1084.38 88.82" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1094.28 89.98 L1090.44 96.63" stroke="#111111" stroke-width="1"/>
+    <path d="M1102.27 95.07 L1100.24 97.97" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1109.78 100.84 L1107.51 103.55" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1116.76 107.24 L1114.26 109.74" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1123.16 114.22 L1120.45 116.49" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1128.93 121.73 L1126.03 123.76" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1134.02 129.72 L1127.37 133.56" stroke="#111111" stroke-width="1"/>
+    <path d="M1138.39 138.12 L1135.18 139.62" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1142.01 146.87 L1138.69 148.08" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1144.86 155.90 L1141.44 156.82" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1146.91 165.15 L1143.42 165.76" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1148.15 174.54 L1144.62 174.85" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1148.56 184.00 L1135.58 184.00" stroke="#111111" stroke-width="2"/>
+    <path d="M1148.15 193.46 L1144.62 193.15" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1146.91 202.85 L1143.42 202.24" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1144.86 212.10 L1141.44 211.18" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1142.01 221.13 L1138.69 219.92" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1138.39 229.88 L1135.18 228.38" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1134.02 238.28 L1127.37 234.44" stroke="#111111" stroke-width="1"/>
+    <path d="M1128.93 246.27 L1126.03 244.24" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1123.16 253.78 L1120.45 251.51" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1116.76 260.76 L1114.26 258.26" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1109.78 267.16 L1107.51 264.45" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1102.27 272.93 L1100.24 270.03" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1094.28 278.02 L1090.44 271.37" stroke="#111111" stroke-width="1"/>
+    <path d="M1085.88 282.39 L1084.38 279.18" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1077.13 286.01 L1075.92 282.69" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1068.10 288.86 L1067.18 285.44" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1058.85 290.91 L1058.24 287.42" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1049.46 292.15 L1049.15 288.62" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1040.00 292.56 L1040.00 279.58" stroke="#111111" stroke-width="2"/>
+    <path d="M1030.54 292.15 L1030.85 288.62" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1021.15 290.91 L1021.76 287.42" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1011.90 288.86 L1012.82 285.44" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1002.87 286.01 L1004.08 282.69" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M994.12 282.39 L995.62 279.18" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M985.72 278.02 L989.56 271.37" stroke="#111111" stroke-width="1"/>
+    <path d="M977.73 272.93 L979.76 270.03" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M970.22 267.16 L972.49 264.45" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M963.24 260.76 L965.74 258.26" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M956.84 253.78 L959.55 251.51" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M951.07 246.27 L953.97 244.24" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M945.98 238.28 L952.63 234.44" stroke="#111111" stroke-width="1"/>
+    <path d="M941.61 229.88 L944.82 228.38" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M937.99 221.13 L941.31 219.92" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M935.14 212.10 L938.56 211.18" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M933.09 202.85 L936.58 202.24" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M931.85 193.46 L935.38 193.15" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M931.44 184.00 L944.42 184.00" stroke="#111111" stroke-width="2"/>
+    <path d="M931.85 174.54 L935.38 174.85" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M933.09 165.15 L936.58 165.76" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M935.14 155.90 L938.56 156.82" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M937.99 146.87 L941.31 148.08" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M941.61 138.12 L944.82 139.62" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M945.98 129.72 L952.63 133.56" stroke="#111111" stroke-width="1"/>
+    <path d="M951.07 121.73 L953.97 123.76" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M956.84 114.22 L959.55 116.49" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M963.24 107.24 L965.74 109.74" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M970.22 100.84 L972.49 103.55" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M977.73 95.07 L979.76 97.97" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M985.72 89.98 L989.55 96.63" stroke="#111111" stroke-width="1"/>
+    <path d="M994.12 85.61 L995.62 88.82" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1002.87 81.99 L1004.08 85.31" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1011.90 79.14 L1012.82 82.56" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1021.15 77.09 L1021.76 80.58" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1030.54 75.85 L1030.85 79.38" stroke="#5c5c5c" stroke-width="1"/>
+    <path d="M1035.87 66.59 L1044.13 66.59 L1040.00 72.49 Z" fill="#c2410c"/>
+    <path d="M1035.34 174.45 L1001.20 104.46" stroke="#5c5c5c" stroke-width="1" stroke-dasharray="2 4"/>
+    <path d="M1042.35 173.64 L1059.61 97.70" stroke="#5c5c5c" stroke-width="1" stroke-dasharray="2 4"/>
+    <path d="M1040.00 100.22 L1033.51 184.00 L1040.00 184.00 Z" fill="#c2410c"/>
+    <path d="M1040.00 100.22 L1046.49 184.00 L1040.00 184.00 Z" fill="#111111"/>
+    <path d="M1033.51 184.00 L1040.00 267.78 L1046.49 184.00 Z" fill="#fafafa" stroke="#111111" stroke-width="1"/>
+    <circle cx="1040" cy="184" r="4.54" fill="#fafafa" stroke="#111111" stroke-width="1"/>
   </g>
 
-  <!-- Accent Rule -->
-  <rect x="48" y="196" width="72" height="4" fill="url(#rust-grad-light)"/>
-
-  <!-- Subtitle / Hook -->
-  <text x="48" y="240" font-family="'Inter', -apple-system, sans-serif" font-size="20" fill="#171717" font-weight="600" letter-spacing="-0.01em">
-    Give your AI coding agents judgment when the prompt runs out.
-  </text>
-  <text x="48" y="268" font-family="'Inter', -apple-system, sans-serif" font-size="14" fill="#525252" font-weight="400">
-    Purpose, ambition, and precomputed trade-off defaults to scale autonomous agency without drift.
-  </text>
-
-  <!-- Bottom Technical Rail -->
-  <line x1="48" y1="312" x2="1152" y2="312" stroke="#e5e5e5" stroke-width="1"/>
-  
-  <!-- Micro Badges in Footer -->
-  <g transform="translate(48, 332)">
-    <text x="0" y="0" font-family="'JetBrains Mono', monospace" font-size="11" fill="#737373">
-      LAYER 5: <tspan fill="#c2410c" font-weight="600">DIRECTION &amp; ARBITRATION</tspan>
-    </text>
-    <text x="340" y="0" font-family="'JetBrains Mono', monospace" font-size="11" fill="#737373">
-      COMPLEMENTS: <tspan fill="#0a0a0a" font-weight="500">AGENTS.md</tspan> · <tspan fill="#0a0a0a" font-weight="500">design.md</tspan> · <tspan fill="#0a0a0a" font-weight="500">SOUL.md</tspan> · <tspan fill="#0a0a0a" font-weight="500">CONSTITUTION.md</tspan>
-    </text>
-    <text x="1104" y="0" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="11" fill="#9a3412" font-weight="600">
-      MIT LICENSE ◇ OPEN STANDARD
-    </text>
-  </g>
+  <!-- Footer rail -->
+  <line x1="48" y1="312.5" x2="1152" y2="312.5" stroke="#d6d6d6" stroke-width="1"/>
+  <text x="48" y="336" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#5c5c5c" letter-spacing="0.04em">LAYER 5: <tspan fill="#c2410c" font-weight="700">DIRECTION &amp; ARBITRATION</tspan></text>
+  <text x="340" y="336" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#5c5c5c" letter-spacing="0.04em">COMPLEMENTS: <tspan fill="#111111">AGENTS.md</tspan> · <tspan fill="#111111">design.md</tspan> · <tspan fill="#111111">SOUL.md</tspan> · <tspan fill="#111111">CONSTITUTION.md</tspan></text>
+  <text x="1152" y="336" text-anchor="end" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#c2410c" font-weight="700" letter-spacing="0.04em">MIT LICENSE ◇ OPEN STANDARD</text>
 </svg>
