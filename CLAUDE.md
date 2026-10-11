@@ -51,25 +51,13 @@ Mirror the project Bar declared in [NORTH.md](./NORTH.md):
 ```bash
 npm run build       # Astro static build
 npm run typecheck   # Astro check (0 errors, 0 warnings, 0 hints)
-npm run lint        # Astro check gate
+npm run lint        # oxlint
+npm run check:links # internal links and anchors across dist/
+npm run check:seo   # canonical, lang, hreflang, og:image, JSON-LD, sitemap, robots
+npm run check:spec  # JSON spec and spec.md agree on the seven sections
 ```
 
-## File ownership for sub-agents
-
-When dispatching parallel sub-agents (isolated worktree megasprint pattern),
-strict file ownership to avoid cascade conflicts:
-
-| Stream | Owns paths |
-|---|---|
-| Design system | `src/styles/*`, `src/components/ui/*`, `tailwind.config.*` |
-| Landing pages | `src/pages/*` (excluding `/api/*`, `/docs/*`) |
-| Interactive | `src/components/interactive/*`, `src/scripts/*` |
-| Examples | `src/content/examples/*` |
-| SEO + AIO | `src/pages/api/*`, `public/llms*.txt`, `public/robots.txt`, `astro.config.mjs` (sitemap) |
-| Docs | `src/content/docs/*`, `src/pages/docs/*` |
-
-Cascade order on merge: design system → SEO+AIO → landing → interactive →
-examples → docs.
+CI (`.github/workflows/ci.yml`) runs the same gates on every push and PR.
 
 ## What this project is NOT
 
