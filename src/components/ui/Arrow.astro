@@ -1,0 +1,17 @@
+---
+/** Drawn arrow icon, one stroke weight across the site. Always decorative. */
+interface Props {
+  dir?: "right" | "up-right" | "left";
+  class?: string;
+}
+const { dir = "right", class: className = "" } = Astro.props;
+const paths = {
+  right: "M2.5 8h10.5M9 4l4 4-4 4",
+  left: "M13.5 8H3M7 4 3 8l4 4",
+  "up-right": "M4.5 11.5l7-7M5.5 4.5h6v6",
+};
+---
+
+<svg class:list={["icon-arrow", className]} viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+  <path d={paths[dir]} stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+</svg>

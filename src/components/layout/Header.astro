@@ -1,6 +1,7 @@
 ---
-import { buildLocalizedPath, getCounterpartPath, hasLocalizedPage, type Language } from "../../lib/i18n";
+import { buildLocalizedPath, getCounterpartPath, hasLocalizedPage, normalizePath, type Language } from "../../lib/i18n";
 import { useTranslations } from "../../data/locales";
+import NorthMark from "../ui/NorthMark.astro";
 
 interface Props {
   lang?: Language;
@@ -14,82 +15,216 @@ const isSpanish = lang === "es";
 const targetLang: Language = isSpanish ? "en" : "es";
 // Only offer the switch when the counterpart page really exists.
 const targetPath = getCounterpartPath(currentPath, targetLang);
+const here = normalizePath(currentPath);
 
 const navLinks = [
   { route: "/spec", label: t("nav.spec") },
   { route: "/compare", label: t("nav.compare") },
   { route: "/why", label: t("nav.why") },
   { route: "/examples", label: t("nav.examples") },
-].map(({ route, label }) => ({
-  href: buildLocalizedPath(route, lang),
-  label,
-  // Link falls back to the EN page when no localised page exists.
-  fallback: lang !== "en" && !hasLocalizedPage(route, lang),
-}));
+].map(({ route, label }) => {
+  const href = buildLocalizedPath(route, lang);
+  return {
+    href,
+    label,
+    // Link falls back to the EN page when no localised page exists.
+    fallback: lang !== "en" && !hasLocalizedPage(route, lang),
+    current: here === href || here.startsWith(`${href}/`),
+  };
+});
 ---
 
-<header class="sticky top-0 z-50 w-full border-b border-[var(--rule)] bg-[var(--bg)]/90 backdrop-blur-md transition-colors">
-  <div class="mx-auto flex min-h-14 max-w-[var(--max-prose,72ch)] flex-wrap items-center justify-between gap-x-5 px-[var(--spacing-gutter)] sm:flex-nowrap">
-    <!-- Brand -->
-    <a
-      href={buildLocalizedPath("/", lang)}
-      class="group flex items-center gap-2 font-display text-xl tracking-[0.04em] text-[var(--fg)] uppercase transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-      aria-label="NORTH.md Home"
-    >
-      <span class="inline-block h-2 w-2 rounded-full bg-[var(--accent)] transition-transform group-hover:scale-125" aria-hidden="true"></span>
-      <span>NORTH.MD</span>
+<header class="site-header">
+  <div class="frame site-header__row">
+    <a href={buildLocalizedPath("/", lang)} class="brand" aria-label="NORTH.md Home">
+      <NorthMark class="brand__mark" />
+      <span class="brand__word">NORTH.MD</span>
     </a>
 
-    <!-- Nav: second row on mobile, inline from sm up. Always visible, no JS. -->
-    <nav class="order-last flex w-full items-center gap-x-5 border-t border-[var(--rule)] font-mono text-xs uppercase tracking-wider sm:order-none sm:ml-auto sm:w-auto sm:border-t-0" aria-label="Main Navigation">
+    <nav class="site-nav" aria-label="Main Navigation">
       {navLinks.map((link) => (
         <a
           href={link.href}
           lang={link.fallback ? "en" : undefined}
-          class="py-3 text-[var(--muted)] hover:text-[var(--fg)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
+          aria-current={link.current ? "page" : undefined}
         >
           {link.label}
         </a>
       ))}
     </nav>
 
-    <!-- Utilities -->
-    <div class="flex items-center gap-5 sm:gap-6">
-      <div class="flex items-center gap-3 sm:border-l sm:border-[var(--rule)] sm:pl-5">
-        <!-- Language Switcher -->
-        {targetPath && <a
+    <div class="site-tools">
+      {targetPath && (
+        <a
           href={targetPath}
           hreflang={targetLang}
-          class="font-mono text-xs uppercase tracking-widest px-2 py-1 rounded border border-[var(--rule)] hover:border-[var(--fg)] text-[var(--fg)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+          class="site-tools__lang label"
           title={t("nav.langTitle")}
           aria-label={`${t("nav.lang")} - ${t("nav.langTitle")}`}
         >
           {t("nav.lang")}
-        </a>}
-
-        <!-- GitHub -->
-        <a
-          href="https://github.com/berthelius/north"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm p-1"
-          aria-label="GitHub repository (opens in new tab)"
-        >
-          <svg
-            aria-hidden="true"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-          </svg>
         </a>
-      </div>
+      )}
+      <a
+        href="https://github.com/berthelius/north"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="site-tools__icon"
+        aria-label="GitHub repository (opens in new tab)"
+      >
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 1C4.134 1 1 4.134 1 8c0 3.09 2.003 5.715 4.781 6.635.35.065.477-.151.477-.337 0-.166-.006-.604-.01-1.187-1.947.423-2.357-.94-2.357-.94-.318-.809-.777-1.025-.777-1.025-.635-.434.048-.425.048-.425.702.049 1.071.72 1.071.72.624 1.069 1.636.76 2.035.581.063-.451.244-.76.444-.935-1.554-.177-3.188-.777-3.188-3.459 0-.764.273-1.389.72-1.88-.072-.177-.312-.89.069-1.855 0 0 .587-.188 1.923.716A6.703 6.703 0 018 4.745c.595.003 1.193.08 1.752.236 1.334-.904 1.92-.716 1.92-.716.382.965.142 1.678.07 1.855.448.491.72 1.116.72 1.88 0 2.689-1.637 3.28-3.197 3.453.251.217.475.644.475 1.299 0 .937-.009 1.692-.009 1.922 0 .188.126.406.48.337C12.998 13.714 15 11.09 15 8c0-3.866-3.134-7-7-7z"></path>
+        </svg>
+      </a>
     </div>
   </div>
 </header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .site-header__row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "brand tools"
+      "nav nav";
+    align-items: center;
+    column-gap: 2rem;
+  }
+
+  .brand {
+    grid-area: brand;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 3.5rem;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .brand :global(.brand__mark) {
+    width: 0.8rem;
+    height: 1.12rem;
+    transition: transform 420ms var(--ease-out-expo);
+  }
+
+  .brand:hover :global(.brand__mark) {
+    transform: translateY(-2px);
+  }
+
+  .brand__word {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    padding-top: 0.08em;
+  }
+
+  .site-nav {
+    grid-area: nav;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--rule);
+  }
+
+  .site-nav a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 160ms;
+  }
+
+  .site-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 220ms var(--ease-out-expo);
+  }
+
+  .site-nav a:hover,
+  .site-nav a[aria-current="page"] {
+    color: var(--fg);
+  }
+
+  .site-nav a:hover::after {
+    transform: scaleX(1);
+  }
+
+  .site-nav a[aria-current="page"]::after {
+    background: var(--accent);
+    transform: scaleX(1);
+  }
+
+  .site-tools {
+    grid-area: tools;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-right: -0.7rem;
+  }
+
+  .site-tools__lang,
+  .site-tools__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 160ms;
+  }
+
+  .site-tools__lang {
+    color: var(--fg);
+  }
+
+  .site-tools__lang:hover,
+  .site-tools__icon:hover {
+    color: var(--accent);
+  }
+
+  @media (min-width: 768px) {
+    .site-header {
+      position: sticky;
+      top: 0;
+    }
+
+    .site-header__row {
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-areas: "brand nav tools";
+      height: var(--header-h);
+    }
+
+    .site-nav {
+      border-top: 0;
+      justify-content: center;
+      gap: clamp(1.25rem, 2.4vw, 2.25rem);
+      align-self: stretch;
+    }
+
+    .site-nav a {
+      min-height: 100%;
+      font-size: 0.84rem;
+    }
+  }
+</style>

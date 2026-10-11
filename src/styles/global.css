@@ -26,13 +26,16 @@
   line-gap-override: 0%;
 }
 
+/* ------------------------------------------------------------------------
+   Tokens. Monochrome editorial system with one signal colour: rust, the
+   needle. Sibling of the BRTHLS system (same faces, same paper and ink),
+   with its own mark and accent.
+   ------------------------------------------------------------------------ */
 @theme {
-  /* Typography */
   --font-display: "Anton", "Anton Fallback", Impact, "Arial Narrow", sans-serif;
   --font-sans: "Inter Variable", "Inter Fallback", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* Type scale (editorial) */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -45,92 +48,178 @@
   --text-6xl: 5.5rem;
   --text-7xl: 7rem;
 
-  /* Colors — monochrome + rust accent */
-  --color-ink: #0a0a0a;
-  --color-paper: #ffffff;
+  --color-ink: #111111;
+  --color-paper: #fafafa;
   --color-rust: #c2410c;
   --color-rust-deep: #9a3412;
-  --color-stone-50: #fafafa;
-  --color-stone-100: #f5f5f5;
-  --color-stone-200: #e5e5e5;
-  --color-stone-300: #d4d4d4;
+  /* Neutral scale, retuned against the #fafafa / #111111 grounds. */
+  --color-stone-50: #f7f7f7;
+  --color-stone-100: #efefef;
+  --color-stone-200: #e2e2e2;
+  --color-stone-300: #d0d0d0;
   --color-stone-400: #a3a3a3;
   --color-stone-500: #737373;
   --color-stone-600: #525252;
-  --color-stone-700: #404040;
+  --color-stone-700: #3a3a3a;
   --color-stone-800: #262626;
-  --color-stone-900: #171717;
-  --color-stone-950: #0a0a0a;
+  --color-stone-900: #1b1b1b;
+  --color-stone-950: #111111;
 
-  /* Spacing scale (editorial) */
-  --spacing-section: clamp(4rem, 8vw, 8rem);
+  /* Square, ruled geometry. Radii stay small everywhere. */
+  --radius-xs: 0px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 3px;
+  --radius-xl: 4px;
+  --radius-2xl: 4px;
+  --radius: 2px;
+
+  --spacing-section: clamp(4.5rem, 9vw, 8.5rem);
   --spacing-gutter: clamp(1.5rem, 4vw, 3rem);
 
-  /* Motion */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
   color-scheme: light dark;
-  --bg: #ffffff;
-  --fg: #0a0a0a;
-  --muted: #525252;
-  --rule: #e5e5e5;
+  --bg: #fafafa;
+  --fg: #111111;
+  --muted: #5c5c5c;
+  --rule: #d6d6d6;
+  --surface: #f0f0f0;
   --accent: #c2410c;
   --accent-hover: #9a3412;
+
+  /* Inverse: a true swap of ground and figure (the NORTH.md layer row). The
+     accent swaps with it so it keeps AA contrast on either ground. */
+  --inv-bg: var(--fg);
+  --inv-fg: var(--bg);
+  --inv-muted: #a3a3a3;
+  --inv-accent: #f0682c;
+
+  /* Ink block: stays dark in both schemes (code, the template spread). */
+  --ink-bg: #111111;
+  --ink-fg: #f2f2f2;
+  --ink-muted: #a3a3a3;
+  --ink-rule: #2f2f2f;
+  --ink-accent: #f0682c;
+
+  --frame: 90rem;
   /* 72ch of Inter at 16px, in rem: a ch-based width changes when the web font
      replaces the fallback and shifts the whole layout (CLS). */
   --max-prose: 45.42rem;
+  --header-h: 0px;
+  --display-leading: 0.98;
+}
+
+/* Anton's accented capitals (Á, Ñ) rise above a tight line box. */
+:root:lang(es) {
+  --display-leading: 1.1;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 4rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0a0a0a;
-    --fg: #f5f5f5;
+    --bg: #111111;
+    --fg: #f2f2f2;
     --muted: #a3a3a3;
-    --rule: #262626;
-    --accent: #f97316;
-    --accent-hover: #ea580c;
+    --rule: #2f2f2f;
+    --surface: #1b1b1b;
+    --accent: #f0682c;
+    --accent-hover: #ff8f5c;
+
+    --inv-muted: #5c5c5c;
+    --inv-accent: #c2410c;
+
+    --ink-bg: #1a1a1a;
+    --ink-rule: #333333;
   }
 }
 
-html {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv11";
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: calc(var(--header-h) + 1.5rem);
+    scrollbar-color: var(--rule) transparent;
+    scrollbar-width: thin;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: var(--display-leading);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Code is literal: no ligatures (JetBrains Mono would draw <!-- as an
+     arrow) and none of Inter's stylistic sets. */
+  code,
+  pre,
+  kbd {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    font-feature-settings: normal;
+    font-variant-ligatures: none;
+  }
+
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #ffffff;
+  }
+
+  ::placeholder {
+    color: var(--muted);
+    opacity: 1;
+  }
+
+  hr {
+    border-color: var(--rule);
+  }
 }
 
-body {
-  margin: 0;
-  min-height: 100dvh;
-  line-height: 1.55;
+@media (prefers-color-scheme: dark) {
+  ::selection {
+    color: #111111;
+  }
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  line-height: 0.95;
-}
-
-code, pre, kbd {
-  font-family: var(--font-mono);
-  font-size: 0.92em;
-}
-
-/* Focus visible for accessibility */
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -141,38 +230,205 @@ code, pre, kbd {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e5e5e5;
+  background: var(--rule);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a3a3a3;
+  background: var(--muted);
 }
 
-@media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-thumb {
-    background: #262626;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #525252;
-  }
+/* ------------------------------------------------------------------------
+   Shared editorial primitives (used by layout, landing, spec, examples).
+   ------------------------------------------------------------------------ */
+
+/* The page column. Wide editorial frame, gutters scale with the viewport. */
+.frame {
+  width: 100%;
+  max-width: var(--frame);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+  box-sizing: border-box;
 }
 
-::selection {
-  background: #000000;
+/* Running label: mono, small caps-height, wide tracking. Only for labels,
+   indices and metadata, never for reading text. */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+/* The signal: a small rust square, the only ornament in the system. */
+.signal {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  background: var(--accent);
+}
+
+/* Buttons: rectangular ink blocks; the arrow moves, the block fills. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem;
+  min-height: 3rem;
+  padding: 0.8rem 1.15rem;
+  font-size: 0.875rem;
+  font-weight: 550;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  border: 1px solid var(--fg);
+  transition:
+    background-color 180ms var(--ease-out-quart),
+    color 180ms var(--ease-out-quart),
+    border-color 180ms var(--ease-out-quart);
+}
+
+.btn-primary {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
   color: #ffffff;
 }
 
+.btn-secondary {
+  background: transparent;
+  color: var(--fg);
+}
+
+.btn-secondary:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.btn .btn-arrow {
+  transition: transform 220ms var(--ease-out-expo);
+}
+
+.btn:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
 @media (prefers-color-scheme: dark) {
-  ::selection {
-    background: #ffffff;
-    color: #000000;
+  .btn-primary:hover {
+    color: #111111;
   }
 }
 
+/* Text link: hairline underline, rust on hover. */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+  transition: color 160ms;
+}
+
+.text-link:hover {
+  color: var(--accent);
+}
+
+/* Arrow icons follow the text colour and nudge on hover of their link. */
+.icon-arrow {
+  width: 0.95em;
+  height: 0.95em;
+  flex-shrink: 0;
+}
+
+/* Section head: display title on the left, the standfirst on the right,
+   both hanging from the same baseline. */
+.section {
+  padding-block: var(--spacing-section);
+  border-top: 1px solid var(--rule);
+}
+
+.section-head {
+  display: grid;
+  gap: 1.25rem clamp(2rem, 5vw, 5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.section-head__kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0;
+  color: var(--muted);
+}
+
+.section-title {
+  margin: 0;
+  font-size: clamp(2.35rem, 5.4vw, 4.75rem);
+}
+
+.section-desc {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+@media (min-width: 960px) {
+  .section-head {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+  }
+
+  .section-head__kicker {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   Prose surfaces: the essay, guide, FAQ and changelog pages compose their
+   own markup; these rules carry the system's decisions into it.
+   ------------------------------------------------------------------------ */
+
+/* One button language site-wide: rectangles, not pills. */
+main a.rounded-full {
+  border-radius: 0;
+  min-height: 2.75rem;
+}
+
+/* Pull quotes set in the display face are upright: Anton has no italic. */
+article.essay blockquote.pull-quote {
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 1.15;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--fg);
+  border-left: 1px solid var(--accent);
+  padding: 0.25rem 0 0.25rem 1.5rem;
+}
+
+/* Changelog: the same square geometry as the rest of the system. */
+main.changelog-main :is(.action-link, .entry-badge, .semver-guide, code) {
+  border-radius: 0;
+}
+
+/* Reduced motion: no movement at all. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

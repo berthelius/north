@@ -1,0 +1,29 @@
+---
+/**
+ * The NORTH.md mark: a cartographic north arrow. The west half is the signal
+ * (rust), the east half is ink. Decorative wherever it appears next to the
+ * wordmark, so it is always aria-hidden.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<svg class:list={["north-mark", className]} viewBox="0 0 20 28" aria-hidden="true" focusable="false">
+  <path class="north-mark__west" d="M10 0.5 L1.5 27.5 L10 21.5 Z"></path>
+  <path class="north-mark__east" d="M10 0.5 L18.5 27.5 L10 21.5 Z"></path>
+</svg>
+
+<style>
+  .north-mark {
+    display: block;
+    overflow: visible;
+  }
+  .north-mark__west {
+    fill: var(--accent);
+  }
+  .north-mark__east {
+    fill: currentColor;
+  }
+</style>
