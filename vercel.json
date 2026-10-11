@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [{ "source": "/sitemap.xml", "destination": "/sitemap-index.xml", "permanent": true }],
   "headers": [
     {
       "source": "/(.*)",
