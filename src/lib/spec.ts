@@ -171,18 +171,14 @@ const field = (head: string, re: RegExp): string => {
   return m[1].trim();
 };
 
-export async function renderSpec(file: SpecFile): Promise<RenderedSpec> {
+/** Header, body and the H2/H3 headings of the body (outside code fences). */
+function parseSpec(file: SpecFile) {
   const raw = readFileSync(join(process.cwd(), file), 'utf-8').replace(/\r\n/g, '\n');
   const sep = raw.indexOf('\n---\n');
   if (sep < 0) throw new Error(`${file}: header separator not found`);
   const head = raw.slice(0, sep);
   const body = raw.slice(sep + 5).replace(/^\n+/, '');
 
-  const title = field(head, /^# (.+)$/m);
-  const version = field(head, /^\*\*(?:Version|Versión):\*\*\s*(.+)$/m);
-  const date = field(head, /^\*\*(?:Date|Fecha):\*\*\s*(\d{4}-\d{2}-\d{2})/m);
-
-  // Split the raw body per heading (outside code fences) for the copy buttons.
   const lines = body.split('\n');
   const marks: { depth: number; start: number; text: string }[] = [];
   let fence = false;
@@ -194,6 +190,27 @@ export async function renderSpec(file: SpecFile): Promise<RenderedSpec> {
   if (marks.length !== HEADING_IDS.length) {
     throw new Error(`${file}: expected ${HEADING_IDS.length} H2/H3 headings, found ${marks.length}`);
   }
+  return { head, body, lines, marks };
+}
+
+export async function renderSpec(file: SpecFile): Promise<RenderedSpec> {
+  const { head, body, lines, marks } = parseSpec(file);
+
+  // Both languages must share one heading structure: same levels, same order.
+  const other: SpecFile = file === 'SPEC.md' ? 'SPEC-ES.md' : 'SPEC.md';
+  const otherMarks = parseSpec(other).marks; // same count: parseSpec checks it
+  const d = marks.findIndex((h, j) => h.depth !== otherMarks[j].depth);
+  if (d >= 0) {
+    throw new Error(
+      `${file} and ${other} heading structure differs at heading ${d + 1}: "${marks[d].text}" is H${marks[d].depth}, "${otherMarks[d].text}" is H${otherMarks[d].depth}`,
+    );
+  }
+
+  const title = field(head, /^# (.+)$/m);
+  const version = field(head, /^\*\*(?:Version|Versión):\*\*\s*(.+)$/m);
+  const date = field(head, /^\*\*(?:Date|Fecha):\*\*\s*(\d{4}-\d{2}-\d{2})/m);
+
+  // Raw body split per heading, for the copy buttons.
   const sections: Record<string, string> = {};
   const headings: SpecHeading[] = marks.map((mk, i) => {
     const id = HEADING_IDS[i];

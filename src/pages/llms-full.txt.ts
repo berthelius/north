@@ -12,11 +12,17 @@ export async function GET(): Promise<Response> {
 
   const examples = (await getCollection('examples')).sort((a, b) => a.data.order - b.data.order);
 
-  // The "real" example must stay a verbatim copy of the repository's NORTH.md.
+  // The "real" example must stay a verbatim copy of the repository's NORTH.md,
+  // byte for byte: its body is everything after the closing frontmatter fence
+  // and the one blank separator line. (The collection's `body` is trimmed, so
+  // the raw file is read instead.)
   const realExample = examples.find((e) => e.id === 'northfile-dev');
-  if (!realExample || (realExample.body ?? '').trim() !== northContent.trim()) {
+  const exampleRaw = readFileSync(join(root, 'src/content/examples/northfile-dev.md'), 'utf-8');
+  const fence = /^---\n[\s\S]*?\n---\n/.exec(exampleRaw);
+  const rest = fence ? exampleRaw.slice(fence[0].length) : '';
+  if (!realExample || !rest.startsWith('\n') || rest.slice(1) !== northContent) {
     throw new Error(
-      'src/content/examples/northfile-dev.md has drifted from NORTH.md. Copy NORTH.md into its body verbatim.',
+      'src/content/examples/northfile-dev.md has drifted from NORTH.md. Copy NORTH.md into its body verbatim, after one blank line below the frontmatter.',
     );
   }
 

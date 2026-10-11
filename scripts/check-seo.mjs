@@ -1,13 +1,20 @@
 #!/usr/bin/env node
 // SEO/AIO invariants over dist/: canonical on the apex, no trailing slash,
-// <html lang> matches the path, hreflang only on pages with both versions,
-// absolute og:image, every JSON-LD block parses, sitemap lists ES pages and
-// not 404. Exit 1 on failure.
+// <html lang> matches the path, hreflang only on pages with both versions and
+// complete on every LOCALIZED_ROUTES page, absolute og:image, no noindex
+// outside the 404, every JSON-LD block parses, sitemap lists every built page
+// (ES included, 404 excluded) and nothing else. Exit 1 on failure.
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 
 const DIST = process.argv[2] ?? 'dist';
 const SITE = 'https://northfile.dev';
+
+// Routes that must carry the full hreflang set; read from the i18n source of truth.
+const i18nSrc = readFileSync(new URL('../src/lib/i18n.ts', import.meta.url), 'utf8');
+const routesSrc = i18nSrc.match(/LOCALIZED_ROUTES\b[^=]*=\s*\[([^\]]*)\]/)?.[1];
+const LOCALIZED_ROUTES = [...(routesSrc ?? '').matchAll(/['"]([^'"]+)['"]/g)].map((m) => m[1]);
+if (!LOCALIZED_ROUTES.length) throw new Error('check-seo: could not read LOCALIZED_ROUTES from src/lib/i18n.ts');
 
 const walk = (d) =>
   readdirSync(d, { withFileTypes: true }).flatMap((e) =>
@@ -17,7 +24,10 @@ const pages = walk(DIST).filter((f) => f.endsWith('.html'));
 const errors = [];
 if (!pages.length) errors.push(`no .html in ${DIST}/ (run npm run build first)`);
 
-const attr = (tag, name) => tag.match(new RegExp(`\\s${name}="([^"]*)"`))?.[1];
+const attr = (tag, name) => {
+  const m = tag.match(new RegExp(`\\s${name}=(?:"([^"]*)"|'([^']*)')`, 'i'));
+  return m ? (m[1] ?? m[2]) : undefined;
+};
 const urlOf = (file) => {
   const rel = '/' + relative(DIST, file).split(sep).join('/');
   return rel.replace(/(^|\/)index\.html$/, '$1').replace(/\/$/, '') || '/';
@@ -41,6 +51,8 @@ for (const file of pages) {
   } else if (!canon[0].startsWith(SITE + '/')) err(`canonical ${canon[0]} not on apex`);
 
   const alts = [...html.matchAll(/<link\b[^>]*hreflang="[^"]*"[^>]*>/g)].map((m) => [attr(m[0], 'hreflang'), attr(m[0], 'href')]);
+  const route = here.replace(/^\/es(\/|$)/, '/') || '/';
+  if (!alts.length && LOCALIZED_ROUTES.includes(route)) err(`no hreflang links; ${route} is in LOCALIZED_ROUTES (expected en, es, x-default)`);
   if (alts.length) {
     const langs = alts.map(([l]) => l).sort().join(',');
     if (langs !== 'en,es,x-default') err(`hreflang set is ${langs}, expected en,es,x-default`);
@@ -59,6 +71,14 @@ for (const file of pages) {
 
   const robots = html.match(/<meta\b[^>]*name="robots"[^>]*>/)?.[0];
   if (!is404 && robots) err(`unexpected robots meta (${robots}); site is open to crawlers`);
+  // Any crawler directive (robots, googlebot, bingbot, X-Robots-Tag...) that blocks indexing.
+  if (!is404) {
+    for (const [tag] of html.matchAll(/<meta\b[^>]*>/gi)) {
+      const who = attr(tag, 'name') ?? attr(tag, 'http-equiv') ?? '';
+      const content = attr(tag, 'content') ?? '';
+      if (/robots|bot|slurp|spider|crawler/i.test(who) && /\b(noindex|none)\b/i.test(content)) err(`indexing blocked by ${tag}`);
+    }
+  }
   if (is404 && !/<meta\b[^>]*name="robots"[^>]*noindex/.test(html)) err('404 must be noindex');
 
   for (const m of html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
@@ -83,7 +103,10 @@ try {
     if (u === '/404.html') continue;
     if (!locs.includes(SITE + (u === '/' ? '/' : u))) errors.push(`sitemap is missing ${u}`);
   }
-  for (const l of locs) if (!l.startsWith(SITE + '/')) errors.push(`sitemap URL off-apex: ${l}`);
+  for (const l of locs) {
+    if (!l.startsWith(SITE + '/')) errors.push(`sitemap URL off-apex: ${l}`);
+    else if (!pages.some((p) => urlOf(p) === (l.slice(SITE.length).replace(/\/$/, '') || '/'))) errors.push(`sitemap lists ${l}, but no page is built for it`);
+  }
 } catch {
   errors.push('sitemap-0.xml missing');
 }
