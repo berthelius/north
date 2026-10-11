@@ -38,37 +38,56 @@ const bearings = [-26, 12.8].map((deg) => {
 });
 ---
 
-<svg class:list={["compass", { "compass--fixed": bearing !== undefined }]} viewBox="0 0 400 400" aria-hidden="true" focusable="false">
-  <circle class="compass__ring" cx={C} cy={C} r={R}></circle>
-  <circle class="compass__inner" cx={C} cy={C} r="150"></circle>
-  <line class="compass__cross" x1={C} y1="62" x2={C} y2="338"></line>
-  <line class="compass__cross" x1="62" y1={C} x2="338" y2={C}></line>
+<!-- The dial and the needle are separate layers: the needle turns as an HTML
+     box, so its settle animation runs on the compositor, not the main thread. -->
+<div class:list={["compass", { "compass--fixed": bearing !== undefined }]} aria-hidden="true">
+  <svg class="compass__dial" viewBox="0 0 400 400" focusable="false">
+    <circle class="compass__ring" cx={C} cy={C} r={R}></circle>
+    <circle class="compass__inner" cx={C} cy={C} r="150"></circle>
+    <line class="compass__cross" x1={C} y1="62" x2={C} y2="338"></line>
+    <line class="compass__cross" x1="62" y1={C} x2="338" y2={C}></line>
 
-  {ticks.map((t) => (
-    <line class={`compass__tick compass__tick--${t.kind}`} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2}></line>
-  ))}
+    {ticks.map((t) => (
+      <line class={`compass__tick compass__tick--${t.kind}`} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2}></line>
+    ))}
 
-  <path class="compass__lubber" d="M193 1 L207 1 L200 11 Z"></path>
+    <path class="compass__lubber" d="M193 1 L207 1 L200 11 Z"></path>
 
-  {bearings.map((b) => (
-    <line class="compass__bearing" x1={b.x1} y1={b.y1} x2={b.x2} y2={b.y2}></line>
-  ))}
+    {bearings.map((b) => (
+      <line class="compass__bearing" x1={b.x1} y1={b.y1} x2={b.x2} y2={b.y2}></line>
+    ))}
+  </svg>
 
-  <g class="compass__jostle">
-    <g class="compass__needle" style={bearing !== undefined ? `transform: rotate(${bearing}deg)` : undefined}>
-      <path class="compass__north-w" d="M200 58 L189 200 L200 200 Z"></path>
-      <path class="compass__north-e" d="M200 58 L211 200 L200 200 Z"></path>
-      <path class="compass__south" d="M189 200 L200 342 L211 200 Z"></path>
-    </g>
-  </g>
-  <circle class="compass__pivot" cx={C} cy={C} r="6"></circle>
-</svg>
+  <div class="compass__jostle">
+    <div class="compass__needle" style={bearing !== undefined ? `transform: rotate(${bearing}deg)` : undefined}>
+      <svg viewBox="0 0 400 400" focusable="false">
+        <path class="compass__north-w" d="M200 58 L189 200 L200 200 Z"></path>
+        <path class="compass__north-e" d="M200 58 L211 200 L200 200 Z"></path>
+        <path class="compass__south" d="M189 200 L200 342 L211 200 Z"></path>
+        <!-- Centred on the turning axis, so it reads the same at any angle. -->
+        <circle class="compass__pivot" cx={C} cy={C} r="6"></circle>
+      </svg>
+    </div>
+  </div>
+</div>
 
 <style>
+  /* One cell, three stacked boxes of the same square: dial, jostle, needle. */
   .compass {
+    display: grid;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+  .compass > *,
+  .compass__needle {
+    grid-area: 1 / 1;
+  }
+
+  .compass svg {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
     overflow: visible;
   }
 
@@ -76,10 +95,6 @@ const bearings = [-26, 12.8].map((deg) => {
   :where(.compass) :where(line, circle, path) {
     vector-effect: non-scaling-stroke;
     fill: none;
-  }
-
-  .compass {
-    aspect-ratio: 1;
   }
 
   .compass__ring {
@@ -141,11 +156,10 @@ const bearings = [-26, 12.8].map((deg) => {
     stroke-width: 1;
   }
 
-  /* The needle is point-symmetric about the pivot, so its own box centre is
-     the pivot at any angle. */
+  /* Both boxes are the full square, so their centre is the pivot (200,200). */
   .compass__jostle,
   .compass__needle {
-    transform-box: fill-box;
+    display: grid;
     transform-origin: 50% 50%;
   }
 
@@ -178,7 +192,7 @@ const bearings = [-26, 12.8].map((deg) => {
 <script>
   // Scroll jostles the needle; a damped spring brings it back to north.
   // Runs only while the instrument is on screen and motion is allowed.
-  const needle = document.querySelector<SVGGElement>(".compass__jostle");
+  const needle = document.querySelector<HTMLElement>(".compass__jostle");
   if (needle && matchMedia("(prefers-reduced-motion: no-preference)").matches) {
     let angle = 0;
     let velocity = 0;
