@@ -1,6 +1,6 @@
 {
   "name": "NORTH.md",
-  "description": "A markdown convention that declares a software project's purpose, ambition, and precomputed trade-off defaults in a form readable by both humans and AI coding agents. It gives agents judgment when the prompt runs out: scaling agency without scaling drift.",
+  "description": "NORTH.md is an open convention: one markdown file that declares a project's purpose, ambition and precomputed trade-offs for humans and AI coding agents. It is designed to give agents judgment when the prompt runs out.",
   "canonical": "https://northfile.dev",
   "spec": "https://northfile.dev/spec",
   "specMarkdown": "https://northfile.dev/spec.md",
@@ -42,7 +42,7 @@
     },
     {
       "file": "NORTH.md",
-      "purpose": "Project purpose, ambition, and trade-off defaults — how to choose when paths compete",
+      "purpose": "Project purpose, ambition and precomputed trade-offs — why, and how far",
       "url": "https://northfile.dev"
     }
   ],
