@@ -7,7 +7,7 @@ const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Why NORTH.md — The missing layer in your agent context stack",
-  "description": "Modern AI coding agents default to safe, incremental output. NORTH.md fixes the asymmetry by naming the destination, setting the bar above the default, and giving agents permission to be ambitious.",
+  "description": "AI coding agents tend to default to safe, incremental output. NORTH.md is designed to correct that by naming the destination, setting the bar above the default, and giving agents permission to be ambitious.",
   "author": {
     "@type": "Person",
     "name": "Viktor Berthelius",
@@ -18,7 +18,7 @@ const articleJsonLd = {
     "name": "NORTH.md",
     "url": siteUrl
   },
-  "datePublished": "2026-05-17",
+  "datePublished": "2026-09-24",
   "url": `${siteUrl}/why`,
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -29,7 +29,7 @@ const articleJsonLd = {
 
 <Base
   title="Why NORTH.md — The missing layer in your agent context stack"
-  description="Modern AI coding agents default to safe, incremental output. NORTH.md fixes the asymmetry by naming the destination, setting the bar above the default, and giving agents permission to be ambitious."
+  description="AI coding agents tend to default to safe, incremental output. NORTH.md is designed to correct that by naming the destination, setting the bar above the default, and giving agents permission to be ambitious."
   canonical={`${siteUrl}/why`}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
@@ -48,7 +48,7 @@ const articleJsonLd = {
 
     <!-- Eyebrow -->
     <p class="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted)]">
-      essay &middot; may 2026
+      essay &middot; september 2026
     </p>
 
     <!-- Title -->
@@ -58,7 +58,7 @@ const articleJsonLd = {
 
     <p class="mt-4 text-sm text-[var(--muted)]">
       By <a href="https://brthls.com" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">Viktor Berthelius</a>
-      &middot; 8 min read
+      &middot; 7 min read
     </p>
 
     <hr class="mt-10 border-[var(--rule)]" />
@@ -87,7 +87,7 @@ const articleJsonLd = {
       </p>
 
       <p>
-        The second wave gave us identity context. <code>SOUL.md</code> tells an agent <em>who</em> the project is: the voice, the aesthetic, the values, the personality. It answers questions like "should this error message be terse or warm?" and "does this codebase prefer explicit verbosity or concise cleverness?" This too was the right move. Without identity context, every AI-touched component ends up feeling subtly alien — technically correct but tonally mismatched.
+        Then came persona context. <code>SOUL.md</code> tells an agent <em>who</em> it is: its voice, its values, its character. It answers questions like "should this reply be terse or warm?" This too was a useful move. Without a persona, an agent's voice drifts from one session to the next — technically correct but tonally mismatched.
       </p>
 
       <p>
@@ -99,7 +99,7 @@ const articleJsonLd = {
       </blockquote>
 
       <p>
-        Without an answer, every agent defaults to the safe interpretation. Not because safe is wrong, but because <em>safe is the only interpretation that requires no assumption about ambition</em>. The agent cannot know whether you are trying to build the best invoicing tool in Europe or just keep the lights on for one more quarter. In the absence of that information, it hedges. It patches. It increments.
+        Without an answer, agents tend to default to the safe interpretation. Not because safe is wrong, but because <em>safe is the only interpretation that requires no assumption about ambition</em>. The agent cannot know whether you are trying to build the best tool in your category or just keep the lights on for one more quarter. In the absence of that information, it hedges. It patches. It increments.
       </p>
 
       <h2>What happens in practice</h2>
@@ -125,34 +125,34 @@ const articleJsonLd = {
       </p>
 
       <p>
-        The first section — the North Star — names the destination in one sentence. Not a vision statement. Not a mission. A destination: specific enough to disqualify wrong moves, ambitious enough to be uncomfortable, grounded enough to be reachable. The second section — the Bar — states what "done" means in concrete, observable terms. Not "high quality" but "Lighthouse 100, WCAG AA, zero type errors in CI, and i18n parity across fifteen languages. No exceptions."
+        The first section — the North Star — names the destination in one sentence. Not a vision statement. Not a mission. A destination: specific enough to disqualify wrong moves, ambitious enough to be uncomfortable, grounded enough to be reachable. The second section — the Bar — states what "done" means in concrete, observable terms. Not "high quality" but "Lighthouse 100, WCAG AA, zero type errors in CI, and i18n parity across every supported locale. No exceptions."
       </p>
 
       <p>
-        The remaining five sections handle trade-offs, asymmetric investments, explicit refusals, ambition triggers, and reversibility. Together they precompute the decisions that would otherwise be made implicitly, and usually incorrectly, on every agent session.
+        The remaining five sections handle trade-offs, asymmetric investments, explicit refusals, ambition triggers, and reversibility. Together they precompute the decisions that would otherwise be made implicitly, and often inconsistently, in every agent session.
       </p>
 
       <!-- Pull quote -->
       <blockquote class="pull-quote">
-        "NORTH.md precomputes the decisions that would otherwise be made implicitly, and usually incorrectly, on every agent session."
+        "NORTH.md precomputes the decisions that would otherwise be made implicitly, and often inconsistently, in every agent session."
       </blockquote>
 
       <p>
-        The effect is not that agents become reckless. It is that agents stop defaulting to the smallest legal interpretation of every task. They still respect the operational rules in <code>CLAUDE.md</code>. They still honour the identity in <code>SOUL.md</code>. But now they also know that this project is going somewhere specific, that certain investments deserve a disproportionate share of effort, and that some tempting shortcuts are pre-declined.
+        The intent is not to make agents reckless. It is to stop them defaulting to the smallest legal interpretation of every task. They still respect the operational rules in <code>CLAUDE.md</code>. They still honour the persona in <code>SOUL.md</code>. But now they also know that this project is going somewhere specific, that certain investments deserve a disproportionate share of effort, and that some tempting shortcuts are pre-declined.
       </p>
 
       <h2>Why a markdown file, specifically</h2>
 
       <p>
-        The success of <code>CLAUDE.md</code> and <code>AGENTS.md</code> demonstrated something that was not obvious a few years ago: a plain markdown file at a known path is one of the most effective ways to get structured context into a software project's ambient information environment. It is read by humans during onboarding. It is read by agents at session start. It is indexed by crawlers. It appears in repository search. It is versioned by git with no additional infrastructure.
+        <code>CLAUDE.md</code> and <code>AGENTS.md</code> showed something that was not obvious a few years ago: a plain markdown file at a known path is a simple, durable way to put context where both humans and agents will find it. Humans read it during onboarding. Agents load it at session start. It is indexed by crawlers. It appears in repository search. It is versioned by git with no additional infrastructure.
       </p>
 
       <p>
-        A YAML schema would be more machine-parseable. A JSON file would be easier to validate programmatically. But both would be worse at the primary job, which is changing how humans and agents <em>think</em> about a project, not just how they <em>process</em> its metadata. Prose has rhetorical force that structured data does not. The sentence "this project replaces QuickBooks for European freelancers by 2027" lands differently in a YAML string than in a document section with a heading and context around it.
+        A YAML schema would be more machine-parseable. A JSON file would be easier to validate programmatically. But both would be worse at the primary job, which is changing how humans and agents <em>think</em> about a project, not just how they <em>process</em> its metadata. Prose has rhetorical force that structured data does not. The sentence "this project replaces spreadsheet bookkeeping for European freelancers by 2030" lands differently in a YAML string than in a document section with a heading and context around it.
       </p>
 
       <p>
-        <code>llms.txt</code> proved the same point from the other direction. A plain text file at a predictable URL turned out to be more durable and more widely adopted than elaborate structured alternatives. Convention compounds. Once enough projects adopt a pattern at a known path, every new tool and every new agent knows where to look.
+        <code>llms.txt</code> applies the same idea to websites: a plain text file at a predictable URL. Conventions compound. Once enough projects use a pattern at a known path, new tools and new agents know where to look.
       </p>
 
       <h2>What NORTH.md is not</h2>
@@ -193,7 +193,7 @@ const articleJsonLd = {
 
       <p>
         The problem <code>NORTH.md</code> addresses is structural to autonomous software development:
-        <em>tests and rules files prevent broken syntax, but they do nothing to prevent product drift.</em>
+        <em>tests and rules files prevent broken builds, but they do little to prevent product drift.</em>
       </p>
 
       <p>
@@ -201,16 +201,16 @@ const articleJsonLd = {
       </p>
 
       <p>
-        When agent execution scales across multiple sessions and parallel worktrees, higher throughput without explicit arbitration simply produces more work-in-progress (WIP). <code>NORTH.md</code> provides that missing anchor: precomputing trade-offs before code is written, codifying unambiguous refusals (anti-goals) that survive pushback, and establishing what quality threshold counts as genuinely finished.
+        When agent execution scales across multiple sessions and parallel worktrees, higher throughput without explicit direction tends to produce more work in progress (WIP), not more progress. <code>NORTH.md</code> provides that missing anchor: precomputing trade-offs before code is written, codifying unambiguous refusals (anti-goals) that survive pushback, and establishing what quality threshold counts as genuinely finished.
       </p>
 
       <!-- Pull quote -->
       <blockquote class="pull-quote">
-        "Without direction, more agent throughput simply produces more WIP."
+        "Without direction, more agent throughput tends to produce more WIP, not more progress."
       </blockquote>
 
       <p>
-        The specification is short enough to read in five minutes. Writing a first draft of your own NORTH.md takes perhaps thirty. The payoff is that every subsequent agent session starts from a better default — not because the agent has changed, but because you have finally given it judgment when the prompt runs out.
+        The specification is short enough to read in five minutes, and a first NORTH.md can be in place in ten; a good one takes longer. The aim is that every later agent session starts from a better default — not because the agent has changed, but because you have finally given it judgment when the prompt runs out.
       </p>
 
       <hr class="section-rule" />
@@ -242,9 +242,10 @@ const articleJsonLd = {
         <a href="https://github.com/berthelius/north" class="underline decoration-dotted underline-offset-4 hover:text-[var(--fg)]">GitHub</a>
       </p>
       <p class="mt-2">
-        Trinity: <a href="https://agents.md" class="hover:text-[var(--fg)]">AGENTS.md</a> &middot;
+        Related: <a href="https://agents.md" class="hover:text-[var(--fg)]">AGENTS.md</a> &middot;
+        <a href="https://github.com/google-labs-code/design.md" class="hover:text-[var(--fg)]">DESIGN.md</a> &middot;
         <a href="https://soul.md" class="hover:text-[var(--fg)]">SOUL.md</a> &middot;
-        <span class="text-[var(--fg)]">NORTH.md</span>
+        <a href="https://llmstxt.org" class="hover:text-[var(--fg)]">llms.txt</a>
       </p>
     </footer>
   </main>

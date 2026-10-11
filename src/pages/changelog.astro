@@ -8,12 +8,12 @@ const entries = [
     dateDisplay: "24 September 2026",
     status: "current",
     changes: [
-      "Canonical public specification release.",
-      "Codified the seven canonical sections: North Star, The Bar, Current Ambition, Anti-Goals, Trade-off Defaults, Ambition Triggers, and Reversibility.",
-      "Structured Trade-off Defaults table schema adopted with explicit 'Flip when' conditions.",
-      "Codified distinction between Mechanical Automated Gates and Truth Assertions in The Bar.",
-      "Established the 5-layer agent governance stack (CONSTITUTION.md, AGENTS.md, design.md, SOUL.md, NORTH.md).",
-      "Adopted semantic versioning (semver) with one-way door guarantees for section names.",
+      "First public release.",
+      "Seven sections defined: North Star, The Bar, Asymmetric Bets, Anti-Goals, Trade-off Defaults, Ambition Triggers, and Reversibility.",
+      "Trade-off Defaults name each default and the condition under which it flips.",
+      "Proposed a five-layer model for agent context files (CONSTITUTION.md, AGENTS.md, DESIGN.md, SOUL.md, NORTH.md).",
+      "Propagation guidance and an optional spec-version marker.",
+      "Versioning policy adopted (semver).",
     ],
   },
 ];
@@ -24,7 +24,7 @@ const jsonLd = {
   headline: "NORTH.md Specification Changelog",
   description:
     "Version history for the NORTH.md specification — a markdown convention for declaring project purpose, ambition, and trade-off defaults.",
-  datePublished: "2026-05-17",
+  datePublished: "2026-09-24",
   author: {
     "@type": "Person",
     name: "Viktor Berthelius",
@@ -63,21 +63,12 @@ const jsonLd = {
           </svg>
           Download spec.md
         </a>
-        <a href="#rss-note" class="action-link rss-link" aria-describedby="rss-note">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <circle cx="3.5" cy="12.5" r="1.5" fill="currentColor"/>
-            <path d="M2 8.5a6 6 0 016 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M2 4.5a10 10 0 0110 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          Subscribe via RSS
+        <a href="https://github.com/berthelius/north" class="action-link">
+          Follow on GitHub
+          <span aria-hidden="true">↗</span>
         </a>
       </div>
     </header>
-
-    <!-- RSS note -->
-    <p class="rss-note" id="rss-note" aria-live="polite">
-      RSS feed coming in a future release. Subscribe to the <a href="https://github.com/berthelius/north" class="cl-link">GitHub repository</a> for now.
-    </p>
 
     <!-- Entries -->
     <section class="changelog-entries" aria-label="Version history">
@@ -209,18 +200,6 @@ const jsonLd = {
     color: var(--fg);
     border-color: var(--muted);
     outline: none;
-  }
-
-  /* RSS note */
-  .rss-note {
-    font-size: var(--text-sm);
-    color: var(--muted);
-    background: color-mix(in srgb, var(--fg) 4%, transparent);
-    border: 1px solid var(--rule);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    margin: 0 0 3rem;
-    line-height: 1.5;
   }
 
   /* Entries */
