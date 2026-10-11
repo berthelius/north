@@ -45,7 +45,7 @@ Specification: https://northfile.dev/spec
 Raw spec: https://northfile.dev/spec.md
 JSON representation: https://northfile.dev/api/spec/v0.1.json
 Repository: https://github.com/berthelius/north
-Author: Viktor Berthelius (https://brthls.com)
+Author: Viktor Berthelius (https://www.brthls.com)
 License: MIT
 Version: 0.1
 Date: 2026-10-11

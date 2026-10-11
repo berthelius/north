@@ -59,13 +59,15 @@ const jsonLd = {
   inLanguage: es ? "es" : "en",
   author: {
     "@type": "Person",
+    "@id": "https://www.brthls.com/about#person",
     name: "Viktor Berthelius",
-    url: "https://brthls.com",
+    url: "https://www.brthls.com",
   },
   publisher: {
     "@type": "Organization",
     name: "BRTHLS",
-    url: "https://brthls.com",
+    "@id": "https://www.brthls.com/#organization",
+    url: "https://www.brthls.com",
   },
   license: "https://opensource.org/licenses/MIT",
   url,
@@ -140,7 +142,7 @@ const jsonLd = {
         </p>
         <h1 class="spec-title">{spec.title}</h1>
         <div class="spec-meta">
-          <span>{t.authors}: <a href="https://brthls.com" class="spec-link">Viktor Berthelius</a> (BRTHLS)</span>
+          <span>{t.authors}: <a href="https://www.brthls.com" class="spec-link">Viktor Berthelius</a> (BRTHLS)</span>
           <span class="meta-sep" aria-hidden="true">·</span>
           <span>{t.licence}: MIT</span>
           <span class="meta-sep" aria-hidden="true">·</span>
@@ -174,7 +176,7 @@ const jsonLd = {
 
       <footer class="spec-footer">
         <p>
-          MIT &copy; <a href="https://brthls.com" class="spec-link">Viktor Berthelius</a>
+          MIT &copy; <a href="https://www.brthls.com" class="spec-link">Viktor Berthelius</a>
           <span class="meta-sep" aria-hidden="true">·</span>
           <a href="https://github.com/berthelius/north" class="spec-link">GitHub</a>
           {

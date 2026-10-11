@@ -11,7 +11,7 @@ const spec = {
   authors: [
     {
       name: 'Viktor Berthelius',
-      url: 'https://brthls.com',
+      url: 'https://www.brthls.com',
     },
   ],
   license: 'MIT',
