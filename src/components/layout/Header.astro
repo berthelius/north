@@ -37,8 +37,8 @@ const navLinks = [
 <header class="site-header">
   <div class="frame site-header__row">
     <a href={buildLocalizedPath("/", lang)} class="brand" aria-label={t("a11y.home")}>
+      <span class="brand__word">NORTH<span class="brand__ext">.md</span></span>
       <NorthMark class="brand__mark" />
-      <span class="brand__word">NORTH.MD</span>
     </a>
 
     <nav class="site-nav" aria-label={t("a11y.mainNav")}>
@@ -98,32 +98,41 @@ const navLinks = [
     column-gap: 2rem;
   }
 
+  /* The lockup, sibling of the BRTHLS wordmark: Inter 900, tight, with the
+     needle top-aligned where BRTHLS sets its square. The font size is the
+     wordmark size; the needle and the gap are in em so they scale with it
+     (at 2.1rem: needle 0.4rem wide, 0.04rem down, 0.34rem gap). */
   .brand {
     grid-area: brand;
     display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    min-height: 3.5rem;
+    align-items: flex-start;
+    gap: 0.162em;
+    /* 3.5rem tall on mobile, as the row it sits in. */
+    padding-block: 0.925rem;
+    font-family: var(--font-sans);
+    font-size: 1.65rem;
+    font-weight: 900;
+    line-height: 1;
     color: var(--fg);
     text-decoration: none;
   }
 
+  .brand__word {
+    letter-spacing: -0.07em;
+  }
+
+  .brand__ext {
+    letter-spacing: -0.04em;
+  }
+
   .brand :global(.brand__mark) {
-    width: 0.8rem;
-    height: 1.12rem;
+    width: 0.1905em;
+    margin-top: 0.019em;
     transition: transform 420ms var(--ease-out-expo);
   }
 
   .brand:hover :global(.brand__mark) {
     transform: translateY(-2px);
-  }
-
-  .brand__word {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    line-height: 1;
-    letter-spacing: 0.03em;
-    padding-top: 0.08em;
   }
 
   .site-nav {
@@ -169,7 +178,6 @@ const navLinks = [
   }
 
   .site-nav a[aria-current="page"]::after {
-    background: var(--accent);
     transform: scaleX(1);
   }
 
@@ -198,9 +206,14 @@ const navLinks = [
     color: var(--fg);
   }
 
-  .site-tools__lang:hover,
   .site-tools__icon:hover {
-    color: var(--accent);
+    color: var(--fg);
+  }
+
+  .site-tools__lang:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
   }
 
   @media (min-width: 768px) {
@@ -225,6 +238,12 @@ const navLinks = [
     .site-nav a {
       min-height: 100%;
       font-size: 0.84rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .brand {
+      font-size: 2.1rem;
     }
   }
 </style>

@@ -17,12 +17,20 @@ const t = useTranslations(lang);
     <p class="hero__eyebrow label">
       <span class="signal" aria-hidden="true"></span>
       <span class="hero__eyebrow-text">
-        {t("hero.eyebrow").split(" · ").map((part, i, all) => (
+        {t("hero.eyebrow").split(" · ").map((part) => (
           <Fragment>
-            {i > 0 && " "}
-            <span class="hero__eyebrow-part">{i < all.length - 1 ? `${part} ·` : part}</span>
+            <span class="hero__eyebrow-part">{`${part} ·`}</span>{" "}
           </Fragment>
         ))}
+        <span class="hero__eyebrow-part">
+          {t("hero.by")}{" "}<a
+            href="https://www.brthls.com"
+            class="hero__endorse"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`BRTHLS — ${t("a11y.newTab")}`}
+          >BRTHLS</a>
+        </span>
       </span>
     </p>
 
@@ -96,6 +104,21 @@ const t = useTranslations(lang);
     white-space: nowrap;
   }
 
+  /* The endorsement, as BRTHLS signs its collections: ink and underlined in
+     the muted row (the underline, not the tone, marks it as a link). The
+     block padding grows the hit area without moving the line. */
+  .hero__endorse {
+    padding-block: 0.3rem;
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  .hero__endorse:hover {
+    text-decoration-thickness: 2px;
+  }
+
   .hero__instrument {
     grid-area: instrument;
     width: 4.75rem;
@@ -115,8 +138,19 @@ const t = useTranslations(lang);
     display: none;
   }
 
-  .hero__accent {
-    color: var(--accent);
+  /* The emphasised word in outline, the BRTHLS headline device. It stays
+     real text (selectable, read aloud); only its fill is dropped. */
+  @supports (-webkit-text-stroke: 1px) {
+    .hero__accent {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--fg);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .hero__accent {
+      -webkit-text-stroke-width: 1px;
+    }
   }
 
   .hero__lead {
@@ -135,7 +169,7 @@ const t = useTranslations(lang);
   .hero__note {
     margin: 1.1rem 0 0;
     padding-left: 1rem;
-    border-left: 1px solid var(--accent);
+    border-left: 1px solid var(--fg);
     font-size: 0.9375rem;
     line-height: 1.6;
     color: var(--muted);

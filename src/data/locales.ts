@@ -14,6 +14,7 @@ export const ui = {
 
     // Hero
     'hero.eyebrow': 'Spec v0.1 · Open convention · MIT',
+    'hero.by': 'By',
     'hero.title1': 'Give your AI agents',
     'hero.titleAccent': 'judgment',
     'hero.title2': 'when the prompt runs out.',
@@ -133,6 +134,7 @@ export const ui = {
 
     // Hero
     'hero.eyebrow': 'Spec v0.1 · Convención abierta · MIT',
+    'hero.by': 'Por',
     'hero.title1': 'Dale a tus agentes de IA',
     'hero.titleAccent': 'criterio',
     'hero.title2': 'donde acaba el prompt.',
