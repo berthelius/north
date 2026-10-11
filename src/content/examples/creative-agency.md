@@ -1,15 +1,16 @@
 ---
-title: "Sable Studio"
+title: "Vantolm Studio"
 domain: "agency"
 subtitle: "Four clients a year, zero retainers"
-description: "Sable is a three-person creative studio specialising in brand identity and digital experience for funded technology companies. The studio takes four client projects per year — deliberately — and treats each one as a potential case study rather than a billable engagement. Revenue targets are set to sustain the model, not to grow headcount."
+description: "Vantolm is a three-person creative studio specialising in brand identity and digital experience for funded technology companies. The studio takes four client projects per year — deliberately — and treats each one as a potential case study rather than a billable engagement. Revenue targets are set to sustain the model, not to grow headcount."
 whyItWorks: "This NORTH.md works because it confronts the central tension of creative agency life honestly: retainers are lucrative and also suffocating. The anti-goals name the tempting things (retainers, brief-and-bid pitches, AI-generated decks) and justify each refusal with a sentence that survives a bad month. The trade-off table makes the depth-over-breadth default explicit and names the flip condition — which is how you know it is a real default and not just aspiration. The ambition triggers are calibrated for creative work, not engineering, which makes them genuinely useful."
-order: 3
+kind: "illustrative"
+order: 4
 ---
 
 <!-- NORTH.md spec: v0.1 -->
 
-# NORTH.md — Sable Studio
+# NORTH.md — Vantolm Studio
 
 > Project purpose, ambition, and trade-off defaults.
 > For client onboarding process, see `process/onboarding.md`.
@@ -28,7 +29,7 @@ A project is shippable as a case study when:
 - The brand system is documented well enough that a different designer could extend it without a brief.
 - The digital deliverable passes WCAG AA, scores ≥90 on Lighthouse performance, and renders correctly at 320 px.
 - The client can articulate the positioning change — not just the visual change — from before to after.
-- We would be comfortable citing it publicly under Sable's name within six months of delivery.
+- We would be comfortable citing it publicly under Vantolm's name within six months of delivery.
 
 If a project does not meet the fourth criterion at kickoff, we decline it before it starts.
 
@@ -50,7 +51,7 @@ If a project does not meet the fourth criterion at kickoff, we decline it before
 
 - **We do not take retainers.** Monthly retainers feel like recurring revenue; they are actually recurring obligation with declining creative quality as the relationship becomes transactional. Every client engagement has a defined end.
 - **We do not participate in brief-and-bid pitches.** Speculative creative work for a selection process devalues the work and selects for clients who do not know what they are buying. We will always meet first; we will never pitch free.
-- **We do not produce AI-generated decks for client presentations.** Not because the tools are bad, but because the clients who hire Sable are paying for judgment, not throughput. The deck is where the judgment is visible.
+- **We do not produce AI-generated decks for client presentations.** Not because the tools are bad, but because the clients who hire Vantolm are paying for judgment, not throughput. The deck is where the judgment is visible.
 - **We do not grow the studio beyond five people.** Growth in headcount would require growth in project volume, which would require retainers or brief-and-bid to sustain, which defeats the model. Revenue grows via rate, not headcount.
 - **We do not take projects we cannot finish well.** A project that strains capacity produces work we cannot defend. We refer clients we cannot serve to studios we trust.
 

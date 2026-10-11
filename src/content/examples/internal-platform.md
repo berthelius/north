@@ -1,15 +1,16 @@
 ---
-title: "Foundry Platform"
+title: "Oxbow Platform"
 domain: "internal-tool"
 subtitle: "Developer platform for a 200-engineer engineering org"
-description: "Foundry is the internal developer platform team at a 200-engineer software company. The team of six owns the golden paths: deployment pipelines, service templates, observability defaults, incident tooling, and the internal portal that surfaces all of it. Their mandate is to reduce the cognitive overhead of shipping production software — measured, not assumed."
+description: "Oxbow is the internal developer platform team at a 200-engineer software company. The team of six owns the golden paths: deployment pipelines, service templates, observability defaults, incident tooling, and the internal portal that surfaces all of it. Their mandate is to reduce the cognitive overhead of shipping production software — measured, not assumed."
 whyItWorks: "This NORTH.md works because it anchors everything to a measurable outcome (P50 ticket lead time) rather than a vague mandate like 'improve developer experience'. The Bar is observable: if a new service cannot be bootstrapped in under 30 minutes using the golden path, the platform has not done its job. The anti-goals confront the most common failure mode of internal platform teams — building bespoke tooling for problems that paid products already solve — and the trade-off table makes the 'internal users tolerate rougher UI' default explicit rather than implicit."
-order: 5
+kind: "illustrative"
+order: 6
 ---
 
 <!-- NORTH.md spec: v0.1 -->
 
-# NORTH.md — Foundry Platform
+# NORTH.md — Oxbow Platform
 
 > Project purpose, ambition, and trade-off defaults.
 > For platform architecture and golden path docs, see the internal wiki.

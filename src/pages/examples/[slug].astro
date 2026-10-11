@@ -16,6 +16,7 @@ const { Content } = await render(example);
 const rawBody = example.body ?? "";
 
 const domainLabels: Record<string, string> = {
+  "open-convention": "Open convention",
   "saas-b2b": "SaaS B2B",
   "oss-library": "OSS Library",
   "agency": "Agency",
@@ -24,11 +25,20 @@ const domainLabels: Record<string, string> = {
 };
 
 const domainLabel = domainLabels[example.data.domain] ?? example.data.domain;
+const isReal = example.data.kind === "real";
+const kindNote = isReal
+  ? "Real file. The NORTH.md at the root of the northfile.dev repository, reproduced verbatim."
+  : "Illustrative example. A composite of a fictional organisation; names, figures and domains are invented.";
+const sourceUrl = isReal
+  ? "https://github.com/berthelius/north/blob/main/NORTH.md"
+  : `https://github.com/berthelius/north/blob/main/src/content/examples/${example.id}.md`;
 ---
 
 <Base
   title={`${example.data.title} — NORTH.md Example`}
-  description={`${example.data.subtitle}. A NORTH.md example for the ${domainLabel} domain.`}
+  description={isReal
+    ? `${example.data.subtitle}. The real NORTH.md behind northfile.dev, reproduced verbatim.`
+    : `${example.data.subtitle}. An illustrative NORTH.md example for the ${domainLabel} domain.`}
 >
   <main class="mx-auto max-w-3xl px-6 py-24 md:py-32">
     <!-- Breadcrumb -->
@@ -40,12 +50,17 @@ const domainLabel = domainLabels[example.data.domain] ?? example.data.domain;
 
     <!-- Header -->
     <div class="mt-6">
-      <span
-        class="inline-block font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border"
-        style="color: var(--accent); border-color: currentColor;"
-      >
-        {domainLabel}
-      </span>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span
+          class="inline-block font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border"
+          style="color: var(--accent); border-color: currentColor;"
+        >
+          {domainLabel}
+        </span>
+        <span class="inline-block font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border border-[var(--rule)] text-[var(--muted)]">
+          {isReal ? "Real" : "Illustrative"}
+        </span>
+      </div>
 
       <h1 class="mt-3 font-display text-4xl md:text-5xl leading-[1.0] tracking-tight">
         {example.data.title}
@@ -53,15 +68,18 @@ const domainLabel = domainLabels[example.data.domain] ?? example.data.domain;
       <p class="mt-3 text-lg text-[var(--muted)] leading-snug">
         {example.data.subtitle}
       </p>
+      <p class="mt-2 text-sm text-[var(--muted)]">
+        {kindNote}
+      </p>
     </div>
 
-    <!-- Why this NORTH.md works — editor's note callout -->
+    <!-- Editor's note callout -->
     <aside
       class="mt-8 border-l-2 border-[var(--accent)] pl-5 py-1"
-      aria-label="Why this NORTH.md works"
+      aria-label={isReal ? "About this file" : "Why this NORTH.md works"}
     >
       <p class="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--accent)] mb-2">
-        Why this NORTH.md works
+        {isReal ? "About this file" : "Why this NORTH.md works"}
       </p>
       <p class="text-sm italic text-[var(--muted)] leading-relaxed">
         {example.data.whyItWorks}
@@ -105,7 +123,7 @@ const domainLabel = domainLabels[example.data.domain] ?? example.data.domain;
         <span aria-hidden>←</span> All examples
       </a>
       <a
-        href={`https://github.com/berthelius/north/blob/main/src/content/examples/${example.id}.md`}
+        href={sourceUrl}
         class="inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-4 py-2 text-sm font-medium text-[var(--fg)] transition hover:bg-[var(--rule)]"
         target="_blank"
         rel="noopener noreferrer"

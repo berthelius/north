@@ -1,15 +1,16 @@
 ---
-title: "Blocktime"
+title: "Stintly"
 domain: "side-project"
 subtitle: "A focus timer that bills clients while you work"
-description: "Blocktime is a browser-based focus timer built for freelancers who bill by the hour. It combines a Pomodoro-style timer with automatic time-entry creation in Harvest, Toggl Track, or a plain CSV export. Built and maintained by one person in stolen hours. Revenue goal: €5,000 MRR by month 12."
-whyItWorks: "This NORTH.md works because it is honest about what the project is: a side project with a solo founder, real revenue targets, and a narrow feature surface by design. The North Star is measurable (€5k MRR, month 12), not aspirational vague. The anti-goals name the traps that kill side projects specifically — hiring, raising, scope creep beyond the core loop — not generic bad things. The trade-off defaults are precomputed for the actual decisions that come up when time is scarce and energy is finite. The reversibility section acknowledges that for a side project, almost everything is a two-way door."
-order: 4
+description: "Stintly is a browser-based focus timer built for freelancers who bill by the hour. It combines a Pomodoro-style timer with automatic time-entry creation in the user's existing time tracker (through its public API) or a plain CSV export. Built and maintained by one person in stolen hours. Revenue goal: €5,000 MRR by month 12."
+whyItWorks: "This NORTH.md works because it is honest about what the project is: a side project with a solo founder, an explicit revenue target, and a narrow feature surface by design. The North Star is measurable (€5k MRR, month 12), not a vague aspiration. The anti-goals name the traps that kill side projects specifically — hiring, raising, scope creep beyond the core loop — not generic bad things. The trade-off defaults are precomputed for the actual decisions that come up when time is scarce and energy is finite. The reversibility section acknowledges that for a side project, almost everything is a two-way door."
+kind: "illustrative"
+order: 5
 ---
 
 <!-- NORTH.md spec: v0.1 -->
 
-# NORTH.md — Blocktime
+# NORTH.md — Stintly
 
 > Project purpose, ambition, and trade-off defaults.
 > One person. Stolen hours. Real constraints.
@@ -26,7 +27,7 @@ A feature is shippable when:
 
 - It works end-to-end in Chrome and Firefox, tested manually on each.
 - It has at least one automated test covering the happy path.
-- It does not break existing integrations (Harvest, Toggl Track, CSV export).
+- It does not break existing integrations (time-tracker sync, CSV export).
 - The landing page copy reflects the new capability before the feature ships.
 
 A weekly demo (Friday, 15 minutes, recorded) is the forcing function. If a feature is not ready to demo by Friday, it waits for the next week. No exceptions.
@@ -36,7 +37,7 @@ A weekly demo (Friday, 15 minutes, recorded) is the forcing function. If a featu
 **Go 10x on:**
 
 - **The timer experience itself.** The core loop is start → focus → log. Every pixel of friction in that loop is a user lost. This is the one thing worth obsessing over.
-- **Integration reliability.** If a user's time entries fail to sync to Harvest at 4pm on a Friday, they will not return. Integrations must be boring and correct.
+- **Integration reliability.** If a user's time entries fail to sync to their time tracker at 4pm on a Friday, they will not return. Integrations must be boring and correct.
 
 **Accept 1.1x on:**
 
@@ -50,7 +51,7 @@ A weekly demo (Friday, 15 minutes, recorded) is the forcing function. If a featu
 - **We do not raise funding.** External capital introduces growth expectations that cannot be satisfied by a €5k MRR target. If the project cannot sustain itself on subscriptions, the project is wrong, not the capitalisation.
 - **We do not add features outside the core loop without removing something.** The backlog is full of good ideas. Scope creep does not announce itself; it arrives as "just one more small thing". Features beyond the core loop require removing a feature of equal complexity.
 - **We do not support mobile apps.** The target user is at a desk with billable work open. A mobile experience solves a different problem for a different user. Build that when this is profitable.
-- **We do not build a client-facing portal.** Freelancers manage client relationships in their own tools. Blocktime is a personal productivity tool, not a client management system.
+- **We do not build a client-facing portal.** Freelancers manage client relationships in their own tools. Stintly is a personal productivity tool, not a client management system.
 
 ## 5. Trade-off Defaults
 
@@ -66,7 +67,7 @@ A weekly demo (Friday, 15 minutes, recorded) is the forcing function. If a featu
 
 - *"Would I pay €12 a month for this myself?"*
 - *"If this feature were removed, how many users would email me within a week?"*
-- *"What is the version of Blocktime that gets linked in every freelancer productivity thread for the next two years?"*
+- *"What is the version of Stintly that gets linked in every freelancer productivity thread for the next two years?"*
 - *"If I had three uninterrupted days instead of scattered hours, what would I build — and is that more important than what I am building now?"*
 - *"Is this the weekly demo I am proud to send to the mailing list?"*
 
@@ -74,7 +75,7 @@ A weekly demo (Friday, 15 minutes, recorded) is the forcing function. If a featu
 
 **One-way doors — decide deliberately:**
 
-- The integration API contracts with Harvest and Toggl Track. Breaking a sync integration ends the relationship with every user who relies on it.
+- The sync contracts with the time trackers we integrate with. Breaking a sync integration ends the relationship with every user who relies on it.
 - Pricing structure. Moving from monthly to annual-only, or changing the free tier, affects existing users' expectations and has real churn risk.
 - The data schema for time entries stored locally. Migration is possible but costs user trust if it goes wrong.
 

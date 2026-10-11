@@ -6,6 +6,7 @@ const allExamples = await getCollection("examples");
 const examples = allExamples.sort((a, b) => a.data.order - b.data.order);
 
 const domainLabels: Record<string, string> = {
+  "open-convention": "Open convention",
   "saas-b2b": "SaaS B2B",
   "oss-library": "OSS Library",
   "agency": "Agency",
@@ -18,7 +19,7 @@ const domainKeys = Object.keys(domainLabels);
 
 <Base
   title="Examples — NORTH.md across domains"
-  description="Five real NORTH.md files across different project types: SaaS, open-source library, creative agency, side project, and internal platform."
+  description="NORTH.md examples: this site's own file, plus five illustrative files for a SaaS, an open-source library, a creative agency, a side project, and an internal platform."
 >
   <main class="mx-auto max-w-3xl px-6 py-24 md:py-32">
     <!-- Header -->
@@ -31,9 +32,10 @@ const domainKeys = Object.keys(domainLabels);
     </h1>
 
     <p class="mt-5 max-w-2xl text-lg text-[var(--muted)] leading-relaxed">
-      NORTH.md works differently depending on the project type. Below are five
-      examples — each a complete, realistic file you could adapt for your own
-      project.
+      NORTH.md reads differently depending on the project type. The first
+      example is real: the NORTH.md at the root of this site's repository. The other five
+      are illustrative — composites of fictional organisations, with invented
+      names, figures and domains — written as complete files you could adapt.
     </p>
 
     <!-- Domain filter chips -->
@@ -83,6 +85,9 @@ const domainKeys = Object.keys(domainLabels);
                     style={`color: var(--accent); border-color: currentColor;`}
                   >
                     {domainLabels[example.data.domain]}
+                  </span>
+                  <span class="font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border border-[var(--rule)] text-[var(--muted)]">
+                    {example.data.kind === "real" ? "Real" : "Illustrative"}
                   </span>
                 </div>
                 <h2 class="mt-2 font-display text-2xl md:text-3xl leading-tight tracking-tight group-hover:text-[var(--accent)] transition-colors">
