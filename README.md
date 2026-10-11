@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://northfile.dev/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://northfile.dev/assets/hero-light.svg">
-  <img alt="NORTH.md — Give your AI coding agents judgment when the prompt runs out" src="https://northfile.dev/assets/hero-dark.svg" width="100%">
+  <img alt="NORTH.md — Give your AI agents judgment when the prompt runs out" src="https://northfile.dev/assets/hero-dark.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -14,33 +14,30 @@
 
 # NORTH.md
 
-**NORTH.md is an open markdown convention: one file at the root of a repository
-that declares the project's purpose, ambition, and precomputed trade-offs, for
-humans and AI coding agents alike.**
+**NORTH.md is an open convention: one markdown file that declares a project's
+purpose, ambition and precomputed trade-offs for humans and AI coding agents.**
 
-## Why
+## The problem
 
-Coding agents tend to take the smaller interpretation of an ambiguous task. They
-patch where a rewrite was due, add error handling instead of removing the
-failure mode, and stop to ask "X or Y?" when the answer was a project decision
-nobody wrote down. In long-running runs (Claude Code's `/goal`, Jules, Devin)
-there is no one to ask, so the agent guesses.
+Left to guess, coding agents tend to ship the safe, incremental version: a patch
+where a redesign was due, more error handling where the failure mode should have gone.
+The files they already read say how to build, what never to cross, how things
+look and who the agent is. None says where the project is going, or how far to push.
+On long, unattended runs there is no one to ask, so every decision nobody wrote
+down becomes a guess.
 
-The files agents already read cover other ground:
+## Where it fits
 
-- `AGENTS.md` / `CLAUDE.md` — **how** to build, test and work in the repository.
 - `CONSTITUTION.md` — **limits**: non-negotiable principles and boundaries.
+- `AGENTS.md` / `CLAUDE.md` — **how**: build, test and work in the repository.
 - `DESIGN.md` — **look**: design tokens and the rationale behind them.
-- `SOUL.md` — **who** the agent is: persona, values, tone.
+- `SOUL.md` — **who**: the agent's persona, values and tone.
+- `NORTH.md` — **why, and how far**: purpose, ambition and precomputed trade-offs.
 
-None of them says why the project exists, how far to push, or which trade-off
-wins when two valid choices collide. `NORTH.md` does, in seven short sections.
-
-We propose seeing these five files as a five-layer model, with `NORTH.md` as the
-direction layer. It is a proposal, not an established standard, and most
-repositories will use only some of the layers. See
-[northfile.dev/compare](https://northfile.dev/compare) for how each file
-relates to `NORTH.md`.
+We propose reading these as five layers, with `NORTH.md` as the direction layer.
+It is a model, not an established standard, and most repositories will use only
+some of the layers. [northfile.dev/compare](https://northfile.dev/compare) sets
+out what each file answers.
 
 ## The template
 
@@ -64,11 +61,11 @@ relates to `NORTH.md`.
 ## 5. Trade-off Defaults
 | Trade-off | Default | Flip when |
 |---|---|---|
-| Speed vs. safety | Safety on core logic; speed on internal tools | Never flip on fiscal/security code |
+| Speed vs. safety | Safety on core logic; speed on internal tools | An internal tool starts writing core data |
 | Build vs. buy | Buy infrastructure; build core product | Vendor breaks unit economics |
 
 ## 6. Ambition Triggers
-[Phrases that escalate scope when we are being too small.]
+[Phrases that escalate scope when we are thinking too small.]
 
 ## 7. Reversibility
 [One-way doors flagged. Two-way doors = move fast.]
@@ -82,11 +79,11 @@ The full definition of each section, with criteria and examples, is in
 
 1. **Create `NORTH.md`** at the repository root and paste the template.
 2. **Fill in the seven sections.** One sentence for the North Star. Real
-   refusals for the Anti-Goals. A flip condition for every Trade-off Default.
+   refusals in the Anti-Goals. A flip condition for every Trade-off Default.
    If a section does not apply, keep the heading and say why.
 3. **Point your agents at it.**
-   - In `CLAUDE.md`, add the line `@NORTH.md`. Claude Code imports the file
-     into context at the start of each session.
+   - In `CLAUDE.md`, add the line `@NORTH.md`. Claude Code loads `CLAUDE.md` at
+     the start of every session, and the import brings `NORTH.md` with it.
    - In `AGENTS.md` or any other rules file, add:
 
      ```markdown
@@ -94,28 +91,35 @@ The full definition of each section, with criteria and examples, is in
      architectural decisions, check The Bar, the Anti-Goals and the Trade-off
      Defaults; do not flip a default unless its "Flip when" condition is met.
      ```
-4. **Optionally, add the badge** to your README:
+4. **Optional: add the badge** to your README.
 
    ```markdown
    [![NORTH.md](https://northfile.dev/badge.svg)](https://northfile.dev)
    ```
 
-Keep it short. A NORTH.md longer than two screens has lost the plot.
+Keep it short. A NORTH.md longer than two screens has lost the plot. A first
+draft takes ten minutes; a good one takes longer, and that is where the value is.
 
 ## Examples
 
-[northfile.dev/examples](https://northfile.dev/examples) has one real file —
-this repository's own [NORTH.md](NORTH.md) — and five illustrative ones for a
-SaaS product, an open-source library, a creative agency, a side project and an
-internal platform. The illustrative examples are composites of fictional
-organisations.
+[northfile.dev/examples](https://northfile.dev/examples) has one real file, this
+repository's own [NORTH.md](NORTH.md), and five illustrative ones for fictional
+organisations: a B2B SaaS product, an open-source library, a creative studio, a
+side project and an internal platform. Their names and figures are invented.
+
+## Status
+
+v0.1, first public release on 2026-10-11. The seven section names are stable;
+guidance and examples may still change in minor versions. There is no published
+evaluation yet: that NORTH.md improves agent decisions is a hypothesis. If you
+test it, open an issue with the results, flattering or not.
 
 ## Machine-readable endpoints
 
 - Raw specification: [`northfile.dev/spec.md`](https://northfile.dev/spec.md)
 - JSON representation: [`northfile.dev/api/spec/v0.1.json`](https://northfile.dev/api/spec/v0.1.json)
 - LLM index: [`northfile.dev/llms.txt`](https://northfile.dev/llms.txt)
-- Full LLM dump: [`northfile.dev/llms-full.txt`](https://northfile.dev/llms-full.txt)
+- Full text for LLMs: [`northfile.dev/llms-full.txt`](https://northfile.dev/llms-full.txt)
 - Discovery pointer: [`northfile.dev/.well-known/llms.json`](https://northfile.dev/.well-known/llms.json)
 
 ## Contributing
@@ -123,7 +127,7 @@ organisations.
 Examples, editorial fixes and site improvements are welcome. Specification
 changes go through an RFC first. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Author and license
+## Author and licence
 
 Created by [Viktor Berthelius](https://brthls.com) (BRTHLS). Released under the
 [MIT License](LICENSE).

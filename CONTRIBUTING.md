@@ -1,7 +1,6 @@
 # Contributing to NORTH.md
 
-Thanks for considering a contribution. The NORTH.md project welcomes three
-kinds of contribution:
+Thank you for considering a contribution. Three kinds are welcome:
 
 1. **Example NORTH.md files** for [northfile.dev/examples](https://northfile.dev/examples).
 2. **Editorial improvements** to the specification text (`SPEC.md`).
@@ -11,7 +10,7 @@ kinds of contribution:
 
 ## Examples (lowest friction)
 
-Open a PR adding `src/content/examples/<slug>.md`. The body is the
+Open a pull request adding `src/content/examples/<slug>.md`. The body is the
 `NORTH.md` itself; the frontmatter describes it:
 
 ```yaml
@@ -32,7 +31,10 @@ Guidelines:
 - Keep it concrete. Avoid abstract aspirations.
 - Two-screen maximum.
 - Mark it `kind: "real"` only if the file is in use in a project you can
-  link to. Otherwise it is `illustrative`.
+  link to. Otherwise it is `illustrative`, and its description starts with
+  "A fictional".
+- Do not present a real company as a user of NORTH.md unless it has agreed
+  to be named.
 
 We curate the examples for breadth across domains. If a domain is already well
 represented, your example may be linked rather than included.
@@ -43,19 +45,20 @@ represented, your example may be linked rather than included.
 
 The specification is the load-bearing artefact. Changes follow an RFC process:
 
-1. Open a discussion before opening a PR.
+1. Open an issue before opening a pull request.
 2. State which section is affected and the proposed wording change.
 3. State the version bump (`PATCH`, `MINOR`, or `MAJOR`).
 4. State whether adopters will need to migrate their files.
 
-`MAJOR` changes are vanishingly rare and require strong consensus.
+`MAJOR` changes should be rare. They need broad agreement and a migration path
+for existing files.
 
 ---
 
 ## Landing and tooling
 
-Visual, copy, accessibility, performance, AIO, and SEO improvements are
-welcome. Quality bar:
+Improvements to design, copy, accessibility, performance, SEO and
+readability for LLMs are welcome. Quality bar:
 
 - Lighthouse 100 across the four metrics on every page touched.
 - Zero WCAG AA violations via `axe-core`.
@@ -72,6 +75,7 @@ not to compete with them — that applies to contributors here too.
 
 ---
 
-## License
+## Licence
 
-Contributions are licensed under MIT (`LICENSE`).
+By contributing, you agree that your contribution is released under the
+MIT License (see `LICENSE`).
