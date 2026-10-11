@@ -62,9 +62,13 @@ const SLUGS: Record<string, SlugConfig> = {
 const moduleDir = dirname(fileURLToPath(import.meta.url));
 const fontsRoot = join(moduleDir, '..', '..', '..', 'node_modules', '@fontsource');
 
-// Satori reads WOFF1 (.woff), not WOFF2.
-const font = (pkg: string, file: string): ArrayBuffer =>
-  readFileSync(join(fontsRoot, pkg, 'files', file)).buffer as ArrayBuffer;
+// Satori reads WOFF1 (.woff), not WOFF2. Copy out exactly the file's bytes:
+// on Node 24 a Buffer can be a view into a larger shared ArrayBuffer, so
+// `.buffer` alone hands Satori unrelated bytes (CI failed with "<svg").
+const font = (pkg: string, file: string): ArrayBuffer => {
+  const bytes = readFileSync(join(fontsRoot, pkg, 'files', file));
+  return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
+};
 
 let fonts: { anton: ArrayBuffer; mono: ArrayBuffer; monoBold: ArrayBuffer } | null = null;
 function loadFonts() {
