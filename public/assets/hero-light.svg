@@ -13,8 +13,8 @@
   <path d="M63 92 L78 140 L63 129 Z" fill="#111111"/>
   <text x="96" y="188" font-family="'Anton', Impact, 'Arial Narrow', sans-serif" font-size="120" fill="#111111" letter-spacing="0.005em">NORTH.md</text>
 
-  <text x="48" y="238" font-family="'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" fill="#111111" font-weight="600" letter-spacing="-0.01em">Give your AI coding agents judgment when the prompt runs out.</text>
-  <text x="48" y="266" font-family="'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5c5c5c">Purpose, ambition, and precomputed trade-off defaults to scale autonomous agency without drift.</text>
+  <text x="48" y="238" font-family="'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" fill="#111111" font-weight="600" letter-spacing="-0.01em">Give your AI agents judgment when the prompt runs out.</text>
+  <text x="48" y="266" font-family="'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#5c5c5c">One markdown file that declares a project's purpose, ambition and precomputed trade-offs.</text>
 
   <!-- Instrument -->
   <g>
@@ -105,6 +105,6 @@
   <!-- Footer rail -->
   <line x1="48" y1="312.5" x2="1152" y2="312.5" stroke="#d6d6d6" stroke-width="1"/>
   <text x="48" y="336" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#5c5c5c" letter-spacing="0.04em">LAYER 5: <tspan fill="#c2410c" font-weight="700">DIRECTION &amp; ARBITRATION</tspan></text>
-  <text x="340" y="336" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#5c5c5c" letter-spacing="0.04em">COMPLEMENTS: <tspan fill="#111111">AGENTS.md</tspan> · <tspan fill="#111111">design.md</tspan> · <tspan fill="#111111">SOUL.md</tspan> · <tspan fill="#111111">CONSTITUTION.md</tspan></text>
-  <text x="1152" y="336" text-anchor="end" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#c2410c" font-weight="700" letter-spacing="0.04em">MIT LICENSE ◇ OPEN STANDARD</text>
+  <text x="340" y="336" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#5c5c5c" letter-spacing="0.04em">COMPLEMENTS: <tspan fill="#111111">AGENTS.md</tspan> · <tspan fill="#111111">DESIGN.md</tspan> · <tspan fill="#111111">SOUL.md</tspan> · <tspan fill="#111111">CONSTITUTION.md</tspan></text>
+  <text x="1152" y="336" text-anchor="end" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="10.5" fill="#c2410c" font-weight="700" letter-spacing="0.04em">MIT LICENSE ◇ OPEN CONVENTION</text>
 </svg>
