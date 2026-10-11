@@ -31,19 +31,19 @@ const SLUGS: Record<string, SlugConfig> = {
   },
   spec: {
     title: 'NORTH.md Specification v0.1',
-    subtitle: 'The seven canonical sections for purpose-driven projects.',
+    subtitle: 'Seven sections: purpose, ambition and precomputed trade-offs.',
   },
   why: {
     title: 'Why NORTH.md',
-    subtitle: 'Coding agents default to safe. NORTH.md fixes the asymmetry.',
+    subtitle: 'Agents know how. Nobody told them how far.',
   },
   examples: {
     title: 'NORTH.md — Examples',
-    subtitle: 'Curated reference models across SaaS, OSS, agency, and platform architectures.',
+    subtitle: 'One real file and five illustrative ones, across five domains.',
   },
   faq: {
     title: 'NORTH.md — FAQ',
-    subtitle: 'Common questions about the convention and agent context files.',
+    subtitle: 'Straight answers, including what is not proven yet.',
   },
   changelog: {
     title: 'NORTH.md — Changelog',
@@ -51,7 +51,7 @@ const SLUGS: Record<string, SlugConfig> = {
   },
   compare: {
     title: 'Comparing Agent Conventions',
-    subtitle: 'NORTH.md vs AGENTS.md, SOUL.md, VISION.md, and CONSTITUTION.md.',
+    subtitle: 'Where NORTH.md fits next to AGENTS.md, SOUL.md and DESIGN.md.',
   },
 };
 

@@ -29,7 +29,7 @@ const domainLabel = domainLabels[example.data.domain] ?? example.data.domain;
 const isReal = example.data.kind === "real";
 const kindNote = isReal
   ? "Real file. The NORTH.md at the root of the northfile.dev repository, reproduced verbatim."
-  : "Illustrative example. A composite of a fictional organisation; names, figures and domains are invented.";
+  : "Illustrative example. A fictional organisation; its names, figures and domains are invented.";
 const sourceUrl = isReal
   ? "https://github.com/berthelius/north/blob/main/NORTH.md"
   : `https://github.com/berthelius/north/blob/main/src/content/examples/${example.id}.md`;
@@ -70,7 +70,7 @@ const sourceUrl = isReal
 
         <div class="specimen__copy">
           <button id="copy-btn" class="btn btn-primary" data-body={rawBody}>
-            <span id="copy-label">Copy template</span>
+            <span id="copy-label">Copy this file</span>
           </button>
           <span id="copy-feedback" class="specimen__feedback" aria-live="polite" aria-atomic="true">
             Copied to clipboard
@@ -438,7 +438,7 @@ const sourceUrl = isReal
       copyFeedback?.classList.add("is-shown");
       setTimeout(() => {
         copyFeedback?.classList.remove("is-shown");
-        if (copyLabel) copyLabel.textContent = "Copy template";
+        if (copyLabel) copyLabel.textContent = "Copy this file";
       }, 2000);
     } catch {
       // Clipboard API not available: open the GitHub source as a fallback.
