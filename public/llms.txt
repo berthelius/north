@@ -16,6 +16,7 @@ Left to guess, coding agents tend to ship the safe, incremental version. A NORTH
 ## Reference
 
 - [README](https://github.com/berthelius/north): repository introduction and the ten-minute adoption guide.
+- [north-adoption skill](https://github.com/berthelius/north/tree/main/skills/north-adoption): an Agent Skill in which your coding agent reads the repository, interviews you one question at a time and writes NORTH.md. Install with `npx skills add berthelius/north --skill north-adoption`; agents without skill support can use its PROMPT.md.
 - [Examples](https://northfile.dev/examples): one real NORTH.md (this site's own) and five illustrative ones for fictional organisations: a B2B SaaS product, an open-source library, a creative studio, a side project and an internal platform.
 - [Why](https://northfile.dev/why): the argument for writing a project's direction down.
 - [FAQ](https://northfile.dev/faq): straight answers, including what is not proven yet.

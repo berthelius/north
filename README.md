@@ -100,6 +100,18 @@ The full definition of each section, with criteria and examples, is in
 Keep it short. A NORTH.md longer than two screens has lost the plot. A first
 draft takes ten minutes; a good one takes longer, and that is where the value is.
 
+**Or let your agent interview you.** The [`north-adoption`](skills/north-adoption/)
+skill has your agent read the repository first, ask you one question at a time,
+draft the seven sections, test the draft against three decisions from your
+project and, once you approve, point your agents at it as in step 3:
+
+```bash
+npx skills add berthelius/north --skill north-adoption
+```
+
+Agents without skill support can use its
+[`PROMPT.md`](skills/north-adoption/PROMPT.md) instead.
+
 ## Examples
 
 [northfile.dev/examples](https://northfile.dev/examples) has one real file, this

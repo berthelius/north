@@ -157,6 +157,9 @@ To adopt NORTH.md in a project:
 4. Optional: add the badge to the README:
    [![NORTH.md](https://northfile.dev/badge.svg)](https://northfile.dev)
 
+Or let your agent interview you and write it: \`npx skills add berthelius/north --skill north-adoption\`
+(https://github.com/berthelius/north/tree/main/skills/north-adoption; without skill support, use its PROMPT.md).
+
 The specification is versioned via semver. A NORTH.md file may declare the
 spec version it targets via an HTML comment on the first line:
 <!-- NORTH.md spec: v0.1 -->
