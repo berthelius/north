@@ -8,11 +8,14 @@
 
 ## 2. The Bar
 
-**Mechanical Automated Gates:**
-- Specification is readable in five minutes and adoptable in ten.
-- Landing scores 100/100/100/100 on Lighthouse, passes WCAG AA, and renders without warnings on `astro check`.
+**Automated gates (CI, every push):**
 - Zero broken internal links or missing anchor targets across all static surfaces.
-- Machine-readable JSON specification (/api/spec/v0.1.json) is strictly typed, valid, and validated in CI.
+- The machine-readable JSON specification (/api/spec/v0.1.json) is valid and agrees with spec.md section by section.
+- `astro check` reports zero errors, zero warnings and zero hints.
+
+**Release checks (before every deploy):**
+- Specification is readable in five minutes and adoptable in ten.
+- Landing scores 100/100/100/100 on Lighthouse and passes WCAG AA with zero axe-core violations, in light and dark.
 
 **Truth & Honesty Assertions:**
 - Every example in `src/content/examples` is a production-grade file we would defend in code review, not a placeholder.
