@@ -37,7 +37,6 @@
     "@tailwindcss/vite": "^4.3.0",
     "@vercel/og": "^0.6.5",
     "astro": "^5.18.1",
-    "motion": "^12.38.0",
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {

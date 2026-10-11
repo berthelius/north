@@ -225,7 +225,6 @@ export const GET: APIRoute = async ({ params }) => {
     status: 200,
     headers: {
       'Content-Type': 'image/png',
-      'Cache-Control': 'public, max-age=86400, s-maxage=604800, immutable',
     },
   });
 };
