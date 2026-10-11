@@ -40,7 +40,7 @@ const t = useTranslations(lang);
       <p class="hero__note">{t("hero.stackNote")}</p>
     </div>
 
-    <div class="hero__actions" role="group" aria-label="Primary actions">
+    <div class="hero__actions" role="group" aria-label={t("hero.actions")}>
       <a href={buildLocalizedPath("/spec", lang)} class="btn btn-primary">
         {t("hero.ctaRead")}
         <Arrow class="btn-arrow" />

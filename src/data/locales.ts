@@ -89,6 +89,24 @@ export const ui = {
     // Footer
     'footer.stack': 'The proposed five-layer model',
     'footer.builtWith': 'MIT licence · Open and vendor-neutral',
+    'footer.label': 'Site footer',
+    'footer.stackNav': 'Agent governance stack',
+
+    // Accessible names and UI chrome
+    'a11y.home': 'NORTH.md Home',
+    'a11y.mainNav': 'Main Navigation',
+    'a11y.githubRepo': 'GitHub repository',
+    'a11y.newTab': 'opens in new tab',
+    'hero.actions': 'Primary actions',
+    'sections.list': 'The seven canonical NORTH.md sections',
+    'template.steps': 'Three steps to adopt NORTH.md',
+    'badge.alt': 'NORTH.md badge',
+    'badge.snippet': 'Badge markdown snippet',
+    'badge.code': 'Badge markdown code',
+    'code.block': '{lang} code block',
+    'copy.label': 'Copy',
+    'copy.success': 'Copied!',
+    'copy.unavailable': 'Clipboard API unavailable in this context',
   },
   es: {
     // Navigation
@@ -180,6 +198,24 @@ export const ui = {
     // Footer
     'footer.stack': 'El modelo de cinco capas que proponemos',
     'footer.builtWith': 'Licencia MIT · Abierta e independiente',
+    'footer.label': 'Pie de página',
+    'footer.stackNav': 'Capas de gobernanza de agentes',
+
+    // Accessible names and UI chrome
+    'a11y.home': 'Inicio de NORTH.md',
+    'a11y.mainNav': 'Navegación principal',
+    'a11y.githubRepo': 'Repositorio en GitHub',
+    'a11y.newTab': 'se abre en una pestaña nueva',
+    'hero.actions': 'Acciones principales',
+    'sections.list': 'Las siete secciones canónicas de NORTH.md',
+    'template.steps': 'Tres pasos para adoptar NORTH.md',
+    'badge.alt': 'Badge de NORTH.md',
+    'badge.snippet': 'Fragmento markdown del badge',
+    'badge.code': 'Código markdown del badge',
+    'code.block': 'Bloque de código {lang}',
+    'copy.label': 'Copiar',
+    'copy.success': 'Copiado',
+    'copy.unavailable': 'El portapapeles no está disponible en este contexto',
   },
 } as const;
 

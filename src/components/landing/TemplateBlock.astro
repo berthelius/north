@@ -64,7 +64,7 @@ const steps = [
       <h2 id="template-heading" class="section-title">{t("template.title")}</h2>
       <p class="template__desc">{t("template.desc")}</p>
 
-      <ol class="template__steps" aria-label="Three steps to adopt NORTH.md">
+      <ol class="template__steps" aria-label={t("template.steps")}>
         {steps.map((step) => (
           <li>
             <span class="template__n label" aria-hidden="true">{step.n}.</span>
@@ -78,7 +78,7 @@ const steps = [
       </ol>
     </div>
 
-    <CodeBlock code={template} lang="markdown" />
+    <CodeBlock code={template} lang="markdown" locale={lang} />
   </div>
 </section>
 

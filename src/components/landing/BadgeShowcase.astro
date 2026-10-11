@@ -23,15 +23,15 @@ const snippetId = "badge-snippet";
 
     <div class="badge__specimen">
       <div class="badge__plate">
-        <img src="/badge.svg" alt="NORTH.md badge" width="96" height="20" loading="lazy" decoding="async" />
+        <img src="/badge.svg" alt={t("badge.alt")} width="96" height="20" loading="lazy" decoding="async" />
         <span class="badge__caption label">
           {t("badge.linksBack")} <span class="badge__host">northfile.dev</span>
         </span>
       </div>
 
-      <div class="badge__snippet" role="group" aria-label="Badge markdown snippet">
-        <code id={snippetId} tabindex="0" aria-label="Badge markdown code">{badgeMarkdown}</code>
-        <CopyButton target={`#${snippetId}`} onDark label={t("badge.copy")} successLabel={t("badge.copied")} />
+      <div class="badge__snippet" role="group" aria-label={t("badge.snippet")}>
+        <code id={snippetId} tabindex="0" aria-label={t("badge.code")}>{badgeMarkdown}</code>
+        <CopyButton target={`#${snippetId}`} onDark lang={lang} label={t("badge.copy")} successLabel={t("badge.copied")} />
       </div>
     </div>
   </div>

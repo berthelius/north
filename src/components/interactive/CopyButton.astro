@@ -5,10 +5,14 @@
  * Props:
  *   value        text to copy directly (takes priority over target)
  *   target       CSS selector; copies the textContent of the matched element
- *   label        button label (default: "Copy")
- *   successLabel label shown on success (default: "Copied!")
+ *   label        button label (default: copy.label in the page language)
+ *   successLabel label shown on success (default: copy.success)
+ *   lang         page language for the default and clipboard-unavailable labels (default: "en")
  *   onDark       render for the ink surface so text keeps AA contrast
  */
+
+import { useTranslations } from "../../data/locales";
+import type { Language } from "../../lib/i18n";
 
 interface Props {
   value?: string;
@@ -16,14 +20,17 @@ interface Props {
   label?: string;
   successLabel?: string;
   onDark?: boolean;
+  lang?: Language;
   class?: string;
 }
 
+const { lang = "en" } = Astro.props;
+const t = useTranslations(lang);
 const {
   value,
   target,
-  label = "Copy",
-  successLabel = "Copied!",
+  label = t("copy.label"),
+  successLabel = t("copy.success"),
   onDark = false,
   class: className = "",
 } = Astro.props;
@@ -37,6 +44,7 @@ const {
   data-copy-target={target ?? ""}
   data-label={label}
   data-success-label={successLabel}
+  data-unavailable-label={t("copy.unavailable")}
 >
   <svg class="copy-icon" aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none">
     <path d="M5.5 5.5h8v8h-8zM10.5 5.5v-3h-8v8h3" stroke="currentColor" stroke-width="1.25"></path>
@@ -105,7 +113,7 @@ const {
 
       if (!supportsClipboard) {
         btn.disabled = true;
-        btn.title = "Clipboard API unavailable in this context";
+        btn.title = btn.dataset.unavailableLabel ?? "";
         return;
       }
 
@@ -126,16 +134,16 @@ const {
           const copyIcon = btn.querySelector<SVGElement>(".copy-icon");
           const checkIcon = btn.querySelector<SVGElement>(".check-icon");
 
-          if (label) label.textContent = btn.dataset.successLabel ?? "Copied!";
+          if (label) label.textContent = btn.dataset.successLabel ?? "";
           copyIcon?.classList.add("hidden");
           checkIcon?.classList.remove("hidden");
-          btn.setAttribute("aria-label", btn.dataset.successLabel ?? "Copied!");
+          btn.setAttribute("aria-label", btn.dataset.successLabel ?? "");
 
           setTimeout(() => {
-            if (label) label.textContent = btn.dataset.label ?? "Copy";
+            if (label) label.textContent = btn.dataset.label ?? "";
             copyIcon?.classList.remove("hidden");
             checkIcon?.classList.add("hidden");
-            btn.setAttribute("aria-label", btn.dataset.label ?? "Copy");
+            btn.setAttribute("aria-label", btn.dataset.label ?? "");
           }, 2000);
         } catch {
           // Clipboard write failed: degrade silently.

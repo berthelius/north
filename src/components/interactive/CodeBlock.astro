@@ -5,19 +5,25 @@
  * syntax and placeholders muted, section numbers in the signal colour). The
  * spans carry no extra text, so the copied text is the source, byte for byte.
  *
+ * `lang` is the code language; `locale` is the page language for the UI labels.
+ *
  * Usage:
- *   <CodeBlock code={`# Example`} lang="markdown" />
+ *   <CodeBlock code={`# Example`} lang="markdown" locale="es" />
  */
 
 import CopyButton from "./CopyButton.astro";
+import { useTranslations } from "../../data/locales";
+import type { Language } from "../../lib/i18n";
 
 interface Props {
   code: string;
   lang?: string;
+  locale?: Language;
   class?: string;
 }
 
-const { code, lang = "markdown", class: className = "" } = Astro.props;
+const { code, lang = "markdown", locale = "en", class: className = "" } = Astro.props;
+const t = useTranslations(locale);
 
 // Unique ID per instance for the copy-target selector.
 const id = `cb-${Math.random().toString(36).slice(2, 9)}`;
@@ -47,9 +53,9 @@ const lines = code.split("\n").map(tokenize);
 <div class:list={["code-block", className]}>
   <div class="code-block__bar">
     <span class="label code-block__lang" aria-hidden="true">{lang}</span>
-    <CopyButton target={`#${id}`} onDark label="Copy" successLabel="Copied!" />
+    <CopyButton target={`#${id}`} onDark lang={locale} />
   </div>
-  <pre id={id} tabindex="0" aria-label={`${lang} code block`}><code>{lines.map((tokens, i) => <Fragment>{tokens.map((tok) => (tok.kind ? <span class={`tk-${tok.kind}`}>{tok.text}</span> : tok.text))}{i < lines.length - 1 ? "\n" : ""}</Fragment>)}</code></pre>
+  <pre id={id} tabindex="0" aria-label={t("code.block").replace("{lang}", lang)}><code>{lines.map((tokens, i) => <Fragment>{tokens.map((tok) => (tok.kind ? <span class={`tk-${tok.kind}`}>{tok.text}</span> : tok.text))}{i < lines.length - 1 ? "\n" : ""}</Fragment>)}</code></pre>
 </div>
 
 <style>

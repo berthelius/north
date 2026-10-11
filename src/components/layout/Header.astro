@@ -36,12 +36,12 @@ const navLinks = [
 
 <header class="site-header">
   <div class="frame site-header__row">
-    <a href={buildLocalizedPath("/", lang)} class="brand" aria-label="NORTH.md Home">
+    <a href={buildLocalizedPath("/", lang)} class="brand" aria-label={t("a11y.home")}>
       <NorthMark class="brand__mark" />
       <span class="brand__word">NORTH.MD</span>
     </a>
 
-    <nav class="site-nav" aria-label="Main Navigation">
+    <nav class="site-nav" aria-label={t("a11y.mainNav")}>
       {navLinks.map((link) => (
         <a
           href={link.href}
@@ -70,7 +70,7 @@ const navLinks = [
         target="_blank"
         rel="noopener noreferrer"
         class="site-tools__icon"
-        aria-label="GitHub repository (opens in new tab)"
+        aria-label={`${t("a11y.githubRepo")} (${t("a11y.newTab")})`}
       >
         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
           <path d="M8 1C4.134 1 1 4.134 1 8c0 3.09 2.003 5.715 4.781 6.635.35.065.477-.151.477-.337 0-.166-.006-.604-.01-1.187-1.947.423-2.357-.94-2.357-.94-.318-.809-.777-1.025-.777-1.025-.635-.434.048-.425.048-.425.702.049 1.071.72 1.071.72.624 1.069 1.636.76 2.035.581.063-.451.244-.76.444-.935-1.554-.177-3.188-.777-3.188-3.459 0-.764.273-1.389.72-1.88-.072-.177-.312-.89.069-1.855 0 0 .587-.188 1.923.716A6.703 6.703 0 018 4.745c.595.003 1.193.08 1.752.236 1.334-.904 1.92-.716 1.92-.716.382.965.142 1.678.07 1.855.448.491.72 1.116.72 1.88 0 2.689-1.637 3.28-3.197 3.453.251.217.475.644.475 1.299 0 .937-.009 1.692-.009 1.922 0 .188.126.406.48.337C12.998 13.714 15 11.09 15 8c0-3.866-3.134-7-7-7z"></path>

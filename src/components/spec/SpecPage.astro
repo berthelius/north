@@ -698,8 +698,8 @@ const jsonLd = {
   // Copy section button: markdown comes from the rendered SPEC file itself.
   const store = document.getElementById("spec-sections");
   const sectionMarkdown: Record<string, string> = JSON.parse(store?.textContent ?? "{}");
-  const copyText = store?.dataset.copy ?? "Copy";
-  const copiedText = store?.dataset.copied ?? "Copied";
+  const copyText = store?.dataset.copy ?? "";
+  const copiedText = store?.dataset.copied ?? "";
 
   document.querySelectorAll<HTMLButtonElement>(".spec-body .copy-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {

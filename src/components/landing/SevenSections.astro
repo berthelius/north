@@ -63,7 +63,7 @@ const sections = [
       <p class="section-desc">{t("sections.desc")}</p>
     </header>
 
-    <ol class="index" role="list" aria-label="The seven canonical NORTH.md sections">
+    <ol class="index" role="list" aria-label={t("sections.list")}>
       {sections.map((s) => (
         <li role="listitem">
           <a href={buildLocalizedPath(`/spec#${s.slug}`, lang)} class="index__row">

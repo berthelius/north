@@ -9,20 +9,21 @@ interface Props {
 
 const { lang = "en" } = Astro.props;
 const t = useTranslations(lang);
+const newTab = t("a11y.newTab");
 ---
 
-<footer class="site-footer" aria-label="Site footer">
+<footer class="site-footer" aria-label={t("footer.label")}>
   <div class="frame site-footer__grid">
-    <nav class="site-footer__stack" aria-label="Agent governance stack">
+    <nav class="site-footer__stack" aria-label={t("footer.stackNav")}>
       <p class="label site-footer__label">{t("footer.stack")}</p>
       <ul role="list">
         <li><span>CONSTITUTION.md</span></li>
         <li>
-          <a href="https://agents.md" target="_blank" rel="noopener noreferrer" aria-label="AGENTS.md — opens in new tab">AGENTS.md</a>
+          <a href="https://agents.md" target="_blank" rel="noopener noreferrer" aria-label={`AGENTS.md — ${newTab}`}>AGENTS.md</a>
         </li>
         <li><span>DESIGN.md</span></li>
         <li>
-          <a href="https://soul.md" target="_blank" rel="noopener noreferrer" aria-label="SOUL.md — opens in new tab">SOUL.md</a>
+          <a href="https://soul.md" target="_blank" rel="noopener noreferrer" aria-label={`SOUL.md — ${newTab}`}>SOUL.md</a>
         </li>
         <li><span class="site-footer__north" aria-current="page">NORTH.md</span></li>
       </ul>
@@ -40,8 +41,8 @@ const t = useTranslations(lang);
       <NorthMark class="site-footer__mark" />
       <p>
         MIT ·
-        <a href="https://www.brthls.com" target="_blank" rel="noopener noreferrer" aria-label="Viktor Berthelius — opens in new tab">Viktor Berthelius</a> ·
-        <a href="https://github.com/berthelius/north" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository — opens in new tab">GitHub</a>
+        <a href="https://www.brthls.com" target="_blank" rel="noopener noreferrer" aria-label={`Viktor Berthelius — ${newTab}`}>Viktor Berthelius</a> ·
+        <a href="https://github.com/berthelius/north" target="_blank" rel="noopener noreferrer" aria-label={`${t("a11y.githubRepo")} — ${newTab}`}>GitHub</a>
       </p>
     </div>
   </div>
