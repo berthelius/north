@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "../../data/locales";
 import { buildLocalizedPath, type Language } from "../../lib/i18n";
+import NorthMark from "../ui/NorthMark.astro";
 
 interface Props {
   lang?: Language;
@@ -10,87 +11,154 @@ const { lang = "en" } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<footer
-  class="mx-auto max-w-[var(--max-prose,72ch)] px-[var(--spacing-gutter)] pt-10 pb-16 border-t border-[var(--rule)]"
-  aria-label="Site footer"
->
-  <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-    <!-- 5-Layer Governance Stack nav -->
-    <nav aria-label="Agent governance stack">
-      <p class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 select-none">
-        {t("footer.stack")}
-      </p>
-      <ul class="flex flex-wrap gap-x-5 gap-y-2 text-xs font-mono" role="list">
+<footer class="site-footer" aria-label="Site footer">
+  <div class="frame site-footer__grid">
+    <nav class="site-footer__stack" aria-label="Agent governance stack">
+      <p class="label site-footer__label">{t("footer.stack")}</p>
+      <ul role="list">
+        <li><span>CONSTITUTION.md</span></li>
         <li>
-          <span class="text-[var(--muted)]">CONSTITUTION.md</span>
+          <a href="https://agents.md" target="_blank" rel="noopener noreferrer" aria-label="AGENTS.md — opens in new tab">AGENTS.md</a>
         </li>
+        <li><span>design.md</span></li>
         <li>
-          <a
-            href="https://agents.md"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
-            aria-label="AGENTS.md — opens in new tab"
-          >
-            AGENTS.md
-          </a>
+          <a href="https://soul.md" target="_blank" rel="noopener noreferrer" aria-label="SOUL.md — opens in new tab">SOUL.md</a>
         </li>
-        <li>
-          <span class="text-[var(--muted)]">design.md</span>
-        </li>
-        <li>
-          <a
-            href="https://soul.md"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
-            aria-label="SOUL.md — opens in new tab"
-          >
-            SOUL.md
-          </a>
-        </li>
-        <li>
-          <span class="text-[var(--accent)] font-semibold" aria-current="page">NORTH.md</span>
-        </li>
-      </ul>
-      <ul class="flex flex-wrap gap-x-5 gap-y-2 mt-4 pt-3 border-t border-[var(--rule)]" role="list">
-        <li>
-          <a href={buildLocalizedPath("/spec", lang)} class="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150">{t("nav.spec")}</a>
-        </li>
-        <li>
-          <a href={buildLocalizedPath("/compare", lang)} class="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150">{t("nav.compare")}</a>
-        </li>
-        <li>
-          <a href={buildLocalizedPath("/why", lang)} class="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150">{t("nav.why")}</a>
-        </li>
-        <li>
-          <a href={buildLocalizedPath("/examples", lang)} class="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150">{t("nav.examples")}</a>
-        </li>
-        <li>
-          <a href={buildLocalizedPath("/faq", lang)} class="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors duration-150">{t("nav.faq")}</a>
-        </li>
+        <li><span class="site-footer__north" aria-current="page">NORTH.md</span></li>
       </ul>
     </nav>
 
-    <!-- Meta -->
-    <div class="text-sm text-[var(--muted)] text-right space-y-1.5">
+    <ul class="site-footer__pages" role="list">
+      <li><a href={buildLocalizedPath("/spec", lang)}>{t("nav.spec")}</a></li>
+      <li><a href={buildLocalizedPath("/compare", lang)}>{t("nav.compare")}</a></li>
+      <li><a href={buildLocalizedPath("/why", lang)}>{t("nav.why")}</a></li>
+      <li><a href={buildLocalizedPath("/examples", lang)}>{t("nav.examples")}</a></li>
+      <li><a href={buildLocalizedPath("/faq", lang)}>{t("nav.faq")}</a></li>
+    </ul>
+
+    <div class="site-footer__meta">
+      <NorthMark class="site-footer__mark" />
       <p>
         MIT ·
-        <a
-          href="https://brthls.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-[var(--fg)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
-          aria-label="Viktor Berthelius — opens in new tab"
-        >Viktor Berthelius</a> ·
-        <a
-          href="https://github.com/berthelius/north"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-[var(--fg)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
-          aria-label="GitHub repository — opens in new tab"
-        >GitHub</a>
+        <a href="https://brthls.com" target="_blank" rel="noopener noreferrer" aria-label="Viktor Berthelius — opens in new tab">Viktor Berthelius</a> ·
+        <a href="https://github.com/berthelius/north" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository — opens in new tab">GitHub</a>
       </p>
     </div>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    padding-block: clamp(2.5rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--fg);
+    font-size: 0.875rem;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .site-footer ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer__label {
+    margin: 0 0 1rem;
+    color: var(--muted);
+  }
+
+  .site-footer__stack ul {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .site-footer__stack li {
+    display: flex;
+    align-items: center;
+    min-height: 2rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .site-footer__stack li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .site-footer__north {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .site-footer a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 160ms;
+  }
+
+  .site-footer a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .site-footer__pages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.5rem;
+  }
+
+  .site-footer__pages a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--fg);
+  }
+
+  .site-footer__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    color: var(--muted);
+  }
+
+  .site-footer__meta p {
+    margin: 0;
+  }
+
+  .site-footer__meta a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--fg);
+  }
+
+  .site-footer__meta :global(.site-footer__mark) {
+    width: 0.75rem;
+    height: 1.05rem;
+    color: var(--fg);
+  }
+
+  @media (min-width: 960px) {
+    .site-footer__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
+      column-gap: clamp(2rem, 5vw, 5rem);
+      align-items: start;
+    }
+
+    .site-footer ul.site-footer__pages {
+      flex-direction: column;
+      padding-top: 2.1rem;
+    }
+
+    .site-footer__pages a {
+      min-height: 2rem;
+    }
+
+    .site-footer__meta {
+      justify-self: end;
+      align-self: end;
+    }
+  }
+</style>

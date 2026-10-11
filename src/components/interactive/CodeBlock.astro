@@ -1,110 +1,108 @@
 ---
 /**
- * CodeBlock — displays code with a language label and CopyButton.
- *
- * Props:
- *   code     — the code content to display
- *   lang     — language label (default: "markdown")
- *   variant  — "dark" | "light" (default: "dark")
- *   class    — additional class names for the outer wrapper
+ * CodeBlock: code on an ink surface, with a language label and CopyButton.
+ * Markdown gets a light, build-time highlight (structure in the bright tone,
+ * syntax and placeholders muted, section numbers in the signal colour). The
+ * spans carry no extra text, so the copied text is the source, byte for byte.
  *
  * Usage:
  *   <CodeBlock code={`# Example`} lang="markdown" />
  */
 
-import CopyButton from './CopyButton.astro';
+import CopyButton from "./CopyButton.astro";
 
 interface Props {
   code: string;
   lang?: string;
-  variant?: 'dark' | 'light';
   class?: string;
 }
 
-const {
-  code,
-  lang = 'markdown',
-  variant = 'dark',
-  class: className = '',
-} = Astro.props;
+const { code, lang = "markdown", class: className = "" } = Astro.props;
 
 // Unique ID per instance for the copy-target selector.
 const id = `cb-${Math.random().toString(36).slice(2, 9)}`;
 
-const wrapperBg = variant === 'dark'
-  ? 'bg-[var(--color-stone-900,#1c1917)]'
-  : 'bg-[var(--color-stone-100,#f5f5f4)]';
+type Token = { text: string; kind?: "mark" | "num" | "head" | "dim" };
 
-const labelColor = variant === 'dark'
-  ? 'text-[var(--color-stone-400,#a8a29e)]'
-  : 'text-[var(--color-stone-600,#57534e)]';
+function tokenize(line: string): Token[] {
+  if (lang !== "markdown") return [{ text: line }];
+  if (/^<!--.*-->$/.test(line) || /^\[.*\]$/.test(line)) return [{ text: line, kind: "dim" }];
+  const heading = line.match(/^(#{1,6} )(\d+\. )?(.*)$/);
+  if (heading) {
+    const [, mark, num, rest] = heading;
+    return [{ text: mark, kind: "mark" }, ...(num ? [{ text: num, kind: "num" as const }] : []), { text: rest, kind: "head" }];
+  }
+  if (line.startsWith("|")) {
+    return line
+      .split(/(\|)/)
+      .filter(Boolean)
+      .map((text) => ({ text, kind: text === "|" || /^-+$/.test(text) ? "mark" : undefined }));
+  }
+  return [{ text: line }];
+}
 
-const codeColor = variant === 'dark'
-  ? 'text-[var(--color-stone-100,#f5f5f4)]'
-  : 'text-[var(--color-stone-900,#1c1917)]';
+const lines = code.split("\n").map(tokenize);
 ---
 
-<div
-  class:list={[
-    'code-block relative rounded-md overflow-hidden',
-    wrapperBg,
-    className,
-  ]}
->
-  <!-- Top bar: lang label + copy button -->
-  <div
-    class:list={[
-      'flex items-center justify-between',
-      'px-4 py-2',
-      'border-b',
-      variant === 'dark'
-        ? 'border-[var(--color-stone-700,#44403c)]'
-        : 'border-[var(--color-stone-200,#e7e5e4)]',
-    ]}
-  >
-    <span
-      class:list={[
-        'text-xs font-mono uppercase tracking-widest select-none',
-        labelColor,
-      ]}
-      aria-hidden="true"
-    >{lang}</span>
-    <CopyButton
-      target={`#${id}`}
-      onDark={variant === 'dark'}
-      label="Copy"
-      successLabel="Copied!"
-    />
+<div class:list={["code-block", className]}>
+  <div class="code-block__bar">
+    <span class="label code-block__lang" aria-hidden="true">{lang}</span>
+    <CopyButton target={`#${id}`} onDark label="Copy" successLabel="Copied!" />
   </div>
-
-  <!-- Code content -->
-  <pre
-    id={id}
-    class:list={[
-      'overflow-x-auto',
-      'p-4',
-      'm-0',
-      'text-sm leading-relaxed',
-      'font-mono',
-      'whitespace-pre',
-      codeColor,
-      'bg-transparent',
-    ]}
-    tabindex="0"
-    aria-label={`${lang} code block`}
-  ><code>{code}</code></pre>
+  <pre id={id} tabindex="0" aria-label={`${lang} code block`}><code>{lines.map((tokens, i) => <Fragment>{tokens.map((tok) => (tok.kind ? <span class={`tk-${tok.kind}`}>{tok.text}</span> : tok.text))}{i < lines.length - 1 ? "\n" : ""}</Fragment>)}</code></pre>
 </div>
 
 <style>
-  /* Scrollbar styling for dark variant */
-  .code-block pre::-webkit-scrollbar {
-    height: 4px;
+  .code-block {
+    background: var(--ink-bg);
+    color: var(--ink-fg);
+    border: 1px solid var(--ink-rule);
   }
-  .code-block pre::-webkit-scrollbar-track {
+
+  .code-block__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.15rem;
+    border-bottom: 1px solid var(--ink-rule);
+  }
+
+  .code-block__lang {
+    color: var(--ink-muted);
+    user-select: none;
+  }
+
+  pre {
+    margin: 0;
+    padding: 1.35rem 1.15rem 1.5rem;
+    overflow-x: auto;
+    font-size: 0.8125rem;
+    line-height: 1.75;
+    white-space: pre;
     background: transparent;
+    scrollbar-color: var(--ink-rule) transparent;
   }
-  .code-block pre::-webkit-scrollbar-thumb {
-    background: var(--color-stone-700, #44403c);
-    border-radius: 2px;
+
+  pre code {
+    font-size: inherit;
+  }
+
+  .tk-mark,
+  .tk-dim {
+    color: var(--ink-muted);
+  }
+
+  .tk-num {
+    color: var(--ink-accent);
+  }
+
+  .tk-head {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  pre:focus-visible {
+    outline-offset: -2px;
   }
 </style>

@@ -58,49 +58,96 @@ const steps = [
 ];
 ---
 
-<section
-  id="template"
-  class="template-section mx-auto max-w-[var(--max-prose,72ch)] px-[var(--spacing-gutter)] py-[var(--spacing-section)] border-t border-[var(--rule)]"
-  aria-labelledby="template-heading"
->
-  <h2
-    id="template-heading"
-    class="font-display text-[clamp(1.75rem,4vw,2.75rem)] tracking-[0.02em] text-[var(--fg)] uppercase"
-  >
-    {t("template.title")}
-  </h2>
-  <p class="mt-3 max-w-[52ch] text-[var(--muted)] leading-[1.65]">
-    {t("template.desc")}
-  </p>
+<section id="template" class="template" aria-labelledby="template-heading">
+  <div class="frame template__grid">
+    <div class="template__intro">
+      <h2 id="template-heading" class="section-title">{t("template.title")}</h2>
+      <p class="template__desc">{t("template.desc")}</p>
 
-  <div class="mt-8">
+      <ol class="template__steps" aria-label="Three steps to adopt NORTH.md">
+        {steps.map((step) => (
+          <li>
+            <span class="template__n label" aria-hidden="true">{step.n}.</span>
+            <span>
+              {step.text}{" "}
+              {step.code && <code>{step.code}</code>}
+              {"suffix" in step ? step.suffix : ""}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+
     <CodeBlock code={template} lang="markdown" />
   </div>
-
-  <ol
-    class="mt-8 space-y-4"
-    aria-label="Three steps to adopt NORTH.md"
-  >
-    {
-      steps.map((step) => (
-        <li class="flex items-baseline gap-4">
-          <span
-            class="shrink-0 font-mono text-xs text-[var(--muted)] w-4 select-none"
-            aria-hidden="true"
-          >
-            {step.n}.
-          </span>
-          <span class="text-sm text-[var(--muted)] leading-[1.6]">
-            {step.text}{" "}
-            {step.code && (
-              <code class="font-mono text-[0.9em] text-[var(--fg)]">
-                {step.code}
-              </code>
-            )}
-            {"suffix" in step ? step.suffix : ""}
-          </span>
-        </li>
-      ))
-    }
-  </ol>
 </section>
+
+<style>
+  /* The one ink spread on the page: it stays dark in both schemes. */
+  .template {
+    --fg: var(--ink-fg);
+    --muted: var(--ink-muted);
+    --rule: var(--ink-rule);
+    --accent: var(--ink-accent);
+    padding-block: var(--spacing-section);
+    background: var(--ink-bg);
+    color: var(--ink-fg);
+    border-block: 1px solid var(--ink-rule);
+  }
+
+  .template__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .template__intro h2 {
+    color: var(--ink-fg);
+  }
+
+  .template__desc {
+    margin: 1.25rem 0 0;
+    max-width: 30rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink-muted);
+  }
+
+  .template__steps {
+    margin: 2.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--ink-rule);
+  }
+
+  .template__steps li {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    align-items: baseline;
+    padding-block: 0.9rem;
+    border-top: 1px solid var(--ink-rule);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--ink-muted);
+  }
+
+  .template__n {
+    color: var(--ink-accent);
+  }
+
+  .template__steps code {
+    color: var(--ink-fg);
+  }
+
+  @media (min-width: 960px) {
+    .template__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      align-items: start;
+    }
+
+    .template__intro {
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
+  }
+</style>

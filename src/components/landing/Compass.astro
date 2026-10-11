@@ -1,0 +1,218 @@
+---
+/**
+ * The hero instrument. Two dashed bearings are the competing valid paths; the
+ * needle is NORTH.md. On load it leaves one bearing, swings past the other and
+ * settles on north (damped spring as a CSS linear() easing, no JS). Scrolling
+ * jostles it; it settles again. Reduced motion: it simply points north.
+ *
+ * The spring: zeta 0.22, omega 11.7 rad/s, 1.8 s. Its first two extrema are
+ * -26deg (start) and +12.8deg, which is where the two bearings are drawn.
+ */
+interface Props {
+  /** Fixed needle bearing in degrees. Set it and the needle holds that heading
+   *  instead of settling on north (the 404 page is off course). */
+  bearing?: number;
+}
+const { bearing } = Astro.props;
+
+const C = 200; // centre of the 400x400 drawing
+const R = 184; // bezel radius
+const polar = (deg: number, r: number) => {
+  const a = ((deg - 90) * Math.PI) / 180;
+  return { x: +(C + r * Math.cos(a)).toFixed(2), y: +(C + r * Math.sin(a)).toFixed(2) };
+};
+
+const ticks = Array.from({ length: 72 }, (_, i) => {
+  const deg = i * 5;
+  const kind = deg === 0 ? "north" : deg % 90 === 0 ? "cardinal" : deg % 30 === 0 ? "major" : "minor";
+  const len = { north: 22, cardinal: 22, major: 13, minor: 6 }[kind];
+  const a = polar(deg, R);
+  const b = polar(deg, R - len);
+  return { kind, x1: a.x, y1: a.y, x2: b.x, y2: b.y };
+});
+
+const bearings = [-26, 12.8].map((deg) => {
+  const end = polar(deg, 150);
+  const start = polar(deg, 18);
+  return { x1: start.x, y1: start.y, x2: end.x, y2: end.y };
+});
+---
+
+<svg class:list={["compass", { "compass--fixed": bearing !== undefined }]} viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+  <circle class="compass__ring" cx={C} cy={C} r={R}></circle>
+  <circle class="compass__inner" cx={C} cy={C} r="150"></circle>
+  <line class="compass__cross" x1={C} y1="62" x2={C} y2="338"></line>
+  <line class="compass__cross" x1="62" y1={C} x2="338" y2={C}></line>
+
+  {ticks.map((t) => (
+    <line class={`compass__tick compass__tick--${t.kind}`} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2}></line>
+  ))}
+
+  <path class="compass__lubber" d="M193 1 L207 1 L200 11 Z"></path>
+
+  {bearings.map((b) => (
+    <line class="compass__bearing" x1={b.x1} y1={b.y1} x2={b.x2} y2={b.y2}></line>
+  ))}
+
+  <g class="compass__jostle">
+    <g class="compass__needle" style={bearing !== undefined ? `transform: rotate(${bearing}deg)` : undefined}>
+      <path class="compass__north-w" d="M200 58 L189 200 L200 200 Z"></path>
+      <path class="compass__north-e" d="M200 58 L211 200 L200 200 Z"></path>
+      <path class="compass__south" d="M189 200 L200 342 L211 200 Z"></path>
+    </g>
+  </g>
+  <circle class="compass__pivot" cx={C} cy={C} r="6"></circle>
+</svg>
+
+<style>
+  .compass {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Zero-specificity base so the part rules below win without !important. */
+  :where(.compass) :where(line, circle, path) {
+    vector-effect: non-scaling-stroke;
+    fill: none;
+  }
+
+  .compass {
+    aspect-ratio: 1;
+  }
+
+  .compass__ring {
+    stroke: var(--fg);
+    stroke-width: 1;
+  }
+
+  .compass__inner,
+  .compass__cross {
+    stroke: var(--rule);
+    stroke-width: 1;
+  }
+
+  .compass__tick {
+    stroke: var(--fg);
+    stroke-width: 1;
+  }
+
+  .compass__tick--minor {
+    stroke: var(--muted);
+  }
+
+  .compass__tick--cardinal {
+    stroke-width: 2;
+  }
+
+  .compass__tick--north {
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+
+  .compass__lubber {
+    fill: var(--accent);
+  }
+
+  .compass__bearing {
+    stroke: var(--muted);
+    stroke-width: 1;
+    stroke-dasharray: 2 5;
+  }
+
+  .compass__north-w {
+    fill: var(--accent);
+  }
+
+  .compass__north-e {
+    fill: var(--fg);
+  }
+
+  .compass__south {
+    fill: var(--bg);
+    stroke: var(--fg);
+    stroke-width: 1;
+  }
+
+  .compass__pivot {
+    fill: var(--bg);
+    stroke: var(--fg);
+    stroke-width: 1;
+  }
+
+  /* The needle is point-symmetric about the pivot, so its own box centre is
+     the pivot at any angle. */
+  .compass__jostle,
+  .compass__needle {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+  }
+
+  /* At dial size (the mobile masthead) the minor graduations are noise. */
+  @media (max-width: 959px) {
+    .compass:not(.compass--fixed) .compass__tick--minor,
+    .compass:not(.compass--fixed) .compass__bearing {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .compass:not(.compass--fixed) .compass__needle {
+      animation: compass-settle 1.8s
+        linear(0, 0.0889, 0.3192, 0.6263, 0.9439, 1.2154, 1.4021, 1.4868, 1.4727, 1.3797, 1.2376, 1.0795, 0.9355, 0.8278, 0.7688, 0.7599, 0.7939, 0.8575, 0.9345, 1.0092, 1.0692, 1.1068, 1.1194, 1.1092, 1.082, 1.0454, 1.0074, 0.9749, 0.9523, 0.942, 0.9434, 0.9544, 0.9713, 0.9901, 1.0074, 1.0203, 1.0275, 1.0287, 1.0247, 1.0172, 1.008, 0.9991, 0.9919, 0.9873, 0.9858, 0.9869, 0.9901, 0.9945, 1)
+        0.3s both;
+    }
+  }
+
+  @keyframes compass-settle {
+    from {
+      transform: rotate(-26deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+</style>
+
+<script>
+  // Scroll jostles the needle; a damped spring brings it back to north.
+  // Runs only while the instrument is on screen and motion is allowed.
+  const needle = document.querySelector<SVGGElement>(".compass__jostle");
+  if (needle && matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+    let angle = 0;
+    let velocity = 0;
+    let lastY = scrollY;
+    let frame = 0;
+    let onScreen = true;
+
+    const step = () => {
+      // Per-frame spring toward 0deg: stiffness 0.06, damping 0.12 (zeta ~0.25).
+      velocity += -0.06 * angle - 0.12 * velocity;
+      angle += velocity;
+      if (Math.abs(angle) < 0.01 && Math.abs(velocity) < 0.01) {
+        angle = velocity = frame = 0;
+        needle.style.transform = "";
+        return;
+      }
+      needle.style.transform = `rotate(${angle.toFixed(3)}deg)`;
+      frame = requestAnimationFrame(step);
+    };
+
+    new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+    }).observe(needle);
+
+    addEventListener(
+      "scroll",
+      () => {
+        const dy = scrollY - lastY;
+        lastY = scrollY;
+        if (!onScreen) return;
+        velocity += Math.max(-2.5, Math.min(2.5, dy * 0.035));
+        if (!frame) frame = requestAnimationFrame(step);
+      },
+      { passive: true },
+    );
+  }
+</script>

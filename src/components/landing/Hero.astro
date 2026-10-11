@@ -1,6 +1,8 @@
 ---
 import { useTranslations } from "../../data/locales";
 import { buildLocalizedPath, type Language } from "../../lib/i18n";
+import Compass from "./Compass.astro";
+import Arrow from "../ui/Arrow.astro";
 
 interface Props {
   lang?: Language;
@@ -10,129 +12,177 @@ const { lang = "en" } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section
-  class="hero-section mx-auto max-w-[var(--max-prose,72ch)] px-[var(--spacing-gutter)] pt-[clamp(5rem,10vw,9rem)] pb-[var(--spacing-section)]"
-  aria-labelledby="hero-heading"
->
-  <div class="flex items-center gap-2 hero-eyebrow">
-    <span class="inline-block w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" aria-hidden="true"></span>
-    <p
-      class="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--muted)] select-none"
-    >
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="frame hero__grid">
+    <p class="hero__eyebrow label">
+      <span class="signal" aria-hidden="true"></span>
       {t("hero.eyebrow")}
     </p>
-  </div>
 
-  <h1
-    id="hero-heading"
-    class="hero-headline mt-5 font-display text-[clamp(2.75rem,7vw,6.25rem)] leading-[0.95] tracking-[0.02em] text-[var(--fg)] uppercase"
-  >
-    {t("hero.title1")} <br class="hidden sm:block" /><span
-      class="text-[var(--accent)]"
-      >{t("hero.titleAccent")}</span
-    > {t("hero.title2")}
-  </h1>
+    <div class="hero__instrument">
+      <Compass />
+    </div>
 
-  <p
-    class="hero-body mt-8 max-w-[58ch] text-[clamp(1.05rem,2vw,1.25rem)] text-[var(--muted)] leading-[1.6]"
-  >
-    {t("hero.body")}
-  </p>
+    <h1 id="hero-heading" class="hero__title">
+      {t("hero.title1")} <br class="hero__break" /><span class="hero__accent">{t("hero.titleAccent")}</span>
+      {t("hero.title2")}
+    </h1>
 
-  <p
-    class="hero-layers mt-5 max-w-[58ch] text-[var(--muted)] text-base leading-[1.6]"
-  >
-    {t("hero.stackNote")}
-  </p>
+    <div class="hero__lead">
+      <p class="hero__body">{t("hero.body")}</p>
+      <p class="hero__note">{t("hero.stackNote")}</p>
+    </div>
 
-  <div
-    class="hero-cta mt-10 flex flex-wrap items-center gap-3"
-    role="group"
-    aria-label="Primary actions"
-  >
-    <a
-      href={buildLocalizedPath("/spec", lang)}
-      class="inline-flex items-center gap-2 rounded-full bg-[var(--fg)] px-5 py-2.5 text-sm font-medium text-[var(--bg)] transition-opacity duration-150 hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-    >
-      {t("hero.ctaRead")}
-      <span aria-hidden="true">&rarr;</span>
-    </a>
-    <a
-      href={buildLocalizedPath("/compare", lang)}
-      class="inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition-colors duration-150 hover:bg-[var(--rule)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-    >
-      {t("hero.ctaCompare")}
-    </a>
-    <a
-      href="https://github.com/berthelius/north"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center gap-2 rounded-full border border-[var(--rule)] px-5 py-2.5 text-sm font-medium text-[var(--fg)] transition-colors duration-150 hover:bg-[var(--rule)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-    >
-      GitHub
-      <svg
-        aria-hidden="true"
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="shrink-0"
-      >
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
-        ></path>
-        <polyline points="15 3 21 3 21 9"></polyline>
-        <line x1="10" y1="14" x2="21" y2="3"></line>
-      </svg>
-    </a>
-    <a
-      href="#template"
-      class="text-sm text-[var(--muted)] decoration-dotted underline underline-offset-4 hover:text-[var(--fg)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] rounded-sm"
-    >
-      {t("hero.ctaCopy")}
-    </a>
+    <div class="hero__actions" role="group" aria-label="Primary actions">
+      <a href={buildLocalizedPath("/spec", lang)} class="btn btn-primary">
+        {t("hero.ctaRead")}
+        <Arrow class="btn-arrow" />
+      </a>
+      <a href={buildLocalizedPath("/compare", lang)} class="btn btn-secondary">
+        {t("hero.ctaCompare")}
+      </a>
+      <span class="hero__links">
+        <a href="https://github.com/berthelius/north" target="_blank" rel="noopener noreferrer" class="text-link">
+          GitHub
+          <Arrow dir="up-right" />
+        </a>
+        <a href="#template" class="text-link">{t("hero.ctaCopy")}</a>
+      </span>
+    </div>
   </div>
 </section>
 
 <style>
-  /* Enter animation: lift only. No opacity fade, so text is painted (and counted as LCP) from the first frame. */
-  @keyframes fade-up {
-    from {
-      transform: translateY(18px);
+  .hero {
+    padding-block: clamp(1.5rem, 3.5vw, 3rem) clamp(4rem, 8vw, 6.5rem);
+  }
+
+  /* Mobile: the instrument is a small dial in the masthead, opposite the label. */
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "eyebrow instrument"
+      "title title"
+      "lead lead"
+      "actions actions";
+  }
+
+  .hero__eyebrow {
+    grid-area: eyebrow;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    align-self: stretch;
+    margin: 0;
+    padding-right: 1rem;
+    color: var(--muted);
+    border-bottom: 1px solid var(--fg);
+  }
+
+  .hero__instrument {
+    grid-area: instrument;
+    width: 4.75rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--fg);
+  }
+
+  .hero__title {
+    grid-area: title;
+    margin: clamp(1.75rem, 4vw, 2.75rem) 0 0;
+    font-size: clamp(2.85rem, 13.4vw, 7.25rem);
+    letter-spacing: 0;
+    color: var(--fg);
+  }
+
+  .hero__break {
+    display: none;
+  }
+
+  .hero__accent {
+    color: var(--accent);
+  }
+
+  .hero__lead {
+    grid-area: lead;
+    margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+    max-width: 36rem;
+  }
+
+  .hero__body {
+    margin: 0;
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--fg);
+  }
+
+  .hero__note {
+    margin: 1.1rem 0 0;
+    padding-left: 1rem;
+    border-left: 1px solid var(--accent);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .hero__actions {
+    grid-area: actions;
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+
+  .hero__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.75rem;
+    margin-top: 0.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .hero__break {
+      display: inline;
     }
-    to {
-      transform: translateY(0);
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero__links {
+      margin: 0 0 0 0.75rem;
     }
   }
 
-  .hero-eyebrow {
-    animation: fade-up 0.5s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1))
-      both;
-    animation-delay: 0ms;
-  }
-  .hero-headline {
-    animation: fade-up 0.6s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1))
-      both;
-    animation-delay: 60ms;
-  }
-  .hero-body {
-    animation: fade-up 0.6s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1))
-      both;
-    animation-delay: 120ms;
-  }
-  .hero-layers {
-    animation: fade-up 0.6s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1))
-      both;
-    animation-delay: 160ms;
-  }
-  .hero-cta {
-    animation: fade-up 0.6s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1))
-      both;
-    animation-delay: 220ms;
-  }
+  /* Desktop: headline and lead on the left, the instrument holds the right. */
+  @media (min-width: 960px) {
+    .hero__grid {
+      grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+      grid-template-areas:
+        "eyebrow eyebrow"
+        "title instrument"
+        "lead instrument"
+        "actions instrument";
+      grid-template-rows: auto auto auto 1fr;
+      column-gap: clamp(2rem, 5vw, 5rem);
+    }
 
-  /* Reduced motion: global.css zeros durations, so no JS needed */
+    .hero__eyebrow {
+      padding-block: 0 0.9rem;
+    }
+
+    .hero__instrument {
+      align-self: center;
+      justify-self: end;
+      width: min(100%, 28rem);
+      margin-top: clamp(1.75rem, 4vw, 2.75rem);
+      padding: 0;
+      border: 0;
+    }
+
+    .hero__title {
+      font-size: clamp(3.5rem, 6.4vw, 6.5rem);
+    }
+  }
 </style>
